@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <link rel="stylesheet" href="backend/web/css/style.css" type="text/css"/>
+
+      <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <title>Accessing arguments in UI events</title>
+    <style>
+      html, body {
+        height: 200px;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body><div>
+          <input id="lifehack-coordinates2" hidden style ="width:100px" class="bacon"  name="testinput">
+      </div>
+      <div id="map">
+          
+      </div>
+
+    <script>
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: {lat: -25.363882, lng: 131.044922 }
+  });
+
+  map.addListener('click', function(e) {
+    placeMarkerAndPanTo(e.latLng, map);
+  });
+}
+
+function placeMarkerAndPanTo(latLng, map) {
+  var marker = new google.maps.Marker({
+    position: latLng,
+    map: map
+  });
+  var loc = JSON.stringify(latLng);
+    alert(loc);
+$('input[name="testinput"]').attr('value',loc);
+  
+  
+  map.panTo(latLng);
+}
+
+
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y&callback=initMap"
+        async defer></script>
+
+<input id="lifehack-coordinates2" hidden class="bacon"  name="testinput">
+  </body>
+
+  
+ 

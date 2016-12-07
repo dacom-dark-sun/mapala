@@ -1,0 +1,41 @@
+# Env
+/.env
+
+# composer
+
+/vendor/*
+
+!/vendor/yii2mod/
+/vendor/yii2mod/*
+!/vendor/yii2mod/yii2-comments
+
+
+
+composer.phar
+## remove in production!
+
+/storage/web/thumbs
+composer.lock
+
+# IDE
+.idea
+nbproject
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit
+phpunit.phar
+/phpunit.xml
+
+# Vagrant
+/.vagrant
+parser/images/2logo.png
+parser/images/logo.png
+parser/images/logosmall.png

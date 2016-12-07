@@ -1,0 +1,5 @@
+{
+    "require": {
+        "rmrevin/yii2-comments": "~1.4"
+    }
+}
