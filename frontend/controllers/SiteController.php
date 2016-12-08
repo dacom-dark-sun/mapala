@@ -32,7 +32,7 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex($author = null, $permlink = null)
+    public function actionIndex($state = 'new', $author = null, $permlink = null)
     {
         $categories_tree = Art::create_array_categories();
         
@@ -54,7 +54,7 @@ class SiteController extends Controller
             
         }
         
-        $dataProvider = Art::get_data_by_categories();
+        $dataProvider = Art::get_data_by_categories($categories=null, $state);
         return $this->render('index', ['dataProvider'=>$dataProvider,
             'data' => $categories_tree,
          ]);

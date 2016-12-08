@@ -58,8 +58,8 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
         ]
     ]); ?>
     <?php NavBar::end(); ?>
-
-
+ 
+    
  <?php echo $content ?>
 
 </div>

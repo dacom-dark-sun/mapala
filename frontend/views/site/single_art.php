@@ -47,7 +47,7 @@ use yii\helpers\Html;
        
     </div>
         <div class="article-metainfo">
-            <?= $this->render('/site/_metainfo_edit',['model'=>$model]) ?>
+            <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
         </div>  
     
 </div>

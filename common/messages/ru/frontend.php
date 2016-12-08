@@ -106,6 +106,8 @@ return [
     'Coordinates' => 'Координаты',
     'Date until leave' => 'Дата отъезда',
     'Im not in the travel now and this is my permanent place' => 'Я не в путешествии сейчас, я тут живу',
-    
+    'New' => 'Новое',
+    'Trending' => 'Горячее',
+    'Discuss' => 'Обсуждаемое',
       
 ];

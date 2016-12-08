@@ -19,39 +19,18 @@ class Parser{
     
 public function init(){
 global $config;
-
-$config = array (
-  'entity' => '2520b329',
-  'relatedTo' => 'common\models\Art:',
-  'status' => '1',
-  'dbhost' => '127.0.0.1',
-  'dbname' => 'yii2',
-  'dbuser' => 'root',
-  'dbpassword' => '',
-  'blockchain' => array(
-  'name' => 'GOLOS',
-  'node' => '127.0.0.1:8090',
-  'currency' => 'SBD',
-  'start_block' => 'current', //use 'current' for production.
-   
-  )
-);
-    
 global $looking_for_tag;
-$looking_for_tag= "steemit";    
-
 global $db;    
+
+$looking_for_tag= "steemit";    
 $db = new SafeMysql(array('user' => $config['dbuser'], 'pass' => $config['dbpassword'],'db' => $config['dbname'], 'charset' => 'utf8mb4'));
+
+
 $num_in_sql = $this->get_num_current_block_from_sql();
 echo ("START from block # " . $num_in_sql ."for " .  $config['blockchain']['name'] . "blockchain");    
-    
 $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node']);
 
-    
-    
-    
-    
-    
+
     
            for ($num_in_sql; $num_in_sql<$num_in_blockchain; $num_in_sql++){
                 $transactions = $this->get_content_from_block($num_in_sql, $config['blockchain']['node']);
@@ -206,16 +185,17 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
         global $config;
         
         if ($config['blockchain']['name'] == 'GOLOS'){
-           if ($tag == '') return 'null';
+           if (($tag == ' ')||($tag == '')) return 'null';
     
             sscanf($tag, "%4s%s", $tr_key, $tag);
            if ($tr_key =='ru--'){
         
             $tag = mb_strtolower($tag);
-            $rus = array('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я');
-            $eng = array('A', 'B', 'V', 'G', 'D', 'E', 'E', 'Gh', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'C', 'Ch', 'Sh', 'Sch', 'Y', 'Y', 'Y', 'E', 'Yu', 'Ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya');
-
-            return str_replace($eng, $rus, $tag);
+            $rus = array('щ',     'ш', 'ч',  'ц',  'й',  'ё',  'э',  'ю',  'я',  'х',  'ж',  'а', 'б', 'в', 'г', 'д', 'е', 'з', 'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'ъ', 'ы', 'ь');
+            $eng = array('shch', 'sh', 'ch', 'cz', 'ij', 'yo', 'ye', 'yu', 'ya', 'kh', 'zh', 'a', 'b', 'v', 'g', 'd', 'e', 'z', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'xx', 'y', 'x');
+            $tag = str_replace($eng, $rus, $tag);
+            return  mb_convert_encoding($tag, 'UTF-8');
+            
            }
     
         }
@@ -388,7 +368,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
         if (is_array($json)&&(isset($json['tags'][0]))){
             if (is_array($json['tags'])) {
                 if (array_key_exists('0', $json['tags'])){
-                    if ($json['tags'][0] != $looking_for_tag) {
+                    if ($json['tags'][0] != $looking_for_tag) { //CHANGE TO == !!!! THAT MEAN WE LOOKING FOR ONE TAG. For test mode it is !=
                 
                         return true; 
                 

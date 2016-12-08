@@ -5,6 +5,8 @@ use common\models\Category;
 use Yii;
 use common\models\ArtSearch;
 use yii\helpers\StringHelper;
+use common\models\BlockChain;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "art".
@@ -244,20 +246,20 @@ class Art extends \yii\db\ActiveRecord
          * This function parse all links and images and return in array for cleaning or change
          */
         static function parse_links_and_urls($text){
-           $re = '/(([A-Za-z.-_]+)\.([\/.A-Za-z0-9-_#=&;%+]{0,})\.([\/.A-Za-z0-9-_#=&;%+]{0,}))/';
+           $re = '/(([A-Za-z.-_]+)\.([\/.A-Za-z0-9-_#=&;%+]{2,})\.([\/.A-Za-z0-9-_#?=&;%+]{0,}))/';
             preg_match_all($re, $text, $matches);
             return $matches;
            
         }
         
-        
+       
         
         /*
          * Функция делает выборку статей из базы по ключевым тегам категорий. Категории передаются в формате
          * cat1+cat2+cat3 (string).
          */
         
-        static function get_data_by_categories($categories = null){
+        static function get_data_by_categories($categories = null, $state = 'new'){
              $searchModel = new ArtSearch();
                 
              if ($categories == null){
@@ -291,10 +293,27 @@ class Art extends \yii\db\ActiveRecord
                  }
                  
              }
-             $dataProvider->sort = [
-                'defaultOrder' => ['created_at' => SORT_DESC]
+             
+             //Change order for different views
+             //TODO REPAIR order list and modificate it for correct list by days
+             if ($state =='new'){
+                 $dataProvider->sort = [
+                    'defaultOrder' => ['created_at' => SORT_DESC]
+                 ];
+             }
+             if ($state == 'trending'){
+                 $dataProvider->sort = [
+                    'defaultOrder' => ['total_pending_payout_value' => SORT_DESC,  'created_at' => SORT_DESC]
              ];
-                    
+             }
+             if ($state == 'discuss'){
+                 $dataProvider->sort = [
+                    'defaultOrder' => ['replies' => SORT_DESC, 'created_at' => SORT_DESC]
+             ];
+             }
+
+             
+             
                     
             return $dataProvider;
             
@@ -337,8 +356,46 @@ class Art extends \yii\db\ActiveRecord
         }
             
         
+        public function convert_currency($price){
+          $price_old =  floatval($price);
+          $blockchain =  BlockChain::get_blockchain_from_locale();
+          $GRAMM_IN_OZ = 31.1034768;
+          
+          switch ($blockchain){
+              case "GOLOS":
+                $XAUOZ = (new \yii\db\Query())
+                ->select('price')
+                ->from(['pricefeed'])
+                ->where('blockchain=' . "'" .  $blockchain . "'")
+                ->one();
+                $price = round($price_old * $XAUOZ['price'] / $GRAMM_IN_OZ / 1000, 2);
+                $price = $price . ' RUB';
+              break;
+          
+          case "STEEM":
+                
+                $price = $price_old . ' USD';
+              break;
+        
+          
+          }
+            return $price;
+            
+        }
         
         
+        static function get_voters($voters){
+            $voters = json_decode($voters);
+            $content = '';
+            foreach ($voters as $v){
+               $link = Html::a($v,['/site/index/','author'=>$v]);
+               $content .= 
+                $link . 
+                ', ';
+            }
+            return $content;
+            
+        }
         
         
         

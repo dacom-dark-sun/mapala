@@ -330,3 +330,22 @@ input[type="radio"], input[type="checkbox"]{
     padding-bottom: 30px;
     
 }
+
+.state_buttons{
+    position: fixed;
+    top: 50px;
+    
+}
+
+.modal-open{
+   padding-right: 0px !important;
+   overflow-y: scroll;
+}
+.popover{
+   z-index: 1 !important;  
+}
+
+.votes-counter{
+    font-weight: normal;
+    cursor: pointer;
+}

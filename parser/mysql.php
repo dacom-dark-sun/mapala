@@ -65,7 +65,7 @@
  * $data = $db->getAll("SELECT * FROM table WHERE ?p", $bar, $sqlpart);
  * 
  */
-class SafeMySQL extends Parser
+class SafeMySQL
 {
 	private $conn;
 	private $stats;
