@@ -52,7 +52,7 @@ Required PHP extensions:
 php console/yii app/setup
 ```
 
-4. Download and import sql-dump: 
+4. Download and import sql-dump to mysql: https://yadi.sk/d/hGIO_8k832XiDb
 
 ### Configure your web server
 Copy `vhost.conf.dist` to `vhost.conf`, change it with your local settings and copy (symlink) it to nginx `sites-enabled` directory.
