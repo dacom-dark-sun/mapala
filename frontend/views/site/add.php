@@ -22,11 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-12">
             
-    <?= Html::a(Yii::t('frontend','Я - Мапала'), ['/forms/add_im_mapala'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Жилье путешественника'), ['/forms/add_homestay'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Лайфхаки'), ['/forms/add_lifehack'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Достопримечательности'), ['/forms/add_must_see'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Истории'), ['/forms/add_story'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Я - Мапала'), ['/forms/immapala'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Жилье путешественника'), ['/forms/homestay'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Лайфхаки'), ['/forms/lifehack'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Достопримечательности'), ['/forms/must_see'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Истории'), ['/forms/story'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
    
             
         </div>

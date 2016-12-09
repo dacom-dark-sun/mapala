@@ -339,6 +339,7 @@ input[type="radio"], input[type="checkbox"]{
 
 .modal-open{
    padding-right: 0px !important;
+   padding-left: 0px !important;
    overflow-y: scroll;
 }
 .popover{

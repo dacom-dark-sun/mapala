@@ -29,7 +29,7 @@ use common\models\Art;
                     'header' => Yii::t('frontend', 'Voters'),
                     'placement' => PopoverX::ALIGN_BOTTOM,
                     'content' => Art::get_voters($model->voters),
-                    'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'Votes'), 'tag' => 'label', 'class'=>'votes-counter'],
+                    'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'Votes') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
                 ]);
                 
                         ?>
@@ -50,6 +50,8 @@ use common\models\Art;
                   onclick = <?php echo 'vote("' . $model->blockchain . '","' . $model->author . '","' . $model->permlink . '",10000)';?>
                      >
              </span>
+             
+            
             
             
             

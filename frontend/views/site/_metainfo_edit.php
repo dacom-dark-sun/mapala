@@ -39,12 +39,6 @@ use yii\helpers\Html;
                      >
              </span>
             
-             
-            <span>|</span>
-             <span class="article-edit">
-                   <?php echo Html::a(Yii::t('frontend', 'Edit'),['/ajax/index/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
-       
-             </span>
             
             
             

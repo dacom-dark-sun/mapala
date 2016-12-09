@@ -46,25 +46,40 @@ class FormsController extends SiteController
     }
 
     
-    public function actionAdd_im_mapala()
+    public function actionImmapala($author = null, $permlink = null)
     {
         $model = new ImMapala();
         
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-          return var_dump($model);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
              $bl_model = BlockChain::construct_im_mapala($model);
              return $bl_model;
-             
-               }
-        else { 
-            return $this->render('immapala', [
-            'model' => $model
-            ]);
         }
+
+        if (($author != null)&&($permlink != null)){ //EDIT
+            $query = new Art();
+            $current_art = $query
+                ->find()
+                ->where('author=' . "'" .  $author . "'")
+                ->andwhere('permlink=' . "'" .  $permlink . "'")
+                ->one();
+              $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              
+              $model->contacts =  (array_key_exists('2', $meta['tags'])? $meta['tags'][2] :  "");
+              $model->languages = (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
+    }
+      
+     
+        return $this->render('immapala', [ //CLEAR
+        'model' => $model
+        ]);
+
+      
+      
     }
     
             
-    public function actionAdd_lifehack()
+    public function actionLifehack()
     {
         $model = new Lifehack();
         
@@ -77,7 +92,7 @@ class FormsController extends SiteController
         }
     }
     
-    public function actionAdd_must_see()
+    public function actionMust_see()
         {
           $model = new Must_see();
         
@@ -95,7 +110,7 @@ class FormsController extends SiteController
     }
 
     
-    public function actionAdd_mapala_events()
+    public function actionEvents()
         {
         $model = new Mapala_events();
        
@@ -117,7 +132,7 @@ class FormsController extends SiteController
     }
 
     
-    public function actionAdd_story()
+    public function actionStory()
         {
         $model = new Story();
         
@@ -135,7 +150,7 @@ class FormsController extends SiteController
     }
 
     
-    public function actionAdd_homestay()
+    public function actionHomestay()
         {
         /*
          @public $title;  
@@ -164,7 +179,7 @@ class FormsController extends SiteController
     }
 
     
-     public function actionAdd_base()
+     public function actionBase()
       {
         $model = new Base();
        
@@ -185,7 +200,7 @@ class FormsController extends SiteController
     }
 
     
-     public function actionAdd_companions()
+     public function actionCompanions()
         {
         $model = new Companions();
        
@@ -206,7 +221,7 @@ class FormsController extends SiteController
     }
 
     
-    public function actionAdd_transport()
+    public function actionTransport()
         {
         $model = new Transport();
 

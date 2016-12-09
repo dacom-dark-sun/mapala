@@ -6,9 +6,7 @@ namespace common\models;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-use common\models\Article;
+use yii\helpers\StringHelper;
 use Yii;
 use yii\base\Model;
 
@@ -46,6 +44,7 @@ class BlockChain extends Model
     
     
    static function construct_im_mapala($model){
+             
              $bl_model['parentAuthor'] = '';
              $bl_model['parentPermlink'] = 'im-mapala'; //
              $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
@@ -60,13 +59,13 @@ class BlockChain extends Model
              $json['tags'][2] =  BlockChain::tag_to_eng(mb_strtolower($model->city));
              $json['tags'][3] = 'im-mapala';
              $json['tags'][4] = explode(", ", $languages);
-             
-             $bl_model['metadata'] = json_encode($json);
+           
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             $bl_model['metadata'] = $json;
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
       
-        
-        
     }
+    
     
    static function construct_homestay($model){
              $bl_model['parentAuthor'] = '';
@@ -82,7 +81,8 @@ class BlockChain extends Model
              $json['tags'][2] =  BlockChain::tag_to_eng($model->city);
              $json['tags'][3] = 'homestay';
              $json['tags'][4] = BlockChain::free_on_different_lang($model->free);
-             
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+           
              $bl_model['metadata'] = json_encode($json);
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -131,7 +131,8 @@ class BlockChain extends Model
              $json['tags'][1] =  BlockChain::tag_to_eng(mb_strtolower($model->country));
              $json['tags'][2] =  BlockChain::tag_to_eng(mb_strtolower($model->city));
              $json['tags'][3] = 'must-see';
-             
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+           
              $bl_model['metadata'] = json_encode($json);
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
       
@@ -143,21 +144,9 @@ class BlockChain extends Model
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
- 
-    
     static function get_blockchain_from_locale(){
       
         return (Yii::$app->language == "ru-RU") ? 'GOLOS' : 'STEEM';
-        
         
     }
     

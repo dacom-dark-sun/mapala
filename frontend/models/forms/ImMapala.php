@@ -18,6 +18,17 @@ class ImMapala extends Model
     public $is_it_traveler = 1;    //living in this place
     public $date_until_leave;
     public $coordinates;
+    private $meta;
+    
+    
+     public function getMeta(){
+         return $this->meta;
+     }
+
+     public function setMeta($meta){
+         $this->meta = $meta;
+     }
+
 
     /**
      * @return array the validation rules.

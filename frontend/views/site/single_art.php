@@ -4,6 +4,7 @@ use \yii2mod\comments;
 use yii\widgets\Pjax;
 use dosamigos\editable\EditableAddressAsset;
 use dosamigos\editable\Editable;
+use common\models\Art;
 /**
  * @var $this yii\web\View
  * @var $model common\models\Article
@@ -51,6 +52,27 @@ use yii\helpers\Html;
         </div>  
     
 </div>
+
+
+<div class ="additional-info">
+ <span class="article-edit">
+     <?php $model_name = 'immapala';?>
+       <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
+ <?php 
+$meta = Art::explode_meta($model->meta);
+$model->attributes = Art::get_article_for_edit($model->author, $permlink);
+var_dump($meta);
+if ($model_name == 'immapala'){
+    echo 'Contacts: ' . $meta[''];
+    
+    
+}    
+
+ ?>       
+
+</div>
+
+
 
 <div id ="comments">
 <?php Pjax::begin() ?>

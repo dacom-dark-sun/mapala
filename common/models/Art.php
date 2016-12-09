@@ -33,6 +33,9 @@ class Art extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    
+    
+    
     public static function tableName()
     {
         return 'art';
@@ -397,7 +400,30 @@ class Art extends \yii\db\ActiveRecord
             
         }
         
-        
+      static function explode_meta($art){
+          $meta = $art->meta;
+          $metadata = json_decode($meta, true);
+      
+      return $metadata; 
+     }
+     
+     static function get_article_for_edit($author, $permlink){
+            $query = new Art();
+            $current_art = $query
+                ->find()
+                ->where('author=' . "'" .  $author . "'")
+                ->andwhere('permlink=' . "'" .  $permlink . "'")
+                ->one();
+              $model = $current_art->attributes;
+              $meta = json_decode($current_art->meta, true);
+              
+              $model['contacts'] =  (array_key_exists('2', $meta['tags'])? $meta['tags'][2] :  "");
+              $model['languages'] = (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
+         
+         return $model;
+     }
+
+     
         
         
         
