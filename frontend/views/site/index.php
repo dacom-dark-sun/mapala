@@ -15,7 +15,7 @@ use talma\widgets\JsTreeAsset;
 
      <div class="body-content">
         <div class="row">
-            <div class="col-lg-11">
+            <div class="col-lg-10">
                <div id="article-index">
 
     <?php echo \yii\widgets\ListView::widget([
@@ -26,20 +26,19 @@ use talma\widgets\JsTreeAsset;
     ])?>
 </div>
             </div>
-            <div class="col-lg-1">
-                <div class = "category_panel">
+            <div class="col-lg-2">
                 
-                    <div class ="addbutton">
-                              <?= Html::a(Yii::t('frontend', 'New'), ['/site/index/','state'=>'new'], ['class'=>'btn btn-success']) ?>
-                              <?= Html::a(Yii::t('frontend', 'Trending'), ['/site/index/','state'=>'trending'], ['class'=>'btn btn-success']) ?>
-                              <?= Html::a(Yii::t('frontend', 'Discuss'), ['/site/index/','state'=>'discuss'], ['class'=>'btn btn-success']) ?>
-                              <?= Html::a('Пополнить Базу', ['/site/add'], ['class'=>'btn btn-success']) ?>
- 
-                   </div
-                   <?= $this->render('_categories',['data'=>$data]) ?>
-               
+                    <div class ="category_buttons">
+                              <?= Html::a('Пополнить Базу', ['/site/add'], ['class'=>'btn btn-danger each_category_button']) ?>
+                              <?= Html::a(Yii::t('frontend', 'New'), ['/site/index/','state'=>'new'], ['class'=>'btn btn-success each_category_button']) ?>
+                              <?= Html::a(Yii::t('frontend', 'Trending'), ['/site/index/','state'=>'trending'], ['class'=>'btn btn-success each_category_button']) ?>
+                              <?= Html::a(Yii::t('frontend', 'Discuss'), ['/site/index/','state'=>'discuss'], ['class'=>'btn btn-success each_category_button']) ?>
+       
+                    </div>
+                <div class = "category_panel">
+                <?= $this->render('_categories',['data'=>$data]) ?>
+                   </div>
                                             
-            </div>
         </div>
     
     </div>

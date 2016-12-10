@@ -54,7 +54,17 @@ $config = [
         ]
     ],
     'components' => [
-
+         'assetManager' => [
+                'bundles' => [
+                    'dosamigos\google\maps\MapAsset' => [
+                        'options' => [
+                            'key' => 'AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y',
+                            'language' => 'en',
+                            'version' => '3.1.18'
+                        ]
+                    ]
+                ]
+            ],
         
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',

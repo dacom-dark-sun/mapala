@@ -54,21 +54,13 @@ class FormsController extends SiteController
              $bl_model = BlockChain::construct_im_mapala($model);
              return $bl_model;
         }
-
+//Here $model - is model for edit, $current_art - it is model current article, from which meta we need to get additional parametrs
         if (($author != null)&&($permlink != null)){ //EDIT
-            $query = new Art();
-            $current_art = $query
-                ->find()
-                ->where('author=' . "'" .  $author . "'")
-                ->andwhere('permlink=' . "'" .  $permlink . "'")
-                ->one();
+              $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
               $meta = Art::explode_meta($current_art);
-              
-              $model->contacts =  (array_key_exists('2', $meta['tags'])? $meta['tags'][2] :  "");
-              $model->languages = (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
+              $model = Art::fill_immapala($model,$meta);
     }
-      
      
         return $this->render('immapala', [ //CLEAR
         'model' => $model

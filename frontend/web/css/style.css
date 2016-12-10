@@ -1,5 +1,5 @@
 .article-item {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 .article-item .article-title,
 .article-item .article-title a {
@@ -124,6 +124,7 @@ a.desc:after {
     font-size: 14px;
     margin-top: 10px;
     text-align: center;
+    margin-top: 20px;
     
 }
 .article-metainfo-center{
@@ -214,7 +215,11 @@ cursor: pointer;
 
 }
 
-.addbutton{
+.each_category_button{
+  margin:1px;
+}
+
+.category_buttons{
     position: relative;
     text-align: center;
     margin-bottom: 20px;
@@ -349,4 +354,37 @@ input[type="radio"], input[type="checkbox"]{
 .votes-counter{
     font-weight: normal;
     cursor: pointer;
+}
+
+.additional-info{
+    background-color: gainsboro;
+    padding: 10px;
+    border-style: groove;
+}
+.row{
+    margin-right: 0px !important; 
+     margin-left: 0px !important; 
+}
+
+
+
+.site-container{
+    padding-top: 65px;
+    padding-left: 20px; 
+    padding-right: 20px;
+}
+
+.logo_text{
+    color: #9d9d9d;
+    font-family: cursive;
+    padding-top: 15px;
+    padding-left:20px;
+    position: absolute;
+}
+
+.site_logo{
+    width: 46px;
+    padding-top: 2px;
+    z-index: 1301;
+    position: fixed;
 }

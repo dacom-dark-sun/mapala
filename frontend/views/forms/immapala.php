@@ -16,7 +16,6 @@ use kartik\date\DatePicker;
 use yii\bootstrap\Modal;
 use kartik\widgets\FileInput;
 
-
 \frontend\assets\KeyAsset::register($this);
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 
@@ -32,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?php echo Html::encode($this->title) ?></h1>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
             <?php $form = ActiveForm::begin(['id' => 'add-form']); ?>
             
                 <?php echo $form->field($model, 'title') ?>
@@ -93,15 +92,66 @@ echo $form->field($model, 'city')->widget(Select2::classname(), [
                 <div class="form-group">
                     <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
                 </div>
-              <?php echo $form->field($model, 'coordinates')->hiddenInput(['value'=> ""])->label(Yii::t('frontend','Coordinates')) ?>
-        
-            <?php ActiveForm::end(); ?>
+           
+            
         </div>
+        <div class="col-lg-5">
+           text
+        </div>
+        
     </div>
+    
+
 <div id ="map-container">   
-        <div id="map"></div>
+     <div id="map">
+    
+            <?php
+            
+                echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
+                    'key' => 'AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y' ,   // require , Put your google map api key
+                    'valueTemplate' => '{latitude},{longitude}' , // Optional , this is default result format
+                    'options' => [
+                        'style' => 'width: 100%; height: 500px',  // map canvas width and height
+                    ] ,
+                    'enableSearchBox' => true , // Optional , default is true
+                    'searchBoxOptions' => [ // searchBox html attributes
+                        'style' => 'width: 90%;', // Optional , default width and height defined in css coordinates-picker.css
+                    ],
+                    'searchBoxPosition' => new JsExpression('google.maps.ControlPosition.TOP_LEFT'), // optional , default is TOP_LEFT
+                    'mapOptions' => [
+                        // google map options
+                        // visit https://developers.google.com/maps/documentation/javascript/controls for other options
+                        'mapTypeControl' => true, // Enable Map Type Control
+                        'mapTypeControlOptions' => [
+                              'style'    => new JsExpression('google.maps.MapTypeControlStyle.HORIZONTAL_BAR'),
+                              'position' => new JsExpression('google.maps.ControlPosition.TOP_LEFT'),
+                        ],
+                        'streetViewControl' => true, // Enable Street View Control
+                    ],
+                    'clientOptions' => [
+                        'zoom' => 2,
+                        'location' => [
+                            'latitude'  => 44.67142437752303 ,
+                            'longitude' => -35.7470703125,
+                      
+                        ],
+                        // jquery-location-picker options
+                        'radius'    => 300,
+                        'addressFormat' => 'street_number',
+                        
+                    ]
+                ]);
+            ?>
+            
+            </div>
+            
     </div>
-</div>
+            
+            
+            
+            
+            
+            <?php ActiveForm::end(); ?>
 
 
 
@@ -133,33 +183,7 @@ $('#immapala-is_it_traveler').click(function(){
     
     
 //When user click to the map, we get coordinates and put it in the model (hide input)
-var marker;
-function placeMarker(location, map) {
-var loc = JSON.stringify(location);
-//Take name of Model for construct name hidden input, which depends from it
-$('input[name="<?php echo $model->formName() ?>[coordinates]"]').attr('value',loc);
-if ( marker ) {
-    marker.setPosition(location);
-  } else {
-    marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-  }
-}
 
-//Map initialization
-function initMap() {
- 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 2,
-    center: {lat: 35, lng: 0 }
-  });
-
-  map.addListener('click', function(e) {
-    placeMarker(e.latLng, map);
-  });
-}
 
 
    //this for filter cities list if user choise the country 
@@ -179,7 +203,3 @@ function initMap() {
 </script>
      
      
-
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y&callback=initMap" async defer></script>

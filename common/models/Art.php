@@ -249,7 +249,7 @@ class Art extends \yii\db\ActiveRecord
          * This function parse all links and images and return in array for cleaning or change
          */
         static function parse_links_and_urls($text){
-           $re = '/(([A-Za-z.-_]+)\.([\/.A-Za-z0-9-_#=&;%+]{2,})\.([\/.A-Za-z0-9-_#?=&;%+]{0,}))/';
+           $re = '/(([A-Za-z:.-_]+)\.([\/.A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([\/.A-Za-zА-Яа-я0-9-_#?=;%+]{0,})\&?([\/.A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
             preg_match_all($re, $text, $matches);
             return $matches;
            
@@ -409,20 +409,24 @@ class Art extends \yii\db\ActiveRecord
      
      static function get_article_for_edit($author, $permlink){
             $query = new Art();
-            $current_art = $query
+            $art = $query
                 ->find()
                 ->where('author=' . "'" .  $author . "'")
                 ->andwhere('permlink=' . "'" .  $permlink . "'")
                 ->one();
-              $model = $current_art->attributes;
-              $meta = json_decode($current_art->meta, true);
-              
-              $model['contacts'] =  (array_key_exists('2', $meta['tags'])? $meta['tags'][2] :  "");
-              $model['languages'] = (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
-         
-         return $model;
+        
+         return $art;
      }
 
+     static function fill_immapala($model, $meta){
+        $model->contacts =  (array_key_exists('2', $meta['tags'])? $meta['tags'][2] :  "");
+        $model->languages = (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
+        $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
+        
+        return $model;
+         
+         
+     }
      
         
         

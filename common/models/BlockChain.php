@@ -58,8 +58,8 @@ class BlockChain extends Model
              $json['tags'][1] =  BlockChain::tag_to_eng(mb_strtolower($model->country));
              $json['tags'][2] =  BlockChain::tag_to_eng(mb_strtolower($model->city));
              $json['tags'][3] = 'im-mapala';
-             $json['tags'][4] = explode(", ", $languages);
-           
+             $json['languages'] = explode(", ", $languages);
+             $json['coordinates'] = $model->coordinates;
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $bl_model['metadata'] = $json;
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);

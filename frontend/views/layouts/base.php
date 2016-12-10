@@ -11,6 +11,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
 <div class="wrap">
    
     <?php
+      
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -18,6 +19,8 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]); ?>
+           <?php echo '<span class="logo_text"> Everyone Can Travel </span>';?>
+ 
     <?php echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [

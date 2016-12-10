@@ -46,32 +46,24 @@ use yii\helpers\Html;
             </div>
         </div>
        
-    </div>
+     <div class ="additional-info">
+     <?= $this->render('/site/_addmetainfo',['model'=>$model]) ?>
+      
+
+     <?php $model_name = 'immapala';?>
+     <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
+
+</div>
+
         <div class="article-metainfo">
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
         </div>  
     
 </div>
 
-
-<div class ="additional-info">
- <span class="article-edit">
-     <?php $model_name = 'immapala';?>
-       <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
- <?php 
-$meta = Art::explode_meta($model->meta);
-$model->attributes = Art::get_article_for_edit($model->author, $permlink);
-var_dump($meta);
-if ($model_name == 'immapala'){
-    echo 'Contacts: ' . $meta[''];
-    
-    
-}    
-
- ?>       
-
 </div>
 
+   
 
 
 <div id ="comments">
