@@ -88,8 +88,9 @@ class Art extends \yii\db\ActiveRecord
     {
         $data_full = null;
         $query = new Category();
-        
-            $array_categories = $query->find()->asArray()->select('country_json, city_json, category_json, sub_category_json')->all();
+         $blockchain =  BlockChain::get_blockchain_from_locale();    
+            
+            $array_categories = $query->find()->where(['blockchain'=> $blockchain])->asArray()->select('country_json, city_json, category_json, sub_category_json')->all();
             foreach ($array_categories as $line){
                 $country_json = json_decode($line['country_json'], true);
                 if ($country_json['text']!='null'){
@@ -264,9 +265,10 @@ class Art extends \yii\db\ActiveRecord
         
         static function get_data_by_categories($categories = null, $state = 'new'){
              $searchModel = new ArtSearch();
-                
+             $blockchain =  BlockChain::get_blockchain_from_locale();    
+             
              if ($categories == null){
-                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+                $dataProvider = $searchModel->search([$searchModel->formName() => ['blockchain'=> $blockchain]]);
              }
              else {
                  $categories = Art::clean_data($categories);
@@ -324,6 +326,8 @@ class Art extends \yii\db\ActiveRecord
         
         
         static function get_author_categories($author){
+            $blockchain =  BlockChain::get_blockchain_from_locale();    
+            
             if ($author == null) {
                  $author = Yii::$app->user->identity->username;
             }
@@ -331,6 +335,7 @@ class Art extends \yii\db\ActiveRecord
                 ->select('country,city,category,sub_category')
                 ->from(['Art'])
                 ->where('author=' . "'" .  $author . "'")
+                ->andwhere('blockchain=' . "'" .  $blockchain . "'")
                 ->all();
             
         }
@@ -338,11 +343,11 @@ class Art extends \yii\db\ActiveRecord
         
         static function get_single_blog($author = null){
             $searchModel = new ArtSearch();
-            
+            $blockchain =  BlockChain::get_blockchain_from_locale();    
             if ($author == null) {
                  $author = Yii::$app->user->identity->username;
             }
-            $dataProvider = $searchModel->search([$searchModel->formName() => ['author' => $author]]);
+            $dataProvider = $searchModel->search([$searchModel->formName() => ['author' => $author, 'blockchain'=> $blockchain]]);
             $dataProvider->sort = [
                 'defaultOrder' => ['created_at' => SORT_DESC]
             ];
@@ -352,8 +357,8 @@ class Art extends \yii\db\ActiveRecord
         }
             
         static function get_single_art($author, $permlink){
-            
-        $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->one();
+        $blockchain =  BlockChain::get_blockchain_from_locale();
+        $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->one();
         return $model;
 
         }
@@ -408,11 +413,14 @@ class Art extends \yii\db\ActiveRecord
      }
      
      static function get_article_for_edit($author, $permlink){
+            $blockchain =  BlockChain::get_blockchain_from_locale();    
             $query = new Art();
             $art = $query
                 ->find()
                 ->where('author=' . "'" .  $author . "'")
                 ->andwhere('permlink=' . "'" .  $permlink . "'")
+                ->andwhere('blockchain=' . "'" .  $blockchain . "'")
+            
                 ->one();
         
          return $art;

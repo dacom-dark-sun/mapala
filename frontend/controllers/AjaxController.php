@@ -23,13 +23,26 @@ class AjaxController extends Controller{
     }
    
     
+    
+    
+    
      public function actionComments($permlink) {
-           $model = Art::find()->where(['permlink' => $permlink])->one();
-      
+      $model = new Art();
+     $data = Yii::$app->request->post();    
+      if (Yii::$app->request->post()) { //SAVE
+            return '$data';
+            
+        } else {
+              $model = Art::find()->where(['permlink' => $permlink])->one();
+    
       return $this->renderAjax('comments', [
          'model' => $model
      ]);
      }
+            
+        }
+      
+      
      
      
 }

@@ -16,7 +16,7 @@ $(document).on("beforeSubmit", "#add-form", function () {
             success: function (data) 
             {
                 console.log(data);
-           //     comment(data);
+                comment(data);
             },
             error  : function () 
             {

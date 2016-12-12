@@ -176,11 +176,9 @@ $config = [
         'adminEmail' => env('ADMIN_EMAIL'),
         'robotEmail' => env('ROBOT_EMAIL'),
         'availableLocales'=>[
-            'en-US'=>'English (US)',
-            'ru-RU'=>'Русский (РФ)',
-            'uk-UA'=>'Українська (Україна)',
-            'es' => 'Español',
-            'zh-CN' => '简体中文',
+            'en-US'=>'English (STEEM)',
+            'ru-RU'=>'Русский (GOLOS)',
+           
         ],
     ],
 ];

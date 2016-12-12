@@ -7,7 +7,7 @@ use yii\widgets\Breadcrumbs;
 
 $this->beginContent('@frontend/views/layouts/base.php')
 ?>
-    <div class="site-container">
+    <div class="container-fluid">
 
         <?php echo Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

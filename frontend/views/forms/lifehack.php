@@ -12,7 +12,6 @@ use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\web\JsExpression;
 
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 
@@ -27,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="form-index">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
             <?php //------ Start active form and show title
             $form = ActiveForm::begin(['id' => 'add-form']); ?>
             <?php echo $form->field($model, 'title') ?>
@@ -43,27 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             
 
-<?php 
-//Show depended cities by ajax ----------------------------------------------------------
-echo $form->field($model, 'city')->widget(Select2::classname(), [
-     'options' => ['placeholder' => 'Search for a city ...'],
-    'pluginOptions' => [
-    'allowClear' => true,
-    'minimumInputLength' => 3,
-    'language' => [
-        'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
-    ],
-    'ajax' => [
-        'url' => Yii::$app->urlManager->createUrl('forms/citylist'),
-        'dataType' => 'json',
-        'data' => new JsExpression('function(params) { return {q:params.term}; }')
-    ],
-    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
-    'templateResult' => new JsExpression('function(city) { return city.text; }'),
-    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
-],//--------------------------------------------------------------------------------------
-]);?>      
-         
 
 
 
@@ -101,68 +79,18 @@ echo $form->field($model, 'city')->widget(Select2::classname(), [
             <?php echo $form->field($model, 'coordinates')->hiddenInput(['value'=> ""])->label(Yii::t('frontend','Coordinates')) ?>
             <?php ActiveForm::end(); ?>
         </div>
-
+   <div class="col-lg-5">twst</div>
+ 
     </div>
     
-    
-    <div id ="map-container">   
-        <div id="map"></div>
+<div id ="map-container">   
+     <div id="map">
+       <?= $this->render('map',['model'=>$model, 'form' => $form]) ?>
+            
+            </div>
+            
     </div>
-
 </div>
 
 
 
-
-<script>
-//When user click to the map, we get coordinates and put it in the model (hide input)
-var marker;
-function placeMarker(location, map) {
-var loc = JSON.stringify(location);
-//Take name of Model for construct name hidden input, which depends from it
-$('input[name="<?php echo $model->formName() ?>[coordinates]"]').attr('value',loc);
-if ( marker ) {
-    marker.setPosition(location);
-  } else {
-    marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-  }
-}
-
-//Map initialization
-function initMap() {
- 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 2,
-    center: {lat: 35, lng: 0 }
-  });
-
-  map.addListener('click', function(e) {
-    placeMarker(e.latLng, map);
-  });
-}
-
-
-   //this for filter cities list if user choise the country 
-   
-    function save_country(id){
-        id = parseInt(id);
-       $.ajax({
-            url    : '<?php echo Yii::$app->urlManager->createUrl('forms/save_country') ?>',
-            type   : 'get',
-            data   : { id : id}
-            });
-     }
-     
-     
-
-
-</script>
-     
-     
-
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y&callback=initMap" async defer></script>

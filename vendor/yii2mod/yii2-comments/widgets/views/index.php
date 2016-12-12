@@ -38,25 +38,48 @@ use yii\helpers\Html;
     </div>
 </div>
 <?php Pjax::end(); ?>
+
+
 <script>
+    
      function send_comment($this){
-        var author;
+        var parentAuthor;
         var body;
-        var parent_permlink = $this[0].form[2].form[2].defaultValue; //get parent_permlink
-        if (parent_permlink == '') 
+        var data = new Array();
+        var parentPermlink = $this[0].form[2].form[2].defaultValue; //get parent_permlink
+       
+        if (parentPermlink == '') 
         {                                                   //if '' that mean, this reply for main article and need take a main permlink from hidden input
-            parent_permlink = $('#relatedTo').val();
-            author = $('#main_author').val();
+            parentPermlink = $('#relatedTo').val();
+            parentAuthor = $('#main_author').val();
         } else {
-            parent_permlink = $this[0].form[2].form[2].defaultValue;  //get parent_permlink for simple reply
-            author = $this[0].form[1].offsetParent.lastElementChild.children[1].childNodes[7].firstChild.parentElement.firstElementChild.innerText; //get parent author
+            parentPermlink = $this[0].form[2].form[2].defaultValue;  //get parent_permlink for simple reply
+            parentAuthor = $this[0].form[1].offsetParent.lastElementChild.children[1].childNodes[7].firstChild.parentElement.firstElementChild.innerText; //get parent author
         }
         body = $this[0].form[2].form[1].value;        //get body new comment get body
-            
-        alert(author);
-        alert(parent_permlink);
-        alert(body);
-        $this.submit();
+         
+        data['parentAuthor'] = parentAuthor;
+        data['parentPermlink'] = parentPermlink;
+        data['body'] = body;
+        
+        $.ajax({
+            url    : $this.attr('action'),
+            type   : 'post',
+            data   : 'data',
+            success: function (data) 
+            {
+                console.log(data);
+                comment(data);
+            },
+            error  : function (xhr, ajaxOptions, thrownError) 
+            {
+               console.log(xhr.status);
+        console.log(thrownError);
+        console.log(ajaxOptions);
+               console.log('internal server error');
+            }
+            });
+       
     }
     
     </script>

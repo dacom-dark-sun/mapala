@@ -1,6 +1,8 @@
 .article-item {
-    padding-bottom: 20px;
+        padding-bottom: 5px;
+    padding-top: 5px;
 }
+
 .article-item .article-title,
 .article-item .article-title a {
   color: inherit;
@@ -113,17 +115,19 @@ a.desc:after {
     
 }
   .category_panel{
-    margin-top: 10px;
-    width : 200px;
-    position : fixed;
-    text-align: left;
+    
+}
+.jstree-anchor{
+     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
 }
 
 .article-metainfo{
     font-size: 14px;
     margin-top: 10px;
-    text-align: center;
+    text-align: right;
     margin-top: 20px;
     
 }
@@ -343,10 +347,11 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 .modal-open{
-   padding-right: 0px !important;
+/*   padding-right: 0px !important;
    padding-left: 0px !important;
-   overflow-y: scroll;
+   overflow-y: scroll;*/
 }
+
 .popover{
    z-index: 1 !important;  
 }
@@ -387,4 +392,27 @@ input[type="radio"], input[type="checkbox"]{
     padding-top: 2px;
     z-index: 1301;
     position: fixed;
+}
+
+.navbar-brand > img {
+    display: inline;
+    width: 48px;
+    margin-right: 15px;
+}
+.navbar-brand{
+ padding: 1px; 
+ padding-left: 15px; 
+
+}
+    
+.container-fluid{
+  margin-top: 65px;
+}
+
+.container-navbar{
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 600px) {
+   .category_panel {display:none}
 }

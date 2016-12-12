@@ -41,16 +41,13 @@ try{
 
 
 
-function comment (current_blockchain, data){
+function comment (data){
+    var trx = new Array();
+    data = JSON.parse(data);
+    var blockchain = data.blockchain.toLowerCase() + 'sig';
     
-    trx = JSON.parse(data);
-    console.log(trx);
+    var wif = get_wif(blockchain);
     
-    current_blockchain = current_blockchain.toLowerCase();
-    current_blockchain = current_blockchain + 'sig';
-
-    var wif = get_wif(current_blockchain);
-
     if (wif.status  ==  'success')
     try{
         pub_key = convert_to_pub_key_steem(wif.plaintext);
@@ -58,25 +55,34 @@ function comment (current_blockchain, data){
         check_pub_key_steem(pub_key, function steem_callback(err, result){ 
         
         if (!err){
-            parentAuthor = '';
-            author = result[0][0];
-            permlink = trx['permlink'];
-            parentPermlink = trx['parentPermlink'];
-            title = trx['title'];
-            body = trx['body'];
-            jsonMetadata = JSON.parse(trx['metadata']);
+            trx['parentAuthor'] = data.parentAuthor;
+            trx['parentPermlink'] = data.parentPermlink;
+            trx['author'] = result[0][0];
+            trx['permlink'] = data.permlink;
+            trx['title'] = data.title;
+            trx['body'] = data.body;
+            trx['metadata'] = data.metadata;
+            
+            //jsonMetadata = JSON.parse(trx['metadata']);
                 
                 console.log(trx);
                 console.log(wif);
                 
                 
                 
-                steem.broadcast.comment(wif.plaintext, parentAuthor, parentPermlink, author, permlink, title, body, jsonMetadata, function(err, result) {
-    console.log(err, result);
-            
-                console.log(err, result);
+                steem.broadcast.comment(wif.plaintext, 
+                trx['parentAuthor'], 
+                trx['parentPermlink'], 
+                trx['author'], 
+                trx['permlink'], 
+                trx['title'], 
+                trx['body'], 
+                trx['metadata'], 
+                function(err, result) {
+                    
+                    console.log(err, result);
             });
-         
+        
         } else alert(err);
   
         });

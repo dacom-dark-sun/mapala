@@ -26,7 +26,7 @@ use talma\widgets\JsTreeAsset;
     ])?>
 </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 category_panel">
                 
                     <div class ="category_buttons">
                               <?= Html::a('Пополнить Базу', ['/site/add'], ['class'=>'btn btn-danger each_category_button']) ?>
@@ -35,9 +35,7 @@ use talma\widgets\JsTreeAsset;
                               <?= Html::a(Yii::t('frontend', 'Discuss'), ['/site/index/','state'=>'discuss'], ['class'=>'btn btn-success each_category_button']) ?>
        
                     </div>
-                <div class = "category_panel">
                 <?= $this->render('_categories',['data'=>$data]) ?>
-                   </div>
                                             
         </div>
     

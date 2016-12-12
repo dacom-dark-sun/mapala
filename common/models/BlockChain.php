@@ -9,7 +9,8 @@ namespace common\models;
 use yii\helpers\StringHelper;
 use Yii;
 use yii\base\Model;
-
+use common\models\Countries;
+use common\models\Cities;
 /**
  * ContactForm is the model behind the contact form.
  */
@@ -46,7 +47,7 @@ class BlockChain extends Model
    static function construct_im_mapala($model){
              
              $bl_model['parentAuthor'] = '';
-             $bl_model['parentPermlink'] = 'im-mapala'; //
+             $bl_model['parentPermlink'] = 'test'; //im-mapala
              $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
              $bl_model['body'] = $model->body;
              $bl_model['title'] = $model->title;
@@ -54,13 +55,14 @@ class BlockChain extends Model
             
              $languages = BlockChain::tag_to_eng(strtolower($model->languages));
              $json['contacts'] = strtolower($model->contacts);
-             $json['tags'][0] = 'mapala';
-             $json['tags'][1] =  BlockChain::tag_to_eng(mb_strtolower($model->country));
-             $json['tags'][2] =  BlockChain::tag_to_eng(mb_strtolower($model->city));
-             $json['tags'][3] = 'im-mapala';
              $json['languages'] = explode(", ", $languages);
+             $json['tags'][0] = 'test';
+             $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
+             $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
+             $json['tags'][3] = 'im-mapala';
              $json['coordinates'] = $model->coordinates;
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             
              $bl_model['metadata'] = $json;
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
       
@@ -69,28 +71,141 @@ class BlockChain extends Model
     
    static function construct_homestay($model){
              $bl_model['parentAuthor'] = '';
-             $bl_model['parentPermlink'] = 'homestay'; //
+             $bl_model['parentPermlink'] = 'test'; //
              $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
              $bl_model['body'] = $model->body;
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
              
              $json['contacts'] = mb_strtolower($model->contacts);
-             $json['tags'][0] = 'mapala';
-             $json['tags'][1] =  BlockChain::tag_to_eng($model->country);
-             $json['tags'][2] =  BlockChain::tag_to_eng($model->city);
+             $json['capacity'] = $model->capacity;
+             $json['cost'] = $model->cost;
+            
+             $json['tags'][0] = 'test';
+             $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
+             $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
              $json['tags'][3] = 'homestay';
              $json['tags'][4] = BlockChain::free_on_different_lang($model->free);
+             $json['coordinates'] = $model->coordinates;
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
-           
-             $bl_model['metadata'] = json_encode($json);
+             
+             $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
         
         
     }
-
     
+    
+    
+    
+   static function construct_lifehack($model){
+/*  public $title;
+    public $country;
+    public $body;
+    public $tags; -- one tag
+    public $coordinates;
+*/    
+             $bl_model['parentAuthor'] = '';
+             $bl_model['parentPermlink'] = 'test'; //
+             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             $bl_model['body'] = $model->body;
+             $bl_model['title'] = $model->title;
+             $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
+                         
+             $json['tags'][0] = 'test';
+             $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
+             $json['tags'][3] = 'lifehack';
+             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+             
+             $json['coordinates'] = $model->coordinates;
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             
+             $bl_model['metadata'] = $json;
+             
+             return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
+        
+        
+    }
+    
+    
+    
+   static function construct_must_see($model){
+           /*  public $title;
+    public $country;
+    public $body;
+    public $tags; -- one tag
+    public $coordinates;
+*/    
+             $bl_model['parentAuthor'] = '';
+             $bl_model['parentPermlink'] = 'test'; //
+             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             $bl_model['body'] = $model->body;
+             $bl_model['title'] = $model->title;
+             $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
+                         
+             $json['tags'][0] = 'test';
+             $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
+             $json['tags'][3] = 'must_see';
+             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+             
+             $json['coordinates'] = $model->coordinates;
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             
+             $bl_model['metadata'] = $json;
+             
+             return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
+        
+        
+        
+    }
+    
+    
+    
+    
+   static function construct_story($model){
+/*  public $title;
+    public $country;
+    public $body;
+    public $tags; -- one tag
+    public $coordinates;
+*/    
+             $bl_model['parentAuthor'] = '';
+             $bl_model['parentPermlink'] = 'test'; //
+             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             $bl_model['body'] = $model->body;
+             $bl_model['title'] = $model->title;
+             $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
+                         
+             $json['tags'][0] = 'test';
+             $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
+             $json['tags'][3] = 'must_see';
+             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+             
+             $json['coordinates'] = $model->coordinates;
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             
+             $bl_model['metadata'] = $json;
+             
+             return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
+        
+        
+        
+    }
+    
+    
+    static function convert_country_to_lang($id){
+        $country = Countries::find()->select('name')->where('id=' . $id)->asArray()->one();
+        return $country['name'];
+    }
+    
+    static function convert_city_to_lang($id){
+        $city = Cities::find()->select('name')->where('id=' . $id)->asArray()->one();
+        return $city['name'];
+        
+        
+    }
+
 
     static function free_on_different_lang($free){
         $current_lang = Yii::$app->language;
@@ -117,28 +232,6 @@ class BlockChain extends Model
         
     }
     
-    
-    
-   static function construct_must_see($model){
-             $bl_model['parentAuthor'] = '';
-             $bl_model['parentPermlink'] = 'must-see'; //
-             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
-             $bl_model['body'] = $model->body;
-             $bl_model['title'] = $model->title;
-             $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
-            
-             $json['tags'][0] = 'mapala';
-             $json['tags'][1] =  BlockChain::tag_to_eng(mb_strtolower($model->country));
-             $json['tags'][2] =  BlockChain::tag_to_eng(mb_strtolower($model->city));
-             $json['tags'][3] = 'must-see';
-             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
-           
-             $bl_model['metadata'] = json_encode($json);
-             return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
-      
-        
-        
-    }
     
     
     

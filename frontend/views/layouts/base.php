@@ -9,17 +9,16 @@ use yii\helpers\Html;
 $this->beginContent('@frontend/views/layouts/_clear.php')
 ?>
 <div class="wrap">
-   
     <?php
-      
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png class= 'img-responsive'>" . Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
+        'innerContainerOptions' => ['class'=>'container-fluid container-navbar'],
     ]); ?>
-           <?php echo '<span class="logo_text"> Everyone Can Travel </span>';?>
+           <?php echo '<span class="logo_text"> [ Everyone Can Travel ]</span>';?>
  
     <?php echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

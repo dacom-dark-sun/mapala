@@ -15,7 +15,7 @@ use talma\widgets\JsTreeAsset;
     'core' => [
         'themes' =>  [
                 'name' => 'proton',
-                'responsive' => true
+                'responsive' => false
             ],
         
         'data' => $data,

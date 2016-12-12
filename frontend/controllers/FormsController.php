@@ -54,7 +54,10 @@ class FormsController extends SiteController
              $bl_model = BlockChain::construct_im_mapala($model);
              return $bl_model;
         }
-//Here $model - is model for edit, $current_art - it is model current article, from which meta we need to get additional parametrs
+        
+//Here $model - is model for edit, $current_art - it is model current article, 
+//from which we need to get additional parametrs (meta) and add to immapala model
+  
         if (($author != null)&&($permlink != null)){ //EDIT
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
@@ -65,19 +68,55 @@ class FormsController extends SiteController
         return $this->render('immapala', [ //CLEAR
         'model' => $model
         ]);
-
-      
-      
+ 
     }
+
+
+    public function actionHomestay()
+        {
+        /*
+         @public $title;  
+         @public $contacts;
+         @public $country;
+         @public $city;
+         @public $capacity;
+         @public $cost=0 ;
+         @public $free = 1;
+         @public $body;
+         @public $parentPermlink = '';
+         @public $parentAuthor = '';
+         @public $blockchain
+        
+        */
+         $model = new Homestay();
+         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+             $bl_model = BlockChain::construct_homestay($model);
+             return $bl_model;
+          }
+        else{ return $this->render('homestay', [
+            'model' => $model
+            ]);
+        }
+    }
+
     
             
     public function actionLifehack()
     {
+/*  public $title;
+    public $country;
+    public $body;
+    public $tags;
+    public $coordinates;
+ */
+        
         $model = new Lifehack();
         
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-        return var_dump($model);  
-        }
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+             $bl_model = BlockChain::construct_lifehack($model);
+        return $bl_model;
+            
+       }
         else{ return $this->render('lifehack', [
             'model' => $model
             ]);
@@ -89,7 +128,6 @@ class FormsController extends SiteController
           $model = new Must_see();
         
          if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-           return  var_dump($model);
             $bl_model = BlockChain::construct_must_see($model);
              return $bl_model;
              
@@ -100,6 +138,25 @@ class FormsController extends SiteController
             ]);
         }
     }
+    
+    
+    
+    public function actionStory()
+        {
+        $model = new Story();
+        
+         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+              $bl_model = BlockChain::construct_story($model);
+             return $bl_model;
+
+               }
+        else { 
+            return $this->render('story', [
+            'model' => $model
+            ]);
+        }
+    }
+    
 
     
     public function actionEvents()
@@ -124,51 +181,8 @@ class FormsController extends SiteController
     }
 
     
-    public function actionStory()
-        {
-        $model = new Story();
-        
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            return var_dump($model);
-            $bl_model = BlockChain::construct_im_mapala($model);
-             return $bl_model;
-
-               }
-        else { 
-            return $this->render('story', [
-            'model' => $model
-            ]);
-        }
-    }
 
     
-    public function actionHomestay()
-        {
-        /*
-         @public $title;  
-         @public $contacts;
-         @public $country;
-         @public $city;
-         @public $capacity;
-         @public $cost=0 ;
-         @public $free = 1;
-         @public $body;
-         @public $parentPermlink = '';
-         @public $parentAuthor = '';
-         @public $blockchain
-        
-        */
-        $model = new Homestay();
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-             $bl_model = new BlockChain();
-             $bl_model = BlockChain::construct_homestay($model);
-             return $bl_model;
-          }
-        else{ return $this->render('homestay', [
-            'model' => $model
-            ]);
-        }
-    }
 
     
      public function actionBase()

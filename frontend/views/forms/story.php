@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?php echo Html::encode($this->title) ?></h1>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
              <?php //------ Start active form and show title
             $form = ActiveForm::begin(['id' => 'add-form']); ?>
             <?php echo $form->field($model, 'title') ?>
@@ -70,10 +70,17 @@ $this->params['breadcrumbs'][] = $this->title;
         
                 <?php ActiveForm::end(); ?>
         </div>
+        <div class="col-lg-5">
+           text
+        </div>
     </div>
 
      <div id ="map-container">   
-        <div id="map"></div>
+         <div id="map">
+             
+       <?= $this->render('map',['model'=>$model, 'form' => $form]) ?>
+             
+         </div>
     </div>
     
     
@@ -83,43 +90,3 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-
-<script>
-//When user click to the map, we get coordinates and put it in the model (hide input)
-var marker;
-function placeMarker(location, map) {
-var loc = JSON.stringify(location);
-//Take name of Model for construct name hidden input, which depends from it
-$('input[name="<?php echo $model->formName() ?>[coordinates]"]').attr('value',loc);
-if ( marker ) {
-    marker.setPosition(location);
-  } else {
-    marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-  }
-}
-
-//Map initialization
-function initMap() {
- 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 2,
-    center: {lat: 35, lng: 0 }
-  });
-
-  map.addListener('click', function(e) {
-    placeMarker(e.latLng, map);
-  });
-}
-
-
-
-</script>
-     
-     
-
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y&callback=initMap" async defer></script>

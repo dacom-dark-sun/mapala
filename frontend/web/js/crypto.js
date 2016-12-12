@@ -3,7 +3,7 @@
 
 function get_client_identy(){ //We need to get unique params which we will use like key for decrypt WIF later
     var client_identy = navigator.userAgent + (screen.width * screen.height); //we get userAgent and screen sized and use their combination
-        client_identy = client_identy.replace(/[^a-zA-ZÀ-ßà-ÿ0-9]/gim,'');   //delete special symbols from our identy-key
+        client_identy = client_identy.replace(/[^a-zA-ZĞ-Ğ¯Ğ°-Ñ0-9]/gim,'');   //delete special symbols from our identy-key
 
    return client_identy;
 }

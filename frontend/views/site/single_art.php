@@ -63,7 +63,9 @@ use yii\helpers\Html;
 
 </div>
 
-   
+<?php echo Html::hiddenInput('relatedTo', $model->permlink, ['id' => 'relatedTo']); ?>
+<?php echo Html::hiddenInput('author', $model->author, ['id' => 'main_author']); ?>
+                
 
 
 <div id ="comments">

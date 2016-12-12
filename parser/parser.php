@@ -93,7 +93,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
 
 
      private function get_num_current_block($node) {
-        
+         
         $param = '{"jsonrpc": "2.0", "method": "call", "params": [0,"get_state",[""]], "id": 2}';
         $cmd = "curl --progress-bar --data" . " " . "'" . $param . "'" . " " . $node;
         
@@ -445,7 +445,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
         
         global $db;
         global $config;
-            
+        $blockchain = $config['blockchain']['name'];    
         if ($country == '[]'){
             $country = 'null';
         }
@@ -463,7 +463,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
 
         
         
-           $exist_category = $db->getRow('SELECT * FROM category WHERE country=?s', $country);
+           $exist_category = $db->getRow('SELECT * FROM category WHERE country=?s AND blockchain=?s', $country, $blockchain);
            //Проверяем на существование рут-категории (страны)
             if ($exist_category == NULL){
                  
@@ -472,7 +472,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
                $data['city_json'] = json_encode(['0' => ['id' => $country . '+' . $city, 'parent' => $country, 'text' => $city]], JSON_UNESCAPED_UNICODE);
                $data['category_json'] = json_encode(['0'=>['id' => $country . '+' . $city . "+" . $category, 'parent' => $country . "+" . $city, 'text' => $category]], JSON_UNESCAPED_UNICODE);
                $data['sub_category_json'] = json_encode(['0'=>['id' => $country . '+' . $city . "+" . $category . "+" . $sub_category, 'parent' => $country . "+" . $city . "+" . $category, 'text' => $sub_category]], JSON_UNESCAPED_UNICODE);
-                
+               $data['blockchain'] = $blockchain;
                 $db->query("INSERT INTO category SET ?u", $data);
            
             } else {
@@ -489,7 +489,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
                     //если надо обновляться - добавляем один элемент со связями, конвертируем его в json и записываем     
                          $data['city_json'][] = ['id' => $country . '+' . $city, 'parent' => $country, 'text' => $city];
                          $data['city_json'] = json_encode($data['city_json'], JSON_UNESCAPED_UNICODE);
-                         $db->query("UPDATE category SET city_json=?s WHERE country=?s", $data['city_json'], $country);
+                         $db->query("UPDATE category SET city_json=?s WHERE country=?s AND blochchain =?s", $data['city_json'], $country, $blockchain);
                 }
                 
                 
@@ -503,7 +503,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
                     //если надо обновляться - добавляем один элемент со связями, конвертируем его в json и записываем     
                          $data['category_json'][] = ['id' => $country . '+' . $city . "+" . $category, 'parent' => $country . "+" . $city, 'text' => $category];
                          $data['category_json'] = json_encode($data['category_json'], JSON_UNESCAPED_UNICODE);
-                         $db->query("UPDATE category SET category_json=?s WHERE country=?s AND city=?s", $data['category_json'], $country, $city);
+                         $db->query("UPDATE category SET category_json=?s WHERE country=?s AND city=?s AND blockchain=?s", $data['category_json'], $country, $city, $blockchain);
                 }
                 
                 
@@ -514,7 +514,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
                                      
                         $data['sub_category_json'][] = ['id' => $country . '+' . $city . "+" . $category . "+" . $sub_category, 'parent' => $country . "+" . $city . "+" . $category, 'text' => $sub_category];
                         $data['sub_category_json'] = json_encode($data['sub_category_json'], JSON_UNESCAPED_UNICODE);
-                        $db->query("UPDATE category SET sub_category_json=?s WHERE country=?s AND city=?s", $data['sub_category_json'], $country, $city);
+                        $db->query("UPDATE category SET sub_category_json=?s WHERE country=?s AND city=?s AND blockchain=?s", $data['sub_category_json'], $country, $city, $blockchain);
                           
                 }
             }
