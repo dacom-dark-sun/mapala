@@ -8,10 +8,16 @@ use yii\web\JsExpression;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+            if ($model->coordinates == '') $key = false;
+              else $key = true;
 
+              
+              
               $js = '
                 function(c){
                 var map = jQuery(c).locationpicker("map").map;
+                jQuery(c).locationpicker("map").marker.visible = true;
+                              
                 google.maps.event.addListener(map, "click", function(e) {
                 var marker = jQuery(c).locationpicker("map").marker;
                 var pos = e.latLng;
@@ -22,6 +28,10 @@ use yii\web\JsExpression;
                 // e.stopPropagation();
               });
         };';
+        
+                  
+                  
+                      
             
                 echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
                     'key' => 'AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y' ,   // require , Put your google map api key
@@ -54,11 +64,10 @@ use yii\web\JsExpression;
                         ],
                         // jquery-location-picker options
                         'radius'    => 300,
-                        "markerVisible" => false,
+                        "markerVisible" => $key,
                         'addressFormat' => 'street_number',
                         'oninitialized' => new JsExpression($js),
                         
                     ]
                 ]);
-           
             

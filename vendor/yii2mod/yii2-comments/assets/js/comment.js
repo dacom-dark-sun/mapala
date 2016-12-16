@@ -103,8 +103,15 @@
         var settings = $commentForm.data('comment');
         var $this = $(this);
         var parentCommentSelector = $this.parents('[data-comment-content-id="' + $this.data('comment-id') + '"]');
+        var Permlink = $this.parents('[data-comment-content-id="' + $this.data('permlink') + '"]');
+        var Author = $this.parents('[data-comment-content-id="' + $this.data('author') + '"]');
+        
         $commentForm.appendTo(parentCommentSelector);
+    
         $commentForm.find('[data-comment="parent-id"]').val($this.data('comment-id'));
+        $commentForm.find('[data-comment="author"]').val($this.data('author'));
+        $commentForm.find('[data-comment="permlink"]').val($this.data('permlink'));
+       
         $commentForm.find(settings.cancelReplyBtnSelector).show();
     }
 
@@ -119,7 +126,11 @@
         $commentForm.find(settings.cancelReplyBtnSelector).hide();
         var formContainer = $(settings.pjaxContainerId).find(settings.formContainerSelector);
         $commentForm.prependTo(formContainer);
+        var main_author = $('#main_author').val();
+        var main_permlink = $('#relatedTo').val();
         $commentForm.find('[data-comment="parent-id"]').val(null);
+         $commentForm.find('[data-comment="permlink"]').val(main_permlink);
+          $commentForm.find('[data-comment="author"]').val(main_author);
     }
 
     /**

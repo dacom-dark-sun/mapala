@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use kartik\popover\PopoverX;
 use common\models\Art;
-
+use common\models\BlockChain;
 ?>
 
            <span class="article-author">
@@ -37,16 +37,18 @@ use common\models\Art;
             </span>
             <span>|</span>
             <span class="Icon chatbox">
+               
                 <svg version="1.1" style="margin-top: 1px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"><path d="M124.3,400H277c14.4,0,14.4,0.1,21.3,5.2S384,464,384,464v-64h3.7c42.2,0,76.3-31.8,76.3-71.4V119.7 c0-39.6-34.2-71.7-76.3-71.7H124.3C82.2,48,48,80.1,48,119.7v208.9C48,368.2,82.2,400,124.3,400z"></path></svg>
             </span>
             <span class="article-comments">
                 <?php echo $model->replies?>
             </span>
-           
+          
             <span>|</span>
              <span class="article-vote-up">
-                 <img src='\storage\web\source\up.png' style="height: 25px" id ='<?php echo $model->id ?>' class= 'vote'
-                    
+                 <?php $params = '\'' . $model->blockchain . '\', \'' . $model->author . '\', \'' . $model->permlink . '\', ' . 10000 ?>
+                 <span class="filter"  id ='<?php echo $model->permlink ?>' onclick="down_vote(<?php echo $params ?>)"></span> 
+                 <img src='\storage\web\source\up0.png' id = '<?php echo 'icon_' . $model->permlink ?>' class= 'vote'  
                   onclick = <?php echo 'vote("' . $model->blockchain . '","' . $model->author . '","' . $model->permlink . '",10000)';?>
                      >
              </span>
@@ -55,3 +57,14 @@ use common\models\Art;
             
             
             
+            <script>
+                var voters = '<?php echo $model->voters ?>';
+                voters = JSON.parse(voters);
+                var blockchain = '<?php echo BlockChain::get_blockchain_from_locale() ?>';
+                var account = blockchain.toLowerCase() + 'ac';
+                    account = getCookie(account);
+                
+                var key = voters.indexOf(account);
+                if (key != '-1')
+                  $('#<?php echo $model->permlink ?>').css('z-index', 10);
+            </script>

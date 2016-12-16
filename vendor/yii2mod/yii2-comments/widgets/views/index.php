@@ -19,8 +19,6 @@ use yii\helpers\Html;
         <div class="title-block clearfix">
             <h3 class="h3-body-title">
                 <?php echo Yii::t('yii2mod.comments', "Comments", $commentModel->getCommentsCount($showDeletedComments ? false : true)); ?>
-                <?php echo Html::hiddenInput('relatedTo', $commentModel->permlink, ['id' => 'relatedTo']); ?>
-                <?php echo Html::hiddenInput('author', $commentModel->author, ['id' => 'main_author']); ?>
                
             </h3>
             <div class="title-separator"></div>
@@ -43,42 +41,33 @@ use yii\helpers\Html;
 <script>
     
      function send_comment($this){
-        var parentAuthor;
-        var body;
-        var data = new Array();
-        var parentPermlink = $this[0].form[2].form[2].defaultValue; //get parent_permlink
-       
-        if (parentPermlink == '') 
-        {                                                   //if '' that mean, this reply for main article and need take a main permlink from hidden input
-            parentPermlink = $('#relatedTo').val();
-            parentAuthor = $('#main_author').val();
-        } else {
-            parentPermlink = $this[0].form[2].form[2].defaultValue;  //get parent_permlink for simple reply
-            parentAuthor = $this[0].form[1].offsetParent.lastElementChild.children[1].childNodes[7].firstChild.parentElement.firstElementChild.innerText; //get parent author
-        }
-        body = $this[0].form[2].form[1].value;        //get body new comment get body
-         
-        data['parentAuthor'] = parentAuthor;
-        data['parentPermlink'] = parentPermlink;
-        data['body'] = body;
+        var data;
+        var category = $('#category').val(); //get category main article
+        var parentPermlink = $this[0].form[2].form[3].defaultValue; //get parent_permlink
+        var parentAuthor = $this[0].form[2].form[4].defaultValue; //get parent_permlink
         
+        var body = $this[0].form[2].form[1].value;        //get body new comment get body
+        
+        data = JSON.stringify({parentAuthor, parentPermlink, body, category});
         $.ajax({
-            url    : $this.attr('action'),
-            type   : 'post',
-            data   : 'data',
-            success: function (data) 
+            url: '<?php echo Yii::$app->request->baseUrl . '/ajax/comments_save/' ?>',
+            type: "post",
+     
+            data   : {data: data},
+            success: function (comment_data) 
             {
-                console.log(data);
-                comment(data);
+                console.log(comment_data);
+                  reply(comment_data, function comment_callback(result){
+                      $this.submit();
+                });
             },
             error  : function (xhr, ajaxOptions, thrownError) 
             {
-               console.log(xhr.status);
-        console.log(thrownError);
-        console.log(ajaxOptions);
                console.log('internal server error');
             }
             });
+            
+            
        
     }
     

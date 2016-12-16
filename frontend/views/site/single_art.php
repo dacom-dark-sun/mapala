@@ -48,15 +48,16 @@ use yii\helpers\Html;
        
      <div class ="additional-info">
      <?= $this->render('/site/_addmetainfo',['model'=>$model]) ?>
-      
 
-     <?php $model_name = 'immapala';?>
-     <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
-
-</div>
+     </div>
 
         <div class="article-metainfo">
+
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
+            <?php $model_name = 'immapala';?>
+            <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
+      
+
         </div>  
     
 </div>
@@ -65,6 +66,7 @@ use yii\helpers\Html;
 
 <?php echo Html::hiddenInput('relatedTo', $model->permlink, ['id' => 'relatedTo']); ?>
 <?php echo Html::hiddenInput('author', $model->author, ['id' => 'main_author']); ?>
+<?php echo Html::hiddenInput('category', $model->parent_permlink, ['id' => 'category']); ?>
                 
 
 
@@ -83,5 +85,4 @@ use yii\helpers\Html;
 ]);
 Pjax::end();?>
 </div>
-
 

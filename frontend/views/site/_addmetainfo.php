@@ -15,25 +15,46 @@ $meta = Art::explode_meta($model);
          switch ($m){
         
              case 'languages':
-                echo '<div>';
+                echo '<div class="row-meta">';
                 echo Yii::t('frontend', 'Languages') . ": ";
                 foreach ($meta['languages'] as $lang){
                     echo $lang . ', ';
                 }
                 echo '</div>';
             break;
+            
+            case 'date_until_leave':
+                echo '<div class="row-meta">';
+                echo Yii::t('frontend', 'Date until leave') . ": ";
+                echo $meta['date_until_leave'];
+                echo '</div>';
+            break;
+       
+             case 'free':
+                echo '<div class="row-meta">';
+                if ($meta['free'] == 1) {
+                   echo Yii::t('frontend', 'Free');
+                } else {
+                   echo Yii::t('frontend', 'Must pay') . ': ' . $meta['cost'];
+         
+                }
+                echo '</div>';
+            break;
+       
           
             case 'contacts':
-                echo '<div>';
+                echo '<div class="row-meta">';
                 echo Yii::t('frontend', 'Contacts') . ": ";
                 echo $meta['contacts'][0];
                 echo '</div>';
             break;
             
         case 'coordinates':
-                echo '<div>';
-                $c = json_decode($meta['coordinates'], true);
-                $coord = new LatLng(['lat' => $c['lat'], 'lng' => $c['lng']]);
+            if ($meta['coordinates'] != ''){
+                echo '<div class="row-meta">';
+            
+                $c = explode(',', $meta['coordinates']);
+                $coord = new LatLng(['lat' => $c['0'], 'lng' => $c['1']]);
                 $map = new Map([
                     'center' => $coord,
                     'zoom' => 5,
@@ -46,11 +67,11 @@ $meta = Art::explode_meta($model);
                 $map->addOverlay($marker);
                 echo $map->display();
                 
-                echo 'lat: ' . $c['lat'] . ', ' . 'lng: ' . $c['lng']; 
+                echo 'lat: ' . $c[0] . ', ' . 'lng: ' . $c[1]; 
                 echo '</div>';
                 break;
          }
-   
+       }
     }
 
  ?>       

@@ -48,6 +48,17 @@ class FormsController extends SiteController
     
     public function actionImmapala($author = null, $permlink = null)
     {
+          /*public $title; //title
+            public $contacts; //tag
+            public $country;  //tag
+            public $city;     //tag
+            public $languages; //json
+            public $body;     //body
+            public $not_traveler = 1;    //living in this place
+            public $date_until_leave;
+            public $coordinates;
+               * 
+              */
         $model = new ImMapala();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
@@ -55,10 +66,10 @@ class FormsController extends SiteController
              return $bl_model;
         }
         
-//Here $model - is model for edit, $current_art - it is model current article, 
-//from which we need to get additional parametrs (meta) and add to immapala model
-  
-        if (($author != null)&&($permlink != null)){ //EDIT
+        if (($author != null)&&($permlink != null)){ //EDIT          
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
+
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
               $meta = Art::explode_meta($current_art);
@@ -72,7 +83,7 @@ class FormsController extends SiteController
     }
 
 
-    public function actionHomestay()
+    public function actionHomestay($author = null, $permlink = null)
         {
         /*
          @public $title;  
@@ -86,22 +97,36 @@ class FormsController extends SiteController
          @public $parentPermlink = '';
          @public $parentAuthor = '';
          @public $blockchain
+         @public $coordinates;
+   
         
         */
-         $model = new Homestay();
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        $model = new Homestay();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
              $bl_model = BlockChain::construct_homestay($model);
              return $bl_model;
-          }
-        else{ return $this->render('homestay', [
-            'model' => $model
-            ]);
         }
+        
+        if (($author != null)&&($permlink != null)){ //EDIT          
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
+
+              $current_art= Art::get_article_for_edit($author, $permlink);
+              $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              $model = Art::fill_homestay($model,$meta);
+    }
+     
+        return $this->render('homestay', [ //CLEAR
+        'model' => $model
+        ]);
+ 
     }
 
     
             
-    public function actionLifehack()
+    public function actionLifehack($author = null, $permlink = null)
     {
 /*  public $title;
     public $country;
@@ -110,74 +135,93 @@ class FormsController extends SiteController
     public $coordinates;
  */
         
-        $model = new Lifehack();
+         $model = new Lifehack();
         
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
              $bl_model = BlockChain::construct_lifehack($model);
-        return $bl_model;
-            
-       }
-        else{ return $this->render('lifehack', [
-            'model' => $model
-            ]);
-        }
-    }
-    
-    public function actionMust_see()
-        {
-          $model = new Must_see();
-        
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $bl_model = BlockChain::construct_must_see($model);
              return $bl_model;
-             
-               }
-        else { 
-            return $this->render('must_see', [
-            'model' => $model
-            ]);
         }
-    }
-    
-    
-    
-    public function actionStory()
-        {
-        $model = new Story();
         
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-              $bl_model = BlockChain::construct_story($model);
-             return $bl_model;
+        if (($author != null)&&($permlink != null)){ //EDIT          
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
 
-               }
-        else { 
-            return $this->render('story', [
-            'model' => $model
-            ]);
-        }
+              $current_art= Art::get_article_for_edit($author, $permlink);
+              $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              $model = Art::fill_simple_model($model,$meta);
     }
-    
+     
+        return $this->render('lifehack', [ //CLEAR
+        'model' => $model
+        ]);
+ 
+    }
+        
+     
+    public function actionMust_see($author = null, $permlink = null)
+        {
+      
+           $model = new Must_see();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+             $bl_model = BlockChain::construct_must_see($model);
+             return $bl_model;
+        }
+        
+        if (($author != null)&&($permlink != null)){ //EDIT          
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
 
+              $current_art= Art::get_article_for_edit($author, $permlink);
+              $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              $model = Art::fill_simple_model($model,$meta);
+    }
+     
+        return $this->render('must_see', [ //CLEAR
+        'model' => $model
+        ]);
+ 
+    }
+      
+        
+        
+    
+    
+    
+    public function actionStory($author = null, $permlink = null)
+        {
+           $model = new Story();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+             $bl_model = BlockChain::construct_must_see($model);
+             return $bl_model;
+        }
+        
+        if (($author != null)&&($permlink != null)){ //EDIT          
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
+
+              $current_art= Art::get_article_for_edit($author, $permlink);
+              $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              $model = Art::fill_simple_model($model,$meta);
+    }
+     
+        return $this->render('story', [ //CLEAR
+        'model' => $model
+        ]);
+ 
+    }
+      
+        
+        
+        
     
     public function actionEvents()
         {
-        $model = new Mapala_events();
        
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $art = new Page();
-            $art->title = $model->city;
-            $art->body = $model->country;
-            $art->status="1";
-            $art->slug = $model->contacts;
-            $art->save();
-          
-            Yii::$app->session->setFlash('success', 'Some Message.');
-            return $this->redirect(['/site/my_blog']);
-        }
-        else{ return $this->render('mapala_events', [
-            'model' => $model
-            ]);
-        }
     }
 
     
@@ -189,20 +233,7 @@ class FormsController extends SiteController
       {
         $model = new Base();
        
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $art = new Page();
-            $art->title = $model->city;
-            $art->body = $model->country;
-            $art->status="1";
-            $art->slug = $model->contacts;
-            $art->save();
-              Yii::$app->session->setFlash('success', 'Some Message.');
-            return $this->redirect(['/site/my_blog']);
-        }
-        else{ return $this->render('base', [
-            'model' => $model
-            ]);
-        }
+         
     }
 
     
@@ -210,20 +241,7 @@ class FormsController extends SiteController
         {
         $model = new Companions();
        
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-          $art = new Page();
-            $art->title = $model->city;
-            $art->body = $model->country;
-            $art->status="1";
-            $art->slug = $model->contacts;
-            $art->save();
-               Yii::$app->session->setFlash('success', 'Some Message.');
-            return $this->redirect(['/site/my_blog']);
-        }
-        else{ return $this->render('companions', [
-            'model' => $model
-            ]);
-        }
+        
     }
 
     
@@ -231,20 +249,7 @@ class FormsController extends SiteController
         {
         $model = new Transport();
 
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $art = new Page();
-            $art->title = $model->city;
-            $art->body = $model->country;
-            $art->status="1";
-            $art->slug = $model->contacts;
-            $art->save();
-            Yii::$app->session->setFlash('success', 'Some Message.');
-            return $this->redirect(['/site/my_blog']);
-        }
-        else{ return $this->render('transport', [
-            'model' => $model
-            ]);
-        }
+       
     }
 
 

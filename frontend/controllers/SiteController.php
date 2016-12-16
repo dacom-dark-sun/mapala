@@ -85,7 +85,11 @@ class SiteController extends Controller
     }
     
     
-    
+       
+    public function actionShow_single_blog(){
+      
+        return $this->render('_pre_single_blog');
+    }
     
     
     

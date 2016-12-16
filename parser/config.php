@@ -11,10 +11,13 @@ $config = array (
   'dbuser' => 'root',
   'dbpassword' => '',
   'blockchain' => array(
-  'name' => 'STEEM',
-  'node' => 'this.piston.rocks',
+  'name' => 'golos',
+  'node' => '127.0.0.1:8090',
   'currency' => 'SBD',
-  'start_block' => '7500000', //use 'current' for production.
+  'start_block' => '1611135', //use 'current' for production.
    
   )
 );
+
+//'node' => 'this.piston.rocks',
+  

@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
              
 <?php //-------SHOW TAGS-----------------//TODO - List PRE-data.   
  echo $form->field($model, 'tags')->widget(Select2::classname(), [
-    'options' => ['placeholder' => 'Select a color ...', 'multiple' => false],
+    'options' => ['placeholder' => 'Select tag or create new ...', 'multiple' => false],
     
     'pluginOptions' => [
         'tags' => true,
@@ -76,8 +76,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="form-group">
         <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
         </div>
-            <?php echo $form->field($model, 'coordinates')->hiddenInput(['value'=> ""])->label(Yii::t('frontend','Coordinates')) ?>
-            <?php ActiveForm::end(); ?>
         </div>
    <div class="col-lg-5">twst</div>
  
@@ -91,6 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
     </div>
 </div>
-
+         <?php ActiveForm::end(); ?>
+   
 
 

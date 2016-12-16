@@ -3,7 +3,7 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
-
+use common\models\BlockChain;
 /* @var $this \yii\web\View */
 /* @var $content string */
 $this->beginContent('@frontend/views/layouts/_clear.php')
@@ -11,20 +11,22 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png class= 'img-responsive'>" . Yii::$app->name,
+        'brandLabel' => "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png>" . Yii::$app->name ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
         'innerContainerOptions' => ['class'=>'container-fluid container-navbar'],
     ]); ?>
-           <?php echo '<span class="logo_text"> [ Everyone Can Travel ]</span>';?>
+           <?php echo '<span class="logo_text">[ Everyone Can Travel ]</span> ';?>
  
     <?php echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => Yii::t('frontend', 'Base'), 'url' => ['/site/index']],
-            ['label' => Yii::t('frontend', 'My blog'), 'url' => ['/site/one_blog'], 'visible'=>!Yii::$app->user->isGuest],
+            ['label' => Yii::t('frontend', 'My blog'), 'url' => ['/site/show_single_blog'], ['visible'=>!Yii::$app->user->isGuest]],
+           
+            
             ['label' => Yii::t('frontend', 'About'), 'url' => ['/page/view', 'slug'=>'about']],
             ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
             ['label' => Yii::t('frontend', 'Login'), 'url' => ['/user/sign-in/login'], 'visible'=>Yii::$app->user->isGuest],

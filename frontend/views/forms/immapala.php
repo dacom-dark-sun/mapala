@@ -67,7 +67,7 @@ echo $form->field($model, 'city')->widget(Select2::classname(), [
     'templateSelection' => new JsExpression('function (city) { return city.text; }'),
 ],//--------------------------------------------------------------------------------------
 ]);?>      
-           <?php echo $form->field($model, 'is_it_traveler')->widget(AwesomeCheckbox::classname())->label(false); ?>
+           <?php echo $form->field($model, 'not_traveler')->widget(AwesomeCheckbox::classname())->label(false); ?>
 
             
                 <?php echo $form->field($model, 'date_until_leave')->widget(DatePicker::classname(), [
@@ -124,19 +124,21 @@ echo $form->field($model, 'city')->widget(Select2::classname(), [
 
 
 <script>
-    
-           $('.field-immapala-date_until_leave').hide(); 
+       if(<?php echo $model->not_traveler ?> == 1 )
+       {
+           $('.field-immapala-date_until_leave').hide();
+       } else { 
+           $('.field-immapala-date_until_leave').show(); 
+       };
  
  
  
- 
-$('#immapala-is_it_traveler').click(function(){
-    console.log('tru');
+$('#immapala-not_traveler').click(function(){
     if (!$('.field-immapala-date_until_leave').is(":visible")){
-        $('#is_it_traveler').val(0);
+        $('#not_traveler').val(0);
            $('.field-immapala-date_until_leave').show();  
     } else{
-        $('#is_it_traveler').val(1);
+        $('#not_traveler').val(1);
            $('.field-immapala-date_until_leave').hide(); 
     }
     

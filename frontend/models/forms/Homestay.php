@@ -14,7 +14,6 @@ class Homestay extends Model
     public $contacts;
     public $country;
     public $city;
-    public $capacity;
     public $cost=0 ;
     public $free = 1;
     public $body;
@@ -28,9 +27,9 @@ class Homestay extends Model
     {
          return [
          //    name, email, subject and body are required
-            [['coordinates','title', 'cost', 'country', 'contacts', 'city', 'capacity', 'body'], 'required'],
+            [['coordinates','title', 'cost', 'country', 'contacts', 'city', 'body'], 'required'],
             // We need to sanitize them
-            [['title', 'cost', 'country', 'contacts', 'city', 'capacity', 'body'], 'filter', 'filter' => 'strip_tags'],
+            [['title', 'cost', 'country', 'contacts', 'city', 'body'], 'filter', 'filter' => 'strip_tags'],
             // verifyCode needs to be entered correctly
             [['cost'], 'number'],
             [['free'], 'boolean']
@@ -47,7 +46,6 @@ class Homestay extends Model
             'country' => Yii::t('frontend', 'Country'),
             'contacts' => Yii::t('frontend', 'Contacts'),
             'city' => Yii::t('frontend', 'City'),
-            'capacity' => Yii::t('frontend', 'Capacity'),
             'body' => Yii::t('frontend', 'Body'),
             'category' => Yii::t('frontend', 'Category'),
             'cost' => Yii::t('frontend', 'Cost, USD'),

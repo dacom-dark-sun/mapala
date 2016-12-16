@@ -22,6 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?php echo $form->field($commentModel, 'content', ['template' => '{input}{error}'])->textarea(['placeholder' => Yii::t('yii2mod.comments', 'Add a comment...'), 'rows' => 4]) ?>
     <?php echo $form->field($commentModel, 'parent_permlink', ['template' => '{input}'])->hiddenInput(['data' => ['comment' => 'parent-id']]); ?>
+    <?php echo $form->field($commentModel, 'permlink', ['template' => '{input}'])->hiddenInput(['data' => ['comment' => 'permlink']]); ?>
     <?php echo $form->field($commentModel, 'author', ['template' => '{input}'])->hiddenInput(['data' => ['comment' => 'author']]); ?>
     
     <div class="comment-box-partial">

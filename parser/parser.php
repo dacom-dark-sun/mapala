@@ -13,80 +13,83 @@ include (MAIN_DIR . "/config.php");
 include (MAIN_DIR . "/classSimpleImage.php");
 
 $parser = new Parser();
-$parser->init();
+
+do{
+    $parser->init();
+}while(1);
 
 class Parser{
     
 public function init(){
-global $config;
-global $looking_for_tag;
-global $db;    
+    global $config;
+    global $looking_for_tag;
+    global $db;    
 
-$looking_for_tag= "steemit";    
-$db = new SafeMysql(array('user' => $config['dbuser'], 'pass' => $config['dbpassword'],'db' => $config['dbname'], 'charset' => 'utf8mb4'));
+    $looking_for_tag= "ru--golos";    
 
-
-$num_in_sql = $this->get_num_current_block_from_sql();
-echo ("START from block # " . $num_in_sql ."for " .  $config['blockchain']['name'] . "blockchain");    
-$num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node']);
+    $db = new SafeMysql(array('user' => $config['dbuser'], 'pass' => $config['dbpassword'],'db' => $config['dbname'], 'charset' => 'utf8mb4'));
 
 
-    
-           for ($num_in_sql; $num_in_sql<$num_in_blockchain; $num_in_sql++){
-                $transactions = $this->get_content_from_block($num_in_sql, $config['blockchain']['node']);
-                if (empty($transactions)){
-                    $db->query("UPDATE current_blocks SET id= " . $num_in_sql . " WHERE blockchain = '" . $config['blockchain']['name'] . "'");
-                    continue;
-              }
-          foreach ($transactions as $tr){
-             foreach ($tr['operations'] as $action){
-                   
-                if ($action[0] == "vote") { 
-                    $answer_upvote = $this->add_vote_to_sql($action[1]['permlink'], $action[1]['author']);
-                    $answer_voters = $this->update_voters_in_sql($action[1]['permlink'], $action[1]['voter']);
-                    echo ("Data parsed, block #" . $num_in_sql . ", action:  " .  $answer_upvote ." \n"); 
-                }
-                 
-                 
-                else if ($action[0]== "account_create"){
-                    
-                   $answer = $this->add_account_to_sql($action[1]);
-                   echo ("Data parsed, block #" . $num_in_sql . ", action:  " .  $answer ." \n"); 
-        
-               }
-               
-               
-               
-                 else if ($action[0]== "comment"){
-                    $json = $this->convert_json($action[1]['json_metadata']);
-                    $answer = $this->validate_tags($json);
-                    
-                    if ($answer === true) {
+    $num_in_sql = $this->get_num_current_block_from_sql();
+    echo ("START from block # " . $num_in_sql ."for " .  $config['blockchain']['name'] . "blockchain");    
+    $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node']);
 
-                            if ($action[1]['parent_author'] == '') {   //choise parent author - steemit, that mean it is article
-                                
-                                $answer = $this->add_article_to_sql($action[1], $json, $config['blockchain']);
-                                $this->download_images($action[1]['permlink'], $json['image'][0]);  //загружаем только первую картинку
-                                echo ("Data parsed, block #" . $num_in_sql . ", action:  " . $answer . " \n");
-                           
-                                } else { 
-                    // if ($action[1]['parent_permlink'] != 'steemit') {//проверка на родителя( чтобы не являлся Стимитом - т.е. статьей)
-                                $answer = $this->add_replie_to_sql($action[1], $json, $config['blockchain']);
-                                echo ("Reple parsed, block #" . $num_in_sql . ", action: " . $answer . " \n");
-                                
-                            }
-                        } else {
-                            echo ("Data parsed, block #" . $num_in_sql . ", action: " . $answer . " \n");
-                        }
+
+
+               for ($num_in_sql; $num_in_sql<$num_in_blockchain; $num_in_sql++){
+                    $transactions = $this->get_content_from_block($num_in_sql, $config['blockchain']['node']);
+                    if (empty($transactions)){
+                        $db->query("UPDATE current_blocks SET id= " . $num_in_sql . " WHERE blockchain = '" . $config['blockchain']['name'] . "'");
+                        continue;
+                  }
+              foreach ($transactions as $tr){
+                 foreach ($tr['operations'] as $action){
+
+                    if ($action[0] == "vote") { 
+                        $answer_upvote = $this->add_vote_to_sql($action[1]['permlink'], $action[1]['author']);
+                        $answer_voters = $this->update_voters_in_sql($action[1]['permlink'], $action[1]['voter']);
+                        echo ("Data parsed, block #" . $num_in_sql . ", action:  " .  $answer_upvote ." \n"); 
                     }
-                   
-                 
-             }
-            
-          }
-        $db->query("UPDATE current_blocks SET id= " . $num_in_sql . " WHERE blockchain= '" . $config['blockchain']['name'] . "'");
-        
-        }   
+
+
+                    else if ($action[0]== "account_create"){
+
+                       $answer = $this->add_account_to_sql($action[1]);
+                       echo ("Data parsed, block #" . $num_in_sql . ", action:  " .  $answer ." \n"); 
+
+                   }
+
+
+
+                     else if ($action[0]== "comment"){
+                        $json = $this->convert_json($action[1]['json_metadata']);
+                        $answer = $this->validate_tags($json);
+
+                        if ($answer === true) {
+
+                                if ($action[1]['parent_author'] == '') {   //check parent author - '', that mean it is article
+
+                                    $answer = $this->add_article_to_sql($action[1], $json, $config['blockchain']);
+                                    $this->download_images($action[1]['permlink'], $json['image'][0]);  //загружаем только первую картинку
+                                    echo ("Data parsed, block #" . $num_in_sql . ", action:  " . $answer . " \n");
+
+                                    } else { //if not '' - that mean it is reply
+                                    $answer = $this->add_replie_to_sql($action[1], $json, $config['blockchain']);
+                                    echo ("Reple parsed, block #" . $num_in_sql . ", action: " . $answer . " \n");
+
+                                }
+                            } else {
+                                echo ("Data parsed, block #" . $num_in_sql . ", action: " . $answer . " \n");
+                            }
+                        }
+
+
+                 }
+
+              }
+            $db->query("UPDATE current_blocks SET id= " . $num_in_sql . " WHERE blockchain= '" . $config['blockchain']['name'] . "'");
+            echo 'block #' . $num_in_sql . " \n";
+            }   
 }     
  
 
@@ -183,22 +186,22 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
     
     private function convert_tag_before_save($tag){
         global $config;
-        
-        if ($config['blockchain']['name'] == 'GOLOS'){
+        $tag_old = $tag;
+        if ($config['blockchain']['name'] == 'golos'){
            if (($tag == ' ')||($tag == '')) return 'null';
-    
             sscanf($tag, "%4s%s", $tr_key, $tag);
-           if ($tr_key =='ru--'){
+            if ($tr_key == "ru--"){
         
             $tag = mb_strtolower($tag);
             $rus = array('щ',     'ш', 'ч',  'ц',  'й',  'ё',  'э',  'ю',  'я',  'х',  'ж',  'а', 'б', 'в', 'г', 'д', 'е', 'з', 'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'ъ', 'ы', 'ь');
             $eng = array('shch', 'sh', 'ch', 'cz', 'ij', 'yo', 'ye', 'yu', 'ya', 'kh', 'zh', 'a', 'b', 'v', 'g', 'd', 'e', 'z', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'xx', 'y', 'x');
             $tag = str_replace($eng, $rus, $tag);
-            return  mb_convert_encoding($tag, 'UTF-8');
+            return  $tag;
             
-           }
-    
+           } 
+           
         }
+           return mb_strtolower($tag_old);
            
     }
         
@@ -211,6 +214,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
     
    private function add_article_to_sql($data_part, $json, $blockchain){
         global $db;
+        global $looking_for_tag;
         $full_content = $this->get_full_content($data_part['author'], $data_part['permlink'], $blockchain['node']);
         
         $data['author']=              $full_content['author'];
@@ -245,10 +249,12 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
        
         if (is_null($exist_art)) {
             
-            $db->query("INSERT INTO art SET ?u", $data);
+          $db->query("INSERT INTO art SET ?u", $data);
+          if(array_key_exists('0', $json['tags'])&&($json['tags'][0] != $looking_for_tag)){
               $this->update_category($data['country'], $data['city'], $data['category'], $data['sub_category']);
-                return ("article by " . $data['author'] . "in category: " . $json['tags'][0] . "ADDED");
-        
+          }
+              return ("article by " . $data['author'] . "in category: " . $json['tags'][0] . "ADDED");
+                
             
         } else {
             
@@ -489,7 +495,7 @@ $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node'
                     //если надо обновляться - добавляем один элемент со связями, конвертируем его в json и записываем     
                          $data['city_json'][] = ['id' => $country . '+' . $city, 'parent' => $country, 'text' => $city];
                          $data['city_json'] = json_encode($data['city_json'], JSON_UNESCAPED_UNICODE);
-                         $db->query("UPDATE category SET city_json=?s WHERE country=?s AND blochchain =?s", $data['city_json'], $country, $blockchain);
+                         $db->query("UPDATE category SET city_json=?s WHERE country=?s AND blockchain=?s", $data['city_json'], $country, $blockchain);
                 }
                 
                 

@@ -79,15 +79,7 @@ $config = [
             'charset' => 'utf8',
             'enableSchemaCache' => YII_ENV_PROD,
         ],
-         'db2'=>[
-            'class'=>'yii\db\Connection',
-            'dsn' => 'mysql:host=sql.golos.cloud',
-            'username' => 'golos',
-            'password' => 'golos',
-
-            'charset' => 'utf8',
-            'enableSchemaCache' => YII_ENV_PROD,
-        ],
+         
         
 
         'log' => [

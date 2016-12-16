@@ -11,6 +11,7 @@ use Yii;
 use yii\base\Model;
 use common\models\Countries;
 use common\models\Cities;
+use DateTime;
 /**
  * ContactForm is the model behind the contact form.
  */
@@ -24,13 +25,7 @@ class BlockChain extends Model
    public $body;
    public $metadata;
    public $blockchain;
-         
-   static function create_permlink($title){
-       $title = str_replace(" ", "-", $title);
-       $title = strtolower($title);
-       
-       return $title;
-   }
+      
    
    
    
@@ -45,7 +40,17 @@ class BlockChain extends Model
     
     
    static function construct_im_mapala($model){
-             
+             /*public $title; //title
+            public $contacts; //tag
+            public $country;  //tag
+            public $city;     //tag
+            public $languages; //json
+            public $body;     //body
+            public $not_traveler = 1;    //living in this place
+            public $date_until_leave;
+            public $coordinates;
+               * 
+              */
              $bl_model['parentAuthor'] = '';
              $bl_model['parentPermlink'] = 'test'; //im-mapala
              $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
@@ -60,7 +65,9 @@ class BlockChain extends Model
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
              $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
              $json['tags'][3] = 'im-mapala';
-             $json['coordinates'] = $model->coordinates;
+             $json['not_traveler'] = $model->not_traveler;
+             $json['date_until_leave'] = $model ->date_until_leave;
+             $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              
              $bl_model['metadata'] = $json;
@@ -78,7 +85,6 @@ class BlockChain extends Model
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
              
              $json['contacts'] = mb_strtolower($model->contacts);
-             $json['capacity'] = $model->capacity;
              $json['cost'] = $model->cost;
             
              $json['tags'][0] = 'test';
@@ -86,7 +92,7 @@ class BlockChain extends Model
              $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
              $json['tags'][3] = 'homestay';
              $json['tags'][4] = BlockChain::free_on_different_lang($model->free);
-             $json['coordinates'] = $model->coordinates;
+             $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              
              $bl_model['metadata'] = $json;
@@ -118,7 +124,7 @@ class BlockChain extends Model
              $json['tags'][3] = 'lifehack';
              $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
              
-             $json['coordinates'] = $model->coordinates;
+             $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              
              $bl_model['metadata'] = $json;
@@ -149,7 +155,7 @@ class BlockChain extends Model
              $json['tags'][3] = 'must_see';
              $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
              
-             $json['coordinates'] = $model->coordinates;
+             $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              
              $bl_model['metadata'] = $json;
@@ -182,7 +188,7 @@ class BlockChain extends Model
              $json['tags'][3] = 'must_see';
              $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
              
-             $json['coordinates'] = $model->coordinates;
+             $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              
              $bl_model['metadata'] = $json;
@@ -194,15 +200,53 @@ class BlockChain extends Model
     }
     
     
+    
+    
+    
+   static function construct_reply($data){
+            /* data (json_array) 
+             * data['parentAuthor'];
+             * data['parentPermlink'];
+             * data['body'];
+             * data['category'];
+             * 
+            */   
+       
+             $data = json_decode($data,true);
+      
+             $bl_model['parentAuthor'] = $data['parentAuthor'];
+             $bl_model['parentPermlink'] = $data['parentPermlink']; //
+             $bl_model['permlink'] = BlockChain::create_permlink_for_reply($data['parentPermlink'],$data['parentAuthor']); 
+             $bl_model['body'] = $data['body'];
+             $bl_model['title'] = '';
+             $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
+                         
+             $json['tags'][0] = $data['category'];
+             $bl_model['metadata'] = $json;
+             
+             return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
+        
+        
+        
+    }
+    
+    
     static function convert_country_to_lang($id){
+      if (is_int($id)){
         $country = Countries::find()->select('name')->where('id=' . $id)->asArray()->one();
         return $country['name'];
+      } else {
+          return $id;
+      }
     }
     
     static function convert_city_to_lang($id){
+      if (is_int($id)){
         $city = Cities::find()->select('name')->where('id=' . $id)->asArray()->one();
         return $city['name'];
-        
+       } else {
+          return $id;
+      } 
         
     }
 
@@ -239,12 +283,37 @@ class BlockChain extends Model
     
     static function get_blockchain_from_locale(){
       
-        return (Yii::$app->language == "ru-RU") ? 'GOLOS' : 'STEEM';
+        return (Yii::$app->language == "ru-RU") ? 'golos' : 'steem';
         
     }
     
     
-    
+       
+   static function create_permlink($title){
+      
+       $title = strtolower(str_replace(" ", "-", $title));
+       
+       return $title;
+   }
+   
+      
+   static function create_permlink_for_reply($parent_permlink, $parent_author){
+       list($sec, $usec) = explode('.', microtime(true));
+       $usec = str_replace("0.", ".", $usec);     //remove the leading '0.' from usec
+       $usec = substr($usec, 0, -1);
+       $now = date('Ymd\tHis', $sec) . $usec . 'z';       //appends the decimal portion of seconds
+       $re = '/([0-9]+.+)/m';                           //looking for old date
+       preg_match_all($re, $parent_permlink, $matches);
+       if (array_key_exists(0, $matches[1])){
+           $permlink = str_replace($matches[1], $now, $parent_permlink); //replace old date if exist
+       }
+       else {
+           $permlink = $parent_permlink . '-' . $now; //add new date, if not exist
+           
+       }
+        
+       return $permlink;
+   }
     
     
     

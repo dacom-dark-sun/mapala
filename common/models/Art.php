@@ -210,7 +210,7 @@ class Art extends \yii\db\ActiveRecord
          */
         static function get_first_line($model){
 //                $links = $model::get_links($model);
-                $first_line = StringHelper::truncate($model->body, 250, '...', null, true);
+                $first_line = StringHelper::truncate($model->body, 500, '...', null, true);
                 $matches = Art::parse_links_and_urls($first_line);
                
                 foreach($matches[0] AS $m){
@@ -250,8 +250,9 @@ class Art extends \yii\db\ActiveRecord
          * This function parse all links and images and return in array for cleaning or change
          */
         static function parse_links_and_urls($text){
-           $re = '/(([A-Za-z:.-_]+)\.([\/.A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([\/.A-Za-zА-Яа-я0-9-_#?=;%+]{0,})\&?([\/.A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
-            preg_match_all($re, $text, $matches);
+           $re = '/(([A-Za-z:\.-_]+)\.([\/.A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([\/.A-Za-zА-Яа-я0-9-_#?=;%+]{0,})\&?([\/.A-Za-zА-Яа-я0-9-_<>#?=;%+]{0,}))/mu';
+         
+           preg_match_all($re, $text, $matches);
             return $matches;
            
         }
@@ -317,7 +318,7 @@ class Art extends \yii\db\ActiveRecord
              ];
              }
 
-             
+             $dataProvider->pagination = ['pageSize' => 50];
              
                     
             return $dataProvider;
@@ -344,10 +345,8 @@ class Art extends \yii\db\ActiveRecord
         static function get_single_blog($author = null){
             $searchModel = new ArtSearch();
             $blockchain =  BlockChain::get_blockchain_from_locale();    
-            if ($author == null) {
-                 $author = Yii::$app->user->identity->username;
-            }
-            $dataProvider = $searchModel->search([$searchModel->formName() => ['author' => $author, 'blockchain'=> $blockchain]]);
+            
+            $dataProvider = $searchModel->search([$searchModel->formName() => ['author' => $author]]);
             $dataProvider->sort = [
                 'defaultOrder' => ['created_at' => SORT_DESC]
             ];
@@ -370,7 +369,7 @@ class Art extends \yii\db\ActiveRecord
           $GRAMM_IN_OZ = 31.1034768;
           
           switch ($blockchain){
-              case "GOLOS":
+              case "golos":
                 $XAUOZ = (new \yii\db\Query())
                 ->select('price')
                 ->from(['pricefeed'])
@@ -380,7 +379,7 @@ class Art extends \yii\db\ActiveRecord
                 $price = $price . ' RUB';
               break;
           
-          case "STEEM":
+          case "steem":
                 
                 $price = $price_old . ' USD';
               break;
@@ -427,16 +426,73 @@ class Art extends \yii\db\ActiveRecord
      }
 
      static function fill_immapala($model, $meta){
-        $model->contacts =  (array_key_exists('2', $meta['tags'])? $meta['tags'][2] :  "");
-        $model->languages = (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
+       /*public $title; //title
+        public $contacts; //tag
+        public $country;  //tag
+        public $city;     //tag
+        public $languages; //json
+        public $body;     //body
+        public $not_traveler = 1;    //json
+        public $date_until_leave; //json
+        public $coordinates; //json
+           * 
+          */
+       
+        $model->date_until_leave = (array_key_exists('date_until_leave', $meta)? $meta['date_until_leave'] :  "");
+        $model->languages = (array_key_exists('languages', $meta)? implode(", ", $meta['languages']) :  "");
+        $model->contacts =  (array_key_exists('contacts', $meta)? $meta['contacts'] :  "");
+        $model->not_traveler = (array_key_exists('not_traveler', $meta)? $meta['not_traveler'] :  "");
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
-        
-        return $model;
+    return $model;
          
          
      }
      
+     static function fill_homestay($model, $meta){
+              /*
+         @public $title;  
+         @public $contacts;
+         @public $country;
+         @public $city;
+         @public $cost=0 ;
+         @public $free = 1;
+         @public $body;
+         @public $parentPermlink = '';
+         @public $parentAuthor = '';
+         @public $blockchain
+         @public $coordinates;
+        */
         
+        $model->contacts =  (array_key_exists('contacts', $meta)? $meta['contacts'] :  "");
+        $model->not_traveler = (array_key_exists('not_traveler', $meta)? $meta['not_traveler'] :  1);
+        $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
+        $model->free = (array_key_exists('free', $meta)? $meta['free'] :  "");
+        $model->cost = (array_key_exists('cost', $meta)? $meta['cost'] :  "");
+        
+    return $model;
+         
+         
+     }
+     
+     
+
+          
+     static function fill_simple_model($model, $meta){
+         /*
+         public $title;
+         public $country;
+         public $body;
+         public $tags;
+         public $coordinates;        
+         */
+        
+        $model->tags =  (array_key_exists('4', $meta['tags'])? $meta['tags'][4] :  "");
+        $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
+        
+    return $model;
+         
+         
+     }
         
         
         

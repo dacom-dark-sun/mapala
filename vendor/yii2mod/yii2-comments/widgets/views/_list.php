@@ -12,6 +12,7 @@ use yii\helpers\Url;
     <?php foreach ($comments as $comment) : ?>
         <li class="comment" id="comment-<?php echo $comment->id ?>" itemscope itemtype="http://schema.org/Comment">
             <div class="comment-content" data-comment-content-id="<?php echo $comment->parent_permlink ?>">
+              
                 <div class="comment-author-avatar">
                     <?php echo Html::img($comment->getAvatar(), ['alt' => $comment->getAuthorName()]); ?>
                 </div>
@@ -20,8 +21,7 @@ use yii\helpers\Url;
                         <div class="comment-action-buttons">
                             <?php if (Yii::$app->getUser()->can('admin')): ?>
                                 <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('yii2mod.comments', 'Delete'), '#', ['data' => ['action' => 'delete', 'url' => Url::to(['/comment/default/delete', 'id' => $comment->permlink]), 'comment-id' => $comment->permlink]]); ?>
-                                 <?php echo Html::hiddenInput('author', $comment->author, ['id' => 'author' . $comment->permlink]); ?>
-               
+                            
                              <?php endif; ?>
                             <?php if (!Yii::$app->user->isGuest && ($comment->level < $maxLevel || is_null($maxLevel))): ?>
                             <?php endif; ?>
@@ -39,7 +39,7 @@ use yii\helpers\Url;
                         <?php echo $comment->getContent(); ?>
                     </div>
                      <div class="comment-action-buttons">
-                          <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> " . Yii::t('yii2mod.comments', 'Reply'), '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $comment->parent_permlink, 'author' => $comment->author]]); ?>
+                          <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> " . Yii::t('yii2mod.comments', 'Reply'), '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $comment->parent_permlink, 'permlink' => $comment->permlink, 'author' => $comment->author]]); ?>
                      </div>
                 </div>
             </div>

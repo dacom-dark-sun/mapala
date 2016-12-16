@@ -109,5 +109,6 @@ return [
     'New' => 'Новое',
     'Trending' => 'Горячее',
     'Discuss' => 'Обсуждаемое',
+    'Update database' => 'Пополнить базу',
       
 ];

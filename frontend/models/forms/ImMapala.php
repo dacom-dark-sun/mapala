@@ -15,7 +15,7 @@ class ImMapala extends Model
     public $city;     //tag
     public $languages; //json
     public $body;     //body
-    public $is_it_traveler = 1;    //living in this place
+    public $not_traveler = 1;    //living in this place
     public $date_until_leave;
     public $coordinates;
     
@@ -33,7 +33,7 @@ class ImMapala extends Model
             [['title', 'country', 'contacts', 'city', 'languages', 'body'], 'filter', 'filter' => 'strip_tags'],
             // verifyCode needs to be entered correctly
              [['date_until_leave'], 'string'],
-             [['is_it_traveler'],'boolean'],
+             [['not_traveler'],'boolean'],
              
         ];
     }
@@ -52,7 +52,7 @@ class ImMapala extends Model
             'body' => Yii::t('frontend', 'Body'),
             'verifyCode' => Yii::t('frontend', 'Verification Code'),
             'date_until_leave' => Yii::t('frontend', 'Date until leave'),
-            'is_it_traveler' => Yii::t('frontend','Im not in the travel now and this is my permanent place'),
+            'not_traveler' => Yii::t('frontend','Im not in the travel now and this is my permanent place'),
       
             
         ];

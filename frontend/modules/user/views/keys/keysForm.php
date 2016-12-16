@@ -13,7 +13,6 @@ KeyAsset::register($this);
 
 $this->title = Yii::t('frontend', 'Keys')
 ?>
-<script src="//cdn.steemjs.com/lib/latest/steem.min.js"></script>
 <div class="form-index">
     <h1><?php echo Html::encode($this->title) ?></h1>
 

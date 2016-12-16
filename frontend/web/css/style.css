@@ -111,11 +111,28 @@ a.desc:after {
 
 
   .article-vote-up{
-    height: 30px;
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
     
 }
+.article-vote-up img,
+.filter {
+  width: 30px;
+  height: 30px;
+}
+
   .category_panel{
+}
+.categories{
     
+    overflow: scroll;
+    height: 100%;
+    position: fixed;
+}
+
+.categories-scroll{
+    overflow: scroll;
 }
 .jstree-anchor{
      white-space: nowrap;
@@ -154,7 +171,8 @@ a.desc:after {
 
 .Icon>svg, .Icon span.icon {
     height: 1.8rem;
-    vertical-align: top;
+   vertical-align: sub;
+   opacity: 0.7;
     color: gainsboro;
 }
 .Icon chatbox{
@@ -163,7 +181,21 @@ a.desc:after {
 }
 .article-full {
   margin-bottom: 15px;
+      margin-right: auto;
+    margin-left: auto;
+    width: 70%;
 }
+
+.comments{
+    margin-right: auto;
+    margin-left: auto;
+    width: 70%;
+}
+
+.article-full .article-metainfo {
+text-align: center;
+}
+
 .article-full .article-title,
 .article-full .article-title a {
   color: inherit;
@@ -192,13 +224,15 @@ a.desc:after {
 .main_page_link{
     font-weight: 100;
     color:  black;
-    text-shadow: black 0 0 2px;
+    text-shadow: black 0 0 1px;
     font-size:22px;
+    vertical-align: sub;
+    margin-left:15px;
     
 }
 .main_page_link:hover{
  font-weight: 100;
-  text-shadow: black 0 0 4px;
+  text-shadow: black 0 0 1px;
   font-size:22px;
   cursor: pointer;
 }
@@ -273,11 +307,16 @@ cursor: pointer;
 .vote:hover {
   -webkit-animation: spin 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
   animation: spin 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-    
+  height: 30px;  
 }
 
 .vote{
-    
+  height: 30px; 
+}
+
+.vote-process{
+    -webkit-animation: spin 0.4s cubic-bezier(0, 0, 0.76, 0.76) infinite !important;
+    animation: spin 0.4s cubic-bezier(0, 0, 0.76, 0.76) infinite !important;
 }
 
 input[type="radio"], input[type="checkbox"]{
@@ -318,10 +357,11 @@ input[type="radio"], input[type="checkbox"]{
 
 .personal_blog_text{
     font-family: cursive;
-    font-size: 40px;
+    font-size: 30px;
     color: #3392e3;
     z-index:1300;
     text-align: center;
+    padding-bottom: 10px;
 }
 
 .single_blog{
@@ -362,13 +402,14 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 .additional-info{
-    background-color: gainsboro;
     padding: 10px;
-    border-style: groove;
+        background-color: rgba(51, 51, 51, 0.05);
+            border-style: groove;
+    font-size: 16px;
 }
 .row{
-    margin-right: 0px !important; 
-     margin-left: 0px !important; 
+//    margin-right: 0px !important; 
+//     margin-left: 0px !important; 
 }
 
 
@@ -415,4 +456,13 @@ input[type="radio"], input[type="checkbox"]{
 
 @media screen and (max-width: 600px) {
    .category_panel {display:none}
+}
+
+.filter {  
+  z-index: -1;
+  top: 0px;
+  left: -15px;
+  border-radius: 40px;
+  position: absolute;
+    background-color: rgba(0, 17, 255, 0.49);
 }

@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use rmrevin\yii\module\Comments\interfaces\CommentatorInterface;
+use common\models\BlockChain;
 /**
  * User model
  *
@@ -307,5 +308,6 @@ class User extends ActiveRecord
         return false; 
         //['/profile', 'id' => $this->id]; // or false, if user does not have a public page
     }
-
+    
+    
 }

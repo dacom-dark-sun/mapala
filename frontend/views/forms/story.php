@@ -66,9 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
              
             </div>
-                   <?php echo $form->field($model, 'coordinates')->hiddenInput(['value'=> ""])->label(Yii::t('frontend','Coordinates')) ?>
         
-                <?php ActiveForm::end(); ?>
         </div>
         <div class="col-lg-5">
            text
@@ -87,6 +85,5 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-
-
-
+           <?php ActiveForm::end(); ?>
+     
