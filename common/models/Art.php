@@ -232,7 +232,7 @@ class Art extends \yii\db\ActiveRecord
             $body = $model->body;
             $matches = Art::parse_links_and_urls($body);
             foreach($matches[0] as $id => $m){
-                if (in_array($matches[4][$id], $format_img)){
+                if (in_array($matches[7][$id], $format_img)){
                     $body = str_replace($m,'![]('. $m . '){.body_images}', $body);
                 } else {
                     $body = str_replace($m,'[' . $m . ']('. $m . ')', $body);
@@ -250,7 +250,7 @@ class Art extends \yii\db\ActiveRecord
          * This function parse all links and images and return in array for cleaning or change
          */
         static function parse_links_and_urls($text){
-           $re = '/(([A-Za-z:\.-_]+)\.([\/.A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([\/.A-Za-zА-Яа-я0-9-_#?=;%+]{0,})\&?([\/.A-Za-zА-Яа-я0-9-_<>#?=;%+]{0,}))/mu';
+           $re = '/((https?:\/\/)?(www\.)?([A-Za-z:1-9\.]+)\.([\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#?=;%+]{0,})?([\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
          
            preg_match_all($re, $text, $matches);
             return $matches;

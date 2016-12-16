@@ -90,7 +90,7 @@ return [
     'Avatar' => 'Аватар',
     'Save' => 'Сохранить',
     'Edit' => 'Редактировать',
-    'Keys' => 'Ключи',
+    'Key STEEM' => 'Ключ GOLOS',
     'Steem private posting key' => 'Приватный постинг ключ для Steem',
     'Golos private posting key' => 'Приватный постинг ключ для ГОЛОС',    
     'Introduce yourself, please (title)' => 'Представьтесь, пожалуйста (заголовок)',

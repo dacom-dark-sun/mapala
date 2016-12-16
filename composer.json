@@ -67,7 +67,9 @@
     "pigochu/yii2-jquery-locationpicker": ">=0.2.0",
     "kartik-v/yii2-checkbox-x": "*",
     "bookin/yii2-awesome-bootstrap-checkbox": "@dev",
-    "kartik-v/yii2-money": "*"
+    "kartik-v/yii2-money": "*",
+    "2amigos/yii2-ckeditor-widget": "^2.0",
+    "borales/yii2-medium-editor": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

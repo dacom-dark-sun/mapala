@@ -232,6 +232,7 @@ class BlockChain extends Model
     
     
     static function convert_country_to_lang($id){
+      $id = intval($id);
       if (is_int($id)){
         $country = Countries::find()->select('name')->where('id=' . $id)->asArray()->one();
         return $country['name'];
@@ -241,7 +242,8 @@ class BlockChain extends Model
     }
     
     static function convert_city_to_lang($id){
-      if (is_int($id)){
+      $id = intval($id);
+        if (is_int($id)){
         $city = Cities::find()->select('name')->where('id=' . $id)->asArray()->one();
         return $city['name'];
        } else {

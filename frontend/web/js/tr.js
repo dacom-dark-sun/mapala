@@ -22,7 +22,7 @@ try{
     check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
         var voter = result[0][0];
-        steem.broadcast.vote('5Jzp9mUiowEj7Uk5hjJdc55bqg89S68fgeFbLAo3vQfFk7vfmby','dark.sun', author, permlink, weight, function(err, result) {
+        steem.broadcast.vote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 $('#icon_' + permlink).removeClass('vote-process'); 
                 alert (err);
@@ -131,8 +131,8 @@ function comment (data, callback){
                 console.log(wif);
                 
                 
-                
-            /*    steem.broadcast.comment(wif.plaintext, 
+              /*  
+                steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
                 trx['author'], 

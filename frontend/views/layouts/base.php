@@ -35,7 +35,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
                 'visible'=>!Yii::$app->user->isGuest,
                 'items'=>[
                      [
-                        'label' => Yii::t('frontend', 'Keys'),
+                        'label' => Yii::t('frontend', 'Key STEEM'),
                         'url' => ['/user/keys/index']
                     ],
                     [

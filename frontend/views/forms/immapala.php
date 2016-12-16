@@ -15,6 +15,7 @@ use yii\web\JsExpression;
 use kartik\date\DatePicker;
 use yii\bootstrap\Modal;
 use kartik\widgets\FileInput;
+use dosamigos\ckeditor;
 
 \frontend\assets\KeyAsset::register($this);
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
