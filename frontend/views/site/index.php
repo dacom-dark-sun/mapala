@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 
 ?>
 
-<?= yii\jui\menu::widget([]) ?>
+
    
 
 <div class="site-index">

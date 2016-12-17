@@ -31,13 +31,13 @@ public function init(){
 
 
     $num_in_sql = $this->get_num_current_block_from_sql();
-    echo ("START from block # " . $num_in_sql ."for " .  $config['blockchain']['name'] . "blockchain");    
-    $num_in_blockchain = $this -> get_num_current_block($config['blockchain']['node']);
+    $num_in_blockchain = $this -> get_num_current_block();
 
-
+    echo ("START from block # " . $num_in_sql .", " .  $config['blockchain']['name'] . "blockchain");    
+    
 
                for ($num_in_sql; $num_in_sql<$num_in_blockchain; $num_in_sql++){
-                    $transactions = $this->get_content_from_block($num_in_sql, $config['blockchain']['node']);
+                    $transactions = $this->get_content_from_block($num_in_sql);
                     if (empty($transactions)){
                         $db->query("UPDATE current_blocks SET id= " . $num_in_sql . " WHERE blockchain = '" . $config['blockchain']['name'] . "'");
                         continue;
@@ -48,18 +48,16 @@ public function init(){
                     if ($action[0] == "vote") { 
                         $answer_upvote = $this->add_vote_to_sql($action[1]['permlink'], $action[1]['author']);
                         $answer_voters = $this->update_voters_in_sql($action[1]['permlink'], $action[1]['voter']);
-                        echo ("Data parsed, block #" . $num_in_sql . ", action:  " .  $answer_upvote ." \n"); 
+                        echo ("block #" . $num_in_sql . ", action: VOTE" .  $answer_upvote ." \n"); 
                     }
 
 
                     else if ($action[0]== "account_create"){
 
                        $answer = $this->add_account_to_sql($action[1]);
-                       echo ("Data parsed, block #" . $num_in_sql . ", action:  " .  $answer ." \n"); 
+                       echo ("block #" . $num_in_sql . ", action: NEW ACCOUNT, username= " .  $answer ." \n"); 
 
                    }
-
-
 
                      else if ($action[0]== "comment"){
                         $json = $this->convert_json($action[1]['json_metadata']);
@@ -69,17 +67,17 @@ public function init(){
 
                                 if ($action[1]['parent_author'] == '') {   //check parent author - '', that mean it is article
 
-                                    $answer = $this->add_article_to_sql($action[1], $json, $config['blockchain']);
+                                    $answer = $this->add_article_to_sql($action[1], $json);
                                     $this->download_images($action[1]['permlink'], $json['image'][0]);  //загружаем только первую картинку
-                                    echo ("Data parsed, block #" . $num_in_sql . ", action:  " . $answer . " \n");
+                                    echo ("block #" . $num_in_sql . ", action: ART, " . $answer . " \n");
 
                                     } else { //if not '' - that mean it is reply
-                                    $answer = $this->add_replie_to_sql($action[1], $json, $config['blockchain']);
-                                    echo ("Reple parsed, block #" . $num_in_sql . ", action: " . $answer . " \n");
+                                    $answer = $this->add_replie_to_sql($action[1], $json);
+                                    echo ("block #" . $num_in_sql . ', action: REPLY, ' . $answer . " \n");
 
                                 }
                             } else {
-                                echo ("Data parsed, block #" . $num_in_sql . ", action: " . $answer . " \n");
+                                echo ("block #" . $num_in_sql . ", action: Art or Reply, permlink =" . $action[1]['permlink'] . ", " . $answer . " \n");
                             }
                         }
 
@@ -95,10 +93,11 @@ public function init(){
 
 
 
-     private function get_num_current_block($node) {
+     private function get_num_current_block() {
+        global $config; 
          
         $param = '{"jsonrpc": "2.0", "method": "call", "params": [0,"get_state",[""]], "id": 2}';
-        $cmd = "curl --progress-bar --data" . " " . "'" . $param . "'" . " " . $node;
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . $config['blockchain']['node'];
         
         $out = shell_exec($cmd);  
          
@@ -124,11 +123,11 @@ public function init(){
     }
     
     
-    private function get_content_from_block($block = null,$node){
-        
+    private function get_content_from_block($block = null){
+        global $config;
         
         $param = '{"jsonrpc": "2.0", "method": "call", "params": [0,"get_block",[' . $block . ']], "id": 4}';
-        $cmd = "curl --progress-bar --data" . " " . "'" . $param . "'" . " " . $node;
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . $config['blockchain']['node'];
         $out = shell_exec($cmd);  
         $out = json_decode($out, true);
         if (isset($out['result']['transactions']))
@@ -140,11 +139,11 @@ public function init(){
     
     
     
-    private function get_full_content($author, $permlink,$node){
-        
+    private function get_full_content($author, $permlink){
+        global $config;
         
         $param = '{"jsonrpc": "2.0", "method": "call", "params": [0,"get_content",["' . $author . '", "' . $permlink . '"]], "id": 4}';
-        $cmd = "curl --progress-bar --data" . " " . "'" . $param . "'" . " " . $node;
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . $config['blockchain']['node'];
  
         $out = shell_exec($cmd);  
         
@@ -157,12 +156,122 @@ public function init(){
     
     
     
+    
+   private function add_article_to_sql($data_part, $json){
+        global $db;
+        global $looking_for_tag;
+        global $config;
+        $blockchain = $config['blockchain'];
+        
+        $full_content = $this->get_full_content($data_part['author'], $data_part['permlink']);
+        
+        $data['author']=              $full_content['author'];
+        $data['permlink']=            $full_content['permlink'];
+        $data['title']=               mb_convert_encoding($full_content['title'], 'UTF-8');
+        $data['body']=                mb_convert_encoding($full_content['body'], 'UTF-8');
+        $data['meta']=                $full_content['json_metadata'];
+        $data['created_at']=          $full_content['created'];
+        $data['updated_at']=          $full_content['last_update'];
+        $data['total_pending_payout_value']=  $full_content['total_pending_payout_value'];
+        $data['meta']=                $full_content['json_metadata'];
+        $data['parent_permlink'] =    $full_content['parent_permlink'];
+        $data['blockchain']=          $blockchain['name'];
+        $data['currency'] =           $blockchain['currency'];
+        
+        if (is_array($json['tags'])){ //soft-validate metadata and cleaning from empty elements
+        $json['tags'] = $this->cleaning_tags($json['tags']);
+        /*
+         * Here we check tag for exist and replace them with language encoding
+         */
+        $data['country']=             (array_key_exists('1', $json['tags'])? self::convert_tag_before_save($json['tags'][1]) :  json_encode([]));
+        $data['city']=                (array_key_exists('2', $json['tags'])? self::convert_tag_before_save($json['tags'][2]) :  json_encode([]));
+        $data['category']=            (array_key_exists('3', $json['tags'])? self::convert_tag_before_save($json['tags'][3]) :  json_encode([]));      
+        $data['sub_category']=        (array_key_exists('4', $json['tags'])? self::convert_tag_before_save($json['tags'][4]) :  json_encode([]));        
+        }
+        
+        $data['votes']=               0;
+        $data['replies']=             0;
+        $data['voters'] =             json_encode([]);
+     
+        $exist_art = $db->getRow('SELECT * FROM art WHERE permlink=?s', $data['permlink']);
+       
+        if (is_null($exist_art)) {
+            
+          $db->query("INSERT INTO art SET ?u", $data);
+          if(array_key_exists('0', $json['tags'])&&($json['tags'][0] != $looking_for_tag)){
+              $this->update_category($data['country'], $data['city'], $data['category'], $data['sub_category']);
+          }
+              return ("article by " . $data['author'] . "category: " . $json['tags'][0] . ", permlink: " . $data['permlink'] . " ADDED");
+                
+            
+        } else {
+            
+            $db->query("UPDATE art SET ?u WHERE permlink=?s", $data, $data['permlink']);
+            return ("article by " . $data['author'] . "category: " . $json['tags'][0] . ", permlink: " . $data['permlink'] .  " UPDATED");
+     
+        }
+     
+    }
+    
+    
+    
+     private function add_replie_to_sql($data_part, $json){
+         global $db;
+         global $config;
+         $blockchain = $config['blockchain'];
+         
+        $full_content = $this->get_full_content($data_part['author'], $data_part['permlink']);
+        $data['author']=              $full_content['author'];
+        $data['permlink']=            $full_content['permlink'];
+        $data['title']=               mb_convert_encoding($full_content['title'], 'UTF-8');
+        $data['body']=                mb_convert_encoding($full_content['body'], 'UTF-8');
+        $data['meta']=                $full_content['json_metadata'];
+        $data['created_at']=          $full_content['created'];
+        $data['updated_at']=          $full_content['last_update'];
+        $data['title']=               $full_content['title'];
+        $data['total_pending_payout_value'] =  $full_content['total_pending_payout_value'];
+        $data['meta']=                $full_content['json_metadata'];
+        $data['parent_permlink'] =    $full_content['parent_permlink'];
+        $data['blockchain']=          $blockchain['name'];
+        $data['currency'] =           $blockchain['currency'];
+        $data['votes']=               0;
+        $data['replies']=             0;
+        $data['level'] =              1;
+        $data['status'] =             1;
+        $data['voters'] =             json_encode([]);
+        $data['entity'] =             $config['entity'];
+        
+        $root_article =               $this->get_root_article_from_permlink($data['permlink']);
+        $data['relatedTo'] =          $config['relatedTo'] . $root_article;
+        
+        
+        $exist_art = $db->getRow('SELECT * FROM comment WHERE permlink=?s', $data['permlink']);
+        
+        if (is_null($exist_art)) {
+            
+            $db->query("INSERT INTO comment SET ?u", $data);
+            $answer_update = $this->update_replies_count($root_article);
+           
+            return ("article by: " . $data['author'] . " , category: " . $json['tags'][0] . ", permlink: " . $data['permlink'] . " ADDED");
+ 
+        } else {
+           
+            $db->query("UPDATE comment SET ?u WHERE permlink=?s", $data, $data['permlink']);
+            
+            return ("article by: " . $data['author'] . " , category: " . $json['tags'][0] . ", permlink: " . $data['permlink'] . " UPDATED");
+        }
+        
+        
+        
+    }
+    
+    
    private function add_account_to_sql($data){
         global $db;
         $data_part['username'] = $data['new_account_name'];
         $db->query("INSERT INTO users_raw SET ?u", $data_part);
         
-        return ("New account: " . $data['new_account_name']);
+        return ($data['new_account_name']);
     }
     
     
@@ -206,115 +315,6 @@ public function init(){
     }
         
         
-        
-        
-        
-    
-    
-    
-   private function add_article_to_sql($data_part, $json, $blockchain){
-        global $db;
-        global $looking_for_tag;
-        $full_content = $this->get_full_content($data_part['author'], $data_part['permlink'], $blockchain['node']);
-        
-        $data['author']=              $full_content['author'];
-        $data['permlink']=            $full_content['permlink'];
-        $data['title']=               mb_convert_encoding($full_content['title'], 'UTF-8');
-        $data['body']=                mb_convert_encoding($full_content['body'], 'UTF-8');
-        $data['meta']=                $full_content['json_metadata'];
-        $data['created_at']=          $full_content['created'];
-        $data['updated_at']=          $full_content['last_update'];
-        $data['total_pending_payout_value']=  $full_content['total_pending_payout_value'];
-        $data['meta']=                $full_content['json_metadata'];
-        $data['parent_permlink'] =    $full_content['parent_permlink'];
-        $data['blockchain']=          $blockchain['name'];
-        $data['currency'] =           $blockchain['currency'];
-        
-        if (is_array($json['tags'])){ //soft-validate metadata and cleaning from empty elements
-        $json['tags'] = $this->cleaning_tags($json['tags']);
-        /*
-         * Here we check tag for exist and replace them with language encoding
-         */
-        $data['country']=             (array_key_exists('1', $json['tags'])? self::convert_tag_before_save($json['tags'][1]) :  json_encode([]));
-        $data['city']=                (array_key_exists('2', $json['tags'])? self::convert_tag_before_save($json['tags'][2]) :  json_encode([]));
-        $data['category']=            (array_key_exists('3', $json['tags'])? self::convert_tag_before_save($json['tags'][3]) :  json_encode([]));      
-        $data['sub_category']=        (array_key_exists('4', $json['tags'])? self::convert_tag_before_save($json['tags'][4]) :  json_encode([]));        
-        }
-        
-        $data['votes']=               0;
-        $data['replies']=             0;
-        $data['voters'] =             json_encode([]);
-     
-        $exist_art = $db->getRow('SELECT * FROM art WHERE permlink=?s', $data['permlink']);
-       
-        if (is_null($exist_art)) {
-            
-          $db->query("INSERT INTO art SET ?u", $data);
-          if(array_key_exists('0', $json['tags'])&&($json['tags'][0] != $looking_for_tag)){
-              $this->update_category($data['country'], $data['city'], $data['category'], $data['sub_category']);
-          }
-              return ("article by " . $data['author'] . "in category: " . $json['tags'][0] . "ADDED");
-                
-            
-        } else {
-            
-            $db->query("UPDATE art SET ?u WHERE permlink=?s", $data, $data['permlink']);
-            return ("article by " . $data['author'] . "in category: " . $json['tags'][0] . "UPDATED");
-     
-        }
-     
-    }
-    
-    
-    
-     private function add_replie_to_sql($data_part, $json, $blockchain){
-         global $db;
-         global $config;
-         
-        $full_content = $this->get_full_content($data_part['author'], $data_part['permlink'], $blockchain['node']);
-        $data['author']=              $full_content['author'];
-        $data['permlink']=            $full_content['permlink'];
-        $data['title']=               mb_convert_encoding($full_content['title'], 'UTF-8');
-        $data['body']=                mb_convert_encoding($full_content['body'], 'UTF-8');
-        $data['meta']=                $full_content['json_metadata'];
-        $data['created_at']=          $full_content['created'];
-        $data['updated_at']=          $full_content['last_update'];
-        $data['title']=               $full_content['title'];
-        $data['total_pending_payout_value'] =  $full_content['total_pending_payout_value'];
-        $data['meta']=                $full_content['json_metadata'];
-        $data['parent_permlink'] =    $full_content['parent_permlink'];
-        $data['blockchain']=          $blockchain['name'];
-        $data['currency'] =           $blockchain['currency'];
-        $data['votes']=               0;
-        $data['replies']=             0;
-        $data['level'] =              1;
-        $data['status'] =             1;
-        $data['voters'] =             json_encode([]);
-        $data['entity'] =             $config['entity'];
-        
-        $root_article =               $this->get_root_article_from_permlink($data['permlink']);
-        $data['relatedTo'] =          $config['relatedTo'] . $root_article;
-        
-        
-        $exist_art = $db->getRow('SELECT * FROM comment WHERE permlink=?s', $data['permlink']);
-        
-        if (is_null($exist_art)) {
-            
-            $db->query("INSERT INTO comment SET ?u", $data);
-            $answer_update = $this->update_replies_count($root_article, $blockchain);
-           
-            return ("article by: " . $data['author'] . " , in category: " . $json['tags'][0] . "replie: ADDED");
- 
-        } else {
-           
-            $db->query("UPDATE comment SET ?u WHERE permlink=?s", $data, $data['permlink']);
-            
-            return ("article by: " . $data['author'] . " , in category: " . $json['tags'][0] . "replie: " . $data['permlink'] . "UPDATED" . "count UPDATED");
-        }
-        
-        
-        
-    }
     
     
     public function get_root_article_from_permlink($permlink){
@@ -332,10 +332,11 @@ public function init(){
     
     
     
-   private function update_replies_count($root_link,$blockchain){
+   private function update_replies_count($root_link){
         global $db;
+        global $config;
       
-        $db->query("UPDATE art SET replies=replies + 1 WHERE permlink=?s AND blockchain=?s", $root_link, $blockchain['name']);
+        $db->query("UPDATE art SET replies=replies + 1 WHERE permlink=?s AND blockchain=?s", $root_link, $config['blockchain']['node']);
         
         return "Comment count for article success updated";
                        
@@ -355,10 +356,10 @@ public function init(){
                 $full_content = $this->get_full_content($author, $permlink, $config['blockchain']['node']);
                 $db->query("UPDATE ?n SET votes=votes+1, total_pending_payout_value=?s  WHERE permlink=?s", $table, $full_content['total_pending_payout_value'],$permlink);
            
-                return "VOTE success updated for permlink = " . $permlink . " author = " . $author;
+                return ", permlink = " . $permlink . ", author = " . $author;
             }
             else {
-                return ("VOTES parsed, but parent article for add VOTE does not exist.. Need full re-parse blockchain. \n");
+                return (", WARNING! VOTE parsed, but parent article not exist. Requere full re-parse blockchain. ");
             }
                        
             
@@ -380,7 +381,7 @@ public function init(){
                 
                     } else {
                     
-                        return "Tag is not contains keyword";
+                        return "tags not contains keyword";
                     
                     }
                 
@@ -419,7 +420,7 @@ public function init(){
         
             
         }else {
-                return ("VOTERS parsed, but parent article for add VOTE does not exist.. Need full re-parse blockchain. \n");
+                return ("VOTERS parsed, but parent article for add VOTE not exist. Requere full re-parse blockchain. \n");
               }
             
     }
@@ -464,9 +465,6 @@ public function init(){
         if ($sub_category == '[]'){
             $sub_category = 'null';
         }
-        
-        
-
         
         
            $exist_category = $db->getRow('SELECT * FROM category WHERE country=?s AND blockchain=?s', $country, $blockchain);
@@ -527,12 +525,6 @@ public function init(){
 
     }
         
-        
-        
-    
-    
-    
-    
     
 
 

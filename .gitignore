@@ -9,6 +9,9 @@
 /vendor/yii2mod/*
 !/vendor/yii2mod/yii2-comments
 
+!/vendor/bower/
+/vendor/bower/*
+!/vendor/bower/jstree
 
 
 composer.phar
