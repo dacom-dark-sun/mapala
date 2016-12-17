@@ -13,6 +13,9 @@
 /vendor/bower/*
 !/vendor/bower/jstree
 
+!/vendor/thiagotalma/
+/vendor/thiagotalma/*
+!/vendor/thiagotalma/yii2-jstree
 
 composer.phar
 ## remove in production!
