@@ -29,7 +29,7 @@ use yii\helpers\Url;
             <?php 
             
             if ($images = $model::get_images($model)):
-                 echo  ("<img src=" . $images . " class= 'article-thumb img-rounded pull-left'>");
+                 echo  ("<img src=https://s13.postimg.org/ror54hqyv/logo_small.png class= 'article-thumb img-rounded pull-left'>");
             else:
                echo "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png class= 'article-thumb img-rounded pull-left'>";
             endif; ?>
