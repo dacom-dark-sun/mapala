@@ -23,7 +23,7 @@ class FrontendAsset extends AssetBundle
     ];
 
     public $js = [
-          "js/cryptico/cryptico.min.js",
+          "js/cryptico.min.js",
         'js/key_op.js',
       
          'js/crypto.js',
