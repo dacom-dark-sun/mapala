@@ -144,7 +144,8 @@ a.desc:after {
 .article-metainfo{
     font-size: 14px;
     margin-top: 10px;
-    text-align: right;
+    display: inline-flex;
+    float: right;
     margin-top: 20px;
     
 }
