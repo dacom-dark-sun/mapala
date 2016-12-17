@@ -168,6 +168,7 @@ a.desc:after {
 
 .article-vote-up{
     height: 30px;
+    top: -4px;
 }
 
 .Icon>svg, .Icon span.icon {
