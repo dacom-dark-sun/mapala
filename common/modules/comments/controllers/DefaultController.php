@@ -61,13 +61,7 @@ class DefaultController extends Controller
     {
         sleep(1);
         return ['status' => 'success'];
-        
-        }
-
-        return [
-            'status' => 'error',
-            'errors' => ActiveForm::validate($commentModel)
-        ];
+       
     }
 
     /**
