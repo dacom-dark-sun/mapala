@@ -30,9 +30,7 @@ use common\models\BlockChain;
                     'placement' => PopoverX::ALIGN_BOTTOM,
                     'content' => Art::get_voters($model->voters),
                     'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'Votes') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
-                ]);
-                
-                        ?>
+                ]);?>
                 
             </span>
             <span>|</span>

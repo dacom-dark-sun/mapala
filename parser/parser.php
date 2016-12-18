@@ -27,7 +27,7 @@ public function init(){
 
     $looking_for_tag= "ru--golos";    
 
-    $db = new SafeMysql(array('user' => $config['dbuser'], 'pass' => $config['dbpassword'],'db' => $config['dbname'], 'charset' => 'utf8mb4'));
+    $db = new SafeMysql(array('user' => $config['dbuser'], 'pass' => $config['dbpassword'],'db' => $config['dbname'],'host' => $config['dbhost'], 'charset' => 'utf8mb4'));
 
 
     $num_in_sql = $this->get_num_current_block_from_sql();
@@ -336,7 +336,7 @@ public function init(){
         global $db;
         global $config;
       
-        $db->query("UPDATE art SET replies=replies + 1 WHERE permlink=?s AND blockchain=?s", $root_link, $config['blockchain']['node']);
+        $db->query("UPDATE art SET replies=replies+1 WHERE permlink=?s AND blockchain=?s", $root_link, $config['blockchain']['node']);
         
         return "Comment count for article success updated";
                        
