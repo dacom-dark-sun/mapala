@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2mod\comments;
+namespace common\modules\comments;
 
 use yii\web\AssetBundle;
 
@@ -13,7 +13,7 @@ class CommentAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/yii2mod/yii2-comments/assets';
+    public $sourcePath = '@common/modules/comments/assets/';
 
     /**
      * @inheritdoc

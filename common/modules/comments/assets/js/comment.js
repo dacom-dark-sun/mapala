@@ -42,6 +42,7 @@
                 $commentForm.data('comment', settings);
                 $commentForm.on('beforeSubmit.comment', beforeSubmitForm);
                 var eventParams = {commentForm: $commentForm};
+                
                 $(settings.pjaxContainerId).on('click.comment', '[data-action="reply"]', eventParams, reply);
                 $(settings.pjaxContainerId).on('click.comment', '[data-action="cancel-reply"]', eventParams, cancelReply);
                 $(settings.pjaxContainerId).on('click.comment', '[data-action="delete"]', eventParams, deleteComment);

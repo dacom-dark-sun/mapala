@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2mod\comments\events;
+namespace comments\events;
 
 use yii\base\Event;
-use yii2mod\comments\models\CommentModel;
+use common\modules\comments\models\CommentModel;
 
 /**
  * Class CommentEvent

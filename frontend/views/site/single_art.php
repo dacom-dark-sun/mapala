@@ -1,6 +1,5 @@
 
 <?php
-use \yii2mod\comments;
 use yii\widgets\Pjax;
 use dosamigos\editable\EditableAddressAsset;
 use dosamigos\editable\Editable;
@@ -71,11 +70,11 @@ use yii\helpers\Html;
 
 
 <div id ="comments">
-<?php echo \yii2mod\comments\widgets\Comment::widget([
+<?php echo common\modules\comments\widgets\Comment::widget([
     'model' => $model,
     'clientOptions' => [
         'pjaxSettings' => [
-            'timeout' => 10000,
+            'timeout' => 20000,
             'url' => \yii\helpers\Url::to(['/site/comments', 'permlink' => $model->permlink]),
             'scrollTo' => false,
             'enablePushState' => false

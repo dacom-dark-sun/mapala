@@ -6,11 +6,11 @@ $config = [
     'bootstrap' => ['maintenance'],
     'modules' => [
         'comment' => [
-        'class' => 'yii2mod\comments\Module',
+        'class' => 'common\modules\comments\Module',
         // use comment controller event example
         'controllerMap' => [
             'default' => [
-                'class' => 'yii2mod\comments\controllers\DefaultController',
+                'class' => 'common\modules\comments\controllers\DefaultController',
                 'on afterCreate' => function ($event) {
                     // get saved comment model
                     $event->getCommentModel();
@@ -98,7 +98,7 @@ $config = [
             }
         ],
         'request' => [
-            'baseUrl' => '',
+            
             'cookieValidationKey' => env('FRONTEND_COOKIE_VALIDATION_KEY')
         ],
         'user' => [

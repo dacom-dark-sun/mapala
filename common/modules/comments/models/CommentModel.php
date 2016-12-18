@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2mod\comments\models;
+namespace common\modules\comments\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -8,8 +8,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii2mod\behaviors\PurifyBehavior;
-use yii2mod\comments\models\enums\CommentStatus;
-use yii2mod\comments\Module;
+use common\modules\comments\models\enums\CommentStatus;
+use common\modules\comments\Module;
 
 /**
  * Class CommentModel

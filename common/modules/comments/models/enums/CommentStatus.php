@@ -1,9 +1,8 @@
 <?php
 
-namespace yii2mod\comments\models\enums;
+namespace common\modules\comments\models\enums;
 
 use yii2mod\enum\helpers\BaseEnum;
-
 /**
  * Class CommentStatus
  * @package yii2mod\comments\models\enums

@@ -1,13 +1,13 @@
 <?php
 
-namespace yii2mod\comments\widgets;
+namespace common\modules\comments\widgets;
 
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\Json;
-use yii2mod\comments\CommentAsset;
-use yii2mod\comments\Module;
+use common\modules\comments\CommentAsset;
+use common\modules\comments\Module;
 
 /**
  * Class Comment
@@ -31,7 +31,7 @@ class Comment extends Widget
     /**
      * @var string the view file that will render the comment tree and form for posting comments.
      */
-    public $commentView = '@vendor/yii2mod/yii2-comments/widgets/views/index';
+    public $commentView = 'index';
 
     /**
      * @var string comment form id

@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2mod\comments\models;
+namespace common\modules\comments\models;
 
 use yii\db\ActiveQuery;
-use yii2mod\comments\models\enums\CommentStatus;
+use common\modules\comments\models\enums\CommentStatus;
 
 /**
  * Class CommentQuery

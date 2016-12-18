@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2mod\comments;
+namespace common\modules\comments;
 
 use Yii;
-use yii2mod\comments\models\CommentModel;
+use common\modules\comments\models\CommentModel;
 
 /**
  * Class Module
@@ -29,7 +29,7 @@ class Module extends \yii\base\Module
     /**
      * @var string the namespace that controller classes are in.
      */
-    public $controllerNamespace = 'yii2mod\comments\controllers';
+    public $controllerNamespace = '@common\modules\comments\controllers';
 
     /**
      * @inheritdoc

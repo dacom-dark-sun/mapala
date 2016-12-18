@@ -1,15 +1,15 @@
 <?php
 
-namespace yii2mod\comments\controllers;
+namespace common\modules\yii2mod\comments\controllers;
 
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii2mod\comments\models\CommentModel;
-use yii2mod\comments\models\CommentSearchModel;
-use yii2mod\comments\Module;
-use yii2mod\editable\EditableAction;
+use common\modules\comments\models\CommentModel;
+use common\modules\comments\models\CommentSearchModel;
+use common\modules\comments\Module;
+use common\modules\editable\EditableAction;
 
 /**
  * Manage comments in admin panel
@@ -22,12 +22,12 @@ class ManageController extends Controller
     /**
      * @var string path to index view file, which is used in admin panel
      */
-    public $indexView = '@vendor/yii2mod/yii2-comments/views/manage/index';
+    public $indexView = 'common/comments/views/manage/index';
 
     /**
      * @var string path to update view file, which is used in admin panel
      */
-    public $updateView = '@vendor/yii2mod/yii2-comments/views/manage/update';
+    public $updateView = '@common/comments/views/manage/update';
 
     /**
      * Returns a list of behaviors that this component should behave as.
