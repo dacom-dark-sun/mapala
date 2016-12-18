@@ -71,18 +71,16 @@ use yii\helpers\Html;
 
 
 <div id ="comments">
-<?php Pjax::begin() ?>
 <?php echo \yii2mod\comments\widgets\Comment::widget([
     'model' => $model,
     'clientOptions' => [
         'pjaxSettings' => [
-            'timeout' => 0,
+            'timeout' => 10000,
             'url' => \yii\helpers\Url::to(['/site/comments', 'permlink' => $model->permlink]),
             'scrollTo' => false,
-            'enablePushState' => true
+            'enablePushState' => false
         ]
     ]
-]);
-Pjax::end();?>
+]);?>
 </div>
 
