@@ -220,7 +220,12 @@ text-align: center;
 .article-full .article-text {
   margin-top: 20px;
   font-size:16px;
+  line-height: 30px;
   font-weight: 400;
+}
+
+.article-full .main_page_link{
+  margin-top: -5px;
 }
 
 .main_page_link{

@@ -4,7 +4,7 @@ return [
     'enablePrettyUrl'=>true,
     'showScriptName'=>false,
     'rules'=> [
-       '' => 'site/index',
-       '<action>'=>'site/<action>',
+        '' => 'site/index',
+       '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
     ]
 ];
