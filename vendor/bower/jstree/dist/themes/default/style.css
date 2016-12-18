@@ -736,12 +736,13 @@ filter: gray;
 }
 .jstree-proton-large .jstree-anchor {
   line-height: 32px;
-  margin: 1px 0 2px;
+  margin: 1px 0px 2px;
   height: 32px;
 }
 .jstree-proton-large .jstree-icon {
   width: 32px;
   height: 32px;
+  margin-left: -5px;
   line-height: 32px;
 }
 .jstree-proton-large .jstree-icon:empty {
