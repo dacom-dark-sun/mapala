@@ -26,14 +26,7 @@ class AjaxController extends Controller{
     
     
     
-     public function actionComments($permlink) {
-      $model = new Art();
-      $model = Art::find()->where(['permlink' => $permlink])->one();
-    
-      return $this->renderAjax('comments', [
-         'model' => $model
-     ]);
-     }
+     
       
       
      public function actionComments_save() {

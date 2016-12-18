@@ -77,7 +77,7 @@ use yii\helpers\Html;
     'clientOptions' => [
         'pjaxSettings' => [
             'timeout' => 0,
-            'url' => \yii\helpers\Url::to(['/ajax/comments', 'permlink' => $model->permlink]),
+            'url' => \yii\helpers\Url::to(['/site/comments', 'permlink' => $model->permlink]),
             'scrollTo' => false,
             'enablePushState' => true
         ]

@@ -61,19 +61,7 @@ class DefaultController extends Controller
     {
         $x = Yii::$app->request->post();
         return ['status' => 'success'];
-        $commentModel = Yii::createObject(Yii::$app->getModule(Module::$name)->commentModelClass);
-        $commentModel->setAttributes($this->getCommentAttributesFromEntity($entity));
-        if ($commentModel->load(Yii::$app->request->post())) {
-            $event = Yii::createObject(['class' => CommentEvent::className(), 'commentModel' => $commentModel]);
-            $this->trigger(self::EVENT_AFTER_CREATE, $event);
-
-            return ['status' => 'success'];
-        }
-
-        return [
-            'status' => 'error',
-            'errors' => ActiveForm::validate($commentModel)
-        ];
+       
     }
 
     /**
