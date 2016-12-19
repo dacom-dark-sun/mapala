@@ -5,7 +5,7 @@ return [
     'showScriptName'=>false,
     'rules'=> [
        
-       '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+        '' => 'site/index',
       
     ]
 ];
