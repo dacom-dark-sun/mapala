@@ -145,14 +145,26 @@ class Art extends \yii\db\ActiveRecord
         return $category;
         }
         
-        //This function use for get first image to preview from Thumbs folder
+        
+        
+        //This function for get first image to preview from Thumbs folder
          static function get_images($model){
            $meta = $model->meta;
            $meta = json_decode(stripslashes($meta), true);
            $image = $model->validate_json($meta, 'image');
+           $author = $model->author;
+           $permlink = $model-> permlink;
+           
             if ($image[0]){
-                $image = '\storage/web/thumbs/' . $model->permlink . '-' . basename($image[0]);
-                return $image;
+             
+                    $filename = basename($image[0]);
+                    $re = '/^(.+?)(\?.*?)?(#.*)?$/m';
+                    preg_match_all($re, $filename, $matches);
+                    $filename = $matches[1][0];
+                    $full_filename = 'http://' . Yii::$app->getRequest()->serverName . '/storage/web/thumbs/' . BlockChain::get_blockchain_from_locale() . '-' . $author . '-' . $permlink . '-' . $filename;
+                
+                
+                return $full_filename;
                 
             } else {
                 return false;

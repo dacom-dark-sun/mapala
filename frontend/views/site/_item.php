@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use common\models\Art;
 use yii\helpers\Url;
+
 ?>
 
 <div class="row article-item">
@@ -28,8 +29,9 @@ use yii\helpers\Url;
         <div class="article-content">
             <?php 
             
-            if ($images = $model::get_images($model)):
-                 echo  ("<img src=https://s13.postimg.org/ror54hqyv/logo_small.png class= 'article-thumb img-rounded pull-left'>");
+            $image = $model::get_images($model);
+            if (($image)&&(@fopen($image,'r'))):
+                 echo  ("<img src=" . $image . " class= 'article-thumb img-rounded pull-left'>");
             else:
                echo "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png class= 'article-thumb img-rounded pull-left'>";
             endif; ?>
