@@ -222,7 +222,9 @@ class Art extends \yii\db\ActiveRecord
          */
         static function get_first_line($model){
 //                $links = $model::get_links($model);
-                $first_line = StringHelper::truncate($model->body, 500, '...', null, true);
+                $body = \kartik\markdown\Markdown::convert($model->body);
+             
+                $first_line = StringHelper::truncate($body, 500, '...', null, true);
                 $matches = Art::parse_links_and_urls($first_line);
                
                 foreach($matches[0] AS $m){
@@ -239,12 +241,13 @@ class Art extends \yii\db\ActiveRecord
         
         
         static function get_body($model){
-            
+            $body = \kartik\markdown\Markdown::convert($model->body);
+             
             $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
             $body = $model->body;
             $matches = Art::parse_links_and_urls($body);
             foreach($matches[0] as $id => $m){
-                if (in_array($matches[7][$id], $format_img)){
+                if (in_array($matches[5][$id], $format_img)){
                     $body = str_replace($m,'![]('. $m . '){.body_images}', $body);
                 } else {
                     $body = str_replace($m,'[' . $m . ']('. $m . ')', $body);
@@ -262,11 +265,30 @@ class Art extends \yii\db\ActiveRecord
          * This function parse all links and images and return in array for cleaning or change
          */
         static function parse_links_and_urls($text){
-           $re = '/((https?:\/\/)?([A-Za-z:1-9\.]+)\.([\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#=;%+]{0,})?([\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
+           $re = '/((https?:\/\/)?([A-Za-z:1-9\]+)\.(][\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{1,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#=;%+]{2,})([@\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
          
            preg_match_all($re, $text, $matches);
             return $matches;
            
+        }
+        
+        static function get_array_links_and_images($body){
+           $matches = Art::parse_links_and_urls($body);
+           $arr = array();
+            $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
+            $matches = Art::parse_links_and_urls($body);
+            foreach($matches[0] as $id => $m){
+                if (in_array($matches[5][$id], $format_img)){
+                    $arr['image'][] = $m; 
+                } else {
+                    $arr['links'][] = $m; 
+               
+                }
+                
+           }
+           return $arr;
+            
+            
         }
         
        
@@ -498,7 +520,7 @@ class Art extends \yii\db\ActiveRecord
          public $coordinates;        
          */
         
-        $model->tags =  (array_key_exists('4', $meta['tags'])? $meta['tags'][4] :  "");
+        $model->tags =  (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
         
     return $model;

@@ -30,11 +30,19 @@ class BlockChain extends Model
    
    
    static function tag_to_eng($str){
+       
     $str = mb_strtolower($str);
     $rus = array('щ','ш','ч','ц','й','ё','э','ю','я','х','ж','а','б','в','г','д','е','з','и','к','л','м','н','о','п','р','с','т','у','ф','ъ','ы','ь');
     $eng = array('shch','sh','ch','cz','ij','yo','ye','yu','ya','kh','zh','a','b','v','g','d','e','z','i','k','l','m','n','o','p','r','s','t','u','f','xx','y','x');
+    $translated = str_replace($rus, $eng, $str);
     
-    return str_replace($rus, $eng, $str);
+    if (BlockChain::get_blockchain_from_locale() == 'golos'){
+            $return = 'ru--' . $translated;
+    } else {
+        $return = $translated;
+    }
+    
+    return $return;
       
    }
     
@@ -58,17 +66,21 @@ class BlockChain extends Model
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
             
-             $languages = BlockChain::tag_to_eng(strtolower($model->languages));
              $json['contacts'] = strtolower($model->contacts);
-             $json['languages'] = explode(", ", $languages);
+             $json['languages'] =  explode(", ", $model->languages);
              $json['tags'][0] = 'test';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
              $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
-             $json['tags'][3] = 'im-mapala';
+             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'People'));
              $json['not_traveler'] = $model->not_traveler;
              $json['date_until_leave'] = $model ->date_until_leave;
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             
+             $arr = Art::get_array_links_and_images($model->body);
+           
+             $json['links'] = $arr['links'];
+             $json['image'] = $arr['image'];
              
              $bl_model['metadata'] = $json;
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -90,11 +102,14 @@ class BlockChain extends Model
              $json['tags'][0] = 'test';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
              $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
-             $json['tags'][3] = 'homestay';
+             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Homestay'));
              $json['tags'][4] = BlockChain::free_on_different_lang($model->free);
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
-             
+             $arr = Art::get_array_links_and_images($model->body);
+           
+             $json['links'] = $arr['links'];
+             $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -105,7 +120,7 @@ class BlockChain extends Model
     
     
     
-   static function construct_lifehack($model){
+   static function construct_library($model){
 /*  public $title;
     public $country;
     public $body;
@@ -121,12 +136,16 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'test';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][3] = 'lifehack';
+             $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
+             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Library'));
              $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
-             
+             $arr = Art::get_array_links_and_images($model->body);
+           
+             $json['links'] = $arr['links'];
+             $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -152,12 +171,16 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'test';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][3] = 'must_see';
-             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+            
+             $json['tags'][2] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Must See'));
+             $json['tags'][3] = BlockChain::tag_to_eng($model->tags);
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
-             
+             $arr = Art::get_array_links_and_images($model->body);
+           
+             $json['links'] = $arr['links'];
+             $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -185,12 +208,15 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'test';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][3] = 'must_see';
-             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+             $json['tags'][2] =  BlockChain::tag_to_eng(Yii::t('frontend','Story'));
+             $json['tags'][3] =  BlockChain::tag_to_eng($model->tags);
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
-             
+             $arr = Art::get_array_links_and_images($model->body);
+           
+             $json['links'] = $arr['links'];
+             $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -222,6 +248,10 @@ class BlockChain extends Model
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
                          
              $json['tags'][0] = $data['category'];
+             $arr = Art::get_array_links_and_images($model->body);
+           
+             $json['links'] = $arr['links'];
+             $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -257,7 +287,7 @@ class BlockChain extends Model
         $current_lang = Yii::$app->language;
              switch ($current_lang){
                  case 'ru-RU':
-                    if ($free == 1){
+                    if ($free == 0){
                         $sub_category = BlockChain::tag_to_eng(Yii::t('frontend','Free'));
                     } else {
                         $sub_category = BlockChain::tag_to_eng(Yii::t('frontend','Must pay'));
@@ -265,7 +295,7 @@ class BlockChain extends Model
                  break;
              
                  case 'en-US':
-                     if ($free == 1){
+                     if ($free == 0){
                         $sub_category = strtolower(Yii::t('frontend','Free'));
                        
                      } else {

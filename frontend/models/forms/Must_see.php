@@ -39,7 +39,7 @@ class Must_see extends Model
             'name' => Yii::t('frontend', 'Name'),
             'country' => Yii::t('frontend', 'Country'),
             'body' => Yii::t('frontend', 'Body'),
-            'tag' => Yii::t('frontend', 'Tag'),
+            'tags' => Yii::t('frontend', 'Category'),
             'title'=>Yii::t('frontend', 'Title'),
             'coordinates' => Yii::t('frontend', 'Coordinates'),
         ];

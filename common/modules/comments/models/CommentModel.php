@@ -215,7 +215,7 @@ class CommentModel extends ActiveRecord
         if (!$showDeletedComments) {
             $query->active();
         }
-        $re = '/^.+:(.+?-.+)/m';
+        $re = '/^.+:(.+?.+)/m';
         preg_match_all($re, $relatedTo, $matches);
         $root_article = $matches[1][0];
         $models = $query->orderBy(['permlink' => SORT_ASC])->all();

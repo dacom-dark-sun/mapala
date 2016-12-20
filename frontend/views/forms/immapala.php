@@ -17,13 +17,12 @@ use yii\bootstrap\Modal;
 use kartik\widgets\FileInput;
 use dosamigos\ckeditor;
 
-\frontend\assets\KeyAsset::register($this);
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 
 
-$this->title = Yii::t('frontend','Я - Мапала'); 
+$this->title = Yii::t('frontend','People'); 
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend','Пополнить базу'), 'url'=> ['/site/add']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend','Update database'), 'url'=> ['/site/add']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -39,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                
        <?php //Show Countries-------------------------------------------------------------
             echo $form->field($model, 'country')->widget(Select2::classname(),[
+                 'options' => ['placeholder' => 'Select a state ...'],
                 "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
                 'pluginEvents' => [
                 "change"=>'function(event, id, value, count){save_country($(this).val())}'
@@ -97,7 +97,61 @@ echo $form->field($model, 'city')->widget(Select2::classname(), [
             
         </div>
         <div class="col-lg-5">
-           text
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Introduce yourself, please (title)') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Enter the title or your name') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Country') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Select a country, which will head branch of tree') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'City') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Select a city, which will next level your branch') ?></div>
+                </div>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Im not in the travel now and this is my permanent place') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'If you living in that place, just not touch it. It will show to everybody, that this is your permanent place. '
+                            . 'If your a traveler, choise date when you leave. It helps to other travelers find you on your way') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Contacts') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Phone? Facebook? Telegram? Email? Any..') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Languages') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Just mark language which you can speak. It helps to other travelers find people who can speak their native language.') ?></div>
+                </div>
+               <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Body') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Tell about yourself, about your traveler expirience. All what you want to say.') ?></div>
+                </div>
+            <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Coordinates') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'You can mark the place around youself. Or not mark.. It is up to you.') ?></div>
+                </div>
         </div>
         
     </div>

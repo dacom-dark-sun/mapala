@@ -77,11 +77,11 @@ return [
     'City' => 'Город',
     'Languages' => 'Языки',
     'ImMapala' => "Я - член Мапала",
-    'Homestay' => 'Жилье путешественника',
+    'Homestay' => 'Жилье',
     'Companios' => 'Попутчики',
-    'Lifehacks' => 'Лайфхаки',
+    'Knowledge' => 'Знания',
     'Events' => 'События',
-    'Must_see' => 'Достопримечательности',
+    'Must See' => 'Достопримечательности',
     'Story' => 'Истории',
     'My blog' => 'Мой блог',
     'Saved!' => 'Сохранено!',
@@ -110,5 +110,8 @@ return [
     'Trending' => 'Горячее',
     'Discuss' => 'Обсуждаемое',
     'Update database' => 'Пополнить базу',
+    'People' => 'Люди',
+    'Enter the capture or your name' => 'Введите заголовок или ваше имя',
+    
       
-];
+];//

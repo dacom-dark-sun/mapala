@@ -39,7 +39,6 @@ use yii\helpers\Html;
              $body = \common\models\Art::get_body($model);
              $body = str_replace("\\n", "<p/>", $body);
 
-             $body = \kartik\markdown\Markdown::convert($body);
              echo $body; 
            ?>
             </div>

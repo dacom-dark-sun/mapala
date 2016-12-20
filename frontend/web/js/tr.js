@@ -131,7 +131,7 @@ function comment (data, callback){
                 console.log(wif);
                 
                 
-               
+            /*   
                 steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
@@ -143,7 +143,7 @@ function comment (data, callback){
                 function(err, result) {
                     console.log(err, result);
             });
-        
+        */
         } else alert(err);
   
         });
@@ -185,7 +185,7 @@ function reply (data, callback){
                 
                 console.log(trx);
                 console.log(wif);
-                
+       /*         
                 
               steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
@@ -199,7 +199,7 @@ function reply (data, callback){
                     callback(result);
                     console.log(err, result);
             });
-        
+        */
         } else alert(err);
   
         });

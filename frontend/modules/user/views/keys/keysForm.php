@@ -40,8 +40,29 @@ $this->title = Yii::t('frontend', 'Key STEEM')
             </div>
     <?php endif; ?>
         </div>
+         <div class="col-lg-6">
+            <div class="panel panel-danger">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Keys') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', ' Мы не храним ваши ключи без вашего разрешения. Ключ сохраняется в Cookies вашего браузера.') ?>
+                    </div>
+                </div>
+      
+        
     </div>
-
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+                    <div class="panel-body"><?= Yii::t('frontend', ' Для публикации постов и голосования за посты, вам необходимо скопировать и '
+                       . 'сохранить ваш приватный постинг ключ от Голоса. Найти приватный постинг ключ можно на golos.io во вкладке "Разрешения"') ?>
+                        <img src='https://cloud.githubusercontent.com/assets/22220976/21292504/8a6b62b2-c529-11e6-8253-ee30b53fd552.png' style="width: 100%">
+                    </div>
+                </div>
+      
+        
+    </div>
+    </div>
+    
 </div>
 
 <script>

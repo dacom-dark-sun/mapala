@@ -7,7 +7,7 @@ use frontend\models\forms\Base;
 use frontend\models\forms\Companions;
 use frontend\models\forms\Homestay;
 use frontend\models\forms\ImMapala;
-use frontend\models\forms\Lifehack;
+use frontend\models\forms\Knowledge;
 use frontend\models\forms\Mapala_events;
 use frontend\models\forms\Must_see;
 use frontend\models\forms\Story;
@@ -126,7 +126,7 @@ class FormsController extends SiteController
 
     
             
-    public function actionLifehack($author = null, $permlink = null)
+    public function actionKnowledge($author = null, $permlink = null)
     {
 /*  public $title;
     public $country;
@@ -135,10 +135,10 @@ class FormsController extends SiteController
     public $coordinates;
  */
         
-         $model = new Lifehack();
+         $model = new Knowledge();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_lifehack($model);
+             $bl_model = BlockChain::construct_library($model);
              return $bl_model;
         }
         
@@ -152,7 +152,7 @@ class FormsController extends SiteController
               $model = Art::fill_simple_model($model,$meta);
     }
      
-        return $this->render('lifehack', [ //CLEAR
+        return $this->render('Knowledge', [ //CLEAR
         'model' => $model
         ]);
  
@@ -195,7 +195,7 @@ class FormsController extends SiteController
            $model = new Story();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_must_see($model);
+             $bl_model = BlockChain::construct_story($model);
              return $bl_model;
         }
         

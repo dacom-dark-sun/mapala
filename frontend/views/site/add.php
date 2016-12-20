@@ -13,7 +13,7 @@ use yii\captcha\Captcha;
  <?= Html::a(Yii::t('app','Базы Мапала'), ['/forms/add_base'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
 */
 
-$this->title = Yii::t('frontend','Пополнить базу');
+$this->title = Yii::t('frontend','Update database');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
@@ -22,11 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-12">
             
-    <?= Html::a(Yii::t('frontend','Я - Мапала'), ['/forms/immapala'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Жилье путешественника'), ['/forms/homestay'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Лайфхаки'), ['/forms/lifehack'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Достопримечательности'), ['/forms/must_see'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Истории'), ['/forms/story'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','People'), ['/forms/immapala'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Homestay'), ['/forms/homestay'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Knowledge'), ['/forms/knowledge'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Must See'), ['/forms/must_see'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Story'), ['/forms/story'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
    
             
         </div>

@@ -31,6 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo $form->field($model, 'title') ?>
                  <?php //Show Countries-------------------------------------------------------------
                 echo $form->field($model, 'country')->widget(Select2::classname(),[
+                     'options' => ['placeholder' => 'Select a state ...'],
+                
                     "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
                     'pluginEvents' => [
                     "change"=>'function(event, id, value, count){save_country($(this).val())}'
@@ -83,8 +85,61 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
         
         </div>
-         <div class="col-lg-5">
-           text
+        <div class="col-lg-5">
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Title') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Write the name of your homestay or just title') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Country') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Select a country, which will head branch of tree') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'City') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Select a city, which will next level your branch') ?></div>
+                </div>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Free') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Now all homestays is free for community members. If you not agree with it, please, not fill that form.') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Contacts') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Phone? Facebook? Telegram? Email? Any..') ?></div>
+                </div>
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Languages') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Just mark language which you can speak. It helps to other travelers find people who can speak their native language.') ?></div>
+                </div>
+               <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Body') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Tell about your place or about yourself. All what you want to say.') ?></div>
+                </div>
+            <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Coordinates') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'You can mark the place around youself. Or not mark.. It is up to you.') ?></div>
+                </div>
         </div>
     </div>
     
