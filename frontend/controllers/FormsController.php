@@ -152,7 +152,7 @@ class FormsController extends SiteController
               $model = Art::fill_simple_model($model,$meta);
     }
      
-        return $this->render('Knowledge', [ //CLEAR
+        return $this->render('knowledge', [ //CLEAR
         'model' => $model
         ]);
  
