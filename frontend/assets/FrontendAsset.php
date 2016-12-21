@@ -47,7 +47,11 @@ class FrontendAsset extends AssetBundle
         }
 
         if ($blockchain == 'golos'){
-           $this->js[] = "js/golos.min.js"; // dynamic file added
+        //   $this->js[] = "js/golos.min.js"; // dynamic file added
+        
+             $this->js[] = "js/golos.js"; // dynamic file added
+        
+            
         }
 
         

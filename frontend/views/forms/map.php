@@ -42,7 +42,7 @@ use yii\web\JsExpression;
                     ] ,
                     'enableSearchBox' => true , // Optional , default is true
                     'searchBoxOptions' => [ // searchBox html attributes
-                        'style' => 'width: 90%;', // Optional , default width and height defined in css coordinates-picker.css
+                        'style' => 'width: 300px;', // Optional , default width and height defined in css coordinates-picker.css
                     ],
                     'searchBoxPosition' => new JsExpression('google.maps.ControlPosition.TOP_LEFT'), // optional , default is TOP_LEFT
                     'mapOptions' => [

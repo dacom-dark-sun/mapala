@@ -8,7 +8,7 @@ use yii\base\Model;
 /**
  * ContactForm is the model behind the contact form.
  */
-class Story extends Model
+class Blogs extends Model
 {
     public $title;
     public $tags;

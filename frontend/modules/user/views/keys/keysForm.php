@@ -17,6 +17,7 @@ $this->title = Yii::t('frontend', 'Key STEEM')
 <div class="form-index">
     <h1><?php echo Html::encode($this->title) ?></h1>
     <div class="row">
+        <div class='col-lg-12'>
         <div class="col-lg-6">
     <?php if (BlockChain::get_blockchain_from_locale() == 'steem'): ?>
             
@@ -42,12 +43,11 @@ $this->title = Yii::t('frontend', 'Key STEEM')
         </div>
          <div class="col-lg-6">
             <div class="panel panel-danger">
-                    <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Keys') ?>
-                    </div>
+                   
                     <div class="panel-body"><?= Yii::t('frontend', ' Мы не храним ваши ключи без вашего разрешения. Ключ сохраняется в Cookies вашего браузера.') ?>
                     </div>
                 </div>
+             </div>
       
         
     </div>

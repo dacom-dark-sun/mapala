@@ -79,8 +79,11 @@ class BlockChain extends Model
              
              $arr = Art::get_array_links_and_images($model->body);
            
-             $json['links'] = $arr['links'];
-             $json['image'] = $arr['image'];
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
              
              $bl_model['metadata'] = $json;
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -108,8 +111,11 @@ class BlockChain extends Model
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
            
-             $json['links'] = $arr['links'];
-             $json['image'] = $arr['image'];
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -144,8 +150,11 @@ class BlockChain extends Model
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
            
-             $json['links'] = $arr['links'];
-             $json['image'] = $arr['image'];
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -155,7 +164,7 @@ class BlockChain extends Model
     
     
     
-   static function construct_must_see($model){
+   static function construct_places($model){
            /*  public $title;
     public $country;
     public $body;
@@ -172,15 +181,18 @@ class BlockChain extends Model
              $json['tags'][0] = 'test';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
             
-             $json['tags'][2] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Must See'));
+             $json['tags'][2] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Places'));
              $json['tags'][3] = BlockChain::tag_to_eng($model->tags);
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
            
-             $json['links'] = $arr['links'];
-             $json['image'] = $arr['image'];
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -192,7 +204,7 @@ class BlockChain extends Model
     
     
     
-   static function construct_story($model){
+   static function construct_blogs($model){
 /*  public $title;
     public $country;
     public $body;
@@ -208,15 +220,19 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'test';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][2] =  BlockChain::tag_to_eng(Yii::t('frontend','Story'));
+             $json['tags'][2] =  BlockChain::tag_to_eng(Yii::t('frontend','Blogs'));
              $json['tags'][3] =  BlockChain::tag_to_eng($model->tags);
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
            
-             $json['links'] = $arr['links'];
-             $json['image'] = $arr['image'];
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
+             
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -250,8 +266,11 @@ class BlockChain extends Model
              $json['tags'][0] = $data['category'];
              $arr = Art::get_array_links_and_images($model->body);
            
-             $json['links'] = $arr['links'];
-             $json['image'] = $arr['image'];
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);

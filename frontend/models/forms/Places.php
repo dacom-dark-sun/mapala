@@ -8,7 +8,7 @@ use yii\base\Model;
 /**
  * ContactForm is the model behind the contact form.
  */
-class Must_see extends Model
+class Places extends Model
 {
     public $title;
     public $tags;

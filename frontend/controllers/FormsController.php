@@ -9,8 +9,8 @@ use frontend\models\forms\Homestay;
 use frontend\models\forms\ImMapala;
 use frontend\models\forms\Knowledge;
 use frontend\models\forms\Mapala_events;
-use frontend\models\forms\Must_see;
-use frontend\models\forms\Story;
+use frontend\models\forms\Places;
+use frontend\models\forms\Blogs;
 use frontend\models\forms\Transport;
 use frontend\controllers\SiteController;
 use common\models\Art;
@@ -159,13 +159,13 @@ class FormsController extends SiteController
     }
         
      
-    public function actionMust_see($author = null, $permlink = null)
+    public function actionPlaces($author = null, $permlink = null)
         {
       
-           $model = new Must_see();
+           $model = new Places();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_must_see($model);
+             $bl_model = BlockChain::construct_places($model);
              return $bl_model;
         }
         
@@ -179,7 +179,7 @@ class FormsController extends SiteController
               $model = Art::fill_simple_model($model,$meta);
     }
      
-        return $this->render('must_see', [ //CLEAR
+        return $this->render('places', [ //CLEAR
         'model' => $model
         ]);
  
@@ -190,12 +190,12 @@ class FormsController extends SiteController
     
     
     
-    public function actionStory($author = null, $permlink = null)
+    public function actionBlogs($author = null, $permlink = null)
         {
-           $model = new Story();
+           $model = new Blogs();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_story($model);
+             $bl_model = BlockChain::construct_blogs($model);
              return $bl_model;
         }
         
@@ -209,7 +209,7 @@ class FormsController extends SiteController
               $model = Art::fill_simple_model($model,$meta);
     }
      
-        return $this->render('story', [ //CLEAR
+        return $this->render('blogs', [ //CLEAR
         'model' => $model
         ]);
  

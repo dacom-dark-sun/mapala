@@ -29,12 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="form-index">
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-12">
+            <div class ='col-lg-7'>
             <?php //------ Start active form and show title
             $form = ActiveForm::begin(['id' => 'add-form']); ?>
             <?php echo $form->field($model, 'title') ?>
+            </div>
+            <div class ='col-lg-5'>
+            <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Title') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Постарайся уложиться в 100 символов, кратко и емко рассказав о сути знания') ?></div>
+                </div>
             
-                         
+            
+            </div>
+            
+            <div class ='col-lg-7'>
 <?php //-------SHOW Categories-----------------//TODO - List PRE-data.   
             echo $form->field($model, 'tags')->widget(Select2::classname(),[
                  'options' => ['placeholder' => 'Select a category ...'],
@@ -43,12 +55,27 @@ $this->params['breadcrumbs'][] = $this->title;
                         ->Where(['model' => StringHelper::basename(get_class($model))])
                         ->all(), BlockChain::get_blockchain_from_locale(), BlockChain::get_blockchain_from_locale()),
                 //---------------------------------------------------------------------
-            ]); 
-      
-           ?> 
+            ]);?> 
+            </div>
+            <div class ='col-lg-5'>
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Category') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 
+                            '- <b>Лайфхак</b> - расскажи секреты жизни в своем городе и стране; <br>'
+                            . '- <b>Погода</b> - расскажи о климате и временах года, к чему путешественнику быть готовым?; <br>'
+                            . '- <b>География</b> - конечно, не все знают где находится твой город и какой пейзжах вокруг. Расскажи об этом, а лучше - покажи;<br>'
+                            . '- <b>Традиции</b> - расскажи о традициях, обрядах и церемониях; <br>'
+                            . '- <b>Язык</b> - расскажи на каких языках говорят в твоем городе, расскажи о нем; <br>'
+                            . '- <b>Видео-презентация</b> - покажи короткую видеопрезентацию города. Позволь путешественникам взглянуть на него твоими глазами;') ?></div>
+                </div>
+
+                
+            </div>
             
             
-            
+            <div class="col-lg-7">
             <?php //Show Countries-------------------------------------------------------------
             echo $form->field($model, 'country')->widget(Select2::classname(),[
                 "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
@@ -58,7 +85,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],//---------------------------------------------------------------------
             ]); 
             ?>
+            </div>
+            <div class ='col-lg-5'>
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Country') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Страна будет размещена в "голове" дерева тегов') ?></div>
+                </div>
                 
+            </div>
+                
+            
+            <div class ='col-lg-7'>
              <?php 
                 //Show depended cities by ajax ----------------------------------------------------------
                 echo $form->field($model, 'city')->widget(Select2::classname(), [
@@ -79,88 +118,69 @@ $this->params['breadcrumbs'][] = $this->title;
                     'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                 ],//--------------------------------------------------------------------------------------
                 ]);?>     
-
-
-
-
- <?php //MARKDOWN EDITOR -----------------------------
- echo $form->field($model, 'body')->widget(
-	MarkdownEditor::classname(), 
-	['height' => 400, 'encodeLabels' => true]
-);//---------------------------------------------------
-?>
-
-        
-
-
-
-
-
-            
-            
-            
-    <div class="form-group">
-        <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
-        </div>
-        </div>
-   <div class="col-lg-5">
-            
-                <div class="panel panel-success">
-                    <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Title') ?>
-                    </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Enter the title') ?></div>
-                </div>
-            
-                <div class="panel panel-success">
-                    <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Category') ?>
-                    </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 
-                            '- <b>Lifehacks</b> - tell secrets life in your country/city; <br>'
-                            . '- <b>Weather</b> - tell about climat in your country/city; <br>'
-                            . '- <b>Geography</b> - sure, not everybody knows where your city and what landscape around. Tell about it; <br>'
-                            . '- <b>Traditions</b> - tell about the traditions, ceremonies and customs; <br>'
-                            . '- <b>Language</b> - tell about language in your place; <br>'
-                            . '- <b>Video Presentation</b> - show your city in promo video;') ?></div>
-                </div>
-             <div class="panel panel-success">
-                    <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Country') ?>
-                    </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Select a country, which will head branch of tree') ?></div>
-                </div>
-                <div class="panel panel-success">
+            </div>
+            <div class='col-lg-5'>
+                 <div class="panel panel-success">
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'City') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Select a city, which will next level your branch') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Город будет являться вложенной папкой в дереве тегов') ?></div>
                 </div>
 
-            
-               <div class="panel panel-success">
+                
+            </div>
+
+
+            <div class="col-lg-7">
+             <?php //MARKDOWN EDITOR -----------------------------
+             echo $form->field($model, 'body')->widget(
+                    MarkdownEditor::classname(), 
+                    ['height' => 400, 'encodeLabels' => true]
+            );//---------------------------------------------------
+            ?>
+            </div>
+            <div class="col-lg-5">
+                <div class="panel panel-success">
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Body') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Tell all what you want to say.') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Расскажи все, что ты хочешь сказать') ?></div>
                 </div>
-            <div class="panel panel-success">
-                    <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Coordinates') ?>
-                    </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'You can mark the place. Or not mark.. It is up to you.') ?></div>
-                </div>
+                
+            </div>
+        
+            <div class="col-lg-7">
+    <div class="form-group">
+        <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
         </div>
-    </div>
+            </div>
     
+    
+    <div class='col-lg-7'>    
 <div id ="map-container">   
      <div id="map">
        <?= $this->render('map',['model'=>$model, 'form' => $form]) ?>
             
             </div>
-            
+    </div>        
     </div>
+            <div class ='col-lg-5'>
+                 <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Coordinates') ?>
+                    </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Отметь место на карте, если это уместно, или ничего не отмечай, если нет.') ?></div>
+                </div>
+                
+            </div>
+            
+            
 </div>
+        </div>
+        
+    </div>
+    
+   
          <?php ActiveForm::end(); ?>
    
 <script>

@@ -81,8 +81,8 @@ return [
     'Companios' => 'Попутчики',
     'Knowledge' => 'Знания',
     'Events' => 'События',
-    'Must See' => 'Достопримечательности',
-    'Story' => 'Истории',
+    'Places' => 'Места',
+    'Blogs' => 'Блоги',
     'My blog' => 'Мой блог',
     'Saved!' => 'Сохранено!',
     'Edit' => 'Редактировать',
@@ -111,7 +111,7 @@ return [
     'Discuss' => 'Обсуждаемое',
     'Update database' => 'Пополнить базу',
     'People' => 'Люди',
-    'Enter the capture or your name' => 'Введите заголовок или ваше имя',
+    'Enter the title or your name' => 'Введите заголовок или ваше имя',
     
       
 ];//

@@ -11,22 +11,58 @@ use yii\captcha\Captcha;
    <?= Html::a(Yii::t('frontend','События'), ['/forms/add_mapala_events'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
  <?= Html::a(Yii::t('app','Транспорт'), ['/forms/add_transport'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
  <?= Html::a(Yii::t('app','Базы Мапала'), ['/forms/add_base'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-*/
+    <?= Html::a(Yii::t('frontend','People'), ['/forms/immapala'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+    <?= Html::a(Yii::t('frontend','Homestay'), ['/forms/homestay'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+
+ *  */
 
 $this->title = Yii::t('frontend','Update database');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
-    <h1><?php echo Html::encode($this->title) ?></h1>
+          <h1>     <?= Yii::t('frontend', 'Выбери тип контента для публикации в BlockChain:') ?> </h1>
+          <br>
     
     <div class="row">
         <div class="col-lg-12">
+               
             
-    <?= Html::a(Yii::t('frontend','People'), ['/forms/immapala'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Homestay'), ['/forms/homestay'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Knowledge'), ['/forms/knowledge'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Must See'), ['/forms/must_see'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
-    <?= Html::a(Yii::t('frontend','Story'), ['/forms/story'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px;']) ?>
+            <div class ='col-lg-3'>
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                      <center>  <b>  <?= Yii::t('frontend', 'Поделись полезными знаниями и туристическими секретами') ?> </b></center>
+                      <?= Html::a('<img src="http://forklog.com/wp-content/uploads/alexandria.jpg" style="width: 100%;">', ['/forms/knowledge'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
+                       <?= Html::a(Yii::t('frontend','Knowledge'), ['/forms/knowledge'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%; ']) ?>
+      
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class ='col-lg-3'>
+              <div class="panel panel-success">
+                    <div class="panel-heading">   
+                   <center>   <b>  <?= Yii::t('frontend', 'Расскажи о интересных местах, которые стоит посетить') ?> </b></center>
+                   <?= Html::a('<img src="http://russian.people.com.cn/mediafile/201309/29/F201309291332195517101302.jpg" style="width: 100%;">', ['/forms/places'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
+                   <?= Html::a(Yii::t('frontend','Places'), ['/forms/places'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
+           
+                    </div>
+                </div>
+            
+            
+            </div>
+            <div class ='col-lg-3'>
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <center>  <b>   <?= Yii::t('frontend', 'Расскажи историю своего приключения') ?> </b> </center>
+                         <?= Html::a('<img src="https://s28.postimg.org/fxya5cy25/2016_12_21_20_23_19.jpg" style="width: 100%;"> ', ['/forms/blogs'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
+      
+                        
+                         <?= Html::a(Yii::t('frontend','Blogs'), ['/forms/blogs'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
+           
+                    </div>
+                </div>
+            </div>
    
             
         </div>
