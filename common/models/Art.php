@@ -343,12 +343,12 @@ class Art extends \yii\db\ActiveRecord
              }
              if ($state == 'trending'){
                  $dataProvider->sort = [
-                    'defaultOrder' => ['total_pending_payout_value' => SORT_DESC,  'created_at' => SORT_DESC]
+                    'defaultOrder' => ['created_at' => SORT_DESC, 'total_pending_payout_value' => SORT_DESC]
              ];
              }
              if ($state == 'discuss'){
                  $dataProvider->sort = [
-                    'defaultOrder' => ['replies' => SORT_DESC, 'created_at' => SORT_DESC]
+                    'defaultOrder' => ['created_at' => SORT_DESC, 'replies' => SORT_DESC]
              ];
              }
 
