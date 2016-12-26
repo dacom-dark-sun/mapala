@@ -237,6 +237,15 @@ text-align: center;
     margin-left:15px;
     
 }
+.edit_link{
+    font-weight: 100;
+    color:  black;
+    text-shadow: black 0 0 1px;
+    font-size:22px;
+    vertical-align: sub;
+    margin-left:15px;
+    display: none;
+}
 .main_page_link:hover{
  font-weight: 100;
   text-shadow: black 0 0 1px;
@@ -410,8 +419,6 @@ input[type="radio"], input[type="checkbox"]{
 
 .additional-info{
     padding: 10px;
-        background-color: rgba(51, 51, 51, 0.05);
-            border-style: groove;
     font-size: 16px;
 }
 .row{

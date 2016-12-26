@@ -5,7 +5,10 @@ use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use common\models\BlockChain;
 /* @var $this \yii\web\View */
-/* @var $content string */
+/* @var $content string 
+   ['label' => Yii::t('frontend', 'About'), 'url' => ['/page/view', 'slug'=>'about']],
+         
+ *  */
 $this->beginContent('@frontend/views/layouts/_clear.php')
 ?>
 <div class="wrap">
@@ -27,7 +30,6 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
             ['label' => Yii::t('frontend', 'My blog'), 'url' => ['/site/show_single_blog'], ['visible'=>!Yii::$app->user->isGuest]],
            
             
-            ['label' => Yii::t('frontend', 'About'), 'url' => ['/page/view', 'slug'=>'about']],
             ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
             ['label' => Yii::t('frontend', 'Login'), 'url' => ['/user/sign-in/login'], 'visible'=>Yii::$app->user->isGuest],
             [

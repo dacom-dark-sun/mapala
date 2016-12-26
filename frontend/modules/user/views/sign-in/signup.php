@@ -4,7 +4,15 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $model \frontend\modules\user\models\SignupForm */
+/* @var $model \frontend\modules\user\models\SignupForm 
+
+ * <h2><?php echo Yii::t('frontend', 'Sign up with')  ?>:</h2>
+                <div class="form-group">
+                    <?php echo yii\authclient\widgets\AuthChoice::widget([
+                        'baseAuthUrl' => ['/user/sign-in/oauth']
+                    ]) ?>
+                </div>
+ *  */
 
 $this->title = Yii::t('frontend', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,13 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group">
                     <?php echo Html::submitButton(Yii::t('frontend', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
-                <h2><?php echo Yii::t('frontend', 'Sign up with')  ?>:</h2>
-                <div class="form-group">
-                    <?php echo yii\authclient\widgets\AuthChoice::widget([
-                        'baseAuthUrl' => ['/user/sign-in/oauth']
-                    ]) ?>
-                </div>
+               
             <?php ActiveForm::end(); ?>
-        </div>
-    </div>
+        </div> 
 </div>
+    <div class ='col-lg-5'>
+              <div class="panel panel-danger">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Сохраняйте пароль НАДЕЖНО. Мы не можем его восстановить') ?>
+                    </div>
+                  
+                  
+         </div>
+    </div>

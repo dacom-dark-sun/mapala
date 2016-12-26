@@ -82,7 +82,9 @@ echo $form->field($model, 'city')->widget(Select2::classname(), [
 
                   <?php echo $form->field($model, 'contacts') ?>
                 <?php echo $form->field($model, 'languages') ?>
-                
+   
+            
+            
                 <?php //MARKDOWN EDITOR -----------------------------
                 echo $form->field($model, 'body')->widget(
                     MarkdownEditor::classname(), 

@@ -4,6 +4,7 @@ use yii\widgets\Pjax;
 use dosamigos\editable\EditableAddressAsset;
 use dosamigos\editable\Editable;
 use common\models\Art;
+use common\models\BlockChain;
 /**
  * @var $this yii\web\View
  * @var $model common\models\Article
@@ -21,16 +22,16 @@ use yii\helpers\Html;
               <?php echo Html::label($model->title, "" ,['class' => 'onepage_link']) ?>
         </h2>
           <div class ="location">
-                     <span>
-                       <?php echo Html::label($model->country, "" ,['class' => 'label label-default', 'onclick' => 'render_single_tag(' . $model->country . ')']) ?>
+                          <span>
+                       <?php if ($model->country !='[]') echo Html::label($model->country, "" ,['class' => 'label label-default', 'onclick' => 'render_single_art(' . $model->country . ')']) ?>
                      </span>
                       <span>
-                       <?php echo Html::label($model->city, "" ,['class' => 'label label-primary', 'onclick' => 'render_single_tag(' . $model->city . ')']) ?>
+                       <?php if ($model->city !='[]') echo Html::label($model->city, "" ,['class' => 'label label-primary', 'onclick' => 'render_single_art(' . $model->city . ')']) ?>
                      </span>
                       <span>
-                       <?php echo Html::label($model->category, "" ,['class' => 'label label-success', 'onclick' => 'render_single_tag(' . $model->category . ')']) ?>
+                       <?php if ($model->category !='[]') echo Html::label($model->category, "" ,['class' => 'label label-success', 'onclick' => 'render_single_art(' . $model->category . ')']) ?>
                      </span>
-          </div>
+        </div>
         
         <div class="article-content">
             <div class="article-text">
@@ -53,7 +54,7 @@ use yii\helpers\Html;
 
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
             <?php $model_name = 'immapala';?>
-            <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
+            <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'edit_link']) ?>
       
 
         </div>  
@@ -82,3 +83,13 @@ use yii\helpers\Html;
 ]);?>
 </div>
 
+
+<script>
+var blockchain = '<?php echo BlockChain::get_blockchain_from_locale() ?>';
+var account = blockchain.toLowerCase() + 'ac';
+    account = getCookie(account);
+var main_author = $('#main_author').val();
+if (account == main_author)
+    $('.edit_link').show();
+
+</script>

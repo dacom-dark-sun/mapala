@@ -142,10 +142,22 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-lg-5">
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Body') ?>
+                        <?= Yii::t('frontend', 'Базовая инструкция MarkDown:') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Расскажи все, что ты хочешь сказать') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend',  'Ссылка: [название ссылки](адрес) <br>'
+                            . 'Картинка: ![альтернативный текст](адрес) <br>'
+                            . '<h5>#ЗАГОЛОВОК# - пишется между решетками</h5> '
+                            . 'Между одинарных звездочек: <i>*КУРСИВ* </i> <br>'
+                            . 'Между двух звездочек: <b>**ЖИРНЫЙ**</b> <br>'
+                            . 'Между трех звездочек: <b><i>***ЖИРНЫЙ КУРСИВ*** </i></b> <br>'
+                            . '<blockquote>`Цитата`- между двумя косыми линиями </blockquote> ' 
+                            . '<ul><li>-каждый элемент списка</li>'
+                            . '<li>-пишется слитно с чертой "-" </li></ul>' 
+                             
+                    );
+                    ?>
                 </div>
+                    </div>
                 
             </div>
         
