@@ -52,9 +52,7 @@ $this->beginContent('@frontend/views/layouts/base.php')
          url: '<?php echo Yii::$app->request->baseUrl . '/ajax/show_by_category' ?>',
          success: function(view) {
              $('#article-index').html(view);
-             
-             }
-              history.pushState('', '',"site/category?categories="+ data);
+            history.pushState('', '',"site/category?categories="+ data);
          
          }
      });
