@@ -53,7 +53,7 @@ $this->beginContent('@frontend/views/layouts/base.php')
          success: function(view) {
              $('#article-index').html(view);
             
-              history.pushState('', '',"category?categories="+ data);
+              history.pushState('', '',"?categories="+ data);
          
          }
      });
