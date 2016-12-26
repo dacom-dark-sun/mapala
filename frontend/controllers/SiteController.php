@@ -32,9 +32,18 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex($state = 'new', $author = null, $permlink = null)
+    public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null)
     {
         $categories_tree = Art::create_array_categories();
+        
+        if ($categories != null){
+            $dataProvider = Art::get_data_by_categories($categories);
+            $categories_tree = Art::create_array_categories();
+        
+            return $this->render('index', ['dataProvider'=>$dataProvider,
+            'data' => $categories_tree,
+             ]); 
+        }
         
         if (($permlink == null)&&($author != null)) {
             $dataProvider = Art::get_single_blog($author);
@@ -62,16 +71,6 @@ class SiteController extends Controller
 }
 
 
-
-   public function actionCategory($categories = null){
-        $dataProvider = Art::get_data_by_categories($categories);
-        $categories_tree = Art::create_array_categories();
-        
-            return $this->render('index', ['dataProvider'=>$dataProvider,
-            'data' => $categories_tree,
-             ]);
-
-    }
 
     
     
