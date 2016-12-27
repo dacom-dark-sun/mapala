@@ -76,7 +76,7 @@ class BlockChain extends Model
              $json['date_until_leave'] = $model ->date_until_leave;
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
-             
+             $json['app'] = 'mapala';
              $arr = Art::get_array_links_and_images($model->body);
            
              if (array_key_exists('links', $arr))
@@ -110,7 +110,7 @@ class BlockChain extends Model
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
-           
+             $json['app'] = 'mapala';
              if (array_key_exists('links', $arr))
                 $json['links'] = $arr['links'];
              
@@ -149,7 +149,7 @@ class BlockChain extends Model
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
-           
+             $json['app'] = 'mapala';
              if (array_key_exists('links', $arr))
                 $json['links'] = $arr['links'];
              
@@ -187,7 +187,7 @@ class BlockChain extends Model
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
-           
+             $json['app'] = 'mapala';
              if (array_key_exists('links', $arr))
                 $json['links'] = $arr['links'];
              
@@ -226,7 +226,7 @@ class BlockChain extends Model
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
-           
+             $json['app'] = 'mapala';
              if (array_key_exists('links', $arr))
                 $json['links'] = $arr['links'];
              
@@ -265,7 +265,7 @@ class BlockChain extends Model
                          
              $json['tags'][0] = $data['category'];
              $arr = Art::get_array_links_and_images($model->body);
-           
+                 
              if (array_key_exists('links', $arr))
                 $json['links'] = $arr['links'];
              

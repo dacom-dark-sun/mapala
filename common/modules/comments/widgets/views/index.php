@@ -32,7 +32,13 @@ use yii\helpers\Html;
                 'encryptedEntity' => $encryptedEntity,
                 'formId' => $formId
             ]); ?>
+        <?php else: ?>
+        <?php echo Yii::t('frontend',' <div class="description_comments"> В сети MapalaNet авторы получают вознаграждение, когда пользователи голосуют за их посты..
+Проголосовавшие читатели также вознаграждаются. Если вам понравился данный пост Вы можете вознаградить автора
+Для этого зарегистрируйтесь и проголосуйте за пост. </div>')?>
         <?php endif; ?>
+        
+        
     </div>
 </div>
 <?php Pjax::end(); ?>

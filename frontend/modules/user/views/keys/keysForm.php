@@ -23,28 +23,52 @@ $this->title = Yii::t('frontend', 'Key STEEM')
             
             <div class="form-group">
                 <label for="usr"><?php echo Yii::t('frontend', 'Steem private posting key')?>:</label>
-                <div><input type="text" class="form-control"  id="STEEM" ><div id = 'steem_load' class = 'loader' ></div></div>
+                <div><input type="text" class="form-control"  id="STEEM" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div id = 'steem_load' class = 'loader' ></div></div>
                 <div class ="keys_save_edit_buttons">
                     <button type="button" id='steem-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
                 <button type="button" id= 'steem-btn-edit' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
+                </div>
+            </div>
+            <div class="form-group" id="steem_pass_form">
+                <label for="usr"><?php echo Yii::t('frontend', 'Получить приватный ключ из пароля')?>:</label>
+                 <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
+                <div><input type="text" class="form-control"  id="STEEM_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div id = 'steem_load' class = 'loader' ></div></div>
+                <div class ="keys_save_edit_buttons">
+                    <button type="button" id='steem-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
+                <button type="button" id= 'steem-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
                 </div>
             </div>
     <?php else: ?>            
     
             <div class="form-group">
                 <label for="pwd"><?php echo Yii::t('frontend', 'Golos private posting key')?>:</label>
-                <div><input type="text" class="form-control"  id="GOLOS" ><div id = 'golos_load' class = 'loader' ></div></div>
+                <div><input type="text" class="form-control"  id="GOLOS" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div id = 'golos_load' class = 'loader' ></div></div>
                     <div class ="keys_save_edit_buttons">
                     <button type="button" id= 'golos-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
                     <button type="button" id= 'golos-btn-edit' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
+                </div>
+            </div>
+               <div class="form-group" id="golos_pass_form">
+                <label for="usr"><?php echo Yii::t('frontend', 'Получить приватный ключ из пароля')?>:</label>
+                 <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
+                <div><input type="text" class="form-control"  id="GOLOS_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div id = 'steem_load' class = 'loader' ></div></div>
+                <div class ="keys_save_edit_buttons">
+                    <button type="button" id='golos-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
+                <button type="button" id= 'golos-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
                 </div>
             </div>
     <?php endif; ?>
         </div>
          <div class="col-lg-6">
             <div class="panel panel-danger">
-                   
-                    <div class="panel-body"><?= Yii::t('frontend', ' Мы не храним ваши ключи без вашего разрешения. Ключ сохраняется в Cookies вашего браузера.') ?>
+                <div class="panel-heading">
+                    <?= Yii::t('frontend', 'Важно!') ?>
+                </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Вы можете использовать логин и пароль от аккаунта Steem/Golos для получения приватного постинг-ключа, или можете самостоятельно взять его '
+                            . 'в кошельке аккаунта Steem/Golos и сохранить его на Mapala.Net. Подробнее о сохранении постинг-ключа см. <span id="instruction">инструкцию</span><br><br>'
+                            . '<b> Ключи и пароли ни в каком виде НЕ передается на сервер MapalaNet. Все операции происходят между вашим устройством и блокчейном, после чего, '
+                            . 'ключ шифруется и сохраняется в cookies браузера. </b>'
+                            ) ?>
                     </div>
                 </div>
              </div>
@@ -52,10 +76,13 @@ $this->title = Yii::t('frontend', 'Key STEEM')
         
     </div>
         <div class="col-lg-12">
-            <div class="panel panel-success">
-                    <div class="panel-body"><?= Yii::t('frontend', ' Для публикации постов и голосования за посты, вам необходимо скопировать и '
-                       . 'сохранить ваш приватный постинг ключ от Голоса. Найти приватный постинг ключ можно на golos.io во вкладке "Разрешения"') ?>
-                        <img src='https://cloud.githubusercontent.com/assets/22220976/21292504/8a6b62b2-c529-11e6-8253-ee30b53fd552.png' style="width: 100%">
+            <div class="panel panel-success instruction" style="display: none">
+                    <div class="panel-body"><?= Yii::t('frontend', '<h3>Инструкция по получению постинг ключа: </h3>'
+                       . 'Для публикации постов, голосования, и получения вознаграждений, вам необходимо скопировать и '
+                       . 'сохранить в соответствующем поле приватный постинг ключ социально-медийной платформы GOLOS. '
+                       . 'Найти приватный постинг ключ можно на <a href=http://golos.io>golos.io</a> во вкладке "Разрешения". '
+                       . 'Обратите внимание, что приватный ключ начинается с цифры "5"') ?>
+                        <img src='/img/keys_ru.png' style="width: 100%">
                     </div>
                 </div>
       
@@ -72,6 +99,7 @@ $(document).ready(function(){
      $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
      $("#steem-btn-save").hide();
      $("#steem-btn-edit").show();
+     $('#steem_pass_form').hide();
      
   
    }
@@ -81,13 +109,19 @@ $(document).ready(function(){
      $('#GOLOS').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
      $("#golos-btn-save").hide();
      $("#golos-btn-edit").show();
+     $('#golos_pass_form').hide();
+    
     
    }
-   $('#steem_load').hide();
-   $('#golos_load').hide();
+   $('.loader').hide();
+   $('.loader').hide();
   
 });
 
+$("#instruction").click(function() {
+    $(".instruction").show();
+    
+});
 
     
 

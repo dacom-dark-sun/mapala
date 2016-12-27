@@ -7,7 +7,7 @@
 
 
 $("#steem-btn-save").click(function() {
-   $('#steem_load').show();
+  $('.loader').show();
   
    client_identy = get_client_identy();
    
@@ -31,23 +31,124 @@ $("#steem-btn-save").click(function() {
        $('#STEEM').prop('disabled', true);
        $("#steem-btn-save").hide();
        $("#steem-btn-edit").show();
+       $('#steem_pass_form').hide();
        } else {
            alert('Sorry, this key not linked to any account');
              $('#STEEM').val('');
          }
    }
    else {
-       $('#steem_load').hide();
+       $('.loader').hide();
        alert ('Wrong private posting key. Try again.');
    }
-   $('#steem_load').hide();
+  
+    
+  $('.loader').hide();
   
    });
-} catch(err) {$('#steem_load').hide();
+} catch(err) {$('.loader').hide();
     alert('This is NOT private key');
     }
 });
    
+   
+   
+$("#steem-btn-save_pass").click(function() {
+   $('.loader').show();
+  
+   client_identy = get_client_identy();
+   
+   if (getCookie('steemsig')) {
+       deleteCookie('steemsig');
+       deleteCookie('steemac');
+   }
+   var username = $('#username').val();
+   var password =  $('#STEEM_pass').val();
+   try{
+   var wif = steem.auth.toWif(username, password, 'posting');
+   var pub_key = convert_to_pub_key_steem(wif);
+   
+   check_pub_key_steem(pub_key, function steem_callback(err, result){
+   
+   //check key here
+   if (!err){
+       if (result[0][0] != null){
+       put_key_to_cookie('steemsig', wif);
+       setCookie('steemac', result[0][0], {"path": "/", "expires": 31536000});
+       $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+       $('#STEEM').prop('disabled', true);
+       $("#steem-btn-save").hide();
+       $("#steem-btn-edit").show();
+       $('#steem_pass_form').hide();
+   
+       } else {
+           alert('Sorry, this key not linked to any account');
+             $('#STEEM').val('');
+         }
+   }
+   else {
+       $('.loader').hide();
+       alert ('Wrong private posting key. Try again.');
+   }
+   $('.loader').hide();
+   
+  
+   });
+} catch(err) {$('.loader').hide();
+    alert('This is NOT private key');
+    }
+});
+   
+   
+   
+$("#golos-btn-save_pass").click(function() {
+    $('.loader').show();
+  
+   client_identy = get_client_identy();
+   
+   if (getCookie('golossig')) {
+       deleteCookie('golossig');
+       deleteCookie('golosac');
+   }
+   var username = $('#username').val();
+   var password =  $('#GOLOS_pass').val();
+   //check key here
+   
+   try{
+       var wif = steem.auth.toWif(username, password, 'posting');
+       var pub_key = convert_to_pub_key_golos(wif);
+
+   check_pub_key_golos(pub_key, function golos_callback(err, result){ 
+    
+   //check key here
+   if (!err){
+       if (result[0][0] != null){
+       put_key_to_cookie('golossig', wif);
+       setCookie('golosac', result[0][0], {"path": "/", "expires": 31536000});
+       $('#GOLOS').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+       $('#GOLOS').prop('disabled', true);
+       $("#golos-btn-save").hide();
+       $("#golos-btn-edit").show();
+       $('#golos_pass_form').hide();
+       } else {
+           alert('Sorry, this key not linked to any account');
+             $('#GOLOS').val('');
+         }
+
+   }
+   else {
+       alert ('Wrong private posting key. Try again.');
+   }
+    $('.loader').hide();
+  
+  
+   });
+   } catch(err){
+        $('.loader').hide();
+         alert('This is NOT private key');
+   }
+});
+
    
 
 
@@ -58,13 +159,16 @@ $("#steem-btn-edit").click(function() {
      $("#steem-btn-save").show();
      $("#steem-btn-edit").hide();
      $('#STEEM').val('');
+     $('#STEEM_pass').val('');
+     $('#steem_pass_form').show();
+     $('.loader').hide();
      
 });
 
 
 
 $("#golos-btn-save").click(function() {
-    $('#golos_load').show();
+    $('.loader').show();
   
    client_identy = get_client_identy();
    
@@ -89,6 +193,7 @@ $("#golos-btn-save").click(function() {
        $('#GOLOS').prop('disabled', true);
        $("#golos-btn-save").hide();
        $("#golos-btn-edit").show();
+       $('#golos_pass_form').hide();
        } else {
            alert('Sorry, this key not linked to any account');
              $('#GOLOS').val('');
@@ -98,11 +203,12 @@ $("#golos-btn-save").click(function() {
    else {
        alert ('Wrong private posting key. Try again.');
    }
-    $('#golos_load').hide();
+    
+    $('.loader').hide();
   
    });
    } catch(err){
-        $('#golos_load').hide();
+        $('.loader').hide();
          alert('This is NOT private key');
    }
 });
@@ -116,6 +222,9 @@ $("#golos-btn-edit").click(function() {
      $("#golos-btn-save").show();
      $("#golos-btn-edit").hide();
      $('#GOLOS').val('');
+     $('#GOLOS_pass').val('');
+     $('#golos_pass_form').show();
+     $('.loader').hide();
      
 });
 
