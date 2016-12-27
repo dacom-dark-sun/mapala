@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="panel panel-success">
                     <div class="panel-heading">   
                       <center>  <b>  <?= Yii::t('frontend', 'Поделись полезными знаниями и туристическими секретами') ?> </b></center>
-                      <?= Html::a('<img src="http://forklog.com/wp-content/uploads/alexandria.jpg" style="width: 100%;">', ['/forms/knowledge'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
+                      <?= Html::a('<img src="/img/alexandria.jpg" style="width: 100%;">', ['/forms/knowledge'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
                        <?= Html::a(Yii::t('frontend','Knowledge'), ['/forms/knowledge'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%; ']) ?>
       
                     </div>
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <div class="panel panel-success">
                     <div class="panel-heading">   
                    <center>   <b>  <?= Yii::t('frontend', 'Расскажи о интересных местах, которые стоит посетить') ?> </b></center>
-                   <?= Html::a('<img src="http://russian.people.com.cn/mediafile/201309/29/F201309291332195517101302.jpg" style="width: 100%;">', ['/forms/places'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
+                   <?= Html::a('<img src="/img/train.jpg" style="width: 100%;">', ['/forms/places'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
                    <?= Html::a(Yii::t('frontend','Places'), ['/forms/places'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
            
                     </div>
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="panel panel-success">
                     <div class="panel-heading">   
                         <center>  <b>   <?= Yii::t('frontend', 'Расскажи историю своего приключения') ?> </b> </center>
-                         <?= Html::a('<img src="https://s28.postimg.org/fxya5cy25/2016_12_21_20_23_19.jpg" style="width: 100%;"> ', ['/forms/blogs'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
+                         <?= Html::a('<img src="/img/tuzemec.jpg" style="width: 100%;"> ', ['/forms/blogs'], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
       
                         
                          <?= Html::a(Yii::t('frontend','Blogs'), ['/forms/blogs'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
