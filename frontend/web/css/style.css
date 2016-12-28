@@ -285,6 +285,9 @@ cursor: pointer;
     
 }
 
+.md-editor{
+  height: 400px;
+}
 
 #art-body{
   font-size:16px;

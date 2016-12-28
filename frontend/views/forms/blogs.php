@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 use common\models\Countries;
-use kartik\markdown\MarkdownEditor;
+use efureev\markdown\MarkdownEditor;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
 use common\models\OurCategory;
@@ -92,12 +92,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
            
 <div class="col-lg-7">
-             <?php //MARKDOWN EDITOR -----------------------------
-             echo $form->field($model, 'body')->widget(
-                    MarkdownEditor::classname(), 
-                    ['height' => 400, 'encodeLabels' => true]
-            );//---------------------------------------------------
-            ?>
+           <?php
+           //MARKDOWN EDITOR
+            echo $form->field($model, 'body')->widget(MarkdownEditor::className(), [
+                        'name'          => 'md-editor',
+                        'clientOptions' => ['language' => Yii::$app->language],
+                        'options'       => ['data-provider' => 'markdown'],
+            ]);?>
             </div>
             <div class="col-lg-5">
                                <div class="panel panel-success">
