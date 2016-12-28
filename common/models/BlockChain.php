@@ -302,10 +302,12 @@ class BlockChain extends Model
     }
     
     
+
+    
     
     static function convert_city_to_lang($id){
-      $id = intval($id);
-        if (is_int($id)){
+      $id_old = intval($id);
+        if ($id_old != 0){
         $city = Cities::find()->select('name')->where('id=' . $id)->asArray()->one();
         return $city['name'];
        } else {
