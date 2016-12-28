@@ -8,7 +8,7 @@
 
 use common\models\Countries;
 use dosamigos\ckeditor\CKEditor;
-
+use vova07\imperavi\Widget;
 use yii\helpers\StringHelper;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
@@ -83,13 +83,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
            <?php
            //MARKDOWN EDITOR
-            echo $form->field($model, 'body')->widget(CKEditor::className(), [
-                'options' => ['rows' => 6],
-                'preset' => 'full'
-            ]) ?>
 
-                
-                
+                echo $form->field($model, 'body')->widget(Widget::className(), [
+    'settings' => [
+        'minHeight' => 400,
+        'plugins' => [
+            'fullscreen'
+        ]
+    ]
+]);
+             ?>   
                 
           
         
