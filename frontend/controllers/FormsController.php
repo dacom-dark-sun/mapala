@@ -149,7 +149,8 @@ class FormsController extends SiteController
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
               $model->country = BlockChain::convert_country_to_id($model->country);
-              $model->city = ucfirst(strtolower($model->city));
+             
+              $model->city = ucwords(strtolower($model->city));
               
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_simple_model($model,$meta);
