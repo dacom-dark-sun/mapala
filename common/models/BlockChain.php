@@ -29,7 +29,7 @@ class BlockChain extends Model
    
    
    
-   static function tag_to_eng($str){
+   static function tag_to_eng($str, $without_ru = null){
        
     $str = mb_strtolower($str);
     $rus = array('щ','ш','ч','ц','й','ё','э','ю','я','х','ж','а','б','в','г','д','е','з','и','к','л','м','н','о','п','р','с','т','у','ф','ъ','ы','ь');
@@ -37,7 +37,14 @@ class BlockChain extends Model
     $translated = str_replace($rus, $eng, $str);
     
     if (BlockChain::get_blockchain_from_locale() == 'golos'){
+        if ($without_ru){
+            
+            $return = $translated;
+        
+            
+        } else {
             $return = 'ru--' . $translated;
+        }
     } else {
         $return = $translated;
     }
@@ -357,11 +364,9 @@ class BlockChain extends Model
     
        
    static function create_permlink($title){
-       $re = '/^[\w\dа-яА-Я\(\)\s]{0,255}/';
-       preg_match($re, $title, $matches);
-       $title = $matches[0];
-       $title = strtolower(str_replace(" ", "-", $title));
-       $title = tag_to_eng($title);
+       $title = mb_strtolower(str_replace(" ", "-", $title));
+       $title = BlockChain::tag_to_eng($title, 1);
+       $title= preg_replace('/[^a-z-а-яё\s.,]+/iu', '', $title);
        
     return $title;
    }
