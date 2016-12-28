@@ -25,7 +25,7 @@ class Transport extends Model
             // name, email, subject and body are required
             [['name', 'email', 'subject', 'body', 'verifyCode'], 'required'],
             // We need to sanitize them
-            [['name', 'subject', 'body'], 'filter', 'filter' => 'strip_tags'],
+            [['name', 'subject'], 'filter', 'filter' => 'strip_tags'],
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly

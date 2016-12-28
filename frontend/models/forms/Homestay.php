@@ -30,7 +30,7 @@ class Homestay extends Model
          //    name, email, subject and body are required
             [['coordinates','title', 'cost', 'country', 'contacts', 'city', 'body'], 'required'],
             // We need to sanitize them
-            [['title', 'cost', 'country', 'contacts', 'city', 'body'], 'filter', 'filter' => 'strip_tags'],
+            [['title', 'cost', 'country', 'contacts', 'city'], 'filter', 'filter' => 'strip_tags'],
             // verifyCode needs to be entered correctly
             [['cost'], 'number'],
             [['free'], 'boolean']

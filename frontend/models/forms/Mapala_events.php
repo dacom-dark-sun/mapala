@@ -28,7 +28,7 @@ class Mapala_events extends Model
          //    name, email, subject and body are required
             [['name', 'country', 'contacts', 'city', 'languages', 'body','verifyCode'], 'required'],
             // We need to sanitize them
-            [['name', 'country', 'contacts', 'city', 'languages', 'body'], 'filter', 'filter' => 'strip_tags'],
+            [['name', 'country', 'contacts', 'city', 'languages'], 'filter', 'filter' => 'strip_tags'],
             // verifyCode needs to be entered correctly
             ['verifyCode', 'captcha'],
 

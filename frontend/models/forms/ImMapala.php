@@ -30,7 +30,7 @@ class ImMapala extends Model
          //    name, email, subject and body are required
             [['coordinates','title', 'country', 'contacts', 'city', 'languages', 'body'], 'required'],
             // We need to sanitize them
-            [['title', 'country', 'contacts', 'city', 'languages', 'body'], 'filter', 'filter' => 'strip_tags'],
+            [['title', 'country', 'contacts', 'city', 'languages'], 'filter', 'filter' => 'strip_tags'],
             // verifyCode needs to be entered correctly
              [['date_until_leave'], 'string'],
              [['not_traveler'],'boolean'],

@@ -23,9 +23,9 @@ class Places extends Model
     {
          return [
          //    name, email, subject and body are required
-            [['coordinates','country','title', 'tags', 'body'], 'required'],
+            [['coordinates','country','title', 'tags'], 'required'],
             // We need to sanitize them
-            [['title', 'body','country', 'tags'], 'filter', 'filter' => 'strip_tags'],
+            [['title', 'country', 'tags'], 'filter', 'filter' => 'strip_tags'],
        
         ];
     }
