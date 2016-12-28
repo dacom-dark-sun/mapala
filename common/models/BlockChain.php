@@ -143,7 +143,7 @@ class BlockChain extends Model
     
     
     
-   static function construct_library($model){
+   static function construct_knowledge($model){
 /*  public $title;
     public $country;
     public $body;
@@ -165,7 +165,7 @@ class BlockChain extends Model
              $json['tags'][0] = 'mapala';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
              $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
-             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Library'));
+             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Knowledge'));
              $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);

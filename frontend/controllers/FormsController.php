@@ -147,7 +147,7 @@ class FormsController extends SiteController
             if ($permlink != null){
                 $model->permlink = $permlink;
             } 
-            $bl_model = BlockChain::construct_library($model);
+            $bl_model = BlockChain::construct_knowledge($model);
              return $bl_model;
         }
         

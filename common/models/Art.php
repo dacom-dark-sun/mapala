@@ -138,8 +138,6 @@ class Art extends \yii\db\ActiveRecord
          
         if (strpos($category, "+") > 0) {
             $category = explode('+', $category);
-        } else if (strpos($category, " ") > 0) {
-            $category = explode(" ", $category);
         }
         
         return $category;
@@ -265,7 +263,7 @@ class Art extends \yii\db\ActiveRecord
          * This function parse all links and images and return in array for cleaning or change
          */
         static function parse_links_and_urls($text){
-           $re = '/((https?:\/\/)?([A-Za-z:1-9\]+)\.(][\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{1,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#=;%+]{2,})([@\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
+           $re = '/((https?:\/\/)?([A-Za-z:1-9\]+)\.][\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{1,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#=;%+]{2,})([@\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
          
            preg_match_all($re, $text, $matches);
             return $matches;
