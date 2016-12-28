@@ -357,10 +357,13 @@ class BlockChain extends Model
     
        
    static function create_permlink($title){
-      
+       $re = '/^[\w\dа-яА-Я\(\)\s]{0,255}/';
+       preg_match($re, $title, $matches);
+       $title = $matches[0];
        $title = strtolower(str_replace(" ", "-", $title));
+       $title = tag_to_eng($title);
        
-       return $title;
+    return $title;
    }
    
       

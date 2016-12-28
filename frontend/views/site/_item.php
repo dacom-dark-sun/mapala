@@ -25,6 +25,9 @@ use yii\helpers\Url;
                       <span>
                        <?php if ($model->category !='[]') echo Html::label($model->category, "" ,['class' => 'label label-success', 'onclick' => 'render_single_art(' . $model->category . ')']) ?>
                      </span>
+                     <span>
+                       <?php if ($model->sub_category !='[]') echo Html::label($model->sub_category, "" ,['class' => 'label label-danger', 'onclick' => 'render_single_art(' . $model->category . ')']) ?>
+                     </span>
           </div>
         <div class="article-content">
             <?php 
