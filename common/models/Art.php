@@ -243,7 +243,7 @@ class Art extends \yii\db\ActiveRecord
         static function get_body($model){
             $body = \kartik\markdown\Markdown::convert($model->body);
              
-            $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
+         /*   $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
             $body = $model->body;
             $matches = Art::parse_links_and_urls($body);
             foreach($matches[0] as $id => $m){
@@ -255,7 +255,7 @@ class Art extends \yii\db\ActiveRecord
                     
                 }
                 
-           }
+           }*/
            return $body;
         }
         
@@ -520,14 +520,21 @@ class Art extends \yii\db\ActiveRecord
          public $coordinates;        
          */
         
-        $model->tags =  (array_key_exists('3', $meta['tags'])? $meta['tags'][3] :  "");
+        $model->tags = (array_key_exists('4', $meta['tags'])? $meta['tags'][4] :  "");
+        $model->tags = ucfirst(strtolower($model->tags));
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
-        
     return $model;
          
          
      }
+     
+     
         
+     static function get_current_model($model){
+        $meta = json_decode($model['meta'], true);
+            
+         return $meta['model'];
+     }
         
         
 }

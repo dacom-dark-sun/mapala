@@ -31,6 +31,9 @@ use yii\helpers\Html;
                       <span>
                        <?php if ($model->category !='[]') echo Html::label($model->category, "" ,['class' => 'label label-success', 'onclick' => 'render_single_art(' . $model->category . ')']) ?>
                      </span>
+                     <span>
+                       <?php if ($model->sub_category !='[]') echo Html::label($model->sub_category, "" ,['class' => 'label label-danger', 'onclick' => 'render_single_art(' . $model->category . ')']) ?>
+                     </span>
         </div>
         
         <div class="article-content">
@@ -53,7 +56,8 @@ use yii\helpers\Html;
         <div class="article-metainfo">
 
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
-            <?php $model_name = 'immapala';?>
+            <?php 
+            $model_name = Art::get_current_model($model);?>
             <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'edit_link']) ?>
       
 

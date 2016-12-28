@@ -281,14 +281,20 @@ class BlockChain extends Model
     
     
     static function convert_country_to_lang($id){
-      $id = intval($id);
-      if (is_int($id)){
-        $country = Countries::find()->select('name')->where('id=' . $id)->asArray()->one();
+        $country = Countries::find()->select('name')->where('id=' . $id )->asArray()->one();
         return $country['name'];
-      } else {
-          return $id;
-      }
+      
     }
+    
+    static function convert_country_to_id($name){
+        $id = Countries::find()->where('name=' . "'" .  $name . "'")->asArray()->one();
+        
+        return $id['id'];
+        
+        
+    }
+    
+    
     
     static function convert_city_to_lang($id){
       $id = intval($id);
@@ -301,6 +307,16 @@ class BlockChain extends Model
         
     }
 
+    
+    static function convert_tags_to_lang($tags){
+        $blockchain = BlockChain::get_blockchain_from_locale();
+        $id = OurCategory::find()->where('name=' . "'" .  $name . "'")->asArray()->one();
+        
+        return $id['id'];
+        
+    }
+
+    
 
     static function free_on_different_lang($free){
         $current_lang = Yii::$app->language;

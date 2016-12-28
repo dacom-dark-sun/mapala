@@ -148,6 +148,7 @@ class FormsController extends SiteController
 
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
+              $model->country = BlockChain::convert_country_to_id($model->country);
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_simple_model($model,$meta);
     }
@@ -175,6 +176,7 @@ class FormsController extends SiteController
 
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
+              $model->country = BlockChain::convert_country_to_id($model->country);
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_simple_model($model,$meta);
     }
@@ -205,6 +207,8 @@ class FormsController extends SiteController
 
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
+              $model->country = BlockChain::convert_country_to_id($model->country);
+          
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_simple_model($model,$meta);
     }
