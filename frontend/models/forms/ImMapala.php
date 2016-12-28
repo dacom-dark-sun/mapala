@@ -18,7 +18,7 @@ class ImMapala extends Model
     public $not_traveler = 1;    //living in this place
     public $date_until_leave;
     public $coordinates;
-    
+    public $permlink=null;
     
 
     /**

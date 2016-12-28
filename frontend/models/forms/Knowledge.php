@@ -15,7 +15,7 @@ class Knowledge extends Model{
     public $body;
     public $tags;
     public $coordinates;
-
+    public $permlink = null;
 
     /**
      * @return array the validation rules.

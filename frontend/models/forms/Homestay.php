@@ -20,6 +20,7 @@ class Homestay extends Model
     public $parentPermlink = '';
     public $parentAuthor = '';
     public $coordinates;
+    public $permlink = null;
     /**
      * @return array the validation rules.
      */

@@ -15,7 +15,7 @@ class Blogs extends Model
     public $body;
     public $country;
     public $coordinates;
-
+    public $permlink = null;
     /**
      * @return array the validation rules.
      */

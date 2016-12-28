@@ -68,7 +68,12 @@ class BlockChain extends Model
               */
              $bl_model['parentAuthor'] = '';
              $bl_model['parentPermlink'] = 'mapala'; //im-mapala
-             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             if ($model->permlink == null){
+                $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             } else {
+                $bl_model['permlink'] = $model->permlink;
+            
+             }
              $bl_model['body'] = $model->body;
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
@@ -101,7 +106,12 @@ class BlockChain extends Model
    static function construct_homestay($model){
              $bl_model['parentAuthor'] = '';
              $bl_model['parentPermlink'] = 'mapala'; //
-             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             if ($model->permlink == null){
+                $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             } else {
+                $bl_model['permlink'] = $model->permlink;
+            
+             }
              $bl_model['body'] = $model->body;
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
@@ -142,7 +152,12 @@ class BlockChain extends Model
 */    
              $bl_model['parentAuthor'] = '';
              $bl_model['parentPermlink'] = 'mapala'; //
-             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             if ($model->permlink == null){
+                $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             } else {
+                $bl_model['permlink'] = $model->permlink;
+            
+             }
              $bl_model['body'] = $model->body;
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
@@ -180,7 +195,12 @@ class BlockChain extends Model
 */    
              $bl_model['parentAuthor'] = '';
              $bl_model['parentPermlink'] = 'mapala'; //
-             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             if ($model->permlink == null){
+                $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             } else {
+                $bl_model['permlink'] = $model->permlink;
+            
+             }
              $bl_model['body'] = $model->body;
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
@@ -220,7 +240,12 @@ class BlockChain extends Model
 */    
              $bl_model['parentAuthor'] = '';
              $bl_model['parentPermlink'] = 'mapala'; //
-             $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             if ($model->permlink == null){
+                $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             } else {
+                $bl_model['permlink'] = $model->permlink;
+            
+             }
              $bl_model['body'] = $model->body;
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
@@ -368,7 +393,7 @@ class BlockChain extends Model
    static function create_permlink($title){
        $title = mb_strtolower(str_replace(" ", "-", $title));
        $title = BlockChain::tag_to_eng($title, 1);
-       $title= preg_replace('/[^a-z-а-яё\s.,]+/iu', '', $title);
+       $title= preg_replace('/[^a-z-а-яё0-9\s.,]+/iu', '', $title);
        
     return $title;
    }

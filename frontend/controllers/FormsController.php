@@ -62,7 +62,10 @@ class FormsController extends SiteController
         $model = new ImMapala();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_im_mapala($model);
+            if ($permlink != null){
+                $model->permlink = $permlink;
+            }  
+            $bl_model = BlockChain::construct_im_mapala($model);
              return $bl_model;
         }
         
@@ -104,7 +107,10 @@ class FormsController extends SiteController
         $model = new Homestay();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_homestay($model);
+            if ($permlink != null){
+                $model->permlink = $permlink;
+            }  
+            $bl_model = BlockChain::construct_homestay($model);
              return $bl_model;
         }
         
@@ -138,7 +144,10 @@ class FormsController extends SiteController
          $model = new Knowledge();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_library($model);
+            if ($permlink != null){
+                $model->permlink = $permlink;
+            } 
+            $bl_model = BlockChain::construct_library($model);
              return $bl_model;
         }
         
@@ -169,7 +178,10 @@ class FormsController extends SiteController
            $model = new Places();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_places($model);
+            if ($permlink != null){
+                $model->permlink = $permlink;
+            } 
+            $bl_model = BlockChain::construct_places($model);
              return $bl_model;
         }
         
@@ -201,7 +213,10 @@ class FormsController extends SiteController
            $model = new Blogs();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
-             $bl_model = BlockChain::construct_blogs($model);
+            if ($permlink != null){
+                $model->permlink = $permlink;
+            } 
+            $bl_model = BlockChain::construct_blogs($model);
              return $bl_model;
         }
         

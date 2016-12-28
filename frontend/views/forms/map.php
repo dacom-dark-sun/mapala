@@ -8,7 +8,11 @@ use yii\web\JsExpression;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-            if ($model->coordinates == '') $key = false;
+            if ($model->coordinates == '') 
+                {
+                    $model->coordinates = "40.7324319,-73.82480777777776";
+                    $key = false;
+                }
               else $key = true;
 
               
