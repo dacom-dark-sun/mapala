@@ -142,7 +142,7 @@ function comment (data, callback){
                     console.log(err, result);
      
                     if (err == null){
-                        setTimeout(redirect, 7000);
+                        setTimeout(redirect, 8000);
                     }
             });
         
