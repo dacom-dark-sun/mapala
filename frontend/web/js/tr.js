@@ -128,7 +128,6 @@ function comment (data, callback){
             //jsonMetadata = JSON.parse(trx['metadata']);
                 
                 console.log(trx);
-                console.log(wif);
                 
                  
                 steem.broadcast.comment(wif.plaintext, 
@@ -141,6 +140,10 @@ function comment (data, callback){
                 trx['metadata'], 
                 function(err, result) {
                     console.log(err, result);
+     
+                    if (err == null){
+                        setTimeout(redirect, 4000);
+                    }
             });
         
         } else alert(err);
@@ -153,6 +156,9 @@ function comment (data, callback){
     
 }
     
+function redirect(){
+    document.location.href = '/show_single_blog';
+}
     
     
 
@@ -181,10 +187,7 @@ function reply (data, callback){
             trx['metadata'] = data.metadata;
             
             //jsonMetadata = JSON.parse(trx['metadata']);
-                
-                console.log(trx);
-                console.log(wif);
-                
+            console.log(trx);    
                 
               steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 

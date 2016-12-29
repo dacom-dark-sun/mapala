@@ -23,16 +23,16 @@ use yii\helpers\Html;
         </h2>
           <div class ="location">
                           <span>
-                       <?php if ($model->country !='[]') echo Html::label($model->country, "" ,['class' => 'label label-default', 'onclick' => 'render_single_art(' . $model->country . ')']) ?>
+                       <?php if ($model->country !='[]') echo Html::label($model->country, "" ,['class' => 'label label-default']) ?>
                      </span>
                       <span>
-                       <?php if ($model->city !='[]') echo Html::label($model->city, "" ,['class' => 'label label-primary', 'onclick' => 'render_single_art(' . $model->city . ')']) ?>
+                       <?php if ($model->city !='[]') echo Html::label($model->city, "" ,['class' => 'label label-primary']) ?>
                      </span>
                       <span>
-                       <?php if ($model->category !='[]') echo Html::label($model->category, "" ,['class' => 'label label-success', 'onclick' => 'render_single_art(' . $model->category . ')']) ?>
+                       <?php if ($model->category !='[]') echo Html::label($model->category, "" ,['class' => 'label label-success']) ?>
                      </span>
                      <span>
-                       <?php if ($model->sub_category !='[]') echo Html::label($model->sub_category, "" ,['class' => 'label label-danger', 'onclick' => 'render_single_art(' . $model->category . ')']) ?>
+                       <?php if ($model->sub_category !='[]') echo Html::label($model->sub_category, "" ,['class' => 'label label-danger']) ?>
                      </span>
         </div>
         
@@ -49,6 +49,7 @@ use yii\helpers\Html;
         </div>
        
      <div class ="additional-info">
+         <hr>
      <?= $this->render('/site/_addmetainfo',['model'=>$model]) ?>
 
      </div>

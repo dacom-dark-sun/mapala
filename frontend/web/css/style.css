@@ -243,13 +243,11 @@ text-align: center;
 }
 .edit_link{
     position: relative;
-    top: -4px;
-    font-weight: 100;
-    color:  black;
-    text-shadow: black 0 0 1px;
-    font-size:22px;
-    vertical-align: sub;
-    margin-left:15px;
+    top: -6px;
+    font-weight: 200;
+    color: black;
+    font-size: 22px;
+    margin-left: 15px;
     display: none;
 }
 .main_page_link:hover{
@@ -282,7 +280,7 @@ cursor: pointer;
 .category_buttons{
     position: relative;
     margin-bottom: 20px;
-    
+   text-align: center;
 }
 
 .md-editor{

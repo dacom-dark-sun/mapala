@@ -46,7 +46,7 @@ use common\models\BlockChain;
              <span class="article-vote-up">
                  <?php $params = '\'' . $model->blockchain . '\', \'' . $model->author . '\', \'' . $model->permlink . '\', ' . 10000 ?>
                  <span class="filter"  id ='<?php echo $model->permlink ?>' onclick="down_vote(<?php echo $params ?>)"></span> 
-                 <img src='img\up0.png' id = '<?php echo 'icon_' . $model->permlink ?>' class= 'vote'  
+                 <img src='/frontend/web/img/up0.png' id = '<?php echo 'icon_' . $model->permlink ?>' class= 'vote'  
                   onclick = <?php echo 'vote("' . $model->blockchain . '","' . $model->author . '","' . $model->permlink . '",10000)';?>
                      >
              </span>

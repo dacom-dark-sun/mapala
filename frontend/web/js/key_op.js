@@ -232,7 +232,6 @@ $("#golos-btn-edit").click(function() {
 function check_pub_key_steem(pub_key, steem_callback){
     
  steem.api.getKeyReferences([pub_key], function(err, result) {
-        console.log(err, result);
         steem_callback(err, result);
             
         
@@ -242,7 +241,6 @@ function check_pub_key_steem(pub_key, steem_callback){
 function check_pub_key_golos(pub_key, golos_callback){
     
  steem.api.getKeyReferences([pub_key], function(err, result) {  //CHANGE TO GOLOS
-        console.log(err, result);
         golos_callback(err, result);
             
         
