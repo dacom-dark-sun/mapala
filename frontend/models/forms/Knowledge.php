@@ -24,7 +24,7 @@ class Knowledge extends Model{
     {
          return [
          //    name, email, subject and body are required
-            [['coordinates','title','country', 'city','body', 'tags'], 'required'],
+            [['coordinates','title','country','city','body', 'tags'], 'required'],
             // We need to sanitize them
             [['title','country', 'tags'], 'filter', 'filter' => 'strip_tags'],
            

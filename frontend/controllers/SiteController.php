@@ -28,7 +28,12 @@ class SiteController extends Controller
             'set-locale'=>[
                 'class'=>'common\actions\SetLocaleAction',
                 'locales'=>array_keys(Yii::$app->params['availableLocales'])
-            ]
+            ],
+            'image-upload' => [
+            'class' => 'vova07\imperavi\actions\UploadAction',
+            'url' => 'http://mapala.dev/storage/web/img/', // Directory URL address, where files are stored.
+            'path' => '@storage/web/img/' // Or absolute path to directory where files are stored.
+            ],
         ];
     }
 

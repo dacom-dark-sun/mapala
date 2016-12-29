@@ -7,7 +7,6 @@
  */
 
 use common\models\Countries;
-use dosamigos\ckeditor\CKEditor;
 use vova07\imperavi\Widget;
 use yii\helpers\StringHelper;
 use kartik\select2\Select2;
@@ -37,11 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php echo $form->field($model, 'title') ?>
          
             
-<?php //-------SHOW Categories-----------------//TODO - List PRE-data.   
+            <?php //-------SHOW Categories--------------------------------------------.   
             echo $form->field($model, 'tags')->widget(Select2::classname(),[
                  'options' => ['placeholder' => 'Select a category ...'],
-                
-                "data" => ArrayHelper::map(OurCategory::find()
+                 "data" => ArrayHelper::map(OurCategory::find()
                         ->Where(['model' => StringHelper::basename(get_class($model))])
                         ->all(), BlockChain::get_blockchain_from_locale(), BlockChain::get_blockchain_from_locale()),
                 //---------------------------------------------------------------------
@@ -81,59 +79,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]);?>     
            
 
-           <?php
-           //MARKDOWN EDITOR
-
-                echo $form->field($model, 'body')->widget(Widget::className(), [
-    'settings' => [
-        'minHeight' => 400,
-        'plugins' => [
-            'fullscreen'
-        ]
-    ]
-]);
-             ?>   
+           <?php //---------------- EDITOR------------------------------
+                 echo $form->field($model, 'body')->widget(Widget::className(), [
+                    'settings' => [
+                        'minHeight' => 400,
+                         'imageResizable' => true,
+                         'imagePosition' => true,
+                        'imageUpload' => yii\helpers\Url::to(['/site/image-upload']),
+                        'plugins' => [
+                            'fullscreen',
+                            'imagemanager'
+                        ]
+                    ]//-------------------------------------------------
+                ]);?>   
                 
           
         
-            <div class="col-lg-7">
-    <div class="form-group">
-        <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
-        </div>
-            </div>
-    
-    
-    <div class='col-lg-7'>    
-<div id ="map-container">   
-     <div id="map">
-       <?= $this->render('map',['model'=>$model, 'form' => $form]) ?>
-       <?php ActiveForm::end(); ?>
-            </div>
-    </div>        
-    </div>
+                   <div class="form-group">
+                        <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
+                   </div>
+                   <?= $this->render('map',['model'=>$model, 'form' => $form]) ?>
+                   <?php ActiveForm::end(); ?>
                                  
-</div>
         </div>
-        
-    </div> 
-                
-                
-                
-            <div class ='col-lg-5'>
-                 <div class="panel panel-success">
-                    <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Coordinates') ?>
-                    </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Отметь место на карте, если это уместно, или ничего не отмечай, если нет.') ?></div>
-                </div>
-                
-            </div>
             
- 
-    
-   
-      
-      
+            
             <div class ='col-lg-5'>
             <div class="panel panel-success">
                     <div class="panel-heading">   
@@ -179,29 +149,38 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 
             </div>
-      <div class="col-lg-5">
+             <div class ='col-lg-5'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Базовая инструкция MarkDown:') ?>
+                        <?= Yii::t('frontend', 'Инструкция к редактору:') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend',  'Ссылка: [название ссылки](адрес) <br>'
-                            . 'Картинка: ![альтернативный текст](адрес) <br>'
-                            . '<h5>#ЗАГОЛОВОК# - пишется между решетками</h5> '
-                            . 'Между одинарных звездочек: <i>*КУРСИВ* </i> <br>'
-                            . 'Между двух звездочек: <b>**ЖИРНЫЙ**</b> <br>'
-                            . 'Между трех звездочек: <b><i>***ЖИРНЫЙ КУРСИВ*** </i></b> <br>'
-                            . '<blockquote>`Цитата`- между двумя косыми линиями </blockquote> ' 
-                            . '<ul><li>-каждый элемент списка</li>'
-                            . '<li>-пишется слитно с чертой "-" </li></ul>' 
-                             
-                    );
-                    ?>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Для установки картинки, вставьте в редактор прямую ссылку на нее.<br>'
+                         . 'Используется базовый синтаксис html, без поддержки MarkDown. <br>'
+                        );?>
+                    </div>
                 </div>
+            </div>
+            
+            
+            <div class ='col-lg-5'>
+                 <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <?= Yii::t('frontend', 'Coordinates') ?>
                     </div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Отметь место на карте, если это уместно, или ничего не отмечай, если нет.') ?></div>
+                </div>
                 
             </div>
+            
 
-     
+            
+            
+    </div>
+
+        
+</div> 
+                
+                     
 <script>
 
     function save_country(id){
