@@ -376,7 +376,7 @@ class Art extends \yii\db\ActiveRecord
             $searchModel = new ArtSearch();
             $blockchain =  BlockChain::get_blockchain_from_locale();    
             
-            $dataProvider = $searchModel->search([$searchModel->formName() => ['author' => $author]]);
+            $dataProvider = $searchModel->search([$searchModel->formName() => ['author' => $author, 'blockchain' => $blockchain]]);
             $dataProvider->sort = [
                 'defaultOrder' => ['created_at' => SORT_DESC]
             ];

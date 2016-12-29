@@ -142,7 +142,7 @@ function comment (data, callback){
                     console.log(err, result);
      
                     if (err == null){
-                        setTimeout(redirect, 4000);
+                        setTimeout(redirect, 6000);
                     }
             });
         
@@ -157,7 +157,7 @@ function comment (data, callback){
 }
     
 function redirect(){
-    document.location.href = 'site/show_single_blog';
+    document.location.href = '/site/show_single_blog';
 }
     
     
