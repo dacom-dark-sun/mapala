@@ -157,7 +157,7 @@ function comment (data, callback){
 }
     
 function redirect(){
-    document.location.href = '/show_single_blog';
+    document.location.href = 'site/show_single_blog';
 }
     
     
