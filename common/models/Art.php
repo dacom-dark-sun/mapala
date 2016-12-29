@@ -241,28 +241,34 @@ class Art extends \yii\db\ActiveRecord
         static function get_body($model){
           //  $body = \kartik\markdown\Markdown::convert($model->body);
              
-         //   $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
+            $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
             $body = $model->body;
-         //   $matches = Art::parse_links_and_urls($body);
-         //   foreach($matches[0] as $id => $m){
-         //       if (in_array($matches[5][$id], $format_img)){
-         //           $body = str_replace($m,'<img src=' . $m . '>', $body);
-         //       }// else {
-                 //   $body = str_replace($m,'[' . $m . ']('. $m . ')', $body);
-                 // }
+            $matches = Art::parse_links_and_urls_for_body($body);
+            foreach($matches[0] as $id => $m){
+                if (in_array($matches[6][$id], $format_img)){
+                    $body = str_replace($m,'<img src=' . $m . '>', $body);
+                }
                 
-        //   }
+            }
            return $body;
         }
         
+        /*
+         * This function parse all links and images and return in array for cleaning or change
+         */
+        static function parse_links_and_urls_for_body($text){
+         $re = '/(^(src="?)?(https?:\/\/)?([A-Za-z:1-9\]+)\.][\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{1,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#=;%+]{2,})([@\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
+           preg_match_all($re, $text, $matches);
+            return $matches;
+           
+        }
         
         
         /*
          * This function parse all links and images and return in array for cleaning or change
          */
         static function parse_links_and_urls($text){
-           $re = '/((https?:\/\/)?([A-Za-z:1-9\]+)\.][\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{1,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#=;%+]{2,})([@\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
-         
+         $re = '/((https?:\/\/)?([A-Za-z:1-9\]+)\.][\/A-Za-zаА-Яа-я0-9-_#=&;%+?]{1,})([\/.-_A-Za-zаА-Яа-я0-9-_#=&;%+?]{2,})\.([A-Za-zА-Яа-я0-9-_#=;%+]{2,})([@\/A-Za-zА-Яа-я0-9-_#?=;%+]{0,}))/mu';
            preg_match_all($re, $text, $matches);
             return $matches;
            
