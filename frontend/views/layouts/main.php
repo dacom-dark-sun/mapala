@@ -2,7 +2,11 @@
 /* @var $this \yii\web\View */
 use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
+use cybercog\yii\googleanalytics\widgets\GATracking;
 
+echo GATracking::widget([
+    'trackingId' => 'UA-89551963-1',
+]) ;
 /* @var $content string */
 
 $this->beginContent('@frontend/views/layouts/base.php')
