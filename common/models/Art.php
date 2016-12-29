@@ -507,7 +507,7 @@ class Art extends \yii\db\ActiveRecord
      
 
           
-     static function fill_simple_model($model, $meta){
+     static function fill_places_or_blogs($model, $meta, $current_art){
          /*
          public $title;
          public $country;
@@ -516,13 +516,31 @@ class Art extends \yii\db\ActiveRecord
          public $coordinates;        
          */
         
-        $model->tags = (array_key_exists('4', $meta['tags'])? $meta['tags'][4] :  "");
-        $model->tags = ucfirst(strtolower($model->tags));
+        $model->tags = $current_art->category;
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
     return $model;
          
          
      }
+     
+      
+     static function fill_knowledge($model, $meta, $current_art){
+         /*
+         public $title;
+         public $country;
+         public $city;
+         public $body;
+         public $tags;
+         public $coordinates;        
+         */
+        
+        $model->tags = $current_art->sub_category;
+        $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
+    return $model;
+         
+         
+     }
+     
      
      
         

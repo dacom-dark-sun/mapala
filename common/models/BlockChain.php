@@ -52,6 +52,8 @@ class BlockChain extends Model
     return $return;
       
    }
+   
+    
     
     
    static function construct_im_mapala($model){
@@ -342,7 +344,7 @@ class BlockChain extends Model
     }
 
     
-    static function convert_tags_to_lang($tags){
+    static function convert_tags_to_lang($name){
         $blockchain = BlockChain::get_blockchain_from_locale();
         $id = OurCategory::find()->where('name=' . "'" .  $name . "'")->asArray()->one();
         

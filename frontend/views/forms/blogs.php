@@ -12,7 +12,7 @@ use yii\web\JsExpression;
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 
 
-$this->title = Yii::t('frontend','Places'); 
+$this->title = Yii::t('frontend','Blogs'); 
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('frontend','Пополнить базу'), 'url'=> ['/site/add']];
 $this->params['breadcrumbs'][] = $this->title;

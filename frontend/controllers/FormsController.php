@@ -162,7 +162,7 @@ class FormsController extends SiteController
               $model->city = ucwords(strtolower($model->city));
               
               $meta = Art::explode_meta($current_art);
-              $model = Art::fill_simple_model($model,$meta);
+              $model = Art::fill_knowledge($model,$meta, $current_art);
     }
      
         return $this->render('knowledge', [ //CLEAR
@@ -193,7 +193,7 @@ class FormsController extends SiteController
               $model->attributes = $current_art->attributes;
               $model->country = BlockChain::convert_country_to_id($model->country);
               $meta = Art::explode_meta($current_art);
-              $model = Art::fill_simple_model($model,$meta);
+              $model = Art::fill_places_or_blogs($model,$meta, $current_art);
     }
      
         return $this->render('places', [ //CLEAR
@@ -228,7 +228,7 @@ class FormsController extends SiteController
               $model->country = BlockChain::convert_country_to_id($model->country);
               
               $meta = Art::explode_meta($current_art);
-              $model = Art::fill_simple_model($model,$meta);
+              $model = Art::fill_places_or_blogs($model,$meta, $current_art);
     }
      
         return $this->render('blogs', [ //CLEAR
