@@ -184,7 +184,7 @@ class BlockChain extends Model
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
              
-             
+             $json['sign_flag'] = 'true';
              $json['sign'] = BlockChain::mc_encrypt($json, ENCRYPTION_KEY);
              
              
@@ -231,7 +231,7 @@ class BlockChain extends Model
              
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
-             
+             $json['sign_flag'] = 'true';
              $json['sign'] = BlockChain::mc_encrypt($json, ENCRYPTION_KEY);
              
              $bl_model['metadata'] = $json;
@@ -278,7 +278,7 @@ class BlockChain extends Model
              
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
-             
+             $json['sign_flag'] = 'true';
              $json['sign'] = BlockChain::mc_encrypt($json, ENCRYPTION_KEY);
              
              
@@ -323,6 +323,11 @@ class BlockChain extends Model
              
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
+             
+             $json['sign_flag'] = 'true';
+             $json['sign'] = BlockChain::mc_encrypt($json, ENCRYPTION_KEY);
+             
+             
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);

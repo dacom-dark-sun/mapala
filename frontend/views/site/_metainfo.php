@@ -7,7 +7,7 @@ use common\models\BlockChain;
 ?>
 
            <span class="article-author">
-            <?php echo 'Author: ' ?><?php echo Html::a(stripslashes($model->author),['/site/index/','author'=>$model->author]) ?>
+            <?php echo Yii::t('frontend', 'автор: ') ?><?php echo Html::a(stripslashes($model->author),['/site/index/','author'=>$model->author]) ?>
       
           </span>
            <span>|</span>
@@ -26,10 +26,10 @@ use common\models\BlockChain;
             <span class="article-votes">
                 <?php 
                 echo PopoverX::widget([
-                    'header' => Yii::t('frontend', 'Voters'),
+                    'header' => Yii::t('frontend', 'Голоса'),
                     'placement' => PopoverX::ALIGN_BOTTOM,
                     'content' => Art::get_voters($model->voters),
-                    'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'Votes') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
+                    'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'голосов') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
                 ]);?>
                 
             </span>
