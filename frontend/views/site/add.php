@@ -2,7 +2,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\captcha\Captcha;
-
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $model \frontend\models\ContactForm 
@@ -63,6 +62,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             </div>
+            <?php if (Yii::$app->user->identity->username == 'dark.sun'): ?>
+                <div class ='col-lg-3'>
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <center>  <b>   <?= Yii::t('frontend', 'Новости') ?> </b> </center>
+                         <?= Html::a(Yii::t('frontend','Новости'), ['/forms/news'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
+           
+                    </div>
+                </div>
+            </div>
+                
+           <?php endif; ?>
    
             
         </div>

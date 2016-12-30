@@ -9,6 +9,7 @@ use frontend\models\forms\Homestay;
 use frontend\models\forms\ImMapala;
 use frontend\models\forms\Knowledge;
 use frontend\models\forms\Mapala_events;
+use frontend\models\forms\News;
 use frontend\models\forms\Places;
 use frontend\models\forms\Blogs;
 use frontend\models\forms\Transport;
@@ -239,6 +240,36 @@ class FormsController extends SiteController
       
         
         
+    
+    public function actionNews($author = null, $permlink = null)
+        {
+        $model = new News();
+
+        if (Yii::$app->user->identity->username == 'dark.sun'){
+             
+         
+           
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+           if ($permlink != null){
+                $model->permlink = $permlink;
+            } 
+            $bl_model = BlockChain::construct_news($model);
+             return $bl_model;
+        }
+        
+        if (($author != null)&&($permlink != null)){ //EDIT          
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
+
+              $current_art= Art::get_article_for_edit($author, $permlink);
+              $model->attributes = $current_art->attributes;
+        }
+     }
+        return $this->render('news', [ //CLEAR
+        'model' => $model
+        ]);
+ 
+    }
         
     
     public function actionEvents()

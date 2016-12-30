@@ -11,7 +11,11 @@ use Yii;
 use yii\base\Model;
 use common\models\Countries;
 use common\models\Cities;
+use common\models\CryptoGraphy;
 use DateTime;
+
+define('ENCRYPTION_KEY', env('ENCRYPTION_KEY'));
+
 /**
  * ContactForm is the model behind the contact form.
  */
@@ -179,6 +183,11 @@ class BlockChain extends Model
              
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
+             
+             
+             $json['sign'] = BlockChain::mc_encrypt($json, ENCRYPTION_KEY);
+             
+             
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -222,6 +231,9 @@ class BlockChain extends Model
              
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
+             
+             $json['sign'] = BlockChain::mc_encrypt($json, ENCRYPTION_KEY);
+             
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -267,6 +279,50 @@ class BlockChain extends Model
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
              
+             $json['sign'] = BlockChain::mc_encrypt($json, ENCRYPTION_KEY);
+             
+             
+             $bl_model['metadata'] = $json;
+             
+             return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
+        
+        
+        
+    }
+    
+    
+    
+    
+   static function construct_news($model){
+           /*  public $title;
+    public $country;
+    public $body;
+    public $tags; -- one tag
+    public $coordinates;
+*/    
+             $bl_model['parentAuthor'] = '';
+             $bl_model['parentPermlink'] = 'mapala'; //
+             if ($model->permlink == null){
+                $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             } else {
+                $bl_model['permlink'] = $model->permlink;
+            
+             }
+             $bl_model['body'] = $model->body;
+             $bl_model['title'] = $model->title;
+             $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
+                         
+             $json['tags'][0] = 'mapala';
+             $json['tags'][1] = Blockchain::tag_to_eng(\Yii::t('frontend', 'News'));
+             
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             $arr = Art::get_array_links_and_images($model->body);
+             $json['app'] = 'mapala';
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -419,6 +475,33 @@ class BlockChain extends Model
        return $permlink;
    }
     
+   
+   // Encrypt Function
+       static function mc_encrypt($encrypt, $key){
+        $encrypt = serialize($encrypt);
+        $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), MCRYPT_DEV_URANDOM);
+        $key = pack('H*', $key);
+        $mac = hash_hmac('sha256', $encrypt, substr(bin2hex($key), -32));
+        $passcrypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $encrypt.$mac, MCRYPT_MODE_CBC, $iv);
+        $encoded = base64_encode($passcrypt).'|'.base64_encode($iv);
+        return $encoded;
+    }
+    // Decrypt Function
+    static function mc_decrypt($decrypt, $key){
+        $decrypt = explode('|', $decrypt.'|');
+        $decoded = base64_decode($decrypt[0]);
+        $iv = base64_decode($decrypt[1]);
+        if(strlen($iv)!==mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC)){ return false; }
+        $key = pack('H*', $key);
+        $decrypted = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $decoded, MCRYPT_MODE_CBC, $iv));
+        $mac = substr($decrypted, -64);
+        $decrypted = substr($decrypted, 0, -64);
+        $calcmac = hash_hmac('sha256', $decrypted, substr(bin2hex($key), -32));
+        if($calcmac!==$mac){ return false; }
+        $decrypted = unserialize($decrypted);
+        return $decrypted;
+    }
+   
     
     
     

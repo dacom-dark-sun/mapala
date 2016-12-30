@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]);?> 
 
                 <div class="form-group">
-                       <?php echo Html::Button(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button', 'onclick' => 'submit_form($(this))']) ?>
+                       <?php echo Html::submitButton(Yii::t('frontend', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
                         <div class ="loader_head"  style="display: none;">Transaction...
                        <div id = 'steem_load' class = 'loader' ></div>
                        </div>       </div>
@@ -143,10 +143,11 @@ $this->params['breadcrumbs'][] = $this->title;
     
         
 <script>
-    function submit_form($this){
-        $('.loader_head').css('display', 'inline');
-        $this.submit();
-    }
+    
+    $('#add-form').on('beforeSubmit', function () {
+          $('.loader_head').css('display', 'inline');
+    });
+ 
 
 </script>
  
