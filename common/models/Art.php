@@ -306,26 +306,26 @@ class Art extends \yii\db\ActiveRecord
                  $count = count($categories);
                  if ($count == 1) {
                      
-                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories]]);
+                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories, 'blockchain'=> $blockchain]]);
                      $count1 = $dataProvider->getTotalCount(); 
                      /* Этот код написан для того, чтобы использовать адресную строку для задания критериев поиска по категории
                      * В адресной строке можно передавать страны, города, или одни лишь категории, а нижеследующий код побирает им свои места (работает для 1 категории) 
                      */ 
                      if ($dataProvider->getTotalCount() === 0) {
                             $searchModel = new ArtSearch();
-                           $dataProvider = $searchModel->search([$searchModel->formName() => ['city' => $categories]]);
+                           $dataProvider = $searchModel->search([$searchModel->formName() => ['city' => $categories,'blockchain'=> $blockchain]]);
                              if ($dataProvider->getTotalCount() === 0) {
                                   $searchModel = new ArtSearch();
-                                 $dataProvider = $searchModel->search([$searchModel->formName() => ['category' => $categories]]);
+                                 $dataProvider = $searchModel->search([$searchModel->formName() => ['category' => $categories, 'blockchain'=> $blockchain]]);
                              }
                      }
 
             } else if ($count == 2) {
-                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories[0], 'city' => $categories[1]]]);
+                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories[0], 'city' => $categories[1], 'blockchain'=> $blockchain]]);
                  } else if ($count == 3) {
-                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories[0], 'city' => $categories[1], 'category' => $categories[2]]]);
+                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories[0], 'city' => $categories[1], 'category' => $categories[2],'blockchain'=> $blockchain]]);
                  } else if ($count == 4) {
-                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories[0], 'city' => $categories[1], 'category' => $categories[2], 'sub_category' => $categories[3]]]);
+                     $dataProvider = $searchModel->search([$searchModel->formName() => ['country' => $categories[0], 'city' => $categories[1], 'category' => $categories[2], 'sub_category' => $categories[3],'blockchain'=> $blockchain]]);
                  }
                  
              }

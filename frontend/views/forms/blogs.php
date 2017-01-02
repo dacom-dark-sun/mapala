@@ -68,7 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class ="loader_head"  style="display: none;">Transaction...
                        <div id = 'steem_load' class = 'loader' ></div>
                        </div>       </div>
-
+                        <div id="account_name"></div>
+                     
                           <?= $this->render('map',['model'=>$model, 'form' => $form]) ?>
                           <?php ActiveForm::end(); ?>
 
@@ -141,13 +142,40 @@ $this->params['breadcrumbs'][] = $this->title;
         
 </div>
     
+<?php
+        yii\bootstrap\Modal::begin([
+            'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
+            'header' => '<h2>' . Yii::t('frontend', 'Ключ Golos') . '</h2>',
+            'id' => 'modalKey',
+            'size' => 'modal-lg',
+            'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
+            'options'=>['style'=>'min-width:400px']
+        ]);
+
+
+        echo $this->context->renderPartial('@frontend/modules/user/views/keys/keysForm');
+        yii\bootstrap\Modal::end();
+
+        ?>
+    
         
 <script>
     
     $('#add-form').on('beforeSubmit', function () {
           $('.loader_head').css('display', 'inline');
     });
- 
+ var acc = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
+       acc = getCookie(acc);
+       if (acc){
+          $('#account_name').text(acc);
+       } else {
+         $('<a id="key_modal_ask"><?php echo Yii::t('frontend', 'укажите приватный ключ от аккаунта GOLOS') ?></a>').appendTo('#account_name');
+         $(":submit").attr("disabled", true);
+       } 
+       
+       $("#key_modal_ask").click(function() {
+          $('#modalKey').modal('show');
+       });
 
 </script>
  

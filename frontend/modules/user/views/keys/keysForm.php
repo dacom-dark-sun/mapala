@@ -12,10 +12,12 @@ KeyAsset::register($this);
 /* @var $model common\base\MultiModel */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->title = Yii::t('frontend', 'Key STEEM')
+if (Yii::$app->controller->id == 'keys')
+    $this->title = Yii::t('frontend', 'Key Steem')
 ?>
 <div class="form-index">
-    <h1><?php echo Html::encode($this->title) ?></h1>
+    <h1><?php if (Yii::$app->controller->id == 'keys')
+             echo Html::encode($this->title) ?></h1>
     <div class="row">
         <div class='col-lg-12'>
         <div class="col-lg-6">
@@ -58,6 +60,7 @@ $this->title = Yii::t('frontend', 'Key STEEM')
                 </div>
             </div>
     <?php endif; ?>
+            <div id ="account_name"></div>
         </div>
          <div class="col-lg-6">
             <div class="panel panel-danger">
@@ -94,6 +97,12 @@ $this->title = Yii::t('frontend', 'Key STEEM')
 
 <script>
 $(document).ready(function(){
+  var acc = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
+  acc = getCookie(acc);
+  if (acc){
+     $('#account_name').text(acc);
+  }     
+        
    if (getCookie('steemsig')) {
      $('#STEEM').prop('disabled', true);
      $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');

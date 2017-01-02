@@ -12,6 +12,7 @@ use common\models\BlockChain;
 use yii\helpers\Html;
 
 ?>
+<div class ="site-index">
 <button type="button" class="btn btn-default previous" onclick = " window.history.back();">Назад</button>
 <?php echo Html::a("Блог Автора",['/site/index/','author'=>$model->author],['class'=>'btn btn-default previous']) ?>
        
@@ -61,7 +62,7 @@ use yii\helpers\Html;
             $model_name = Art::get_current_model($model);?>
             <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'edit_link']) ?>
       
-
+        </div>
         </div>  
     
 </div>

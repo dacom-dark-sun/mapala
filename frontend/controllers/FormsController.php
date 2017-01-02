@@ -141,6 +141,10 @@ class FormsController extends SiteController
     public $tags;
     public $coordinates;
  */
+        if(Yii::$app->user->isGuest) {
+            $this->redirect(array('user/sign-in/login'));
+        }
+        
         
          $model = new Knowledge();
         
@@ -175,6 +179,10 @@ class FormsController extends SiteController
      
     public function actionPlaces($author = null, $permlink = null)
         {
+        if(Yii::$app->user->isGuest) {
+            $this->redirect(array('user/sign-in/login'));
+        }
+        
       
            $model = new Places();
         
@@ -210,6 +218,11 @@ class FormsController extends SiteController
     
     public function actionBlogs($author = null, $permlink = null)
         {
+        
+        if(Yii::$app->user->isGuest) {
+            $this->redirect(array('user/sign-in/login'));
+        }
+        
            $model = new Blogs();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
@@ -243,6 +256,10 @@ class FormsController extends SiteController
     
     public function actionNews($author = null, $permlink = null)
         {
+        if(Yii::$app->user->isGuest) {
+            $this->redirect(array('user/sign-in/login'));
+        }
+        
         $model = new News();
 
         if (Yii::$app->user->identity->username == 'dark.sun'){

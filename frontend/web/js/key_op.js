@@ -27,11 +27,14 @@ $("#steem-btn-save").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('steemsig', wif);
        setCookie('steemac', result[0][0], {"path": "/", "expires": 31536000});
+       $('#account_name').text(result[0][0]);
        $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#STEEM').prop('disabled', true);
        $("#steem-btn-save").hide();
        $("#steem-btn-edit").show();
        $('#steem_pass_form').hide();
+       $('#modalKey').modal('hide');
+        $(":submit").attr("disabled", false);
        } else {
            alert('Sorry, this key not linked to any account');
              $('#STEEM').val('');
@@ -75,11 +78,14 @@ $("#steem-btn-save_pass").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('steemsig', wif);
        setCookie('steemac', result[0][0], {"path": "/", "expires": 31536000});
+       $('#account_name').text(result[0][0]);
        $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#STEEM').prop('disabled', true);
        $("#steem-btn-save").hide();
        $("#steem-btn-edit").show();
        $('#steem_pass_form').hide();
+       $('#modalKey').modal('hide');
+       $(":submit").attr("disabled", false);
    
        } else {
            alert('Sorry, this key not linked to any account');
@@ -125,11 +131,14 @@ $("#golos-btn-save_pass").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('golossig', wif);
        setCookie('golosac', result[0][0], {"path": "/", "expires": 31536000});
+       $('#account_name').text(result[0][0]);
        $('#GOLOS').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#GOLOS').prop('disabled', true);
        $("#golos-btn-save").hide();
        $("#golos-btn-edit").show();
        $('#golos_pass_form').hide();
+       $('#modalKey').modal('hide');
+       $(":submit").attr("disabled", false);
        } else {
            alert('Sorry, this key not linked to any account');
              $('#GOLOS').val('');
@@ -162,6 +171,8 @@ $("#steem-btn-edit").click(function() {
      $('#STEEM_pass').val('');
      $('#steem_pass_form').show();
      $('.loader').hide();
+     $('#account_name').text('');
+       
      
 });
 
@@ -189,11 +200,14 @@ $("#golos-btn-save").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('golossig', wif);
        setCookie('golosac', result[0][0], {"path": "/", "expires": 31536000});
+       $('#account_name').text(result[0][0]);
        $('#GOLOS').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#GOLOS').prop('disabled', true);
        $("#golos-btn-save").hide();
        $("#golos-btn-edit").show();
        $('#golos_pass_form').hide();
+       $('#modalKey').modal('hide');
+       $(":submit").attr("disabled", false);
        } else {
            alert('Sorry, this key not linked to any account');
              $('#GOLOS').val('');
@@ -225,6 +239,7 @@ $("#golos-btn-edit").click(function() {
      $('#GOLOS_pass').val('');
      $('#golos_pass_form').show();
      $('.loader').hide();
+     $('#account_name').text('');
      
 });
 

@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo Html::submitButton(Yii::t('frontend', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
                 <div class="form-group">
+                    <?php echo Yii::t('frontend', 'Если вы еще не зарегистрированы, сделайте это <a href="{link}">здесь.</a> Пока еще бесплатно.', [
+                        'link'=>yii\helpers\Url::to(['sign-in/signup'])
+                    ]) ?>
+                
                 </div>
                
             <?php ActiveForm::end(); ?>

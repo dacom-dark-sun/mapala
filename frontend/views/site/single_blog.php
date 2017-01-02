@@ -12,7 +12,7 @@ use talma\widgets\JsTreeAsset;
     <button type="button" class="btn btn-default previous" onclick = " window.history.back();">Назад</button>
   
 
-<div class="site-index">
+<div class="sigle-blog-index">
      <div class="body-content">
         <div class="row">
             <div class="col-lg-10">
