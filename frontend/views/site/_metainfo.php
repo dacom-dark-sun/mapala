@@ -31,6 +31,7 @@ use common\models\BlockChain;
                     'content' => Art::get_voters($model->voters),
                     'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'голосов') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
                 ]);?>
+                <div is="[object Object]"></div>
                 
             </span>
             <span>|</span>
@@ -66,7 +67,8 @@ use common\models\BlockChain;
                 if (key != '-1')
                   $('#<?php echo $model->permlink ?>').css('z-index', 10);
               
+                $( document ).ready(function() {
+                     $('[is="[object Object]"]').remove(); //bag in POPOVER-X
+                });
                 
-                $('[is="[object Object]"]').remove(); //bag in POPOVER-X
-              
             </script>
