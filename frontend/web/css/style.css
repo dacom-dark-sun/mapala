@@ -120,7 +120,7 @@ a.desc:after {
 .filter {
   width: 30px;
   height: 30px;
-  margin-top: 5px;
+  
 }
 
   .category_panel{
@@ -152,7 +152,7 @@ a.desc:after {
 }
 
 [is="[object Object]"]{
-    display: none;
+   display: inline;
 }
 
 .article-metainfo-center{
@@ -165,7 +165,6 @@ a.desc:after {
 
 .article-metainfo span {
     margin-left: 15px;
-    margin-top: 5px;
     
 }
 .article-metainfo-center span{
