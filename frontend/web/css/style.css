@@ -533,10 +533,10 @@ padding-top: 5px;
 .article-full{width: 100%}
 .comments{width:100%}
 .comments-list .children{padding-left: 10px;}
-.comments .comment-author-avatar img{width: 45px !important; max-height: 45px !important;}
-.comments .comment-author-avatar {padding-right: 10px;}
-.comments .comment-details{padding-left: 0px;}
+.comments .comment-author-avatar {width: 75px;}
 #gmap0-map-canvas{height: 200px !important;}
+.additional-info{padding: 0px; font-size: 12px;}
+.comments .comment-content{padding: 0px;}
 }
 
 .filter {  
