@@ -532,6 +532,8 @@ padding-top: 5px;
 .categories{display:none}
 .article-full{width: 100%}
 .comments{width:100%}
+.comments-list .children{padding-left: 10px;}
+.comments .comment-author-avatar img{width: 45px; max-height: 45px;}
 }
 
 .filter {  
