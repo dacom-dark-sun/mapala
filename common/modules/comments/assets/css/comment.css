@@ -2,18 +2,7 @@
 .comments {
     margin: 40px 0 40px 0;
 }
-.loader_comment {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-   border-top: 16px solid #3498db;
- border-bottom: 16px solid #3498db;
-  width: 10px;
-  height: 10px;
-  float:right;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  margin-top: 7px;
-}
+
 
 .comments .comments-list {
     list-style: none;
