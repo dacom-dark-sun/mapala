@@ -16,7 +16,7 @@ use yii\widgets\Pjax;
 
      <div class="body-content">
         <div class="row">
-            <div class="col-lg-10 col-md-9">
+            <div class="col-lg-10 col-md-9 col-xs-12">
                <div id="article-index">
 
    <?php echo \yii\widgets\ListView::widget([
@@ -28,7 +28,7 @@ use yii\widgets\Pjax;
     ])?>
 </div>
             </div>
-            <div class="col-lg-2 col-md-3 category_panel">
+            <div class="col-lg-2 col-md-3 col-xs-12 category_panel">
       
 <div class ='categories'>          
                     <div class ="category_buttons">

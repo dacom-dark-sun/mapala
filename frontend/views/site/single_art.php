@@ -18,7 +18,7 @@ use yii\helpers\Html;
        
 <hr/>
 <div class="article-full row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 col-lg-12 col-md-12">
         <h2 class="article-title">
               <?php echo Html::label($model->title, "" ,['class' => 'onepage_link']) ?>
         </h2>
