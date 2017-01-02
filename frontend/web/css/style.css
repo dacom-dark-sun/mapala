@@ -529,6 +529,7 @@ padding-top: 5px;
 }
 
 @media screen and (max-width: 600px) {
+.categories{display:none}
 .article-full{width: 100%}
 .comments{width:100%}
 .comments-list .children{padding-left: 10px;}
@@ -538,6 +539,7 @@ padding-top: 5px;
 .comments .comment-content{padding: 0px;}
 .comments .comment-details{padding:5px;}
 .logo_text{display: none}
+.article-column{padding-left: 0px; padding-right: 0px}
 }
 
 .filter {  
