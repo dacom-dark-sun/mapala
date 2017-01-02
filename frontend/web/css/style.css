@@ -540,6 +540,10 @@ padding-top: 5px;
 .comments .comment-details{padding:5px;}
 .logo_text{display: none}
 .article-column{padding-left: 0px; padding-right: 0px}
+.onepage_link{text-align:center}
+.article-full .location {text-align: center}
+.comments_column {padding-left: 0px; padding-right: 0px}
+.container-fluid {padding-right: 5px; padding-left: 5px;}
 }
 
 .filter {  

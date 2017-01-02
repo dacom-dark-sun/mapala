@@ -16,7 +16,7 @@ use yii\helpers\Html;
 <?php  $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); ?>
 
 <div class="comments row">
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-sm-12 comments_column">
         <div class="title-block clearfix">
             <h3 class="h3-body-title">
                 <?php echo Yii::t('yii2mod.comments', "Comments", $commentModel->getCommentsCount($showDeletedComments ? false : true)); ?>
