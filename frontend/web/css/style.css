@@ -534,6 +534,8 @@ padding-top: 5px;
 .comments{width:100%}
 .comments-list .children{padding-left: 10px;}
 .comments .comment-author-avatar img{width: 45px; max-height: 45px;}
+.comments .comment-author-avatar {padding-right: 10px;}
+.comments .comment-details{padding-left: 0px;}
 }
 
 .filter {  
@@ -567,4 +569,8 @@ padding-top: 5px;
 .comment-body{
     display: block !important;
     word-wrap: break-word;
+}
+.comments .comment-author-avatar{
+  float: left;
+  margin-right: 5px;
 }
