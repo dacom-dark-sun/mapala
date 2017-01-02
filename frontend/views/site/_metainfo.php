@@ -31,7 +31,6 @@ use common\models\BlockChain;
                     'content' => Art::get_voters($model->voters),
                     'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'голосов') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
                 ]);?>
-                <div is="[object Object]"></div>
                 
             </span>
             <span>|</span>

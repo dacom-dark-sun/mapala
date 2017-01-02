@@ -561,3 +561,8 @@ padding-top: 5px;
 .comment-box{
         margin-top: 40px;
 }
+
+.comment-body{
+    display: block !important;
+    word-wrap: break-word;
+}
