@@ -15,12 +15,15 @@ use talma\widgets\JsTreeAsset;
     'core' => [
         'themes' =>  [
                 'name' => 'proton',
-                'responsive' => false
+                'url' => "frontend/web/themes/proton/style.css",
+                'dots' => true,
+                'icons' => true,
             ],
         
         'data' => $data,
     ],
     'plugins' => ['sort','state','wholerow','search', 'unique', 'massload', "dnd"],
+    
 
 ]);
 

@@ -356,13 +356,15 @@ class BlockChain extends Model
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
                          
              $json['tags'][0] = $data['category'];
-             $arr = Art::get_array_links_and_images($model->body);
+             $arr = Art::get_array_links_and_images($data['body']);
                  
              if (array_key_exists('links', $arr))
                 $json['links'] = $arr['links'];
              
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
+             
+             $json['app'] = 'mapala';
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);

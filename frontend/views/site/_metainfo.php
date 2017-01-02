@@ -27,7 +27,7 @@ use common\models\BlockChain;
                 <?php 
                 echo PopoverX::widget([
                     'header' => Yii::t('frontend', 'Голоса'),
-                    'placement' => PopoverX::ALIGN_BOTTOM,
+                    'placement' => PopoverX::ALIGN_BOTTOM_LEFT,
                     'content' => Art::get_voters($model->voters),
                     'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'голосов') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
                 ]);?>
@@ -66,5 +66,4 @@ use common\models\BlockChain;
                 if (key != '-1')
                   $('#<?php echo $model->permlink ?>').css('z-index', 10);
               
-              $('.row').filter('[is="object Object"]').remove();
             </script>

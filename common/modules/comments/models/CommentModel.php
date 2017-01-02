@@ -354,8 +354,19 @@ class CommentModel extends ActiveRecord
    //     if ($this->author->hasMethod('getAvatar')) {
   //          return $this->author->getAvatar();
     //    }
-
-        return "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
+        $query = new \common\models\User();
+        $blockchain = \common\models\BlockChain::get_blockchain_from_locale();
+        $account = $query->find()->where([$blockchain => $this->author])->asArray()->select('id')->one();
+        if ($account){
+           $avatar = \common\models\UserProfile::find()->where(['user_id'=> $account['id']])->asArray()->select('avatar_path')->one();    
+           if ($avatar['avatar_path'])
+                 return '/storage/web/source/' . $avatar['avatar_path'];
+           else {
+                 return "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
+           }
+        } else {
+           return "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
+        }
     }
 
     /**

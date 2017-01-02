@@ -35,6 +35,17 @@ $("#steem-btn-save").click(function() {
        $('#steem_pass_form').hide();
        $('#modalKey').modal('hide');
         $(":submit").attr("disabled", false);
+        
+       $.ajax({
+         method: "GET",
+         data: {name:result[0][0]},
+         url:'/ajax/save_name',
+         success: function(result) {
+             console.log(result);
+         }
+     });
+        
+        
        } else {
            alert('Sorry, this key not linked to any account');
              $('#STEEM').val('');
@@ -86,6 +97,17 @@ $("#steem-btn-save_pass").click(function() {
        $('#steem_pass_form').hide();
        $('#modalKey').modal('hide');
        $(":submit").attr("disabled", false);
+       
+       $.ajax({
+         method: "GET",
+         data: {name:result[0][0]},
+         url:'/ajax/save_name',
+         success: function(result) {
+             console.log(result);
+         }
+       });
+       
+   
    
        } else {
            alert('Sorry, this key not linked to any account');
@@ -139,6 +161,15 @@ $("#golos-btn-save_pass").click(function() {
        $('#golos_pass_form').hide();
        $('#modalKey').modal('hide');
        $(":submit").attr("disabled", false);
+       $.ajax({
+         method: "GET",
+         data: {name:result[0][0]},
+         url:'/ajax/save_name',
+         success: function(result) {
+             console.log(result);
+         }
+       });
+       
        } else {
            alert('Sorry, this key not linked to any account');
              $('#GOLOS').val('');
@@ -208,6 +239,15 @@ $("#golos-btn-save").click(function() {
        $('#golos_pass_form').hide();
        $('#modalKey').modal('hide');
        $(":submit").attr("disabled", false);
+       $.ajax({
+         method: "GET",
+         data: {name:result[0][0]},
+         url:'/ajax/save_name',
+         success: function(result) {
+             console.log(result);
+         }
+       });
+       
        } else {
            alert('Sorry, this key not linked to any account');
              $('#GOLOS').val('');

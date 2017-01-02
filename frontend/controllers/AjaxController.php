@@ -24,7 +24,15 @@ class AjaxController extends Controller{
    
      
     
-    
+    public function actionSave_name ($name){
+        $blockchain = BlockChain::get_blockchain_from_locale();
+        $name = strip_tags($name);
+        $sql_name = Yii::$app->user->identity->username;
+        
+        Yii::$app->db->createCommand()
+             ->update('user', [$blockchain => $name], ['username' => $sql_name])
+             ->execute();
+    }
     
      
       
