@@ -151,7 +151,7 @@ a.desc:after {
 }
 
 [is="[object Object]"]{
-    display: none;
+ //   display: none;
 }
 
 .article-metainfo-center{

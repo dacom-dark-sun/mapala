@@ -66,4 +66,7 @@ use common\models\BlockChain;
                 if (key != '-1')
                   $('#<?php echo $model->permlink ?>').css('z-index', 10);
               
+                
+                $('[is="[object Object]"]').remove(); //bag in POPOVER-X
+              
             </script>
