@@ -149,6 +149,11 @@ a.desc:after {
     margin-top: 20px;
     
 }
+
+[is="[object Object]"]{
+    display: none;
+}
+
 .article-metainfo-center{
     font-size: 14px;
     margin-top: 10px;
