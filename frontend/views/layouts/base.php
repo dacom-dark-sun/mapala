@@ -26,7 +26,17 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
     <?php echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => Yii::t('frontend', 'Base'), 'url' => ['/site/index']],
+            ['label' => Yii::t('frontend', 'Base'),
+                'items'=>[
+                     [
+                        'label' => Yii::t('frontend', 'Просмотреть'), 'url' => ['/site/index'],
+                        'url' => ['/site/index']
+                    ],
+                    [
+                        'label' => Yii::t('frontend', 'Обновить'),
+                        'url' => ['/site/add']
+                    ],
+                ]],
             ['label' => Yii::t('frontend', 'My blog'), 'url' => ['/site/show_single_blog'], ['visible'=>!Yii::$app->user->isGuest]],
            
             

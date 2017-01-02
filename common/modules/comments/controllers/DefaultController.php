@@ -59,7 +59,7 @@ class DefaultController extends Controller
      */
     public function actionCreate()
     {
-        sleep(8);
+        sleep(6);
         return ['status' => 'success'];
        
     }

@@ -27,14 +27,16 @@ $("#steem-btn-save").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('steemsig', wif);
        setCookie('steemac', result[0][0], {"path": "/", "expires": 31536000});
-       $('#account_name').text(result[0][0]);
+       $('.account_name').text(result[0][0]);
        $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#STEEM').prop('disabled', true);
        $("#steem-btn-save").hide();
        $("#steem-btn-edit").show();
        $('#steem_pass_form').hide();
        $('#modalKey').modal('hide');
-        $(":submit").attr("disabled", false);
+       $(":submit").attr("disabled", false);
+       $(".comment-submit").attr("disabled", false);
+ 
         
        $.ajax({
          method: "GET",
@@ -89,7 +91,7 @@ $("#steem-btn-save_pass").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('steemsig', wif);
        setCookie('steemac', result[0][0], {"path": "/", "expires": 31536000});
-       $('#account_name').text(result[0][0]);
+       $('.account_name').text(result[0][0]);
        $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#STEEM').prop('disabled', true);
        $("#steem-btn-save").hide();
@@ -97,6 +99,7 @@ $("#steem-btn-save_pass").click(function() {
        $('#steem_pass_form').hide();
        $('#modalKey').modal('hide');
        $(":submit").attr("disabled", false);
+       $(".comment-submit").attr("disabled", false);
        
        $.ajax({
          method: "GET",
@@ -153,7 +156,7 @@ $("#golos-btn-save_pass").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('golossig', wif);
        setCookie('golosac', result[0][0], {"path": "/", "expires": 31536000});
-       $('#account_name').text(result[0][0]);
+       $('.account_name').text(result[0][0]);
        $('#GOLOS').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#GOLOS').prop('disabled', true);
        $("#golos-btn-save").hide();
@@ -161,6 +164,8 @@ $("#golos-btn-save_pass").click(function() {
        $('#golos_pass_form').hide();
        $('#modalKey').modal('hide');
        $(":submit").attr("disabled", false);
+       $(".comment-submit").attr("disabled", false);
+ 
        $.ajax({
          method: "GET",
          data: {name:result[0][0]},
@@ -202,7 +207,7 @@ $("#steem-btn-edit").click(function() {
      $('#STEEM_pass').val('');
      $('#steem_pass_form').show();
      $('.loader').hide();
-     $('#account_name').text('');
+     $('.account_name').text('');
        
      
 });
@@ -231,7 +236,7 @@ $("#golos-btn-save").click(function() {
        if (result[0][0] != null){
        put_key_to_cookie('golossig', wif);
        setCookie('golosac', result[0][0], {"path": "/", "expires": 31536000});
-       $('#account_name').text(result[0][0]);
+       $('.account_name').text(result[0][0]);
        $('#GOLOS').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#GOLOS').prop('disabled', true);
        $("#golos-btn-save").hide();
@@ -239,6 +244,8 @@ $("#golos-btn-save").click(function() {
        $('#golos_pass_form').hide();
        $('#modalKey').modal('hide');
        $(":submit").attr("disabled", false);
+       $(".comment-submit").attr("disabled", false);
+ 
        $.ajax({
          method: "GET",
          data: {name:result[0][0]},
@@ -279,7 +286,7 @@ $("#golos-btn-edit").click(function() {
      $('#GOLOS_pass').val('');
      $('#golos_pass_form').show();
      $('.loader').hide();
-     $('#account_name').text('');
+     $('.account_name').text('');
      
 });
 

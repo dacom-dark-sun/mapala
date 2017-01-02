@@ -18,7 +18,7 @@ class KeyAsset extends AssetBundle
     ];
 
     public $js = [
-        "js/cryptico/cryptico.min.js",
+   //     "js/cryptico/cryptico.min.js",
         'js/key_op.js',
        // "js/steem.min.js",//ADD GOLOS
          'js/crypto.js',
@@ -30,4 +30,5 @@ class KeyAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'common\assets\Html5shiv',
     ];
+
 }

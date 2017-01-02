@@ -25,7 +25,7 @@ if (Yii::$app->controller->id == 'keys')
             
             <div class="form-group">
                 <label for="usr"><?php echo Yii::t('frontend', 'Steem private posting key')?>:</label>
-                <div><input type="text" class="form-control"  id="STEEM" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div id = 'steem_load' class = 'loader' ></div></div>
+                <div><input type="text" class="form-control"  id="STEEM" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div  class = 'loader' style="display: none" ></div></div>
                 <div class ="keys_save_edit_buttons">
                     <button type="button" id='steem-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
                 <button type="button" id= 'steem-btn-edit' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
@@ -34,7 +34,7 @@ if (Yii::$app->controller->id == 'keys')
             <div class="form-group" id="steem_pass_form">
                 <label for="usr"><?php echo Yii::t('frontend', 'Получить приватный ключ из пароля')?>:</label>
                  <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
-                <div><input type="text" class="form-control"  id="STEEM_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div id = 'steem_load' class = 'loader' ></div></div>
+                 <div><input type="text" class="form-control"  id="STEEM_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div class = 'loader' style="display: none" ></div></div>
                 <div class ="keys_save_edit_buttons">
                     <button type="button" id='steem-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
                 <button type="button" id= 'steem-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
@@ -44,7 +44,7 @@ if (Yii::$app->controller->id == 'keys')
     
             <div class="form-group">
                 <label for="pwd"><?php echo Yii::t('frontend', 'Golos private posting key')?>:</label>
-                <div><input type="text" class="form-control"  id="GOLOS" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div id = 'golos_load' class = 'loader' ></div></div>
+                <div><input type="text" class="form-control"  id="GOLOS" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div  style="display: none"  class = 'loader' ></div></div>
                     <div class ="keys_save_edit_buttons">
                     <button type="button" id= 'golos-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
                     <button type="button" id= 'golos-btn-edit' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
@@ -53,14 +53,14 @@ if (Yii::$app->controller->id == 'keys')
                <div class="form-group" id="golos_pass_form">
                 <label for="usr"><?php echo Yii::t('frontend', 'Получить приватный ключ из пароля')?>:</label>
                  <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
-                <div><input type="text" class="form-control"  id="GOLOS_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div id = 'steem_load' class = 'loader' ></div></div>
+                <div><input type="text" class="form-control"  id="GOLOS_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div  style="display: none"  class = 'loader' ></div></div>
                 <div class ="keys_save_edit_buttons">
                     <button type="button" id='golos-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
                 <button type="button" id= 'golos-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
                 </div>
             </div>
     <?php endif; ?>
-            <div id ="account_name"></div>
+            <div class ="account_name"></div>
         </div>
          <div class="col-lg-6">
             <div class="panel panel-danger">
@@ -100,7 +100,7 @@ $(document).ready(function(){
   var acc = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
   acc = getCookie(acc);
   if (acc){
-     $('#account_name').text(acc);
+     $('.account_name').text(acc);
   }     
         
    if (getCookie('steemsig')) {
@@ -122,9 +122,7 @@ $(document).ready(function(){
     
     
    }
-   $('.loader').hide();
-   $('.loader').hide();
-  
+   
 });
 
 $("#instruction").click(function() {

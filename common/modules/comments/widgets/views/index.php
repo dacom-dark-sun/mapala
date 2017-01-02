@@ -2,6 +2,7 @@
 
 use yii\widgets\Pjax;
 use yii\helpers\Html;
+
 /* @var $this \yii\web\View */
 /* @var $comments array */
 /* @var $commentModel \yii2mod\comments\models\CommentModel */
@@ -42,11 +43,13 @@ use yii\helpers\Html;
     </div>
 </div>
 <?php Pjax::end(); ?>
+ 
 
 
 <script>
     
      function send_comment($this){
+        $('.loader_head').css('display', 'inline');
         var data;
         var category = $('#category').val(); //get category main article
         var parentPermlink = $this[0].form[2].form[3].defaultValue; //get parent_permlink

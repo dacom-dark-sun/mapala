@@ -74,6 +74,7 @@ use yii\helpers\Html;
 <?php echo Html::hiddenInput('category', $model->parent_permlink, ['id' => 'category']); ?>
                 
 
+        
 
 <div id ="comments">
 <?php echo common\modules\comments\widgets\Comment::widget([
@@ -89,6 +90,21 @@ use yii\helpers\Html;
 ]);?>
 </div>
 
+<?php
+        yii\bootstrap\Modal::begin([
+            'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
+            'header' => '<h2>' . Yii::t('frontend', 'Ключ Golos') . '</h2>',
+            'id' => 'modalKey',
+            'size' => 'modal-lg',
+            'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
+            'options'=>['style'=>'min-width:400px']
+        ]);
+
+
+        echo $this->context->renderPartial('@frontend/modules/user/views/keys/keysForm');
+        yii\bootstrap\Modal::end();
+
+        ?>
 
 <script>
 var blockchain = '<?php echo BlockChain::get_blockchain_from_locale() ?>';

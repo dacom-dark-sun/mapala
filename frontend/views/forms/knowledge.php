@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                        <div class ="loader_head"  style="display: none;">Transaction...
                        <div id = 'steem_load' class = 'loader' ></div>
                        </div>
-                       <div id="account_name"></div>
+                       <div class="account_name"></div>
                        
                    </div>
                    <?= $this->render('map',['model'=>$model, 'form' => $form]) ?>
@@ -213,13 +213,13 @@ $this->params['breadcrumbs'][] = $this->title;
      var acc = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
        acc = getCookie(acc);
        if (acc){
-          $('#account_name').text(acc);
+          $('.account_name').text(acc);
        } else {
-         $('<a id="key_modal_ask"><?php echo Yii::t('frontend', 'укажите приватный ключ от аккаунта GOLOS') ?></a>').appendTo('#account_name');
+         $('<a id="key_modal_ask"><?php echo Yii::t('frontend', 'укажите приватный ключ от аккаунта GOLOS') ?></a>').appendTo('.account_name');
          $(":submit").attr("disabled", true);
        } 
        
-       $("#key_modal_ask").click(function() {
+       $(".account_name").click(function() {
           $('#modalKey').modal('show');
        });
 

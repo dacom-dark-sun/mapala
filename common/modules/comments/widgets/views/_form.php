@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use common\models\BlockChain;
 
 /* @var $this \yii\web\View */
 /* @var $commentModel \yii2mod\comments\models\CommentModel */
@@ -31,6 +32,37 @@ use yii\widgets\ActiveForm;
             <?php echo Html::Button(Yii::t('yii2mod.comments', 'Comment'), ['class' => 'btn btn-primary comment-submit', 'onclick' => 'send_comment($(this))']); ?>
         </div>
     </div>
+ <div class ="loader_head"  style="display: none;">Transaction...
+       <div class = 'loader_comment' ></div>
+       </div>
+       <div class="account_name"></div>    
     <?php $form->end(); ?>
-    <div class="clearfix"></div>
+   
+     <div class="clearfix"></div>
 </div>
+
+   
+
+  <script>    
+      $( document ).ready(function() {
+     var acc = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
+       acc = getCookie(acc);
+       if (acc){
+          $('.account_name').text(acc);
+       } else {
+         $('<a id="key_modal_ask"><?php echo Yii::t('frontend', 'укажите приватный ключ от аккаунта GOLOS') ?></a>').appendTo('.account_name');
+         $(".comment-submit").attr("disabled", true);
+       }
+   
+});
+       
+    $('#<?=$formId?>').on('afterSubmit', function () {
+          $('.loader_head').css('display', 'none');
+    });
+
+   $(".account_name").click(function() {
+      $('#modalKey').modal('show');
+   });
+    
+        
+  </script>
