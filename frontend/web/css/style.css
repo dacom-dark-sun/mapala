@@ -394,8 +394,8 @@ input[type="radio"], input[type="checkbox"]{
 }
       
 .article-author {
-    font-family: cursive;
-    font-size: 16px;
+ //   font-family: cursive;
+ //   font-size: 16px;
     margin-left: 15px;
 }
 

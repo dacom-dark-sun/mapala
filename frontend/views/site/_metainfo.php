@@ -65,4 +65,7 @@ use common\models\BlockChain;
                 var key = voters.indexOf(account);
                 if (key != '-1')
                   $('#<?php echo $model->permlink ?>').css('z-index', 10);
+              
+              
+              $('div[is="[object Object]"]').remove();
             </script>
