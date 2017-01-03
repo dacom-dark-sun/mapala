@@ -119,11 +119,15 @@ a.desc:after {
 .filter {
   width: 30px;
   height: 30px;
-  margin-bottom: -11px;
   
 }
 
   .category_panel{
+}
+.voters{
+   padding-left: 0px !important;
+  padding-right: 0px !important;
+  
 }
 .categories{
     
@@ -164,10 +168,13 @@ a.desc:after {
 
 
 .article-metainfo span {
-    margin-left: 15px;
-    margin-right: 15px;
     
 }
+
+.article-date{
+    padding-bottom: 10px;
+}
+
 .article-metainfo-center span{
 
     margin-left: 15px;
@@ -409,7 +416,8 @@ input[type="radio"], input[type="checkbox"]{
 .article-author {
  //   font-family: cursive;
  //   font-size: 16px;
-    margin-left: 15px;
+ //   margin-left: 15px;
+ 
 }
 
 .personal_blog_text{
@@ -544,12 +552,11 @@ padding-top: 5px;
 .article-full .location {text-align: center}
 .comments_column {padding-left: 0px; padding-right: 0px}
 .container-fluid {padding-right: 5px; padding-left: 5px;}
+.voters{padding-left: 0px !important; padding-right: 0px !important}
 }
 
 .filter {  
   z-index: -1;
-  top: 0px;
-  left: -15px;
   border-radius: 40px;
   position: absolute;
     background-color: rgba(0, 17, 255, 0.49);
@@ -585,4 +592,7 @@ padding-top: 5px;
 .article-metainfo div:not(.popover):not(.popover-title):not(.popover-content){
     display: inline;
     text-align: center;
+    padding-top: 5px;
+    
 }
+.article-metainfo svg {padding-right: 2px;}
