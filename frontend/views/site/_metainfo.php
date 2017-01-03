@@ -46,8 +46,7 @@ use common\models\BlockChain;
                   onclick = <?php echo 'vote("' . $model->blockchain . '","' . $model->author . '","' . $model->permlink . '",10000)';?>
                      >
              </div>
-        </div>            
-            
+        </div>           
             
             <script>
                 var voters = '<?php echo $model->voters ?>';
