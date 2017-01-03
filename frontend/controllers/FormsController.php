@@ -262,7 +262,7 @@ class FormsController extends SiteController
         
         $model = new News();
 
-        if (Yii::$app->user->identity->username == 'dark.sun'){
+        if (Yii::$app->user->identity->username == 'mapala'){
              
          
            
