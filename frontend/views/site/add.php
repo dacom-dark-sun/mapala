@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             </div>
-            <?php if ((!Yii::$app->user->isGuest)&&((Yii::$app->user->identity->username == 'dark.sun')||((Yii::$app->user->identity->username == 'lehard'))): ?>
+            <?php if ((!Yii::$app->user->isGuest)&&((Yii::$app->user->identity->username == 'dark.sun')||(Yii::$app->user->identity->username == 'lehard'))): ?>
                 <div class ='col-lg-3'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
