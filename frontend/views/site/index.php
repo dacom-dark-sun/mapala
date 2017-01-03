@@ -38,9 +38,8 @@ use yii\widgets\Pjax;
                               <?= Html::a(Yii::t('frontend', 'Discuss'), ['/site/index/','state'=>'discuss'], ['class'=>'btn btn-success each_category_button']) ?>
        
                     </div>
-                <div class="col-lg-12 col-md-12">
+             
                 <?= $this->render('_categories',['data'=>$data]) ?>
-                </div>
 </div>                            
         </div>
     
