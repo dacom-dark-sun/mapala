@@ -137,7 +137,7 @@ a.desc:after {
 }
 
 .categories-scroll{
-    overflow: scroll;
+ //   overflow: scroll;
 }
 .jstree-anchor{
      white-space: nowrap;
