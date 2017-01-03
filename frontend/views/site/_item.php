@@ -46,8 +46,9 @@ use yii\helpers\Url;
             </div>
         </div>
      <?= $this->render('_metainfo',['model'=>$model]) ?>
+        
+         <hr>
     </div>
    
 </div>
-         <hr>
 

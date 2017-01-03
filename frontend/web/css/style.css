@@ -589,7 +589,7 @@ padding-top: 5px;
   float: left;
   margin-right: 5px;
 }
-.article-metainfo div:not(.popover):not(.popover-title):not(.popover-content){
+.article-metainfo div:not(.popover):not(.popover-title):not(.popover-content):not(.arrow){
     display: inline;
     text-align: center;
     padding-top: 5px;
