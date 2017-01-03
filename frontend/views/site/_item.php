@@ -15,7 +15,8 @@ use yii\helpers\Url;
           
             <?php echo Html::a(stripslashes($model->title),['/site/index/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
         </h2>
-          <div class ="location">
+                  <div class ="col-xs-12 col-lg-12 col-md-12 location">
+
                      <span>
                        <?php if ($model->country !='[]') echo Html::label($model->country, "" ,['class' => 'label label-default', 'onclick' => 'render_single_art(' . $model->country . ')']) ?>
                      </span>
