@@ -5,7 +5,7 @@ use kartik\popover\PopoverX;
 use common\models\Art;
 use common\models\BlockChain;
 ?>
-     <div class ="col-xs-12 col-lg-9 article-metainfo">
+
         
            <div class="col-xs-4 col-lg-2 article-author">
             <?php echo Yii::t('frontend', 'автор: ') ?><?php echo Html::a(stripslashes($model->author),['/site/index/','author'=>$model->author]) ?>
@@ -32,7 +32,7 @@ use common\models\BlockChain;
                 <div is="[object Object]"></div>
                 
             </div>
-            <div class="col-xs-4 col-lg-2 Icon chatbox">
+            <div class="col-xs-4 col-lg-1 Icon chatbox">
                
                 <svg version="1.1" style="margin-top: 1px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"><path d="M124.3,400H277c14.4,0,14.4,0.1,21.3,5.2S384,464,384,464v-64h3.7c42.2,0,76.3-31.8,76.3-71.4V119.7 c0-39.6-34.2-71.7-76.3-71.7H124.3C82.2,48,48,80.1,48,119.7v208.9C48,368.2,82.2,400,124.3,400z"></path></svg>
            <?php echo $model->replies?>
@@ -46,7 +46,6 @@ use common\models\BlockChain;
                   onclick = <?php echo 'vote("' . $model->blockchain . '","' . $model->author . '","' . $model->permlink . '",10000)';?>
                      >
              </div>
-        </div>           
             
             <script>
                 var voters = '<?php echo $model->voters ?>';

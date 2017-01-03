@@ -13,16 +13,16 @@ use yii\helpers\Html;
 
 ?>
 <div class ="site-index">
-<button type="button" class="btn btn-default previous" onclick = " window.history.back();">Назад</button>
+<button type="button" class="btn btn-default previous" onclick = "window.history.back();">Назад</button>
 <?php echo Html::a("Блог Автора",['/site/index/','author'=>$model->author],['class'=>'btn btn-default previous']) ?>
        
 <hr/>
 <div class="article-full row">
-    <div class="col-xs-12 col-lg-12 col-md-12 article-column">
+    <div class="col-xs-12 col-lg-8 col-lg-push-2 col-md-8 col-md-push-2 article-column">
         <h2 class="article-title">
               <?php echo Html::label($model->title, "" ,['class' => 'onepage_link']) ?>
         </h2>
-          <div class ="location">
+          <div class ="col-xs-12 col-lg-12 col-md-12 location">
                           <span>
                        <?php if ($model->country !='[]') echo Html::label($model->country, "" ,['class' => 'label label-default']) ?>
                      </span>
@@ -51,11 +51,11 @@ use yii\helpers\Html;
        
      <div class ="additional-info">
          <hr>
-     <?= $this->render('/site/_addmetainfo',['model'=>$model]) ?>
+         <?= $this->render('/site/_addmetainfo',['model'=>$model]) ?>
 
      </div>
 
-        <div class="article-metainfo">
+        <div class="col-xs-12 col-lg-12 col-md-12 col-lg-psh-1 col-md-push-1 article-metainfo">
 
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
             <?php 
@@ -63,7 +63,23 @@ use yii\helpers\Html;
             <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'edit_link']) ?>
       
         </div>
+                <div id ="comments">
+        <?php echo common\modules\comments\widgets\Comment::widget([
+            'model' => $model,
+            'clientOptions' => [
+                'pjaxSettings' => [
+                    'timeout' => 20000,
+                    'url' => \yii\helpers\Url::to(['/site/comments', 'permlink' => $model->permlink]),
+                    'scrollTo' => false,
+                    'enablePushState' => false
+                ]
+            ]
+        ]);?>
+        </div>
+
         </div>  
+
+
     
 </div>
 
@@ -76,19 +92,6 @@ use yii\helpers\Html;
 
         
 
-<div id ="comments">
-<?php echo common\modules\comments\widgets\Comment::widget([
-    'model' => $model,
-    'clientOptions' => [
-        'pjaxSettings' => [
-            'timeout' => 20000,
-            'url' => \yii\helpers\Url::to(['/site/comments', 'permlink' => $model->permlink]),
-            'scrollTo' => false,
-            'enablePushState' => false
-        ]
-    ]
-]);?>
-</div>
 
 <?php
         yii\bootstrap\Modal::begin([

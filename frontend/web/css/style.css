@@ -199,13 +199,10 @@ a.desc:after {
   margin-bottom: 15px;
       margin-right: auto;
     margin-left: auto;
-    width: 70%;
+ 
 }
 
 .comments{
-    margin-right: auto;
-    margin-left: auto;
-    width: 70%;
 }
 
 .article-full .article-metainfo {
@@ -278,8 +275,7 @@ text-align: center;
 }
 
 .location{
-    padding-bottom: 10px;
-    padding-top: 5px;
+   
     
 }
 .location label{
