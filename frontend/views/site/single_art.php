@@ -22,7 +22,7 @@ use yii\helpers\Html;
         <h2 class="article-title">
               <?php echo Html::label($model->title, "" ,['class' => 'onepage_link']) ?>
         </h2>
-          <div class ="col-xs-12 col-lg-12 col-md-12 location">
+          <div class ="location">
                           <span>
                        <?php if ($model->country !='[]') echo Html::label($model->country, "" ,['class' => 'label label-default']) ?>
                      </span>
