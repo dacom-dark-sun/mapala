@@ -5,7 +5,7 @@ use kartik\popover\PopoverX;
 use common\models\Art;
 use common\models\BlockChain;
 ?>
-     <div class ="col-xs-12 col-md-7 article-metainfo">
+     <div class ="article-metainfo">
         
            <div class="article-author">
             <?php echo Yii::t('frontend', 'автор: ') ?><?php echo Html::a(stripslashes($model->author),['/site/index/','author'=>$model->author]) ?>
@@ -52,8 +52,7 @@ use common\models\BlockChain;
                   onclick = <?php echo 'vote("' . $model->blockchain . '","' . $model->author . '","' . $model->permlink . '",10000)';?>
                      >
              </div>
-        </div>    
-            
+        </div>            
             
             
             <script>
