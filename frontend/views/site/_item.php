@@ -45,10 +45,9 @@ use yii\helpers\Url;
                 echo $model::get_first_line($model) ?>
             </div>
         </div>
-        <div class="article-metainfo">
      <?= $this->render('_metainfo',['model'=>$model]) ?>
-            <hr>
-        </div>  
     </div>
+   
 </div>
+         <hr>
 
