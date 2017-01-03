@@ -537,7 +537,7 @@ padding-top: 5px;
 }
 
 @media screen and (max-width: 600px) {
-.categories{display:none}
+.category_panel{display:none}
 .article-full{width: 100%}
 .comments{width:100%}
 .comments-list .children{padding-left: 10px;}

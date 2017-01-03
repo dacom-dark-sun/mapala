@@ -5,7 +5,7 @@ use kartik\popover\PopoverX;
 use common\models\Art;
 use common\models\BlockChain;
 ?>
-     <div class ="col-xs-12 col-lg-8 article-metainfo">
+     <div class ="col-xs-12 col-lg-9 article-metainfo">
         
            <div class="col-xs-4 col-lg-2 article-author">
             <?php echo Yii::t('frontend', 'автор: ') ?><?php echo Html::a(stripslashes($model->author),['/site/index/','author'=>$model->author]) ?>
