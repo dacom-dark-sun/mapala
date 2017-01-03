@@ -584,4 +584,5 @@ padding-top: 5px;
 }
 .article-metainfo div:not(.popover):not(.popover-title):not(.popover-content){
     display: inline;
+    text-align: center;
 }
