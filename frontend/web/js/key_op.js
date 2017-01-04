@@ -78,7 +78,7 @@ $("#steem-btn-save_pass").click(function() {
        deleteCookie('steemsig');
        deleteCookie('steemac');
    }
-   var username = $('#username').val();
+   var username = $('#username').val().toLowerCase();
    var password =  $('#STEEM_pass').val();
    try{
    var wif = steem.auth.toWif(username, password, 'posting');
@@ -141,7 +141,7 @@ $("#golos-btn-save_pass").click(function() {
        deleteCookie('golossig');
        deleteCookie('golosac');
    }
-   var username = $('#username').val();
+   var username = $('#username').val().toLowerCase();
    var password =  $('#GOLOS_pass').val();
    //check key here
    
