@@ -1,12 +1,11 @@
 # Env
 /.env
 
-# composer
 
 /vendor/*
+/parser/*
 
-
-!/parser/
+# composer
 
 composer.phar
 ## remove in production!
@@ -33,6 +32,3 @@ phpunit.phar
 
 # Vagrant
 /.vagrant
-parser/images/2logo.png
-parser/images/logo.png
-parser/images/logosmall.png

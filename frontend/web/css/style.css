@@ -149,7 +149,6 @@ a.desc:after {
 .article-metainfo{
     font-size: 14px;
     margin-top: 10px;
-   // display: inline-flex;
     float: right;
     margin-top: 20px;
     
@@ -199,10 +198,12 @@ a.desc:after {
   margin-bottom: 15px;
       margin-right: auto;
     margin-left: auto;
- 
 }
 
 .comments{
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .article-full .article-metainfo {
@@ -256,8 +257,8 @@ text-align: center;
     position: relative;
     font-weight: 200;
     color: black;
-    font-size: 22px;
-    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: none;
 }
 .main_page_link:hover{
@@ -412,14 +413,10 @@ input[type="radio"], input[type="checkbox"]{
 }
       
 .article-author {
- //   font-family: cursive;
- //   font-size: 16px;
- //   margin-left: 15px;
  
 }
 
 .personal_blog_text{
-  //  font-family: cursive;
     font-size: 30px;
     color: #3392e3;
     z-index:1300;
@@ -469,8 +466,6 @@ input[type="radio"], input[type="checkbox"]{
     font-size: 16px;
 }
 .row{
-//    margin-right: 0px !important; 
-//     margin-left: 0px !important; 
 }
 
 
@@ -483,7 +478,6 @@ input[type="radio"], input[type="checkbox"]{
 
 .logo_text{
     color: #9d9d9d;
- //   font-family: cursive;
     padding-top: 13px;
     padding-left:20px;
     position: absolute;
@@ -507,23 +501,8 @@ input[type="radio"], input[type="checkbox"]{
  padding-left: 15px; 
 
 }
-.container-fluid{
-//  margin-top: 65px;
-}
-.site-index{
-    margin-top: 65px;
-}
-
-.sigle-blog-index{
-    margin-top: 35px;
-}
-
-.form-index{
-margin-top: 65px;    
-}
-
-.user-profile-form{
-margin-top: 65px;    
+.container_for_all{
+margin-top:65px;
 }
 
 .article-index{
@@ -562,7 +541,6 @@ padding-top: 5px;
 
 .account_name{
     cursor: pointer;
- //   font-family: cursive;
     font-size: 24px;
     margin-left: 3px;
 }

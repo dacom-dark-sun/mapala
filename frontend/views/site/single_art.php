@@ -60,9 +60,10 @@ use yii\helpers\Html;
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
             <?php 
             $model_name = Art::get_current_model($model);?>
-            <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'edit_link']) ?>
       
         </div>
+       
+              <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'btn btn-warning edit_link']) ?>
                 <div id ="comments">
         <?php echo common\modules\comments\widgets\Comment::widget([
             'model' => $model,

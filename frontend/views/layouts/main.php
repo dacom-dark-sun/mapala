@@ -2,17 +2,17 @@
 /* @var $this \yii\web\View */
 use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
+/* @var $content string */
 use cybercog\yii\googleanalytics\widgets\GATracking;
 
 echo GATracking::widget([
     'trackingId' => 'UA-89551963-1',
 ]) ;
-/* @var $content string */
 
 $this->beginContent('@frontend/views/layouts/base.php')
 ?>
     <div class="container-fluid">
-
+        <div class ="container_for_all">
         <?php echo Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -41,6 +41,7 @@ $this->beginContent('@frontend/views/layouts/base.php')
    
         <?php echo $content ?>
 
+    </div>
     </div>
 <?php $this->endContent() ?>
 
