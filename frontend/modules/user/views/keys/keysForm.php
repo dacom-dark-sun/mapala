@@ -13,7 +13,7 @@ KeyAsset::register($this);
 /* @var $form yii\widgets\ActiveForm */
 
 if (Yii::$app->controller->id == 'keys')
-    $this->title = Yii::t('frontend', 'Key Steem')
+    $this->title = Yii::t('frontend', 'Ключ GOLOS')
 ?>
 <div class="form-index">
     <h1><?php if (Yii::$app->controller->id == 'keys')
