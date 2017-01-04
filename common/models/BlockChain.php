@@ -455,7 +455,7 @@ class BlockChain extends Model
    static function create_permlink($title){
        $title = mb_strtolower(str_replace(" ", "-", $title));
        $title = BlockChain::tag_to_eng($title, 1);
-       $title= preg_replace('/[^a-z-а-яё0-9\s.,]+/iu', '', $title);
+       $title= preg_replace('/[^a-z-а-яё0-9\s]+/iu', '', $title);
        
     return $title;
    }
