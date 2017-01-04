@@ -170,9 +170,8 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'mapala';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][2] =  BlockChain::convert_city_to_lang($model->city);
-             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Knowledge'));
-             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+             $json['tags'][2] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Knowledge'));
+             $json['tags'][3] = BlockChain::tag_to_eng($model->tags);
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
@@ -312,6 +311,7 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'mapala';
              $json['tags'][1] = Blockchain::tag_to_eng(\Yii::t('frontend', 'News'));
+             $json['tags'][2] = BlockChain::tag_to_eng($model->tags);
              
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
@@ -455,7 +455,7 @@ class BlockChain extends Model
    static function create_permlink($title){
        $title = mb_strtolower(str_replace(" ", "-", $title));
        $title = BlockChain::tag_to_eng($title, 1);
-       $title= preg_replace('/[^a-z-а-яё0-9\s.,]+/iu', '', $title);
+       $title= preg_replace('/[^a-z-а-яё0-9\s]+/iu', '', $title);
        
     return $title;
    }

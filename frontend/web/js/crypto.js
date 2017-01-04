@@ -45,6 +45,7 @@ function get_wif(name){
             }
 
     } else {
+      alert('Oups, something wrong. Check your keys')
       return false;
     }
 

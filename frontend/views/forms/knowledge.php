@@ -28,9 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="form-index">
+     <?php if ($author&&$permlink){
+              echo Html::a(Yii::t('frontend', 'Сменить модель данных'), 
+                  ['/site/add', 'author' => $author, 'permlink' => $permlink], 
+                  ['class'=>'btn btn-warning change_category_btn']);
+          }
+          ?>
+         
     <div class="row">
         <div class="col-lg-12">
-            <div class ='col-lg-7'>
+              <div class ='col-lg-7'>
             <?php //------ Start active form and show title
             $form = ActiveForm::begin(['id' => 'add-form']); ?>
             <?php echo $form->field($model, 'title') ?>
@@ -45,40 +52,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 //---------------------------------------------------------------------
             ]);?> 
             
-            
-            
-            <?php //Show Countries-------------------------------------------------------------
-            echo $form->field($model, 'country')->widget(Select2::classname(),[
-                "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
-                'options' => ['placeholder' => 'Select a state ...'],
-                'pluginEvents' => [
-                "change"=>'function(event, id, value, count){save_country($(this).val())}'
-                ],//---------------------------------------------------------------------
-            ]); 
-            ?>
-       
-             <?php 
-                //Show depended cities by ajax ----------------------------------------------------------
-                echo $form->field($model, 'city')->widget(Select2::classname(), [
-                     'options' => ['placeholder' => 'Search for a city ...'],
-                    'pluginOptions' => [
-                    'allowClear' => true,
-                    'minimumInputLength' => 3,
-                    'language' => [
-                        'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
-                    ],
-                    'ajax' => [
-                        'url' => Yii::$app->urlManager->createUrl('forms/citylist'),
-                        'dataType' => 'json',
-                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
-                    ],
-                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
-                    'templateResult' => new JsExpression('function(city) { return city.text; }'),
-                    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
-                ],//--------------------------------------------------------------------------------------
-                ]);?>     
-           
+             <?php //Show Countries-------------------------------------------------------------
+                echo $form->field($model, 'country')->widget(Select2::classname(),[
+                     'options' => ['placeholder' => 'Select a state ...'],
 
+                    "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
+                    'pluginEvents' => [
+                     ],//---------------------------------------------------------------------
+                ]); 
+                ?>
+
+             
            <?php //---------------- EDITOR------------------------------
                  echo $form->field($model, 'body')->widget(Widget::className(), [
                     'settings' => [
@@ -185,7 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
 </div> 
     
-    
+</div>    
 <?php
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
@@ -223,13 +207,5 @@ $this->params['breadcrumbs'][] = $this->title;
           $('#modalKey').modal('show');
        });
 
-    function save_country(id){
-        id = parseInt(id);
-       $.ajax({
-            url    : '<?php echo Yii::$app->urlManager->createUrl('forms/save_country') ?>',
-            type   : 'get',
-            data   : { id : id}
-            });
-     }
      
 </script>

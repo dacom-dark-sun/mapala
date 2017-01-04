@@ -35,6 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
             $form = ActiveForm::begin(['id' => 'add-form']); ?>
             <?php echo $form->field($model, 'title') ?>
           
+                <?php //-------SHOW Categories-----------------//TODO - List PRE-data.   
+                    echo $form->field($model, 'tags')->widget(Select2::classname(),[
+                        'options' => ['placeholder' => 'Select a category ...'],
+                        "data" => ArrayHelper::map(OurCategory::find()
+                            ->Where(['model' => StringHelper::basename(get_class($model))])
+                            ->all(), BlockChain::get_blockchain_from_locale(), BlockChain::get_blockchain_from_locale()),
+                    //---------------------------------------------------------------------
+                        ]);?> 
 
            <?php //---------------- EDITOR------------------------------
                  echo $form->field($model, 'body')->widget(Widget::className(), [

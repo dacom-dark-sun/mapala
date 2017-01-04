@@ -31,7 +31,7 @@ class SiteController extends Controller
             ],
             'image-upload' => [
             'class' => 'vova07\imperavi\actions\UploadAction',
-            'url' => 'http://mapala.dev/storage/web/img/', // Directory URL address, where files are stored.
+            'url' => 'http://mapala.net/storage/web/img/', // Directory URL address, where files are stored.
             'path' => '@storage/web/img/' // Or absolute path to directory where files are stored.
             ],
         ];
@@ -80,11 +80,12 @@ class SiteController extends Controller
     
     
     
-    public function actionAdd()
+    public function actionAdd($author = null, $permlink = null)  //for change data model
     {
         $model = new AddForm();
         return $this->render('add', [
-            'model' => $model
+            'author' => $author,
+            'permlink' => $permlink
         ]);
     }
     

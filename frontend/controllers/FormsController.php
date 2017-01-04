@@ -164,16 +164,17 @@ class FormsController extends SiteController
               $model->attributes = $current_art->attributes;
               $model->country = BlockChain::convert_country_to_id($model->country);
              
-              $model->city = ucwords(strtolower($model->city));
               
               $meta = Art::explode_meta($current_art);
-              $model = Art::fill_knowledge($model,$meta, $current_art);
-    }
+              $model = Art::fill_places_or_blogs($model,$meta, $current_art);
+          }
      
-        return $this->render('knowledge', [ //CLEAR
-        'model' => $model
-        ]);
- 
+              return $this->render('knowledge', [ //CLEAR
+                'model' => $model, 
+                'author' => $author,
+                'permlink' => $permlink
+                ]);
+   
     }
         
      
@@ -203,12 +204,15 @@ class FormsController extends SiteController
               $model->country = BlockChain::convert_country_to_id($model->country);
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_places_or_blogs($model,$meta, $current_art);
+         
     }
      
-        return $this->render('places', [ //CLEAR
-        'model' => $model
-        ]);
- 
+                return $this->render('places', [ //CLEAR
+                   'model' => $model, 
+                   'author'=> $author,
+                   'permlink' => $permlink
+                ]);
+  
     }
       
         
@@ -243,10 +247,14 @@ class FormsController extends SiteController
               
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_places_or_blogs($model,$meta, $current_art);
+              
     }
      
         return $this->render('blogs', [ //CLEAR
-        'model' => $model
+        'model' => $model,
+        'author' => $author,
+        'permlink' => $permlink
+             
         ]);
  
     }
@@ -280,6 +288,9 @@ class FormsController extends SiteController
 
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              $model = Art::fill_news($model,$meta, $current_art);
+    
         }
      }
         return $this->render('news', [ //CLEAR

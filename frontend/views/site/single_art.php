@@ -55,14 +55,16 @@ use yii\helpers\Html;
 
      </div>
 
-        <div class="col-xs-12 col-lg-12 col-md-12 col-lg-psh-1 col-md-push-1 article-metainfo">
+        <div class="col-xs-12 col-lg-12 col-md-12 col-lg-push-1 col-md-push-1 article-metainfo">
 
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
             <?php 
             $model_name = Art::get_current_model($model);?>
-            <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'edit_link']) ?>
       
         </div>
+       <div class ="col-xs-12 col-lg-12 col-md-12 edit-button text-center">
+              <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'btn btn-warning edit_link']) ?>
+       </div>
                 <div id ="comments">
         <?php echo common\modules\comments\widgets\Comment::widget([
             'model' => $model,
