@@ -62,8 +62,9 @@ use yii\helpers\Html;
             $model_name = Art::get_current_model($model);?>
       
         </div>
-       
+       <div class ="edit-center">
               <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'btn btn-warning edit_link']) ?>
+       </div>
                 <div id ="comments">
         <?php echo common\modules\comments\widgets\Comment::widget([
             'model' => $model,
