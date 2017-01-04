@@ -11,7 +11,6 @@ use yii\base\Model;
 class Knowledge extends Model{
     public $title;
     public $country;
-    public $city;
     public $body;
     public $tags;
     public $coordinates;
@@ -24,7 +23,7 @@ class Knowledge extends Model{
     {
          return [
          //    name, email, subject and body are required
-            [['coordinates','title','country','city','body', 'tags'], 'required'],
+            [['coordinates','title','country','body', 'tags'], 'required'],
             // We need to sanitize them
             [['title','country', 'tags'], 'filter', 'filter' => 'strip_tags'],
            
@@ -40,7 +39,6 @@ class Knowledge extends Model{
         return [
             'title'=> Yii::t('frontend', 'Title'),
             'country' => Yii::t('frontend', 'Country'),
-            'city' => Yii::t('frontend', 'City'),
             'body' => Yii::t('frontend', 'Body'),
             'tags' => Yii::t('frontend', 'Category'),
             'coordinates' => Yii::t('frontend', 'Coordinates'),

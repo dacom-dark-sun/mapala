@@ -45,40 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 //---------------------------------------------------------------------
             ]);?> 
             
-            
-            
-            <?php //Show Countries-------------------------------------------------------------
-            echo $form->field($model, 'country')->widget(Select2::classname(),[
-                "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
-                'options' => ['placeholder' => 'Select a state ...'],
-                'pluginEvents' => [
-                "change"=>'function(event, id, value, count){save_country($(this).val())}'
-                ],//---------------------------------------------------------------------
-            ]); 
-            ?>
-       
-             <?php 
-                //Show depended cities by ajax ----------------------------------------------------------
-                echo $form->field($model, 'city')->widget(Select2::classname(), [
-                     'options' => ['placeholder' => 'Search for a city ...'],
-                    'pluginOptions' => [
-                    'allowClear' => true,
-                    'minimumInputLength' => 3,
-                    'language' => [
-                        'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
-                    ],
-                    'ajax' => [
-                        'url' => Yii::$app->urlManager->createUrl('forms/citylist'),
-                        'dataType' => 'json',
-                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
-                    ],
-                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
-                    'templateResult' => new JsExpression('function(city) { return city.text; }'),
-                    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
-                ],//--------------------------------------------------------------------------------------
-                ]);?>     
-           
+             <?php //Show Countries-------------------------------------------------------------
+                echo $form->field($model, 'country')->widget(Select2::classname(),[
+                     'options' => ['placeholder' => 'Select a state ...'],
 
+                    "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
+                    'pluginEvents' => [
+                     ],//---------------------------------------------------------------------
+                ]); 
+                ?>
+
+             
            <?php //---------------- EDITOR------------------------------
                  echo $form->field($model, 'body')->widget(Widget::className(), [
                     'settings' => [
@@ -223,13 +200,5 @@ $this->params['breadcrumbs'][] = $this->title;
           $('#modalKey').modal('show');
        });
 
-    function save_country(id){
-        id = parseInt(id);
-       $.ajax({
-            url    : '<?php echo Yii::$app->urlManager->createUrl('forms/save_country') ?>',
-            type   : 'get',
-            data   : { id : id}
-            });
-     }
      
 </script>

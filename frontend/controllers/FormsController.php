@@ -167,7 +167,7 @@ class FormsController extends SiteController
               $model->city = ucwords(strtolower($model->city));
               
               $meta = Art::explode_meta($current_art);
-              $model = Art::fill_knowledge($model,$meta, $current_art);
+              $model = Art::fill_places_or_blogs($model,$meta, $current_art);
     }
      
         return $this->render('knowledge', [ //CLEAR
