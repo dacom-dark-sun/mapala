@@ -200,6 +200,11 @@ a.desc:after {
     margin-left: auto;
 }
 
+.edit-button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .comments{
     margin-right: auto;
     margin-left: auto;
