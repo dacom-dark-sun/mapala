@@ -143,7 +143,7 @@ function comment (data, callback){
      
                     if (err == null){
                         setTimeout(redirect, 6000);
-                    }
+                    } else alert(err);
             });
         
         } else alert(err);

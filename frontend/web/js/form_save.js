@@ -8,7 +8,7 @@
 $(document).on("beforeSubmit", "#add-form", function () {
     // send data by ajax request.
     var form = $(this);
-   
+    try{
        $.ajax({
             url    : form.attr('action'),
             type   : 'post',
@@ -25,6 +25,8 @@ $(document).on("beforeSubmit", "#add-form", function () {
             });
    
     return false; // Cancel form submitting.
+} catch(err){ alert('Error data send');}
 });
+
      
      
