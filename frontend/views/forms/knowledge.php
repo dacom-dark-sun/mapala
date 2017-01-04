@@ -28,9 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="form-index">
+     <?php if ($author&&$permlink){
+              echo Html::a(Yii::t('frontend', 'Сменить модель данных'), 
+                  ['/site/add', 'author' => $author, 'permlink' => $permlink], 
+                  ['class'=>'btn btn-warning change_category_btn']);
+          }
+          ?>
+         
     <div class="row">
         <div class="col-lg-12">
-            <div class ='col-lg-7'>
+              <div class ='col-lg-7'>
             <?php //------ Start active form and show title
             $form = ActiveForm::begin(['id' => 'add-form']); ?>
             <?php echo $form->field($model, 'title') ?>
@@ -162,7 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
 </div> 
     
-    
+</div>    
 <?php
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],

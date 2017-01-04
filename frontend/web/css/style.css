@@ -581,3 +581,8 @@ padding-top: 5px;
 #article-index hr{
  margin-top: 0px !important; 
 }
+
+.change_category_btn{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

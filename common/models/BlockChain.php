@@ -311,6 +311,7 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'mapala';
              $json['tags'][1] = Blockchain::tag_to_eng(\Yii::t('frontend', 'News'));
+             $json['tags'][2] = BlockChain::tag_to_eng($model->tags);
              
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);

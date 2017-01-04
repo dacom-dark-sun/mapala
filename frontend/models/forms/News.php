@@ -12,6 +12,7 @@ class News extends Model
 {
     public $title;
     public $body;
+    public $tags;
     public $permlink = null;
     /**
      * @return array the validation rules.
@@ -20,7 +21,7 @@ class News extends Model
     {
          return [
          //    name, email, subject and body are required
-            [['title', 'body'], 'required'],
+            [['title', 'body', 'tags'], 'required'],
             // We need to sanitize them
             [['title'], 'filter', 'filter' => 'strip_tags'],
        
@@ -35,6 +36,7 @@ class News extends Model
         return [
             'name' => Yii::t('frontend', 'Name'),
             'body' => Yii::t('frontend', 'Body'),
+            'tags' => Yii::t('frontend', 'Category'),
             'title'=>Yii::t('frontend', 'Title'),
         ];
     }

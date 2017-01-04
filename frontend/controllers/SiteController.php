@@ -80,11 +80,12 @@ class SiteController extends Controller
     
     
     
-    public function actionAdd()
+    public function actionAdd($author = null, $permlink = null)  //for change data model
     {
         $model = new AddForm();
         return $this->render('add', [
-            'model' => $model
+            'author' => $author,
+            'permlink' => $permlink
         ]);
     }
     

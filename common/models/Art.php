@@ -523,6 +523,20 @@ class Art extends \yii\db\ActiveRecord
          
      }
      
+     
+     static function fill_news($model, $meta, $current_art){
+         /*
+         public $title;
+         public $body;
+         public $tags;
+         */
+        
+        $model->tags = $current_art->category;
+    return $model;
+         
+         
+     }
+     
       
      static function fill_knowledge($model, $meta, $current_art){
          /*
