@@ -7,6 +7,7 @@ use common\models\ArtSearch;
 use yii\helpers\StringHelper;
 use common\models\BlockChain;
 use yii\helpers\Html;
+use yii\helpers\Markdown;
 
 /**
  * This is the model class for table "art".
@@ -242,7 +243,7 @@ class Art extends \yii\db\ActiveRecord
           //  $body = \kartik\markdown\Markdown::convert($model->body);
              
          //   $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
-            $body = $model->body;
+            $body = Markdown::process($model->body);
          //   $matches = Art::parse_links_and_urls($body);
          //   foreach($matches[0] as $id => $m){
          //       if (in_array($matches[5][$id], $format_img)){

@@ -45,7 +45,7 @@ $this->beginContent('@frontend/views/layouts/base.php')
     </div>
 <?php $this->endContent() ?>
 
-
+<div class ="version">alfa 1.01</div>
 
 <script>
 

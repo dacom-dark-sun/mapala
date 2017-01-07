@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use yii2mod\behaviors\PurifyBehavior;
 use common\modules\comments\models\enums\CommentStatus;
 use common\modules\comments\Module;
+use yii\helpers\Markdown;
 
 /**
  * Class CommentModel
@@ -341,7 +342,7 @@ class CommentModel extends ActiveRecord
      */
     public function getContent($deletedCommentText = 'Comment has been deleted.')
     {
-        return $this->isDeleted ? Yii::t('yii2mod.comments', $deletedCommentText) : nl2br($this->body);
+        return $this->isDeleted ? Yii::t('yii2mod.comments', $deletedCommentText) : nl2br(\yii\helpers\Markdown::process($this->body));
     }
 
     /**

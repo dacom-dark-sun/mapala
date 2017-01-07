@@ -36,12 +36,18 @@ class SiteController extends Controller
             ],
         ];
     }
-
+    
+    
+/*
+Начальная страница проекта возвращается действием Index контроллера Site. В качестве параметров передаются переменные: $state = 'new'/'trending'/'discuss, что меняет порядок отображения контента в ленте. Если в параметрах указаны автор и прямая ссылка - контроллер возвращает статью. Если только автор - блог автора. Если массив категорий - возвращаются данные по одной или нескольким категориям. 
+*/
+    
+    
     public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null)
     {
         $categories_tree = Art::create_array_categories();
         
-        if ($categories != null){
+        if ($categories != null){ //Отображение по категориям
             $dataProvider = Art::get_data_by_categories($categories);
             $categories_tree = Art::create_array_categories();
         
@@ -50,14 +56,14 @@ class SiteController extends Controller
              ]); 
         }
         
-        if (($permlink == null)&&($author != null)) {
+        if (($permlink == null)&&($author != null)) { //Отображение персонального блога
             $dataProvider = Art::get_single_blog($author);
             return $this->render('single_blog', ['dataProvider' => $dataProvider,
                 'data' => $categories_tree,
                 'author'=>$author,
             ]);
             
-        } elseif (($permlink != null)&&($author != null)) {
+        } elseif (($permlink != null)&&($author != null)) { //Отображение статьи в полный экран
             $model = Art::get_single_art($author, $permlink);
             if ($model == null){
                 return $this->render('empty_blog');
@@ -68,7 +74,7 @@ class SiteController extends Controller
             
         }
         
-        $dataProvider = Art::get_data_by_categories($categories=null, $state);
+        $dataProvider = Art::get_data_by_categories($categories=null, $state); //Стандартное отображение с порядком вывода, определяемым переменной $state
         return $this->render('index', ['dataProvider'=>$dataProvider,
             'data' => $categories_tree,
          ]);
@@ -77,7 +83,9 @@ class SiteController extends Controller
 
 
 
-    
+    /*
+    Действие ADD используется для обновление базы. В качестве параметров возможно передать автора и прямую ссылку, что используется для смены категорий в процессе редактирования опубликованной статьи. 
+    */
     
     
     public function actionAdd($author = null, $permlink = null)  //for change data model
@@ -90,12 +98,22 @@ class SiteController extends Controller
     }
     
     
+    
+    /*
+    Поскольку мы не храним ключей пользователя и не передаем их на сервер ни в каком виде, то единственный способ перейти в блог пользователя - это перенаправить его на страницу, где выполнится javascript скрипт, получающий имя аккаунта пользователя и переадресующий с ним на действие Site/Index с параметром author.
+    */
+    
        
     public function actionShow_single_blog(){
       
         return $this->render('_pre_single_blog');
     }
     
+    
+
+    /*
+    Используется для построения дерева комментарием к определенной статье. 
+    */
     
     public function actionComments($permlink) {
       $model = new Art();

@@ -246,13 +246,12 @@ text-align: center;
 }
 
 .article-content img{
-    width: 100%;
+   
     
 }
 .main_page_link{
-    font-weight: 100;
+    font-weight: 400;
     color:  black;
-    text-shadow: black 0 0 1px;
     font-size:22px;
     vertical-align: sub;
     margin-left:15px;
@@ -267,17 +266,21 @@ text-align: center;
     display: none;
 }
 .main_page_link:hover{
- font-weight: 100;
-  text-shadow: black 0 0 1px;
+ font-weight: 400;
   font-size:22px;
   cursor: pointer;
 }
 
 
 .onepage_link{
-    font-weight: 100;
+    font-weight: 400;
     color:  black;
-    text-shadow: black 0 0 2px;
+}
+
+.version {
+    padding-left: 5px;
+        position: fixed;
+    bottom: 0px;
 }
 
 .location{
@@ -520,6 +523,7 @@ padding-top: 5px;
 
 @media screen and (max-width: 600px) {
 .category_panel{display:none}
+.article-content img{width: 100%;}
 .article-full{width: 100%}
 .comments{width:100%}
 .comments-list .children{padding-left: 10px;}

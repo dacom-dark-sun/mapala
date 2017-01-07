@@ -133,11 +133,4 @@ class UserToken extends ActiveRecord
         ]);
     }
     
-    /**
-     * @return UsertokenQuery
-     */
-    public static function find()
-    {
-        return new UserTokenQuery(get_called_class());
-    }
 }

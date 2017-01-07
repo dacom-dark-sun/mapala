@@ -22,7 +22,7 @@ use yii\helpers\Json;
 use yii\web\JsExpression;
 use yii\db\Query;
 /**
- * Site controller
+ * Forms controller, вызывается при нажатии на кнопку добавления статьи определенной модели данных
  */
 class FormsController extends SiteController
 {
@@ -46,7 +46,14 @@ class FormsController extends SiteController
         ];
     }
 
+    /*
+    Каждое действие контроллера вызывает соответствущую для него модель и обрабатывает в зависимости от полученных (или не полученных) параметров author и permlink. Наличие параметров определяет то, редактируется ли старая статья, или добавляется новая. Обращение к действию происходит при нажатии кнопки выбора модели данных на странице Пополнения Базы (контроллер site/add), или при нажатии на кнопку редактирования в статье. 
+    */
     
+    
+    /*
+    Действие Immapala показывает форму добавления информации о путешественнике с возможностью редактирования. На данный момент действие ОТКЛЮЧЕНО и УСТАРЕЛО (требует проверки и отладки перед запуском).
+    */
     public function actionImmapala($author = null, $permlink = null)
     {
           /*public $title; //title
@@ -86,6 +93,10 @@ class FormsController extends SiteController
  
     }
 
+    
+    /*
+    Действие Homestay показывает форму добавления информации о жилье с возможностью редактирования. На данный момент действие ОТКЛЮЧЕНО и УСТАРЕЛО (требует проверки и отладки перед запуском).
+    */
 
     public function actionHomestay($author = null, $permlink = null)
         {
@@ -131,8 +142,10 @@ class FormsController extends SiteController
  
     }
 
-    
-            
+    /*
+    Действие Knowledge показывает форму пополнения базы знаний о стране. 
+    */
+
     public function actionKnowledge($author = null, $permlink = null)
     {
 /*  public $title;
@@ -141,14 +154,18 @@ class FormsController extends SiteController
     public $tags;
     public $coordinates;
  */
+        //Если пользователь - гость, перенаправляем на контроллер логина.
         if(Yii::$app->user->isGuest) {
             $this->redirect(array('user/sign-in/login'));
         }
         
-        
          $model = new Knowledge();
         
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+        /*
+        При нажатии на кнопку submit формы добавления материала, вызывается это же действие, в котором проверяется поступление данных через массив POST. В случае их наличия и успешной валидации, запускается процесс конструирования массива с данными, готовыми к транзакции в блокчейн. 
+        */
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { 
             if ($permlink != null){
                 $model->permlink = $permlink;
             } 
@@ -156,15 +173,17 @@ class FormsController extends SiteController
              return $bl_model;
         }
         
-        if (($author != null)&&($permlink != null)){ //EDIT          
+        if (($author != null)&&($permlink != null)){ //EDIT        
+        /*
+        Если в контроллер поступают данные об авторе и прямой ссылке, то запускается процесс "доконструирования" модели данных. Поскольку часть данных записывается в metadata, их необходимо передать файлу view вместе с основной моделью. Процесс не из самых "красивых" и требует переработки. 
+        */
+        
         //Here $model - is model for edit (immapala), $current_art - it is model current article, 
         //from which we need to get additional parametrs (meta) and add to main model
 
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
               $model->country = BlockChain::convert_country_to_id($model->country);
-             
-              
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_places_or_blogs($model,$meta, $current_art);
           }
@@ -176,17 +195,23 @@ class FormsController extends SiteController
                 ]);
    
     }
-        
-     
+       
+    
+    /*
+    Действие Places показывает форму пополнения достопримечательностей. 
+    */
+ 
     public function actionPlaces($author = null, $permlink = null)
         {
+         //Если пользователь - гость, перенаправляем на контроллер логина.
+       
         if(Yii::$app->user->isGuest) {
             $this->redirect(array('user/sign-in/login'));
         }
-        
-      
-           $model = new Places();
-        
+         $model = new Places();
+         /*
+        При нажатии на кнопку submit формы добавления материала, вызывается это же действие, в котором проверяется поступление данных через массив POST. В случае их наличия и успешной валидации, запускается процесс конструирования массива с данными, готовыми к транзакции в блокчейн. 
+        */
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
             if ($permlink != null){
                 $model->permlink = $permlink;
@@ -196,17 +221,22 @@ class FormsController extends SiteController
         }
         
         if (($author != null)&&($permlink != null)){ //EDIT          
+        /*
+        Если в контроллер поступают данные об авторе и прямой ссылке, то запускается процесс "доконструирования" модели данных. Поскольку часть данных записывается в metadata, их необходимо передать файлу view вместе с основной моделью. Процесс не из самых "красивых" и требует переработки. 
+        */
+        
         //Here $model - is model for edit (immapala), $current_art - it is model current article, 
         //from which we need to get additional parametrs (meta) and add to main model
 
               $current_art= Art::get_article_for_edit($author, $permlink);
               $model->attributes = $current_art->attributes;
               $model->country = BlockChain::convert_country_to_id($model->country);
+              $model->city = ucwords(strtolower($model->city));
+
               $meta = Art::explode_meta($current_art);
               $model = Art::fill_places_or_blogs($model,$meta, $current_art);
          
     }
-     
                 return $this->render('places', [ //CLEAR
                    'model' => $model, 
                    'author'=> $author,
@@ -218,17 +248,22 @@ class FormsController extends SiteController
         
         
     
-    
+    /*
+    Действие Blogs показывает форму добавления истории о путешествии. 
+    */
     
     public function actionBlogs($author = null, $permlink = null)
         {
-        
+         //Если пользователь - гость, перенаправляем на контроллер логина.
         if(Yii::$app->user->isGuest) {
             $this->redirect(array('user/sign-in/login'));
         }
         
            $model = new Blogs();
         
+        /*
+        При нажатии на кнопку submit формы добавления материала, вызывается это же действие, в котором проверяется поступление данных через массив POST. В случае их наличия и успешной валидации, запускается процесс конструирования массива с данными, готовыми к транзакции в блокчейн. 
+        */
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
             if ($permlink != null){
                 $model->permlink = $permlink;
@@ -238,6 +273,9 @@ class FormsController extends SiteController
         }
         
         if (($author != null)&&($permlink != null)){ //EDIT          
+         /*
+        Если в контроллер поступают данные об авторе и прямой ссылке, то запускается процесс "доконструирования" модели данных. Поскольку часть данных записывается в metadata, их необходимо передать файлу view вместе с основной моделью. Процесс не из самых "красивых" и требует переработки. 
+        */
         //Here $model - is model for edit (immapala), $current_art - it is model current article, 
         //from which we need to get additional parametrs (meta) and add to main model
 
@@ -260,10 +298,14 @@ class FormsController extends SiteController
     }
       
         
-        
+      
+    /*
+    Действие News показывает форму добавления новостей. Форма доступна только пользователю с ником "mapala".  
+    */  
     
     public function actionNews($author = null, $permlink = null)
         {
+        //Если пользователь - гость, перенаправляем на контроллер логина.
         if(Yii::$app->user->isGuest) {
             $this->redirect(array('user/sign-in/login'));
         }
@@ -271,9 +313,6 @@ class FormsController extends SiteController
         $model = new News();
 
         if (Yii::$app->user->identity->username == 'mapala'){
-             
-         
-           
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
            if ($permlink != null){
                 $model->permlink = $permlink;
@@ -283,6 +322,8 @@ class FormsController extends SiteController
         }
         
         if (($author != null)&&($permlink != null)){ //EDIT          
+        /* Если в контроллер поступают данные об авторе и прямой ссылке, то запускается процесс "доконструирования" модели данных. Поскольку часть данных записывается в metadata, их необходимо передать файлу view вместе с основной моделью. Процесс не из самых "красивых" и требует переработки. 
+        */
         //Here $model - is model for edit (immapala), $current_art - it is model current article, 
         //from which we need to get additional parametrs (meta) and add to main model
 
@@ -303,7 +344,7 @@ class FormsController extends SiteController
     public function actionEvents()
         {
        
-    }
+        }
 
     
 
@@ -312,28 +353,23 @@ class FormsController extends SiteController
     
      public function actionBase()
       {
-        $model = new Base();
-       
-         
-    }
+      }
 
     
      public function actionCompanions()
         {
-        $model = new Companions();
        
-        
-    }
+        }
 
     
     public function actionTransport()
         {
-        $model = new Transport();
-
-       
-    }
+        }
 
 
+    /*
+    В тех моделях, где необходимо выбрать город, список городов подгружается с использованием cookies. При выборе страны, отправляется ajax запрос, который сохраняет страну и при клике на список городов, подгружает нужный список.
+    */
      
      public function actionSave_country($id)
     {
@@ -346,8 +382,9 @@ class FormsController extends SiteController
     }
     
     
-    
-    
+/*
+Действие используется для получения списка городов с учетом сохраненной страны.
+*/
     
 public function actionCitylist($q = null, $id = null) {
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

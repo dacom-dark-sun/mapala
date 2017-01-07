@@ -14,6 +14,10 @@ use common\models\BlockChain;
  */
 class AjaxController extends Controller{
 
+    /*
+    Для обеспечения работы сайта без перезагрузки страницы, используется ajax запрос, вызываемый нажатием на кнопку выбора категории в дереве (функция function_a в frontend/views/layout/main). Запрос отправляется действию Ajax/Show_by_category.
+    
+    */
     
     public function actionShow_by_category($categories){
      
@@ -22,7 +26,10 @@ class AjaxController extends Controller{
               ]);
     }
    
-     
+    
+    /*
+    Для того, чтобы иметь возможность поставить в соответствие аккаунты пользователей MapalaNet с их аккаунтами на Golos/Steem, каждый никнейм при сохранении приватного ключа сохраняется в таблицу user, колонки steem/golos. 
+    */
     
     public function actionSave_name ($name){
         $blockchain = BlockChain::get_blockchain_from_locale();
@@ -35,9 +42,11 @@ class AjaxController extends Controller{
     }
     
      
+    /*
+    При отправке комментария используется действие Send_comment, которое запрашивает модель Blockchain о подготовке данных к отправке. 
+    */
       
-      
-     public function actionComments_save() {
+     public function actionSend_comment() {
       $data = Yii::$app->request->post();
       
       if ($data['data']){

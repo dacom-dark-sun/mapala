@@ -48,6 +48,12 @@ use yii\helpers\Html;
 
 <script>
     
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+    
      function send_comment($this){
         $('.loader_head').css('display', 'inline');
         var data;
@@ -59,7 +65,7 @@ use yii\helpers\Html;
         
         data = JSON.stringify({parentAuthor, parentPermlink, body, category});
         $.ajax({
-            url: '<?php echo Yii::$app->request->baseUrl . '/ajax/comments_save/' ?>',
+            url: '<?php echo Yii::$app->request->baseUrl . '/ajax/send_comment/' ?>',
             type: "post",
      
             data   : {data: data},
