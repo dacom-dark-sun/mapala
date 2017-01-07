@@ -24,9 +24,6 @@ use yii\helpers\Html;
             </h3>
             <div class="title-separator"></div>
         </div>
-        <ol class="comments-list">
-            <?php echo $this->render('_list', ['comments' => $comments, 'maxLevel' => $maxLevel]) ?>
-        </ol>
         <?php if (!Yii::$app->user->isGuest): ?>
             <?php echo $this->render('_form', [
                 'commentModel' => $commentModel,
@@ -38,6 +35,11 @@ use yii\helpers\Html;
 Проголосовавшие читатели также вознаграждаются. Если вам понравился данный пост Вы можете вознаградить автора
 Для этого зарегистрируйтесь и проголосуйте за пост. </div>')?>
         <?php endif; ?>
+        
+        
+        <ol class="comments-list">
+            <?php echo $this->render('_list', ['comments' => $comments, 'maxLevel' => $maxLevel]) ?>
+        </ol>
         
         
     </div>
