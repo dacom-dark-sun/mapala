@@ -131,5 +131,6 @@ return [
     'Welcome to {app-name}. Email with your login information was sent to your email.' => 'Добро пожаловать в {app-name}. E-mail с информацией о пользователе был отправлен на вашу почту.',
     'Your account has been successfully saved' => 'Ваш аккаунт был успешно сохранен',
     '{app-name} | Your login information' => '{app-name} | Информация о пользователе',
-    'News' => 'Новости'
+    'News' => 'Новости',
+    'Вне Города' => 'Unsorted',
 ];

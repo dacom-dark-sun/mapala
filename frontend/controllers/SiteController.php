@@ -6,6 +6,7 @@ use frontend\models\AddForm;
 use yii\web\Controller;
 use common\models\ArtSearch;
 use common\models\Art;
+use common\models\BlockChain;
 
 /**
  * Site controller
@@ -123,6 +124,15 @@ class SiteController extends Controller
          'model' => $model
      ]);
      }
+     
+    static function actionCreate_account(){
+        
+        $username = 'vasya';
+        $pass = 'pass';
+        $result = BlockChain::register($username, $pass);
+    return $result;
+    
+    }
        
     
 }

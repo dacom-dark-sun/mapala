@@ -12,6 +12,7 @@ KeyAsset::register($this);
 /* @var $model common\base\MultiModel */
 /* @var $form yii\widgets\ActiveForm */
 
+$this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 if (Yii::$app->controller->id == 'keys')
     $this->title = Yii::t('frontend', 'Ключ GOLOS')
 ?>
@@ -57,12 +58,16 @@ if (Yii::$app->controller->id == 'keys')
                 <div class ="keys_save_edit_buttons">
                     <button type="button" id='golos-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
                 <button type="button" id= 'golos-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
+        <?php  if (Yii::$app->controller->id == 'keys'):?>      <button type="button" class="btn btn-danger" onclick=" $('#modalsignupBlockchain').modal('show')"> <?php echo Yii::t('frontend', 'Получить аккаунт GOLOS')?></button>
+            <?php endif; ?>
                 </div>
             </div>
     <?php endif; ?>
             <div class ="account_name"></div>
         </div>
-         <div class="col-lg-6">
+   
+            
+            <div class="col-lg-6">
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     <?= Yii::t('frontend', 'Важно!') ?>
@@ -94,6 +99,26 @@ if (Yii::$app->controller->id == 'keys')
     </div>
     
 </div>
+
+<?php
+        yii\bootstrap\Modal::begin([
+            'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
+            'header' => '<h2>' . Yii::t('frontend', 'Создать аккаунт Golos') . '</h2>',
+            'id' => 'modalsignupBlockchain',
+            'size' => 'modal-md',
+            'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
+        ]);
+
+
+       if (Yii::$app->controller->id == 'keys'){
+         echo $this->context->renderPartial('@frontend/modules/user/views/keys/signupBlockchain',[
+            'signupBl_model'=> $signupBl_model,
+        ]);
+        yii\bootstrap\Modal::end();
+       }
+?>
+
+
 
 <script>
 $(document).ready(function(){
@@ -130,6 +155,22 @@ $("#instruction").click(function() {
     
 });
 
-    
-
+function create_account(username, pass){
+     $.ajax({
+              url: '/site/create_account/',
+       
+            type: "post",
+     
+            data   : {username: username, pass: pass},
+            success: function (comment_data) 
+            {
+                console.log(comment_data);
+            },
+            error  : function (xhr, ajaxOptions, thrownError) 
+            {
+               console.log('internal server error');
+            }
+            });
+            
+}
 </script>

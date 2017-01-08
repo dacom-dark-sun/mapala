@@ -505,6 +505,55 @@ class BlockChain extends Model
         $decrypted = unserialize($decrypted);
         return $decrypted;
     }
+    
+    
+    static function register($username, $pass){
+        $creator = 'mapala';
+        
+        $param = '{"id":"1","method":"unlock","params":["' . env('GOLOS_PASS') . '"]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $out = shell_exec($cmd);
+        $result = json_decode($out,true);
+      
+        $param = '{"id":"1","method":"get_account","params":["' . $username . '"]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $account = json_decode(shell_exec($cmd), true);
+       
+        
+        if (array_key_exists('error', $account)){
+        $param = '{"id":"1","method":"get_private_key_from_password","params":["' . $username . '", "active", "' . $pass . '"]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $active_key = json_decode(shell_exec($cmd), true);
+     
+        $param = '{"id":"1","method":"get_private_key_from_password","params":["' . $username . '", "posting", "' . $pass . '"]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $posting_key = json_decode(shell_exec($cmd), true);
+        
+        $param = '{"id":"1","method":"get_private_key_from_password","params":["' . $username . '", "owner", "' . $pass . '"]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $owner_key = json_decode(shell_exec($cmd), true);
+     
+        $param = '{"id":"1","method":"get_private_key_from_password","params":["' . $username . '", "memo", "' . $pass . '"]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $memo_key = json_decode(shell_exec($cmd), true);
+        
+        $param = '{"id":"1","method":"create_account_with_keys","params":["' . $creator . '","' . $username . '", '
+                . '"{"app":"mapala"}", "' . $owner_key["result"][0] . '",  "' . $active_key["result"][0] . '",  "' . $posting_key["result"][0] . '",  "' . $memo_key["result"][0] . '", "true"]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $result = json_decode(shell_exec($cmd), true);
+        $result = $posting_key["result"][1];
+        } else {
+            $result = false;
+        }
+        
+        $param = '{"id":"1","method":"lock","params":[""]}';
+        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+        $out = shell_exec($cmd);  
+ 
+        
+        return $result;
+        
+    }
    
     
     
