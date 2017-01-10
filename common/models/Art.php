@@ -243,7 +243,7 @@ class Art extends \yii\db\ActiveRecord
           //  $body = \kartik\markdown\Markdown::convert($model->body);
              
          //   $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
-            $body = Markdown::process($model->body);
+            $body = $model->body;
          //   $matches = Art::parse_links_and_urls($body);
          //   foreach($matches[0] as $id => $m){
          //       if (in_array($matches[5][$id], $format_img)){
