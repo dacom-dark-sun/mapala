@@ -14,6 +14,8 @@ class Places extends Model
     public $tags;
     public $body;
     public $country;
+    public $location = null;
+    public $city = null;
     public $coordinates;
     public $permlink = null;
     /**
@@ -23,11 +25,11 @@ class Places extends Model
     {
          return [
          //    name, email, subject and body are required
-            [['coordinates','country','title', 'body','tags'], 'required'],
+            [['coordinates', 'country','title', 'body','tags'], 'required'],
             // We need to sanitize them
             [['title', 'country', 'tags'], 'filter', 'filter' => 'strip_tags'],
-       
-        ];
+            [['location', 'city'], 'string']
+         ];
     }
 
     /**
@@ -38,7 +40,9 @@ class Places extends Model
         return [
             'name' => Yii::t('frontend', 'Name'),
             'country' => Yii::t('frontend', 'Country'),
+            'location' => Yii::t('frontend', 'Location'),
             'body' => Yii::t('frontend', 'Body'),
+            'city' => Yii::t('frontend', 'City'),
             'tags' => Yii::t('frontend', 'Category'),
             'title'=>Yii::t('frontend', 'Title'),
             'coordinates' => Yii::t('frontend', 'Coordinates'),

@@ -170,8 +170,11 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'mapala';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][2] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Knowledge'));
-             $json['tags'][3] = BlockChain::tag_to_eng($model->tags);
+             $json['tags'][2] = ($model->city == "" ? Blockchain::tag_to_eng(\Yii::t('frontend', 'Unsorted')) : $model->city);
+             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Knowledge'));
+             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+             
+             $json['location'] = $model->location;
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
@@ -183,7 +186,8 @@ class BlockChain extends Model
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
              
-             $json['sign'] = BlockChain::mc_encrypt($bl_model['permlink'], ENCRYPTION_KEY);
+             $sign = ['permlink' => $bl_model['permlink'], 'tags' => $json['tags']];
+             $json['sign'] = BlockChain::mc_encrypt($sign, ENCRYPTION_KEY);
              
              
              $bl_model['metadata'] = $json;
@@ -198,6 +202,7 @@ class BlockChain extends Model
    static function construct_places($model){
            /*  public $title;
     public $country;
+    public $location;
     public $body;
     public $tags; -- one tag
     public $coordinates;
@@ -216,9 +221,10 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'mapala';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-            
-             $json['tags'][2] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Places'));
-             $json['tags'][3] = BlockChain::tag_to_eng($model->tags);
+             $json['tags'][2] = ($model->city == "" ? Blockchain::tag_to_eng(\Yii::t('frontend', 'Unsorted')) : $model->city);
+             $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Places'));
+             $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
+             $json['location'] = $model->location;
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
@@ -229,8 +235,9 @@ class BlockChain extends Model
              
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
-             $json['sign'] = BlockChain::mc_encrypt($bl_model['permlink'], ENCRYPTION_KEY);
-             
+             $sign = ['permlink' => $bl_model['permlink'], 'tags' => $json['tags']];
+             $json['sign'] = BlockChain::mc_encrypt($sign, ENCRYPTION_KEY);
+
              $bl_model['metadata'] = $json;
              
              return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
@@ -263,8 +270,10 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'mapala';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][2] =  BlockChain::tag_to_eng(Yii::t('frontend','Blogs'));
-             $json['tags'][3] =  BlockChain::tag_to_eng($model->tags);
+             $json['tags'][2] = ($model->city == "" ? Blockchain::tag_to_eng(\Yii::t('frontend', 'Unsorted')) : $model->city);
+             $json['tags'][3] =  BlockChain::tag_to_eng(Yii::t('frontend','Blogs'));
+             $json['tags'][4] =  BlockChain::tag_to_eng($model->tags);
+             $json['location'] = $model->location;
              
              $json['coordinates'] = ($model->coordinates == "40.7324319,-73.82480777777776" ? "" : $model->coordinates);
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
@@ -276,8 +285,9 @@ class BlockChain extends Model
              if (array_key_exists('image', $arr))
                 $json['image'] = $arr['image'];
 
-             $json['sign'] = BlockChain::mc_encrypt($bl_model['permlink'], ENCRYPTION_KEY);
-             
+             $sign = ['permlink' => $bl_model['permlink'], 'tags' => $json['tags']];
+             $json['sign'] = BlockChain::mc_encrypt($sign, ENCRYPTION_KEY);
+
              
              $bl_model['metadata'] = $json;
              
@@ -538,7 +548,7 @@ class BlockChain extends Model
         $memo_key = json_decode(shell_exec($cmd), true);
         
         $param = '{"id":"1","method":"create_account_with_keys","params":["' . $creator . '","' . $username . '", '
-                . '"{"app":"mapala"}", "' . $owner_key["result"][0] . '",  "' . $active_key["result"][0] . '",  "' . $posting_key["result"][0] . '",  "' . $memo_key["result"][0] . '", "true"]}';
+                . '"app":"mapala", "' . $owner_key["result"][0] . '",  "' . $active_key["result"][0] . '",  "' . $posting_key["result"][0] . '",  "' . $memo_key["result"][0] . '", "true"]}';
         $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
         $result = json_decode(shell_exec($cmd), true);
         $result = $posting_key["result"][1];

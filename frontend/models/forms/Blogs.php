@@ -14,6 +14,8 @@ class Blogs extends Model
     public $tags;
     public $body;
     public $country;
+    public $location = null;
+    public $city = null;
     public $coordinates;
     public $permlink = null;
     /**
@@ -26,6 +28,7 @@ class Blogs extends Model
             [['coordinates','country','title', 'tags', 'body'], 'required'],
             // We need to sanitize them
             [['title','country', 'tags'], 'filter', 'filter' => 'strip_tags'],
+            [['location', 'city'], 'string']
        
         ];
     }
@@ -39,6 +42,9 @@ class Blogs extends Model
             'name' => Yii::t('frontend', 'Name'),
             'country' => Yii::t('frontend', 'Country'),
             'body' => Yii::t('frontend', 'Body'),
+            'location' => Yii::t('frontend', 'Location'),
+            'city' => Yii::t('frontend', 'City'),
+    
             'tags' => Yii::t('frontend', 'Category'),
             'title'=>Yii::t('frontend', 'Title'),
             'coordinates' => Yii::t('frontend', 'Coordinates'),

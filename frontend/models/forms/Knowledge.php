@@ -14,6 +14,8 @@ class Knowledge extends Model{
     public $body;
     public $tags;
     public $coordinates;
+    public $location = null;
+    public $city = null;
     public $permlink = null;
 
     /**
@@ -26,7 +28,8 @@ class Knowledge extends Model{
             [['coordinates','title','country','body', 'tags'], 'required'],
             // We need to sanitize them
             [['title','country', 'tags'], 'filter', 'filter' => 'strip_tags'],
-           
+            [['location', 'city'], 'string']
+       
 
         ];
     }
@@ -42,6 +45,9 @@ class Knowledge extends Model{
             'body' => Yii::t('frontend', 'Body'),
             'tags' => Yii::t('frontend', 'Category'),
             'coordinates' => Yii::t('frontend', 'Coordinates'),
+            'location' => Yii::t('frontend', 'Location'),
+            'city' => Yii::t('frontend', 'City'),
+    
            
         ];
     }

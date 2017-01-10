@@ -132,5 +132,6 @@ return [
     'Your account has been successfully saved' => 'Ваш аккаунт был успешно сохранен',
     '{app-name} | Your login information' => '{app-name} | Информация о пользователе',
     'News' => 'Новости',
-    'Вне Города' => 'Unsorted',
+    'Unsorted' => 'Вне Города',
+    'Travel' => 'Путешествия',
 ];

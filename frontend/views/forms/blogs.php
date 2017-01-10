@@ -54,6 +54,13 @@ $this->params['breadcrumbs'][] = $this->title;
                      ],//---------------------------------------------------------------------
                 ]); 
                 ?>
+                <?php //Show Location-------------------------------------------------------------
+                echo $form->field($model, 'location')->input(['text'], ['placeholder' => 'Select a location ...', 'id'=>'location']); 
+                ?>
+                 <?php //Show Location-------------------------------------------------------------
+                echo $form->field($model, 'city')->hiddenInput(['text'], ['placeholder' => 'Select a location ...', 'id'=>'city'])->label(false); 
+                ?>
+
 
                 <?php //---------------- EDITOR------------------------------
                  echo $form->field($model, 'body')->widget(Widget::className(), [

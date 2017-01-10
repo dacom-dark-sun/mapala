@@ -316,6 +316,9 @@ cursor: pointer;
   font-weight: 400;
     
 }
+a#key_modal_ask {
+    color:red;
+}
 
 
 .keys_save_edit_buttons{
@@ -555,7 +558,7 @@ padding-top: 5px;
 .account_name{
     cursor: pointer;
     font-size: 24px;
-    margin-left: 3px;
+    margin-left: 6px;
 }
 .account_name a{
     font-size: 20px;
