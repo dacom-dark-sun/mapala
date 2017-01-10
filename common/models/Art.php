@@ -572,6 +572,7 @@ class Art extends \yii\db\ActiveRecord
             $art = $query
                 ->find()
                 ->where('blockchain=' . "'" .  $blockchain . "'")
+                ->andwhere(['<>','author', 'mapala'])
                 ->count();
         
          return $art;
