@@ -4,6 +4,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use common\models\BlockChain;
+use common\models\Art;
+
 /* @var $this \yii\web\View */
 /* @var $content string 
    ['label' => Yii::t('frontend', 'About'), 'url' => ['/page/view', 'slug'=>'about']],
@@ -82,3 +84,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
 
 
 <?php $this->endContent() ?>
+
+ <div class = "div_amount">
+       <div class="article_amount"><?php echo Yii::t('frontend','Articles') . ": " . Art::get_article_amount() ?> </div>
+   </div>

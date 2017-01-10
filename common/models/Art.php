@@ -564,6 +564,19 @@ class Art extends \yii\db\ActiveRecord
             
          return $meta['model'];
      }
+     
+     
+     static function get_article_amount(){
+         $query = new Art();
+         $blockchain = BlockChain::get_blockchain_from_locale();
+            $art = $query
+                ->find()
+                ->where('blockchain=' . "'" .  $blockchain . "'")
+                ->count();
+        
+         return $art;
+         
+     }
         
         
 }
