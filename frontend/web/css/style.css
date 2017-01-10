@@ -497,18 +497,17 @@ input[type="radio"], input[type="checkbox"]{
     padding-left:20px;
     position: absolute;
 }
-.div_amount{
-    width: 100%;
-    z-index: 10000;
-    position: absolute;
-    position: fixed;
+.span_amount{
+    z-index: 1035;
     top: 0;
-    
-}
-.article_amount{
     color: #d9534f;
     padding-top: 13px;
-    text-align: center;
+    position: absolute;
+    text-align: center;   
+    padding-left: 190px;
+}
+.article_amount{
+ 
 }
 
 .site_logo{
