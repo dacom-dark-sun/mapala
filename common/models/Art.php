@@ -516,7 +516,7 @@ class Art extends \yii\db\ActiveRecord
          public $tags;
          public $coordinates;        
          */
-        $model->location = $current_art->location;
+        $model->location =  (array_key_exists('location', $meta)? $meta['location'] :  "");
         $model->tags = $current_art->category;
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
     return $model;
@@ -548,7 +548,7 @@ class Art extends \yii\db\ActiveRecord
          public $tags;
          public $coordinates;        
          */
-        $model->location = $current_art->location;        
+        $model->location =  (array_key_exists('location', $meta)? $meta['location'] :  "");
         $model->tags = $current_art->sub_category;
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
     return $model;
