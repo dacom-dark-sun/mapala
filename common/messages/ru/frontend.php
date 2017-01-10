@@ -136,4 +136,5 @@ return [
     'Travel' => 'Путешествия',
     'Location' => 'Локация (город, остров, ...)',
     'Articles' => 'Статьи',
+    'You can use Markdown syntax' => 'Вы можете использовать синтаксис MarkDown',
 ];
