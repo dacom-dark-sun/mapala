@@ -561,8 +561,8 @@ class Art extends \yii\db\ActiveRecord
         
      static function get_current_model($model){
         $meta = json_decode($model['meta'], true);
-            
-         return $meta['model'];
+        $model =  (array_key_exists('model', $meta)? $meta['model'] :  "blogs");
+         return $model;
      }
      
      
