@@ -24,6 +24,10 @@
 }
 .article-item .article-text {
   margin-top: 7px;
+  word-wrap: break-word;
+}
+.article-text{
+  word-wrap: break-word;
 }
 
 html,
