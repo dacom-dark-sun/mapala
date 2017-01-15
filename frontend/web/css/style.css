@@ -29,6 +29,11 @@
 .article-text{
   word-wrap: break-word;
 }
+.link{
+ color: brown;  
+ cursor: pointer;
+ 
+}
 
 html,
 body {

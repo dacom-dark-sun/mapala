@@ -44,7 +44,7 @@ class SignupForm extends Model
             ['username', 'string', 'min' => 2, 'max' => 255],
             
             ['username',
-            'match', 'not' => true, 'pattern' => '/[^a-zA-Z.]/',
+            'match', 'not' => true, 'pattern' => '/[^a-z0-9A-Z.]/',
             'message' => 'Invalid characters in username.'],
             
             ['email', 'filter', 'filter' => 'trim'],

@@ -10,11 +10,6 @@ use yii\helpers\Html;
 
 ?>
 
-<?=  Html::a(Yii::t('frontend', 'Current distribution'), 
-                  ['/site/ico'], 
-                  ['class'=>'btn btn-warning change_category_btn']);
-          ?>
-
 <div class="row">
     <div class="col-lg-12">
   
@@ -40,7 +35,14 @@ use yii\helpers\Html;
                     </div>
                 </div>
    </div>
-        
+    </div>  
+    
+    <div class = 'col-lg-2'>   
+<?=  Html::a(Yii::t('frontend', '<-- ICO'), 
+                              ['/site/ico'], 
+                              ['class'=>'btn btn-success change_category_btn']);
+                      ?>  
+    </div>
         
         
     </div>
