@@ -30,7 +30,7 @@ use yii\widgets\Pjax;
             </div>
             <div class="col-lg-2 col-md-2 category_panel">
                     <div class ="category_buttons">
-                              <?= Html::a(Yii::t('frontend', 'Update database'), ['/site/add'], ['class'=>'btn btn-danger each_category_button']) ?>
+                              <?= Html::a(Yii::t('frontend', 'Add Post'), ['/site/add'], ['class'=>'btn btn-danger each_category_button']) ?>
                               <?= Html::a(Yii::t('frontend', 'New'), ['/site/index/','state'=>'new'], ['class'=>'btn btn-success each_category_button']) ?>
                               <?= Html::a(Yii::t('frontend', 'Trending'), ['/site/index/','state'=>'trending'], ['class'=>'btn btn-success each_category_button']) ?>
                               <?= Html::a(Yii::t('frontend', 'Discuss'), ['/site/index/','state'=>'discuss'], ['class'=>'btn btn-success each_category_button']) ?>

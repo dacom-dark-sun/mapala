@@ -122,7 +122,7 @@ return [
     'Title' => 'Заголовок',
     'Trending' => 'Горячее',
     'Update' => 'Редактировать',
-    'Update database' => 'Пополнить базу',
+    'Add Post' => 'Добавить пост',
     'User Settings' => 'Настройки пользователя',
     'Username' => 'Имя пользователя',
     'Username or email' => 'Имя пользователя или e-mail',

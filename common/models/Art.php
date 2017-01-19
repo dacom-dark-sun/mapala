@@ -160,7 +160,7 @@ class Art extends \yii\db\ActiveRecord
                     $re = '/^(.+?)(\?.*?)?(#.*)?$/m';
                     preg_match_all($re, $filename, $matches);
                     $filename = $matches[1][0];
-                    $full_filename = 'http://' . Yii::$app->getRequest()->serverName . '/storage/web/thumbs/' . BlockChain::get_blockchain_from_locale() . '-' . $author . '-' . $permlink . '-' . $filename;
+                    $full_filename = 'https://' . Yii::$app->getRequest()->serverName . '/storage/web/thumbs/' . BlockChain::get_blockchain_from_locale() . '-' . $author . '-' . $permlink . '-' . $filename;
                 
                 
                 return $full_filename;

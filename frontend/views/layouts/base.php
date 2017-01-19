@@ -16,9 +16,6 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
 ?>
 
 <div class="wrap">
- <div class = "div_amount">
-       <?php echo Yii::t('frontend','Articles') . ": " . Art::get_article_amount() ?>
-   </div>
 
     <?php
     NavBar::begin([
@@ -47,6 +44,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
                     ],
                 ]],
             ['label' => Yii::t('frontend', 'My blog'), 'url' => ['/site/show_single_blog'], ['visible'=>!Yii::$app->user->isGuest]],
+            ['label' => Yii::t('frontend', 'ICO'), 'url' => ['/site/ico']],
            
             
             ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
