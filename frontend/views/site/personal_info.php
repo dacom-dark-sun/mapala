@@ -73,7 +73,7 @@ use common\models\BitCoin;
                  <div class="panel-body">
                         <center>  <?= Yii::t('frontend', 'All distributed tokens - ') ?>       <?= $total_tokens ?> </center>
                     </div>
-                     <center>    <?=  Html::a(Yii::t('frontend', 'Current distribution'), 
+                     <center>    <?=  Html::a(Yii::t('frontend', 'History'), 
                               ['/site/investors'], 
                               ['class'=>'btn btn-success change_category_btn']);
                       ?></center>

@@ -161,7 +161,8 @@ return [
     'All investments - ' => 'Все инвестиции - ',
     'All distributed tokens - ' => 'Все распределенные токены - ',
     'History' => 'История',
-    'BONUS TODAY:' => 'БОНУС СЕГОДНЯ:'
+    'BONUS TODAY:' => 'БОНУС СЕГОДНЯ:',
+    'Bonuses:' => 'Бонусы:'
     
     
     
