@@ -150,7 +150,7 @@ class SiteController extends Controller
     $data_provider = new ArrayDataProvider([
         'allModels' => $investors,
         'sort' => [
-            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'tokens'],
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'tokens', 'bonuse'],
         ],
         'pagination' => [
             'pageSize' => 50,
@@ -186,6 +186,7 @@ $total_btc = Bitcoin::get_all_btc();
 $personal_btc = Bitcoin::get_personal_btc();
 $personal_gbg = Bitcoin::get_personal_gbg();
 $total_tokens = Bitcoin::get_all_tokens();
+$bonuse_today = BitCoin::get_bonuse_today();
 
 
 
@@ -213,7 +214,8 @@ $total_tokens = Bitcoin::get_all_tokens();
             'personal_btc' => $personal_btc, 
             'personal_gbg' => $personal_gbg,
             'weekly_btc' => $weekly_btc, 
-            'weekly_gbg' => $weekly_gbg, 
+            'weekly_gbg' => $weekly_gbg,
+            'bonuse_today' => $bonuse_today,
         ]);   
         
         

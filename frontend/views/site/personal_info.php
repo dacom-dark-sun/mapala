@@ -40,21 +40,7 @@ use common\models\BitCoin;
     
             </div>
 
-        <div class ='col-xs-6 col-lg-3'>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">   
-                <center>        <?= Yii::t('frontend', 'Weekly information') ?>  </center>
-                    </div>
-                    <div class="panel-body">
-                 <center> <?= Yii::t('frontend', 'All investments - ') ?>      <?= $total_btc ?> BTC </center>
-                    </div>
-                 <div class="panel-body">
-                        <center>  <?= Yii::t('frontend', 'All distributed tokens - ') ?>       <?= $total_tokens ?> </center>
-                    </div>
-                     
-               
-                </div>
-   </div>
+       
 
 <div class ='col-xs-3 col-lg-3'>
                 <div class="panel panel-danger">
@@ -128,18 +114,43 @@ use common\models\BitCoin;
 
                                     ['attribute' => 'created_at', 
                                      'label' => Yii::t('frontend', 'Date, Time'),
-                                      'format'=>'datetime',
+                                      'format'=>'datetime',  
+                                      'contentOptions' => ['class' => 'text-center'],
+                                      'headerOptions' => ['class' => 'text-center']
+
                                         ],
 
                                     ['attribute' => 'amount', 
-                                     'label' => Yii::t('frontend', 'Amount, BTC')],
+                                     'label' => Yii::t('frontend', 'Amount, BTC'),
+                                      'contentOptions' => ['class' => 'text-center'],
+                                      'headerOptions' => ['class' => 'text-center']
+                                    ],
+                                     ['attribute' => 'bonuse', 
+                                     'label' => Yii::t('frontend', 'Amount, BTC'),
+                                      'contentOptions' => ['class' => 'text-center'],
+                                      'headerOptions' => ['class' => 'text-center']
+                                    ],
+
 
                                     ['attribute' => 'currency', 
-                                     'label' => Yii::t('frontend', 'Currency')],
+                                     'label' => Yii::t('frontend', 'Currency'),
+                                     'contentOptions' => ['class' => 'text-center'],
+                                     'headerOptions' => ['class' => 'text-center']
+                                    ],
+                                        
+                                     ['attribute' => 'bonuse', 
+                                      'label' => Yii::t('frontend', 'Bonuse, %'),
+                                      'contentOptions' => ['class' => 'text-center'],
+                                      'headerOptions' => ['class' => 'text-center']
+                                    ],
+
 
                                
                                     ['attribute' => 'tokens', 
-                                     'label' => Yii::t('frontend', 'Tokens')],
+                                     'label' => Yii::t('frontend', 'Tokens'),
+                                      'contentOptions' => ['class' => 'text-center'],
+                                      'headerOptions' => ['class' => 'text-center']
+                                    ],
 
 
                                     /**

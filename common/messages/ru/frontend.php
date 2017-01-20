@@ -157,9 +157,12 @@ return [
     'GBG account' => 'GBG аккаунт',
     'Tokens for distribution: 810000' => 'Токены на распределение: 810000',
     'INSTRUCTION' => 'ИНСТРУКЦИЯ',
-    'Tokens' => 'Токен',
+    'Tokens' => 'Токены',
     'All investments - ' => 'Все инвестиции - ',
     'All distributed tokens - ' => 'Все распределенные токены - ',
+    'History' => 'История',
+    'BONUS TODAY:' => 'БОНУС СЕГОДНЯ:'
+    
     
     
 ];

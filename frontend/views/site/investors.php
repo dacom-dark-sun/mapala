@@ -14,24 +14,24 @@ use yii\helpers\Html;
     <div class="col-lg-12">
   
         
-<div class ='col-xs-6 col-lg-2'>
+<div class ='col-xs-6 col-lg-3'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'All investments, BTC') ?>  
+                        <center>      <?= Yii::t('frontend', 'All investments, BTC') ?>  </center>
                     </div>
                     <div class="panel-body">
-                        <?= $total_btc ?>
+                        <center>    <?= $total_btc ?>
                     </div>
                 </div>
    </div>
         
-    <div class ='col-xs-6 col-lg-2'>
+    <div class ='col-xs-6 col-lg-3'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'All distributed tokens') ?>  
+                        <center>    <?= Yii::t('frontend', 'All distributed tokens') ?>  </center>
                     </div>
                     <div class="panel-body">
-                        <?= $total_tokens ?>
+                        <center>    <?= $total_tokens ?> </center>
                     </div>
                 </div>
    </div>
@@ -71,24 +71,45 @@ use yii\helpers\Html;
                          * Перечисленные ниже поля модели отображаются как колонки с данными без изменения
                          */
                         ['attribute' => 'name', 
-                         'label' => Yii::t('frontend', 'Username')],
+                         'label' => Yii::t('frontend', 'Username'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center']
+                        ],
 
                         ['attribute' => 'created_at', 
                          'label' => Yii::t('frontend', 'Date, Time'),
                           'format'=>'datetime',
+                          'contentOptions' => ['class' => 'text-center'],
+                          'headerOptions' => ['class' => 'text-center'],
+
                             ],
 
                         ['attribute' => 'amount', 
-                         'label' => Yii::t('frontend', 'Amount, BTC')],
+                         'label' => Yii::t('frontend', 'Amount, BTC'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center'],
+                        ],
 
-                       
+                         ['attribute' => 'bonuse', 
+                         'label' => Yii::t('frontend', 'Bonuse, %'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center']
+                         ],
+
+
 
                         ['attribute' => 'tokens', 
-                         'label' => Yii::t('frontend', 'Tokens')],
+                         'label' => Yii::t('frontend', 'Tokens'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center'],
+                        ],
 
                         ['attribute' => 'hash', 
                          'label' => Yii::t('frontend', 'Hash'),
                          'format' => 'raw',
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center'],
+
                          'value' => function ($model) {
               
                               return '<a target=_blank href=https://blockexplorer.com/tx/' . $model['hash'] . '> ' . Yii::t('frontend', 'Link') .'</a>';
@@ -113,6 +134,5 @@ use yii\helpers\Html;
    
     
     
-</div>
 
 

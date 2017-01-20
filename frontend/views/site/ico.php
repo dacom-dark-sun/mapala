@@ -93,7 +93,7 @@ use common\models\BitCoin;
                  <div class="panel-body">
                         <center>  <?= Yii::t('frontend', 'All distributed tokens - ') ?>       <?= $total_tokens ?> </center>
                     </div>
-                     <center>    <?=  Html::a(Yii::t('frontend', 'Current distribution'), 
+                     <center>    <?=  Html::a(Yii::t('frontend', 'History'), 
                               ['/site/investors'], 
                               ['class'=>'btn btn-success change_category_btn']);
                       ?></center>
@@ -105,6 +105,12 @@ use common\models\BitCoin;
         
         
     </div>
+    
+   <div class = 'col-lg-2'>   
+       
+       <button class="btn btn-danger change_category_btn" onclick="bonus_info();"> <?= Yii::t('frontend', 'BONUS TODAY:')?> <?= $bonuse_today; ?> %</button>
+    </div>
+     
     
     
     <div class="col-lg-12">
@@ -211,8 +217,6 @@ use common\models\BitCoin;
     
     </div>
     
-    
-    
 </div>
 
 
@@ -248,7 +252,21 @@ use common\models\BitCoin;
         yii\bootstrap\Modal::end();
 
         ?>
+<?php
+        yii\bootstrap\Modal::begin([
+            'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
+            'header' => '<h2>' . Yii::t('frontend', 'Bonuses:') . '</h2>',
+            'id' => 'bonusinfo',
+            'size' => 'modal-xs',
+            'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
+            'options'=>['style'=>'min-width:400px']
+        ]);
 
+
+        echo $this->context->renderPartial('/site/bonusinfo', ['btc_wallet' => $btc_wallet]);
+        yii\bootstrap\Modal::end();
+
+        ?>
 
 
 <script>
@@ -259,6 +277,11 @@ use common\models\BitCoin;
     
      function btc_info(){
        $('#btcinfo').modal('show');
+       
+    }
+    
+     function bonus_info(){
+       $('#bonusinfo').modal('show');
        
     }
     
