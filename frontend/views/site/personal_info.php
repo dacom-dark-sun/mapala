@@ -119,6 +119,11 @@ use common\models\BitCoin;
                                       'headerOptions' => ['class' => 'text-center']
 
                                         ],
+                                     ['attribute' => 'symbol', 
+                                     'label' => Yii::t('frontend', 'Currency'),
+                                     'contentOptions' => ['class' => 'text-center'],
+                                     'headerOptions' => ['class' => 'text-center']
+                                     ],
 
                                     ['attribute' => 'amount', 
                                      'label' => Yii::t('frontend', 'Amount, BTC'),

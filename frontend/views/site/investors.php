@@ -83,6 +83,11 @@ use yii\helpers\Html;
                           'headerOptions' => ['class' => 'text-center'],
 
                             ],
+                         ['attribute' => 'symbol', 
+                         'label' => Yii::t('frontend', 'Currency'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center']
+                         ],
 
                         ['attribute' => 'amount', 
                          'label' => Yii::t('frontend', 'Amount, BTC'),
@@ -111,9 +116,13 @@ use yii\helpers\Html;
                          'headerOptions' => ['class' => 'text-center'],
 
                          'value' => function ($model) {
-              
+                         if ($model['symbol'] == 'GBG'){
+                            $block = BitCoin::get_block_from_gbg_table($model['hash']);
+                              return '<a target=_blank href=https://golostools.ru/explorer/#method=get_block&params=[' . $block . ']' . '> ' . Yii::t('frontend', 'Link') .'</a>';
+                   
+                         } else {
                               return '<a target=_blank href=https://blockexplorer.com/tx/' . $model['hash'] . '> ' . Yii::t('frontend', 'Link') .'</a>';
-                
+                         } 
         },],
 
 

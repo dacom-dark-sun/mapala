@@ -150,7 +150,7 @@ class SiteController extends Controller
     $data_provider = new ArrayDataProvider([
         'allModels' => $investors,
         'sort' => [
-            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'tokens', 'bonuse'],
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'tokens', 'bonuse', 'symbol'],
         ],
         'pagination' => [
             'pageSize' => 50,
@@ -235,7 +235,7 @@ $bonuse_today = BitCoin::get_bonuse_today();
     $data_provider_for_periods = new ArrayDataProvider([
         'allModels' => $total_invest_by_user,
         'sort' => [
-            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'currency','tokens'],
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'currency','tokens', 'symbol'],
         ],
         'pagination' => [
             'pageSize' => 50,
