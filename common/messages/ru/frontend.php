@@ -151,7 +151,7 @@ return [
     'Currency' => 'Валюта',
     'Bonuse, %' => 'Бонус, %',
     'Week stake, %'=> 'Доля за неделю, %',
-    'Weekly information' => 'Информация за неделю',
+    'Weekly income' => 'Поступления за неделю',
     'Personal information' => 'Персональная информация',
     'Total information' => 'Общая информация',
     'GBG account' => 'GBG аккаунт',
