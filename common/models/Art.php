@@ -222,7 +222,7 @@ class Art extends \yii\db\ActiveRecord
         static function get_first_line($model){
 //                $links = $model::get_links($model);
           //      $body = \kartik\markdown\Markdown::convert($model->body);
-             
+            $body = $model->body; 
                 $first_line = StringHelper::truncate($body, 500, '...', null, true);
                 $matches = Art::parse_links_and_urls($first_line);
                
