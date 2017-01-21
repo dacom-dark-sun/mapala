@@ -44,7 +44,7 @@ use common\models\BitCoin;
         <div class ='col-xs-6 col-lg-2'>
                 <div class="panel panel-danger">
                     <div class="panel-heading">   
-                <center>        <?= Yii::t('frontend', 'Weekly information') ?>  </center>
+                <center>        <?= Yii::t('frontend', 'Weekly income') ?>  </center>
                     </div>
                     <div class="panel-body">
                  <center> <?= $weekly_btc ?> BTC </center>
