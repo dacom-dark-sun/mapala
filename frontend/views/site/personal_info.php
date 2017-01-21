@@ -10,6 +10,7 @@ use common\models\BitCoin;
  */
 
 ?>
+<?php $this->title = Yii::t('frontend','ICO'); ?>
 
 
 <div class="row">

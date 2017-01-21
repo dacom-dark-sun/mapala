@@ -18,7 +18,7 @@ use DateTime;
 use common\models\Calendar;
 use common\models\BitCoin;
 use yii\data\ArrayDataProvider;
-
+use Coinbase\Wallet\Enum\Param;
 
 
 
@@ -48,6 +48,9 @@ class SiteController extends Controller
             ],
             'image-upload' => [
             'class' => 'vova07\imperavi\actions\UploadAction',
+                'validatorOptions' => [
+                'maxSize' => 40000
+              ],
             'url' => 'https://mapala.net/storage/web/img/', // Directory URL address, where files are stored.
             'path' => '@storage/web/img/' // Or absolute path to directory where files are stored.
             ],
@@ -167,11 +170,16 @@ class SiteController extends Controller
      
      
     public function actionIco(){
-    
+ 
+
+
      if(Yii::$app->user->isGuest) {
                 redirect(array('user/sign-in/login'));
      } else {
         
+         
+         
+         
 $btc_wallet = BitCoin::get_user_wallet();
 $total_invest_by_user = BitCoin::get_user_btc_investments();
 $total_amount = BitCoin::get_total_amount($total_invest_by_user);
