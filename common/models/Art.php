@@ -221,7 +221,7 @@ class Art extends \yii\db\ActiveRecord
          */
         static function get_first_line($model){
 //                $links = $model::get_links($model);
-                $body = \kartik\markdown\Markdown::convert($model->body);
+          //      $body = \kartik\markdown\Markdown::convert($model->body);
              
                 $first_line = StringHelper::truncate($body, 500, '...', null, true);
                 $matches = Art::parse_links_and_urls($first_line);
@@ -232,7 +232,7 @@ class Art extends \yii\db\ActiveRecord
                }
                 $first_line = str_replace("\\n\\n", ". ", $first_line);
                 $first_line = strip_tags($first_line);
-                $first_line= preg_replace('/[^a-zа-яё\s.,]+/iu', '', $first_line);
+            //    $first_line= preg_replace('/[^a-zа-яё\s.,]+/iu', '', $first_line);
         
               return $first_line;
         }
