@@ -23,7 +23,8 @@ use common\models\BitCoin;
                     <div class="panel-body">
                   <center>      <?= $btc_wallet ?></center>
                     </div>
-                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
+                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'min: 0.002 BTC (100 RUB)')?> </span></center>
+                   <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
                        
                 </div>
     <div class="panel panel-danger">
