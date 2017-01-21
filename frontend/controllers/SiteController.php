@@ -49,7 +49,7 @@ class SiteController extends Controller
             'image-upload' => [
             'class' => 'vova07\imperavi\actions\UploadAction',
                 'validatorOptions' => [
-                'maxSize' => 5000000
+                'maxSize' => 4000000
               ],
             'url' => 'https://mapala.net/storage/web/img/', // Directory URL address, where files are stored.
             'path' => '@storage/web/img/' // Or absolute path to directory where files are stored.
