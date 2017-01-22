@@ -363,10 +363,10 @@ class CommentModel extends ActiveRecord
            if ($avatar['avatar_path'])
                  return '/storage/web/source/' . $avatar['avatar_path'];
            else {
-                 return "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
+                 return "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
            }
         } else {
-           return "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
+           return "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
         }
     }
 
