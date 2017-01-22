@@ -8,7 +8,7 @@ use talma\widgets\JsTreeAsset;
 use yii\widgets\Pjax;
 
 ?>
-
+<?php $this->title = Yii::t('frontend','MAPALA'); ?>
 
    
 

@@ -5,7 +5,7 @@ use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 use talma\widgets\JsTreeAsset;
 
-
+$this->title = '@' . $author;
 ?>
 
 <div class ="site-index">
@@ -19,7 +19,7 @@ use talma\widgets\JsTreeAsset;
                     </div>
                 
                     <div class ="category_buttons">
-                              <?= Html::Button('Отправить сообщение', ['class' => 'btn btn-success', 'disabled' => 'disabled']) ?>
+                              <?php // echo Html::Button('Отправить сообщение', ['class' => 'btn btn-success', 'disabled' => 'disabled']) ?>
                     </div>
         </div>
             <div class="col-xs-12 col-lg-10 col-md-10 col-sm-10 col-lg-pull-2 col-md-pull-2 col-sm-pull-2">
