@@ -1,5 +1,6 @@
 <?php
 use common\models\Countries;
+use common\models\Cities;
 use vova07\imperavi\Widget;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
@@ -53,6 +54,16 @@ $this->params['breadcrumbs'][] = $this->title;
                      ],//---------------------------------------------------------------------
                 ]); 
                 ?>
+                 
+                 <?php //Show Location-------------------------------------------------------------
+                echo $form->field($model, 'location')->input(['text'], ['placeholder' => 'Select a location ...', 'id'=>'location']); 
+                ?>
+                 <?php //Show Location-------------------------------------------------------------
+                echo $form->field($model, 'city')->hiddenInput(['text'], ['placeholder' => 'Select a location ...', 'id'=>'city'])->label(false); 
+                ?>
+                 
+                 
+            
 
                  <?php //---------------- EDITOR------------------------------
                  echo $form->field($model, 'body')->widget(Widget::className(), [
@@ -185,6 +196,16 @@ $this->params['breadcrumbs'][] = $this->title;
        $(".account_name").click(function() {
           $('#modalKey').modal('show');
        });
+ 
+     function save_country(id){
+        id = parseInt(id);
+       $.ajax({
+            url    : '<?php echo Yii::$app->urlManager->createUrl('forms/save_country') ?>',
+            type   : 'get',
+            data   : { id : id}
+            });
+     }
+     
  
    </script>
      

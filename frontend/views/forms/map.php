@@ -8,6 +8,9 @@ use yii\web\JsExpression;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+?>
+
+<?php
             if ($model->coordinates == '') 
                 {
                     $model->coordinates = "40.7324319,-73.82480777777776";
@@ -21,7 +24,8 @@ use yii\web\JsExpression;
                 function(c){
                 var map = jQuery(c).locationpicker("map").map;
                 jQuery(c).locationpicker("map").marker.visible = true;
-                              
+                var addressComponents = jQuery(c).locationpicker("map").location.addressComponents;
+                $("#location").val("");
                 google.maps.event.addListener(map, "click", function(e) {
                 var marker = jQuery(c).locationpicker("map").marker;
                 var pos = e.latLng;
@@ -29,14 +33,26 @@ use yii\web\JsExpression;
              
                 jQuery(c).locationpicker("location" , {latitude: pos.lat(), longitude: pos.lng()});
                 google.maps.event.trigger(marker, "dragend");
-                // e.stopPropagation();
+
+               // e.stopPropagation();
               });
-        };';
-        
-                  
-                  
-                      
+              
             
+               };';
+                  
+                  
+                      $js2= '
+                function (currentLocation, radius, isMarkerDropped) {
+                    var addressComponents = $(this).locationpicker("map").location.addressComponents;
+                    $("#places-city").val(addressComponents.city);
+                    $("#knowledge-city").val(addressComponents.city);
+                    $("#blogs-city").val(addressComponents.city);
+
+
+                };              
+                 
+                ';
+
                 echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
                     'key' => 'AIzaSyC9PkCzTGG3Ial2tkDuSmmZvV2joFfzj0Y' ,   // require , Put your google map api key
                     'valueTemplate' => '{latitude},{longitude}' , // Optional , this is default result format
@@ -69,9 +85,24 @@ use yii\web\JsExpression;
                         // jquery-location-picker options
                         'radius'    => 300,
                         "markerVisible" => $key,
-                        'addressFormat' => 'street_number',
+                   //     'addressFormat' => 'locality',
+                   //      'autocompleteOptions'=> ['types' => ['(cities)']],
                         'oninitialized' => new JsExpression($js),
+                         'onchanged' => new JsExpression ($js2),
+                    'inputBinding' => [
+                        'locationNameInput' => new JsExpression("$('#location')"),
+                    ]
                         
                     ]
                 ]);
-            
+         ?>   
+<script>
+/*    $(document).ready(function() {
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+            return false;
+            }
+        });
+    }); */
+</script>

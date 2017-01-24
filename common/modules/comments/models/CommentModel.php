@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use yii2mod\behaviors\PurifyBehavior;
 use common\modules\comments\models\enums\CommentStatus;
 use common\modules\comments\Module;
+use yii\helpers\Markdown;
 
 /**
  * Class CommentModel
@@ -341,7 +342,7 @@ class CommentModel extends ActiveRecord
      */
     public function getContent($deletedCommentText = 'Comment has been deleted.')
     {
-        return $this->isDeleted ? Yii::t('yii2mod.comments', $deletedCommentText) : nl2br($this->body);
+        return $this->isDeleted ? Yii::t('yii2mod.comments', $deletedCommentText) : nl2br(\yii\helpers\Markdown::process($this->body));
     }
 
     /**
@@ -362,10 +363,10 @@ class CommentModel extends ActiveRecord
            if ($avatar['avatar_path'])
                  return '/storage/web/source/' . $avatar['avatar_path'];
            else {
-                 return "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
+                 return "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
            }
         } else {
-           return "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
+           return "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50";
         }
     }
 

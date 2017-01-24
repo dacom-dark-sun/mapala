@@ -178,10 +178,12 @@ function reply (data, callback){
         check_pub_key_steem(pub_key, function steem_callback(err, result){ 
         
         if (!err){
+            
             trx['parentAuthor'] = data.parentAuthor;
             trx['parentPermlink'] = data.parentPermlink;
             trx['author'] = result[0][0];
             trx['permlink'] = 're-' + trx['author'] + '-' + data.permlink;
+            trx['permlink'] = trx['permlink'].replace(".","");
             trx['title'] = data.title;
             trx['body'] = data.body;
             trx['metadata'] = data.metadata;

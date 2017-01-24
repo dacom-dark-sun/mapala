@@ -32,6 +32,7 @@ use common\models\BlockChain;
             <?php echo Html::Button(Yii::t('yii2mod.comments', 'Comment'), ['class' => 'btn btn-primary comment-submit', 'onclick' => 'send_comment($(this))']); ?>
         </div>
     </div>
+    <div class ="comment_info"><a href = "https://guides.github.com/features/mastering-markdown" target="_blank"><?php echo Yii::t('frontend', 'You can use Markdown syntax'); ?></a></div>
  <div class ="loader_head"  style="display: none;">Transaction...
        <div class = 'loader_comment' ></div>
        </div>

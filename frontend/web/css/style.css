@@ -19,11 +19,20 @@
 .article-item .article-thumb {
   margin-right: 10px;
   margin-bottom: 10px;
-  max-height: 125px;
-  max-width: 125px;
+  max-height: 200px;
+  max-width: 200px;
 }
 .article-item .article-text {
   margin-top: 7px;
+  word-wrap: break-word;
+}
+.article-text{
+  word-wrap: break-word;
+}
+.link{
+ color: brown;  
+ cursor: pointer;
+ 
 }
 
 html,
@@ -246,13 +255,16 @@ text-align: center;
 }
 
 .article-content img{
-    width: 100%;
+     max-width:100%;
+    
+}
+.comment-body img{
+   max-width:100%;
     
 }
 .main_page_link{
-    font-weight: 100;
+    font-weight: 400;
     color:  black;
-    text-shadow: black 0 0 1px;
     font-size:22px;
     vertical-align: sub;
     margin-left:15px;
@@ -267,17 +279,21 @@ text-align: center;
     display: none;
 }
 .main_page_link:hover{
- font-weight: 100;
-  text-shadow: black 0 0 1px;
+ font-weight: 400;
   font-size:22px;
   cursor: pointer;
 }
 
 
 .onepage_link{
-    font-weight: 100;
+    font-weight: 400;
     color:  black;
-    text-shadow: black 0 0 2px;
+}
+
+.version {
+    position: fixed;
+    bottom: 0px;
+    right: 5px;
 }
 
 .location{
@@ -308,6 +324,9 @@ cursor: pointer;
   font-size:16px;
   font-weight: 400;
     
+}
+a#key_modal_ask {
+    color:red;
 }
 
 
@@ -487,6 +506,18 @@ input[type="radio"], input[type="checkbox"]{
     padding-left:20px;
     position: absolute;
 }
+.span_amount{
+    z-index: 1035;
+    top: 0;
+    color: #d9534f;
+    padding-top: 13px;
+    position: absolute;
+    text-align: center;   
+    padding-left: 190px;
+}
+.article_amount{
+ 
+}
 
 .site_logo{
     width: 46px;
@@ -520,6 +551,8 @@ padding-top: 5px;
 
 @media screen and (max-width: 600px) {
 .category_panel{display:none}
+.span_amount{display:none}
+.article-content img{width: 100%;}
 .article-full{width: 100%}
 .comments{width:100%}
 .comments-list .children{padding-left: 10px;}
@@ -547,7 +580,7 @@ padding-top: 5px;
 .account_name{
     cursor: pointer;
     font-size: 24px;
-    margin-left: 3px;
+    margin-left: 6px;
 }
 .account_name a{
     font-size: 20px;
@@ -559,7 +592,7 @@ padding-top: 5px;
     max-height: 75px;
 }
 .comment-box{
-        margin-top: 40px;
+margin-bottom: 20px;
 }
 
 .comment-body{

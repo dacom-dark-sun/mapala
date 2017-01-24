@@ -10,6 +10,7 @@ use common\models\BlockChain;
  * @var $model common\models\Article
  */
 use yii\helpers\Html;
+$this->title = $model->title;
 
 ?>
 <div class ="site-index">

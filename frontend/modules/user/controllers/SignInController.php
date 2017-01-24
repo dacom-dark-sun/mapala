@@ -17,6 +17,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
+use common\models\BitCoin;
 use yii\widgets\ActiveForm;
 
 /**
@@ -36,7 +37,11 @@ class SignInController extends \yii\web\Controller
             'oauth' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'successOAuthCallback']
-            ]
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null
+            ],
         ];
     }
 
@@ -131,9 +136,12 @@ class SignInController extends \yii\web\Controller
                 } else {
                     Yii::$app->getUser()->login($user);
                 }
+                BitCoin::create_address($user->username);
                 return $this->goHome();
             }
         }
+        
+        
 
         return $this->render('signup', [
             'model' => $model

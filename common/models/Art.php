@@ -7,6 +7,7 @@ use common\models\ArtSearch;
 use yii\helpers\StringHelper;
 use common\models\BlockChain;
 use yii\helpers\Html;
+use yii\helpers\Markdown;
 
 /**
  * This is the model class for table "art".
@@ -159,7 +160,7 @@ class Art extends \yii\db\ActiveRecord
                     $re = '/^(.+?)(\?.*?)?(#.*)?$/m';
                     preg_match_all($re, $filename, $matches);
                     $filename = $matches[1][0];
-                    $full_filename = 'http://' . Yii::$app->getRequest()->serverName . '/storage/web/thumbs/' . BlockChain::get_blockchain_from_locale() . '-' . $author . '-' . $permlink . '-' . $filename;
+                    $full_filename = 'https://' . Yii::$app->getRequest()->serverName . '/storage/web/thumbs/' . BlockChain::get_blockchain_from_locale() . '-' . $author . '-' . $permlink . '-' . $filename;
                 
                 
                 return $full_filename;
@@ -220,8 +221,8 @@ class Art extends \yii\db\ActiveRecord
          */
         static function get_first_line($model){
 //                $links = $model::get_links($model);
-                $body = \kartik\markdown\Markdown::convert($model->body);
-             
+          //      $body = \kartik\markdown\Markdown::convert($model->body);
+            $body = $model->body; 
                 $first_line = StringHelper::truncate($body, 500, '...', null, true);
                 $matches = Art::parse_links_and_urls($first_line);
                
@@ -231,7 +232,7 @@ class Art extends \yii\db\ActiveRecord
                }
                 $first_line = str_replace("\\n\\n", ". ", $first_line);
                 $first_line = strip_tags($first_line);
-                $first_line= preg_replace('/[^a-zа-яё\s.,]+/iu', '', $first_line);
+            //    $first_line= preg_replace('/[^a-zа-яё\s.,]+/iu', '', $first_line);
         
               return $first_line;
         }
@@ -515,7 +516,7 @@ class Art extends \yii\db\ActiveRecord
          public $tags;
          public $coordinates;        
          */
-        
+        $model->location =  (array_key_exists('location', $meta)? $meta['location'] :  "");
         $model->tags = $current_art->category;
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
     return $model;
@@ -547,7 +548,7 @@ class Art extends \yii\db\ActiveRecord
          public $tags;
          public $coordinates;        
          */
-        
+        $model->location =  (array_key_exists('location', $meta)? $meta['location'] :  "");
         $model->tags = $current_art->sub_category;
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
     return $model;
@@ -560,8 +561,22 @@ class Art extends \yii\db\ActiveRecord
         
      static function get_current_model($model){
         $meta = json_decode($model['meta'], true);
-            
-         return $meta['model'];
+        $model =  (array_key_exists('model', $meta)? $meta['model'] :  "blogs");
+         return $model;
+     }
+     
+     
+     static function get_article_amount(){
+         $query = new Art();
+         $blockchain = BlockChain::get_blockchain_from_locale();
+            $art = $query
+                ->find()
+                ->where('blockchain=' . "'" .  $blockchain . "'")
+                ->andwhere(['<>','author', 'mapala'])
+                ->count();
+        
+         return $art;
+         
      }
         
         

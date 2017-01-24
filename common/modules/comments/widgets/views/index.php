@@ -24,9 +24,6 @@ use yii\helpers\Html;
             </h3>
             <div class="title-separator"></div>
         </div>
-        <ol class="comments-list">
-            <?php echo $this->render('_list', ['comments' => $comments, 'maxLevel' => $maxLevel]) ?>
-        </ol>
         <?php if (!Yii::$app->user->isGuest): ?>
             <?php echo $this->render('_form', [
                 'commentModel' => $commentModel,
@@ -40,6 +37,11 @@ use yii\helpers\Html;
         <?php endif; ?>
         
         
+        <ol class="comments-list">
+            <?php echo $this->render('_list', ['comments' => $comments, 'maxLevel' => $maxLevel]) ?>
+        </ol>
+        
+        
     </div>
 </div>
 <?php Pjax::end(); ?>
@@ -47,6 +49,12 @@ use yii\helpers\Html;
 
 
 <script>
+    
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
     
      function send_comment($this){
         $('.loader_head').css('display', 'inline');
@@ -59,7 +67,7 @@ use yii\helpers\Html;
         
         data = JSON.stringify({parentAuthor, parentPermlink, body, category});
         $.ajax({
-            url: '<?php echo Yii::$app->request->baseUrl . '/ajax/comments_save/' ?>',
+            url: '<?php echo Yii::$app->request->baseUrl . '/ajax/send_comment/' ?>',
             type: "post",
      
             data   : {data: data},

@@ -5,21 +5,20 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "votes_raw".
+ * This is the model class for table "calendar".
  *
  * @property integer $id
- * @property string $voter
- * @property string $author
- * @property string $permlink
+ * @property string $date_start
+ * @property string $date_end
  */
-class VotesRaw extends \yii\db\ActiveRecord
+class Calendar extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'votes_raw';
+        return 'calendar';
     }
 
     /**
@@ -28,7 +27,7 @@ class VotesRaw extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['voter', 'author', 'permlink'], 'string'],
+            [['date_start', 'date_end'], 'safe'],
         ];
     }
 
@@ -39,9 +38,8 @@ class VotesRaw extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'voter' => 'Voter',
-            'author' => 'Author',
-            'permlink' => 'Permlink',
+            'date_start' => 'Date Start',
+            'date_end' => 'Date End',
         ];
     }
 }

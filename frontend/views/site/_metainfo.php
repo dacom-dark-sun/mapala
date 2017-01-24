@@ -27,9 +27,8 @@ use common\models\BlockChain;
                     'header' => Yii::t('frontend', 'Голоса'),
                     'placement' => PopoverX::ALIGN_BOTTOM_LEFT,
                     'content' => Art::get_voters($model->voters),
-                    'toggleButton' => ['label'=>$model->votes . ' ' . Yii::t('frontend', 'голосов') . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
+                    'toggleButton' => ['label'=>$model->votes .'  ' . '&#9660', 'tag' => 'label', 'class'=>'votes-counter'],
                 ]);?>
-                <div is="[object Object]"></div>
                 
             </div>
             <div class="col-xs-4 col-lg-1 Icon chatbox">
@@ -56,7 +55,7 @@ use common\models\BlockChain;
                 
                 var key = voters.indexOf(account);
                 if (key != '-1')
-                  $('#<?php echo $model->permlink ?>').css('z-index', 10);
+                  $('#<?php echo $model->permlink ?>').css('z-index', 1);
               
                 
             </script>

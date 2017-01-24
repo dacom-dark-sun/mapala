@@ -28,7 +28,7 @@ class SignupForm extends Model
      * @var
      */
     public $password;
-
+    public $verifyCode;
     /**
      * @inheritdoc
      */
@@ -42,13 +42,19 @@ class SignupForm extends Model
                 'message' => Yii::t('frontend', 'This username has already been taken.')
             ],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
+            
+            ['username',
+            'match', 'not' => true, 'pattern' => '/[^a-z0-9A-Z.]/',
+            'message' => 'Invalid characters in username.'],
+            
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'email'],
             ['email', 'unique',
                 'targetClass'=> '\common\models\User',
                 'message' => Yii::t('frontend', 'This email address has already been taken.')
             ],
+             ['verifyCode', 'captcha'],
+
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
