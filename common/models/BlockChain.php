@@ -308,7 +308,7 @@ class BlockChain extends Model
     public $coordinates;
 */    
              $bl_model['parentAuthor'] = '';
-             $bl_model['parentPermlink'] = 'mapala'; //
+             $bl_model['parentPermlink'] = 'test'; //
              if ($model->permlink == null){
                 $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
              } else {
@@ -319,9 +319,10 @@ class BlockChain extends Model
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
                          
-             $json['tags'][0] = 'mapala';
+             $json['tags'][0] = 'test';
              $json['tags'][1] = Blockchain::tag_to_eng(\Yii::t('frontend', 'News'));
-             $json['tags'][2] = BlockChain::tag_to_eng($model->tags);
+               
+             $json['tags'][2] = $model->tags != 'ico' ? BlockChain::tag_to_eng($model->tags) : $model->tags;
              
              $json['model'] = strtolower(StringHelper::basename(get_class($model)));
              $arr = Art::get_array_links_and_images($model->body);
