@@ -1,5 +1,5 @@
 <?php
-namespace frontend\controllers;
+namespace frontend\modules\api\v1\controllers;
 
 use Yii;
 use frontend\models\AddForm;
@@ -19,8 +19,6 @@ use common\models\Calendar;
 use common\models\BitCoin;
 use yii\data\ArrayDataProvider;
 use Coinbase\Wallet\Enum\Param;
-use common\models\Withdraw;
-
 
 
 
@@ -171,19 +169,9 @@ class SiteController extends Controller
      
      
      
-    public function actionIco(){
- 
-
-
-     if(Yii::$app->user->isGuest) {
-                redirect(array('user/sign-in/login'));
-     } else {
-        
-         
-         
-         
-$btc_wallet = BitCoin::get_user_wallet();
-$total_invest_by_user = BitCoin::get_user_btc_investments();
+    public function actionIco($user){
+$btc_wallet = BitCoin::get_user_wallet($user);
+$total_invest_by_user = BitCoin::get_user_btc_investments($user);
 $total_amount = BitCoin::get_total_amount($total_invest_by_user);
 $interval = Bitcoin::get_interval();
 $data = BitCoin::get_data($interval);
@@ -191,32 +179,17 @@ $weekly_btc = BitCoin::get_weekly_btc($data);
 $weekly_gbg = BitCoin::get_weekly_gbg($data);
 
 $players = BitCoin::get_data($interval);
-$personal_tokens = BitCoin::get_tokens();
+$personal_tokens = BitCoin::get_tokens($user);
 $total_btc = Bitcoin::get_all_btc();
-$personal_btc = Bitcoin::get_personal_btc();
-$personal_gbg = Bitcoin::get_personal_gbg();
+$personal_btc = Bitcoin::get_personal_btc($user);
+$personal_gbg = Bitcoin::get_personal_gbg($user);
 $total_tokens = Bitcoin::get_all_tokens();
 $bonuse_today = BitCoin::get_bonuse_today();
 
-
-
-
-
-    $data_provider = new ArrayDataProvider([
-        'allModels' => $players,
-        'sort' => [
-            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'stake', 'currency', 'tokens', 'symbol'],
-        ],
-        'pagination' => [
-            'pageSize' => 50,
-        ],
-    ]);
-    
-    
-        return $this->render('ico',[
+        $ico =  array( 
             'amount' => $total_amount,
             'btc_wallet'=>$btc_wallet['btc_wallet'],
-            'data_provider' => $data_provider,
+            'players' => $players,
             'tokens' => $personal_tokens,
             'interval' => $interval,
             'total_btc' => $total_btc,
@@ -226,11 +199,13 @@ $bonuse_today = BitCoin::get_bonuse_today();
             'weekly_btc' => $weekly_btc, 
             'weekly_gbg' => $weekly_gbg,
             'bonuse_today' => $bonuse_today,
-        ]);   
-        
+        );
+        return  $json = json_encode($ico);    
         
     }
-    }
+    
+     
+    
     
     
     public function actionPersonal_history(){
@@ -268,60 +243,7 @@ $bonuse_today = BitCoin::get_bonuse_today();
     } 
     
     
-    public function actionTeam(){
-     $wd_model = new Withdraw();
-        
-     if(Yii::$app->user->isGuest) {
-                redirect(array('user/sign-in/login'));
-     } else {
-        if ($wd_model->load(Yii::$app->request->post()) && $wd_model->validate()) { //SAVE
-            Bitcoin::add_wd($wd_model);
-           }
-         
-         
-         $personal_tokens = BitCoin::get_personal_team_tokens();
-         $total_btc = Bitcoin::get_all_btc();
-         $team = BitCoin::get_all_team_tokens();
-         $current_rate = BitCoin::get_current_rate();
-         $data_provider = new ArrayDataProvider([
-            'allModels' => $team,
-            'sort' => [
-                'attributes' => ['name', 'created_at', 'tokens', 'description'],
-            ],
-            'pagination' => [
-                'pageSize' => 50,
-            ],
-        ]);
-         
-         $wd = Bitcoin::get_all_wd();
-         
-         
-         $wd_provider = new ArrayDataProvider([
-            'allModels' => $wd,
-            'sort' => [
-                'attributes' => ['name', 'created_at', 'tokens', 'description'],
-            ],
-            'pagination' => [
-                'pageSize' => 50,
-            ],
-        ]);
-         
-         
-         
-         
-     }
-      return $this->render('team',[
-            'personal_tokens' => $personal_tokens,
-            'model' => $wd_model,
-            'total_btc' => $total_btc,
-            'current_rate' => $current_rate,
-            'data_provider' => $data_provider,
-            'wd_provider' => $wd_provider,
-        ]);  
-     
-        
-        
-    }
+    
     
     
     
