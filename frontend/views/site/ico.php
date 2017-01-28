@@ -93,7 +93,7 @@ use common\models\BitCoin;
                  <center> <?= Yii::t('frontend', 'All investments - ') ?>      <?= $total_btc ?> BTC </center>
                     </div>
                  <div class="panel-body">
-                        <center>  <?= Yii::t('frontend', 'All distributed tokens - ') ?>       <?= $total_tokens ?> </center>
+                        <center>  <?= Yii::t('frontend', 'All distributed tokens - ') ?>       <?= round($total_tokens) ?> </center>
                     </div>
                      <center>    <?=  Html::a(Yii::t('frontend', 'History'), 
                               ['/site/investors'], 
