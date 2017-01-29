@@ -1,5 +1,6 @@
 <?php
-
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,23 +9,26 @@
 
 ?>
 
-<b>1.</b> Для инвестиции в Золотых вам необходимо зайти в ваш кошелёк на Голосе и выбрать <b> меню </b> --> <b> Передать </b>. <br>
-<img src="/img/transfergbg.png">     <br>
-<b>2.</b> Введите аккаунт <b> mapala.ico</b>, укажите желаемую сумму и в поле Заметка укажите имя аккаунта на Mapala.net, на который вы хотите, чтобы зачислились токены от этого платежа;<br><br>
-<img src="/img/transfergbg2.png"><br><br>
-<b>3.</b> Через несколько минут транзакция появится в вашем личном кабинете;<br>
-<b>4.</b> Весь наш внутренний учёт ведётся в биткоинах, поэтому при зачислении инвестиции GBG будут конвертированы по курсу BTC/GBG.<br>
-<br>
-<b> Важно! </b> В данный момент существующие объёмы торгов не позволяют быстро конвертировать GBG в BTC. Поэтому мы продаём GBG в частном порядке с коэффициентом 0,85, и при этом ориентируемся на эталонный курс 1 мг золота.<br>
-В случае появления лучших предложений по выкупу у нас GBG или повышения ликвидности GBG на биржах мы пересмотрим данное правило по конвертации.<br>
-<br>
-<b> Точная формула: </b> Курс_золота_за_тройскую_унцию / 1000 / 31,1034768 / курс BTC * 0,85<br>
-<br>
-Для каждого дня недели действуют бонусы:<br>
-Суббота: +6% <br>
-Воскресенье: +5%<br>
-Понедельник: +4%<br>
-Вторник: +3%<br>
-Среда:  +2%<br>
-Четверг: +1%<br>
-Пятница: 0%<br>
+
+  <?php $form = ActiveForm::begin(['id' => 'add-form']); ?>
+  <?php echo $form->field($model, 'btc',['inputOptions' => [
+'autocomplete' => 'off']]) ?>
+  <?php echo $form->field($model, 'btc_address') ?>
+  
+  <?php echo Html::submitButton(Yii::t('frontend', 'Withdraw'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
+         <input id ="tokens" readonly> tokens           
+         
+  <?php ActiveForm::end(); ?>
+
+<script>
+    $('#withdraw-btc').on('keyup', function(){
+        btc = $('#withdraw-btc').val();
+        rate =  <?=\common\models\BitCoin::get_current_rate(); ?>;
+        tokens = btc/rate; 
+        $('#tokens').val(tokens.toFixed(6));
+        
+    })
+    
+    </script>
+    
+     
