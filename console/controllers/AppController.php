@@ -5,6 +5,15 @@ namespace console\controllers;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
+use Coinbase\Wallet\Resource\Account;
+use Coinbase\Wallet\Resource\Address;
+use Coinbase\Wallet\Enum\CurrencyCode;
+use Coinbase\Wallet\Resource\Transaction;
+use Coinbase\Wallet\Value\Money;
+use common\models\Ico;
+use common\models\BitCoin;
+use Coinbase\Wallet\Client;
+use Coinbase\Wallet\Configuration;
 
 /**
  * @author Eugene Terentev <eugene@terentev.net>
@@ -52,7 +61,7 @@ class AppController extends Controller
 
     public function actionSetKeys()
     {
-        $this->setKeys($this->generateKeysPaths);
+        BitCoin::check_distribution();
     }
 
     public function setWritable($paths)

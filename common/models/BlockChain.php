@@ -548,7 +548,7 @@ class BlockChain extends Model
         $memo_key = json_decode(shell_exec($cmd), true);
         
         $param = '{"id":"1","method":"create_account_with_keys","params":["' . $creator . '","' . $username . '", '
-                . '"app":"mapala", "' . $owner_key["result"][0] . '",  "' . $active_key["result"][0] . '",  "' . $posting_key["result"][0] . '",  "' . $memo_key["result"][0] . '", "true"]}';
+                . '"{\"app\":\"mapala\"}", "' . $owner_key["result"][0] . '",  "' . $active_key["result"][0] . '",  "' . $posting_key["result"][0] . '",  "' . $memo_key["result"][0] . '", "true"]}';
         $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
         $result = json_decode(shell_exec($cmd), true);
         $result = $posting_key["result"][1];

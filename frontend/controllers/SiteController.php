@@ -7,7 +7,23 @@ use yii\web\Controller;
 use common\models\ArtSearch;
 use common\models\Art;
 use common\models\BlockChain;
+use Coinbase\Wallet\Resource\Account;
+use Coinbase\Wallet\Resource\Address;
+use Coinbase\Wallet\Enum\CurrencyCode;
+use Coinbase\Wallet\Resource\Transaction;
+use Coinbase\Wallet\Value\Money;
+use common\models\Ico;
+use common\models\User;
+use DateTime;
+use common\models\Calendar;
+use common\models\BitCoin;
+use yii\data\ArrayDataProvider;
 
+
+
+
+use Coinbase\Wallet\Client;
+use Coinbase\Wallet\Configuration;
 /**
  * Site controller
  */
@@ -125,14 +141,84 @@ class SiteController extends Controller
      ]);
      }
      
-    static function actionCreate_account(){
+     
+    public function actionInvestors(){
+        $investors = Bitcoin::get_all_investors();
+        $total_btc = Bitcoin::get_all_btc();
+        $total_tokens = Bitcoin::get_all_tokens();
         
-        $username = 'vasya';
-        $pass = 'pass';
-        $result = BlockChain::register($username, $pass);
-    return $result;
+    $data_provider = new ArrayDataProvider([
+        'allModels' => $investors,
+        'sort' => [
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'tokens'],
+        ],
+        'pagination' => [
+            'pageSize' => 50,
+        ],
+    ]);
+        
+        return $this->render('investors',[
+            'total_btc' => $total_btc,
+            'total_tokens' => $total_tokens,
+            'data_provider' => $data_provider,
+        ]);   
+    } 
+     
+     
+     
+    public function actionIco(){
+ini_set('xdebug.var_display_max_depth', 5);
+ini_set('xdebug.var_display_max_children', 256);
+ini_set('xdebug.var_display_max_data', 1024);
+
+BitCoin::check_distribution();
+$btc_wallet = BitCoin::get_user_wallet();
+$total_invest_by_user = BitCoin::get_user_btc_investments();
+$total_amount = BitCoin::get_total_amount($total_invest_by_user);
+$interval = Bitcoin::get_interval();
+$players = BitCoin::get_data($interval);
+$personal_tokens = BitCoin::get_tokens();
+$total_btc = Bitcoin::get_all_btc();
+$total_tokens = Bitcoin::get_all_tokens();
+
+
+    $data_provider_for_periods = new ArrayDataProvider([
+        'allModels' => $total_invest_by_user,
+        'sort' => [
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'currency','tokens'],
+        ],
+        'pagination' => [
+            'pageSize' => 50,
+        ],
+    ]);
+
+
+
+
+    $data_provider = new ArrayDataProvider([
+        'allModels' => $players,
+        'sort' => [
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'stake', 'currency', 'tokens'],
+        ],
+        'pagination' => [
+            'pageSize' => 50,
+        ],
+    ]);
     
+    
+        return $this->render('ico',[
+            'amount' => $total_amount,
+            'btc_wallet'=>$btc_wallet['btc_wallet'],
+            'data_provider' => $data_provider,
+            'data_provider_for_periods' => $data_provider_for_periods,
+            'tokens' => $personal_tokens,
+            'interval' => $interval,
+            'total_btc' => $total_btc,
+            'total_tokens' => $total_tokens,
+        ]);   
+        
+        
     }
-       
+
     
 }
