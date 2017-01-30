@@ -80,6 +80,13 @@ class BitCoin extends Model
         
     }
     
+    static function get_rate(){
+        $interval = Bitcoin::get_interval(); 
+        $prev_id = $interval['id'] - 1;
+        
+        $prev_interval = Calendar::find()->where('id=' . $prev_id)->asArray()->one();
+        return $prev_interval['rate'];
+    }
     
 
     
@@ -89,22 +96,36 @@ class BitCoin extends Model
     static function check_distribution(){
         $interval = Bitcoin::get_interval(); 
         $prev_id = $interval['id'] - 1;
+        
         $prev_interval = Calendar::find()->where('id=' . $prev_id)->asArray()->one();
         if ($prev_interval['finished'] == 0){
              $players = BitCoin::get_data($prev_interval);
+             $total_investments = 0;
             foreach ($players as $player){
+                $total_investments = $total_investments + $player['amount'];
                 Yii::$app->db->createCommand("UPDATE user SET tokens = tokens + " . $player['tokens'] . " WHERE username =" . "'". $player['name'] . "'")->execute(); 
                 
                 Yii::$app->db->createCommand("UPDATE ico SET tokens=" . $player['tokens'] . " WHERE hash=" . "'" . $player['hash'] . "'")->execute(); 
                 
                 
+            }
+                
+                $total_btc_per_week = BitCoin::get_weekly_btc($players);
+                $total_gbg_per_week = Bitcoin::get_weekly_gbg($players);
+                
+                
+                
+                $rate = $total_btc_per_week / 810000;
                 Yii::$app->db->createCommand()
                  ->update('calendar', [
                  'finished' => 1, 
+                 'rate' => $rate,
+                 'week_investments' => $total_investments,
+                 'btc_per_week' => $total_btc_per_week,
+                 'gbg_per_week' => $total_gbg_per_week, 
                 ],['id' => $interval['id'] - 1 
                 ]) ->execute();
           
-                }
             echo $prev_interval['date_start'] . '-' . $prev_interval['date_end'] . '  SUCCESS DISTRIBUTED' . " \n";
             
         }
@@ -263,7 +284,7 @@ class BitCoin extends Model
        $all_btc = BitCoin::get_all_btc();
        $all_tokens = BitCoin::get_all_tokens();
        
-       $rate = $all_btc/$all_tokens;
+       $rate = $all_btc/$all_tokens/2;
        $rate = number_format($rate, 10);
       return $rate;  
     }
@@ -279,7 +300,7 @@ class BitCoin extends Model
        
         $model->status = 'pending';
         $model->created_at = date("Y-m-d H:i:s");
-        $model->rate = BitCoin::get_current_rate();
+        $model->rate = BitCoin::get_rate();
         $model->tokens = $model->btc / $model->rate;
          
         if ($model->tokens <= $user->team_tokens) {
