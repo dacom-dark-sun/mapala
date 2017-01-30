@@ -53,7 +53,11 @@ use common\models\BitCoin;
                  <div class="panel-body">
                         <center><?= $weekly_gbg ?> GBG </center>
                     </div>
-                     
+                    <hr>
+                <center> <?= Yii::t('frontend', 'Current rate:') ?></center>
+                
+                    <center> <?= $current_rate ?> BTC/MPL </center>
+                    
                
                 </div>
    </div>

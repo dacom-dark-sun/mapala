@@ -197,7 +197,7 @@ $personal_btc = Bitcoin::get_personal_btc();
 $personal_gbg = Bitcoin::get_personal_gbg();
 $total_tokens = Bitcoin::get_all_tokens();
 $bonuse_today = BitCoin::get_bonuse_today();
-
+$current_rate = BitCoin::get_rate();
 
 
 
@@ -214,6 +214,7 @@ $bonuse_today = BitCoin::get_bonuse_today();
     
     
         return $this->render('ico',[
+            'current_rate' => $current_rate,
             'amount' => $total_amount,
             'btc_wallet'=>$btc_wallet['btc_wallet'],
             'data_provider' => $data_provider,
