@@ -162,7 +162,8 @@ return [
     'All distributed tokens - ' => 'Все распределенные токены - ',
     'History' => 'История',
     'BONUS TODAY:' => 'БОНУС СЕГОДНЯ:',
-    'Bonuses:' => 'Бонусы:'
+    'Bonuses:' => 'Бонусы:',
+    'Current rate:' => 'Текущий курс:',
     
     
     
