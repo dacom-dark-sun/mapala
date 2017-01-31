@@ -23,7 +23,7 @@ use yii\helpers\Html;
 <script>
     $('#withdraw-btc').on('keyup', function(){
         btc = $('#withdraw-btc').val();
-        rate =  <?=\common\models\BitCoin::get_current_rate(); ?>;
+        rate =  <?=\common\models\BitCoin::get_rate(); ?>;
         tokens = btc/rate; 
         $('#tokens').val(tokens.toFixed(6));
         

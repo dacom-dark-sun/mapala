@@ -8,7 +8,7 @@ use common\models\BlockChain;
 
         
            <div class="col-xs-4 col-lg-2 article-author">
-            <?php echo Yii::t('frontend', 'автор: ') ?><?php echo Html::a(stripslashes($model->author),['/site/index/','author'=>$model->author]) ?>
+            <?php echo Yii::t('frontend', 'author:') .' '?><?php echo Html::a(stripslashes($model->author),['/site/index/','author'=>$model->author]) ?>
            
           </div>
             <div class="col-xs-4 col-lg-2 article-total_pending_payout_value">

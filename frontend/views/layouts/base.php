@@ -35,11 +35,11 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
             ['label' => Yii::t('frontend', 'Base'),
                 'items'=>[
                      [
-                        'label' => Yii::t('frontend', 'Просмотреть'), 'url' => ['/site/index'],
+                        'label' => Yii::t('frontend', 'Watch'), 'url' => ['/site/index'],
                         'url' => ['/site/index']
                     ],
                     [
-                        'label' => Yii::t('frontend', 'Обновить'),
+                        'label' => Yii::t('frontend', 'Add Post'),
                         'url' => ['/site/add']
                     ],
                 ]],

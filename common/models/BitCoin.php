@@ -115,7 +115,7 @@ class BitCoin extends Model
                 
                 
                 
-                $rate = $total_btc_per_week / 810000;
+                $rate = $total_investments / 810000;
                 Yii::$app->db->createCommand()
                  ->update('calendar', [
                  'finished' => 1, 

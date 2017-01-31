@@ -14,7 +14,7 @@ KeyAsset::register($this);
 
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 if (Yii::$app->controller->id == 'keys')
-    $this->title = Yii::t('frontend', 'Ключ GOLOS')
+    $this->title = Yii::t('frontend', 'Key STEEM')
 ?>
 <div class="form-index">
     <h1><?php if (Yii::$app->controller->id == 'keys')
