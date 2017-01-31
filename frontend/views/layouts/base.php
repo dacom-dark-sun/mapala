@@ -14,6 +14,11 @@ use common\models\Art;
 
 $this->beginContent('@frontend/views/layouts/_clear.php')
 ?>
+<?php
+$this->registerMetaTag([
+'name' => 'p:domain_verify',
+'content' => '2a77368c453493113d92d6d451b0bcd1'
+]); ?>
 
 <div class="wrap">
 
