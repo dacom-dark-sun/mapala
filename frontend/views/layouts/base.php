@@ -14,6 +14,11 @@ use common\models\Art;
 
 $this->beginContent('@frontend/views/layouts/_clear.php')
 ?>
+<?php
+$this->registerMetaTag([
+'name' => 'p:domain_verify',
+'content' => '2a77368c453493113d92d6d451b0bcd1'
+]); ?>
 
 <div class="wrap">
 
@@ -35,11 +40,11 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
             ['label' => Yii::t('frontend', 'Base'),
                 'items'=>[
                      [
-                        'label' => Yii::t('frontend', 'Просмотреть'), 'url' => ['/site/index'],
+                        'label' => Yii::t('frontend', 'Watch'), 'url' => ['/site/index'],
                         'url' => ['/site/index']
                     ],
                     [
-                        'label' => Yii::t('frontend', 'Обновить'),
+                        'label' => Yii::t('frontend', 'Add Post'),
                         'url' => ['/site/add']
                     ],
                 ]],

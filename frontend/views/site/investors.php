@@ -32,7 +32,7 @@ use common\models\BitCoin;
                         <center>    <?= Yii::t('frontend', 'All distributed tokens') ?>  </center>
                     </div>
                     <div class="panel-body">
-                        <center>    <?= $total_tokens ?> </center>
+                        <center>    <?= round($total_tokens) ?> </center>
                     </div>
                 </div>
    </div>

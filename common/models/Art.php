@@ -388,7 +388,25 @@ class Art extends \yii\db\ActiveRecord
             
         static function get_single_art($author, $permlink){
         $blockchain =  BlockChain::get_blockchain_from_locale();
+        
         $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->one();
+        if (empty($model)){
+            if ($blockchain =='golos'){
+                $blockchain = 'steem';
+                $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->one();
+                if (!empty($model)){
+                    return $model;
+                }
+            }
+            if ($blockchain =='steem'){
+                $blockchain = 'golos';
+                $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->one();
+                if (!empty($model)){
+                    return $model;
+                }
+            }
+        }
+        
         return $model;
 
         }
@@ -517,7 +535,7 @@ class Art extends \yii\db\ActiveRecord
          public $coordinates;        
          */
         $model->location =  (array_key_exists('location', $meta)? $meta['location'] :  "");
-        $model->tags = $current_art->category;
+        $model->tags = $current_art->sub_category;
         $model->coordinates = (array_key_exists('coordinates', $meta)? $meta['coordinates'] :  "");
     return $model;
          

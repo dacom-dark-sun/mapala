@@ -123,6 +123,7 @@ return [
     'Trending' => 'Горячее',
     'Update' => 'Редактировать',
     'Add Post' => 'Добавить пост',
+    'Watch' => 'Просмотреть',
     'User Settings' => 'Настройки пользователя',
     'Username' => 'Имя пользователя',
     'Username or email' => 'Имя пользователя или e-mail',
@@ -162,7 +163,11 @@ return [
     'All distributed tokens - ' => 'Все распределенные токены - ',
     'History' => 'История',
     'BONUS TODAY:' => 'БОНУС СЕГОДНЯ:',
-    'Bonuses:' => 'Бонусы:'
+    'Bonuses:' => 'Бонусы:',
+    'Current rate:' => 'Текущий курс:',
+    'author:' => 'автор:',
+    'install STEEM posting private key' => 'укажите приватный ключ от аккаунта GOLOS',
+    
     
     
     
