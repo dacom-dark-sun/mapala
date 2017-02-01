@@ -69,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                  echo $form->field($model, 'body')->widget(Widget::className(), [
                     'settings' => [
                         'minHeight' => 400,
+                        'toolbarFixedTopOffset' => 50,
                          'imageResizable' => true,
                          'imagePosition' => true,
                         'imageUpload' => yii\helpers\Url::to(['/site/image-upload']),

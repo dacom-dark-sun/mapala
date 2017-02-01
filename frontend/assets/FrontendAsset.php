@@ -28,6 +28,7 @@ class FrontendAsset extends AssetBundle
       
          'js/crypto.js',
          'js/tr.js',
+        'js/common.js',
     ];
     
     public $depends = [

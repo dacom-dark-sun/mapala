@@ -18,12 +18,12 @@ class AjaxController extends Controller{
     Для обеспечения работы сайта без перезагрузки страницы, используется ajax запрос, вызываемый нажатием на кнопку выбора категории в дереве (функция function_a в frontend/views/layout/main). Запрос отправляется действию Ajax/Show_by_category.
     
     */
-    
-    public function actionShow_by_category($categories){
-     
+
+    public function actionCategory($categories)
+    {
         $dataProvider = Art::get_data_by_categories($categories);
-        return $this->renderAjax('_index_new_view_by_category', ['dataProvider'=>$dataProvider,
-              ]);
+
+        return $this->renderAjax('_index_new_view_by_category', ['dataProvider' => $dataProvider,]);
     }
    
     

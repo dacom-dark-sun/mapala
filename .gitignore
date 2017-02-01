@@ -5,6 +5,7 @@
 /vendor/*
 /parser/*
 
+
 # composer
 
 composer.phar
@@ -32,3 +33,5 @@ phpunit.phar
 
 # Vagrant
 /.vagrant
+
+!/vendor/vova07/yii2-imperavi-widget/
