@@ -34,4 +34,4 @@ phpunit.phar
 # Vagrant
 /.vagrant
 
-!/vendor/vova07/yii2-imperavi-widget/
+!/vendor/vova07/
