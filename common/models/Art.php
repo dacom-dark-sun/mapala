@@ -8,6 +8,7 @@ use yii\helpers\StringHelper;
 use common\models\BlockChain;
 use yii\helpers\Html;
 use yii\helpers\Markdown;
+use yii\data\ArrayDataProvider;
 
 /**
  * This is the model class for table "art".
@@ -89,9 +90,53 @@ class Art extends \yii\db\ActiveRecord
     {
         $data_full = null;
         $query = new Category();
+        $blockchain =  BlockChain::get_blockchain_from_locale();    
+            
+            $array_categories = $query->find()->where(['blockchain'=> $blockchain])->asArray()->select('country, country_json, city_json, category_json, sub_category_json')->all();
+            foreach ($array_categories as $line){
+                $country_json = json_decode($line['country_json'], true);
+
+                if ($country_json['text'] != 'null'){
+                    $data_full[]= $country_json;
+                }
+                $city_json = json_decode($line['city_json'], true);
+                foreach ($city_json as $city_js){
+                    if ($city_js['text']!='null'){
+                        $data_full[]= $city_js;
+                    }
+                }
+                $category_json = json_decode($line['category_json'], true);
+                foreach ($category_json as $cat_js){
+                    if ($cat_js['text']!='null'){
+                        $data_full[]= $cat_js;
+                    }
+                }
+                $sub_category_json = json_decode($line['sub_category_json'], true);
+                foreach ($sub_category_json as $sub_cat_js){
+                    if ($sub_cat_js['text']!='null'){
+                        $data_full[]= $sub_cat_js;
+                    }
+                }
+                    
+                
+                
+            }
+         
+        
+        
+        return $data_full;
+   
+        
+        }
+        
+    static function get_news($raw = null)
+    {
+        $data_full = null;
+        $query = new Category();
          $blockchain =  BlockChain::get_blockchain_from_locale();    
             
-            $array_categories = $query->find()->where(['blockchain'=> $blockchain])->asArray()->select('country_json, city_json, category_json, sub_category_json')->all();
+            $array_categories = $query->find()->where(['blockchain'=> $blockchain, 'country' => Yii::t('frontend', 'News')])->asArray()->select('country, country_json, city_json, category_json, sub_category_json')->all();
+           
             foreach ($array_categories as $line){
                 $country_json = json_decode($line['country_json'], true);
                 if ($country_json['text']!='null'){
@@ -356,6 +401,77 @@ class Art extends \yii\db\ActiveRecord
             
         }
         
+         static function get_data_by_categories_in_array($categories = null, $state = 'new'){
+             $searchModel = new Art();
+             $blockchain =  BlockChain::get_blockchain_from_locale();    
+             $dataProvider = new \yii\data\ArrayDataProvider();
+             if ($categories == null){
+                $dataProvider = $searchModel->find()->where(['blockchain'=> $blockchain])->asArray()->all();
+             }
+             else {
+                 $categories = Art::clean_data($categories);
+                 $count = count($categories);
+                 if ($count == 1) {
+                     $searchModel = new Art();
+                     $dataProvider = $searchModel->find()->where(['country' => $categories, 'blockchain'=> $blockchain])->asArray()->all();
+                     
+                     /* Этот код написан для того, чтобы использовать адресную строку для задания критериев поиска по категории
+                     * В адресной строке можно передавать страны, города, или одни лишь категории, а нижеследующий код побирает им свои места (работает для 1 категории) 
+                     */ 
+                     if ($dataProvider->getTotalCount() === 0) {
+                        $searchModel = new Art();
+                        $dataProvider = $searchModel->find()->where(['city' => $categories,'blockchain'=> $blockchain])->asArray()->all();
+                             if ($dataProvider->getTotalCount() === 0) {
+                                  $searchModel = new Art();
+                                  $dataProvider = $searchModel->find()->where(['category' => $categories, 'blockchain'=> $blockchain])->asArray()->all();
+                             }
+                     }
+
+            } else if ($count == 2) {
+                     $dataProvider = $searchModel->find()->where(['country' => $categories[0], 'city' => $categories[1], 'blockchain'=> $blockchain])->asArray()->all();
+                 } else if ($count == 3) {
+                     $dataProvider = $searchModel->find()->where(['country' => $categories[0], 'city' => $categories[1], 'category' => $categories[2],'blockchain'=> $blockchain])->asArray()->all();
+                 } else if ($count == 4) {
+                     $dataProvider = $searchModel->find()->where(['country' => $categories[0], 'city' => $categories[1], 'category' => $categories[2], 'sub_category' => $categories[3],'blockchain'=> $blockchain])->asArray()->all();
+                 }
+                 
+             }
+             
+             $data_provider = new ArrayDataProvider([
+                 'allModels' => $dataProvider,
+                 'pagination' => [
+                 'pageSize' => 10,
+                 ],
+             ]);
+             
+             //Change order for different views
+             //TODO REPAIR order list and modificate it for correct list by days
+      /*      if ($state =='new'){
+                 $dataProvider->sort = [
+                    'defaultOrder' => ['created_at' => SORT_DESC]
+                 ];
+             }
+             if ($state == 'trending'){
+                 $dataProvider->sort = [
+                    'defaultOrder' => ['created_at' => SORT_DESC, 'total_pending_payout_value' => SORT_DESC]
+             ];
+             }
+             if ($state == 'discuss'){
+                 $dataProvider->sort = [
+                    'defaultOrder' => ['created_at' => SORT_DESC, 'replies' => SORT_DESC]
+             ];
+             }
+
+             $dataProvider->pagination = ['pageSize' => 50];
+        */     
+                    
+            return $data_provider;
+            
+        }
+        
+           
+        
+        
         
         static function get_author_categories($author){
             $blockchain =  BlockChain::get_blockchain_from_locale();    
@@ -385,6 +501,23 @@ class Art extends \yii\db\ActiveRecord
 
 
         }
+        
+         static function get_single_blog_in_array($author = null){
+            $searchModel = new Art();
+            $blockchain =  BlockChain::get_blockchain_from_locale();    
+            
+            $dataProvider = $searchModel->find()->where(['author' => $author, 'blockchain' => $blockchain])->asArray()->all();
+            $data_provider = new ArrayDataProvider([
+                 'allModels' => $dataProvider,
+                 'pagination' => [
+                 'pageSize' => 10,
+                 ],
+             ]);
+            return $data_provider;
+
+
+        }
+            
             
         static function get_single_art($author, $permlink){
         $blockchain =  BlockChain::get_blockchain_from_locale();
@@ -411,6 +544,34 @@ class Art extends \yii\db\ActiveRecord
 
         }
             
+             
+        static function get_single_art_in_array($author, $permlink){
+        $blockchain =  BlockChain::get_blockchain_from_locale();
+        
+        $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->asArray()->one();
+        if (empty($model)){
+            if ($blockchain =='golos'){
+                $blockchain = 'steem';
+                $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->asArray()->one();
+                if (!empty($model)){
+                    return $model;
+                }
+            }
+            if ($blockchain =='steem'){
+                $blockchain = 'golos';
+                $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->asArray()->one();
+                if (!empty($model)){
+                    return $model;
+                }
+            }
+        }
+        
+        return $model;
+
+        }
+            
+        
+        
         
         public function convert_currency($price){
           $price_old =  floatval($price);

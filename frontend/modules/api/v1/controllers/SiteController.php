@@ -65,41 +65,44 @@ class SiteController extends Controller
     
     public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null)
     {
-        $categories_tree = Art::create_array_categories();
-        
         if ($categories != null){ //Отображение по категориям
-            $dataProvider = Art::get_data_by_categories($categories);
-            $categories_tree = Art::create_array_categories();
-        
-            return $this->render('index', ['dataProvider'=>$dataProvider,
-            'data' => $categories_tree,
-             ]); 
+            $dataProvider = Art::get_data_by_categories_in_array($categories);
+             return  $json = strip_tags(json_encode($dataProvider, JSON_UNESCAPED_UNICODE));    
         }
         
         if (($permlink == null)&&($author != null)) { //Отображение персонального блога
-            $dataProvider = Art::get_single_blog($author);
-            return $this->render('single_blog', ['dataProvider' => $dataProvider,
-                'data' => $categories_tree,
-                'author'=>$author,
-            ]);
+            $dataProvider = Art::get_single_blog_in_array($author);
+            $personal_blog = array(
+                'author' => $author,
+                'data' => $dataProvider,
+            );
+             return  $json = strip_tags(json_encode($personal_blog, JSON_UNESCAPED_UNICODE));    
+            
             
         } elseif (($permlink != null)&&($author != null)) { //Отображение статьи в полный экран
-            $model = Art::get_single_art($author, $permlink);
+            $model = Art::get_single_art_in_array($author, $permlink);
             if ($model == null){
-                return $this->render('empty_blog');
+                return null;
             } else{ 
-                return $this->render('single_art', ['model'=>$model,
-              ]);
+                return $json = strip_tags(json_encode($model, JSON_UNESCAPED_UNICODE));    
             }
             
         }
+        $dataProvider = Art::get_data_by_categories_in_array($categories=null, $state); //Стандартное отображение с порядком вывода, определяемым переменной $state
         
-        $dataProvider = Art::get_data_by_categories($categories=null, $state); //Стандартное отображение с порядком вывода, определяемым переменной $state
-        return $this->render('index', ['dataProvider'=>$dataProvider,
-            'data' => $categories_tree,
-         ]);
+            return  $json = strip_tags(json_encode($dataProvider, JSON_UNESCAPED_UNICODE));    
+            
         
 }
+
+
+
+
+    public function actionGet_tree(){
+        $categories_tree = Art::create_array_categories();
+   
+    return json_encode($categories_tree, JSON_UNESCAPED_UNICODE);
+    }
 
 
 
@@ -135,9 +138,9 @@ class SiteController extends Controller
     Используется для построения дерева комментарием к определенной статье. 
     */
     
-    public function actionComments($permlink) {
+    public function actionComments($author, $permlink) {
       $model = new Art();
-      $model = Art::find()->where(['permlink' => $permlink])->one();
+      $model = Art::find()->where(['author' => $author, 'permlink' => $permlink])->one();
     
       return $this->renderAjax('comments', [
          'model' => $model
@@ -159,12 +162,13 @@ class SiteController extends Controller
             'pageSize' => 50,
         ],
     ]);
-        
-        return $this->render('investors',[
+        $investors = array(
             'total_btc' => $total_btc,
             'total_tokens' => $total_tokens,
             'data_provider' => $data_provider,
-        ]);   
+      );
+        
+        return json_encode($investors);
     } 
      
      
@@ -186,10 +190,9 @@ $personal_gbg = Bitcoin::get_personal_gbg($user);
 $total_tokens = Bitcoin::get_all_tokens();
 $bonuse_today = BitCoin::get_bonuse_today();
 
-        $ico =  array( 
-            'amount' => $total_amount,
+$ico =  array( 
+            'total_amount_in_all_curr' => $total_amount,
             'btc_wallet'=>$btc_wallet['btc_wallet'],
-            'players' => $players,
             'tokens' => $personal_tokens,
             'interval' => $interval,
             'total_btc' => $total_btc,
@@ -199,8 +202,10 @@ $bonuse_today = BitCoin::get_bonuse_today();
             'weekly_btc' => $weekly_btc, 
             'weekly_gbg' => $weekly_gbg,
             'bonuse_today' => $bonuse_today,
+            'players' => $players,
+            
         );
-        return  $json = json_encode($ico);    
+        return  $json = json_encode($ico, JSON_UNESCAPED_UNICODE);    
         
     }
     
@@ -208,43 +213,41 @@ $bonuse_today = BitCoin::get_bonuse_today();
     
     
     
-    public function actionPersonal_history(){
-        $btc_wallet = BitCoin::get_user_wallet();
+    public function actionPersonal_history($user){
+        $btc_wallet = BitCoin::get_user_wallet($user);
         $total_btc = Bitcoin::get_all_btc();
-        $personal_btc = Bitcoin::get_personal_btc();
-        $personal_gbg = Bitcoin::get_personal_gbg();
-        $personal_tokens = BitCoin::get_tokens();
-        $total_invest_by_user = BitCoin::get_user_btc_investments();
+        $personal_btc = Bitcoin::get_personal_btc($user);
+        $personal_gbg = Bitcoin::get_personal_gbg($user);
+        $personal_tokens = BitCoin::get_tokens($user);
+        $total_invest_by_user = BitCoin::get_user_btc_investments($user);
         $total_tokens = Bitcoin::get_all_tokens();
-        
-    $data_provider_for_periods = new ArrayDataProvider([
-        'allModels' => $total_invest_by_user,
-        'sort' => [
-            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'currency','tokens', 'symbol'],
-        ],
-        'pagination' => [
-            'pageSize' => 50,
-        ],
-    ]);
 
-        
-        return $this->render('personal_info',[
+        $data_provider_for_periods = new ArrayDataProvider([
+            'allModels' => $total_invest_by_user,
+            'sort' => [
+                'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'currency','tokens', 'symbol'],
+            ],
+            'pagination' => [
+                'pageSize' => 50,
+            ],
+        ]);
+
+        $history = array(
             'total_btc' => $total_btc,
             'total_tokens' => $total_tokens,
             'data_provider_for_periods' => $data_provider_for_periods,
             'btc_wallet'=>$btc_wallet['btc_wallet'],
             'personal_btc' => $personal_btc, 
             'personal_gbg' => $personal_gbg,
-               'tokens' => $personal_tokens,
-         
-       
-            
-        ]);   
-    } 
+            'tokens' => $personal_tokens,
+    );
+        return json_encode($history, JSON_UNESCAPED_UNICODE);
+     
     
     
     
     
     
-    
+}
+
 }
