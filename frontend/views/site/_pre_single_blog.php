@@ -11,7 +11,7 @@ use common\models\BlockChain;
 var blockchain = '<?php echo BlockChain::get_blockchain_from_locale() ?>';
 var account = blockchain.toLowerCase() + 'ac';
     account = getCookie(account);
-    document.location.href='index?author=' + account;
+    document.location.href='index/' + account;
     
 
 
