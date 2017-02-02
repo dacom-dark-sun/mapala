@@ -12,6 +12,7 @@ composer.phar
 ## remove in production!
 
 /storage/web/thumbs
+/storage/web/img
 composer.lock
 
 # IDE
@@ -35,3 +36,4 @@ phpunit.phar
 /.vagrant
 
 #!/vendor/vova07/
+/storage/web/img/
