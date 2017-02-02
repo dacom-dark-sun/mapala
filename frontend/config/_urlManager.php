@@ -5,7 +5,7 @@ return [
     'showScriptName'=>false,
     'rules'=> [
         '/ajax/<action>' => 'ajax/<action>',
-        '/site/<action:add|show_single_blog|ico|stat|team|investors|set-locale|personal_history|image-upload>' => 'site/<action>',
+        '/site/<action:add|show_single_blog|ico|stat|team|investors|set-locale|captcha|personal_history|image-upload>' => 'site/<action>',
         '/forms/<action>' => 'forms/<action>',
         '/page/<action>' => 'page/<action>',
         '/category/<categories>' => 'site/index',
