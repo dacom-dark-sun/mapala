@@ -346,6 +346,51 @@ class BlockChain extends Model
     
     
     
+   static function construct_community($model){
+           /*  public $title;
+    public $body;
+    public $tags; -- one tag
+   
+*/    
+             $bl_model['parentAuthor'] = '';
+             $bl_model['parentPermlink'] = 'test'; //
+             if ($model->permlink == null){
+                $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
+             } else {
+                $bl_model['permlink'] = $model->permlink;
+            
+             }
+             $bl_model['body'] = $model->body;
+             $bl_model['title'] = $model->title;
+             $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
+                         
+             $json['tags'][0] = 'test';
+             $json['tags'][1] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Community'));
+               
+             $json['tags'][2] = BlockChain::tag_to_eng($model->tags);
+             
+             $json['model'] = strtolower(StringHelper::basename(get_class($model)));
+             $arr = Art::get_array_links_and_images($model->body);
+             $json['app'] = 'mapala';
+             if (array_key_exists('links', $arr))
+                $json['links'] = $arr['links'];
+             
+             if (array_key_exists('image', $arr))
+                $json['image'] = $arr['image'];
+             
+             $json['sign'] = BlockChain::mc_encrypt($bl_model['permlink'], ENCRYPTION_KEY);
+             
+             
+             $bl_model['metadata'] = $json;
+             
+             return json_encode($bl_model, JSON_UNESCAPED_UNICODE);
+        
+        
+        
+    }
+    
+    
+    
     
     
    static function construct_reply($data){

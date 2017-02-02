@@ -62,6 +62,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             </div>
+             <div class ='col-lg-3'>
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <center>  <b>   <?= Yii::t('frontend', 'Здесь кипит жизнь сообщества. В этом разделе можно сообщить о проблемах, поделиться идеями или полезными материалами для сообщества.') ?> </b> </center>
+                         <?= Html::a('<img src="/img/community2.png" style="width: 100%;"> ', ['/forms/community','author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
+      
+                        
+                         <?= Html::a(Yii::t('frontend','Community'), ['/forms/community','author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
+           
+                    </div>
+                </div>
+            </div>
             <?php if ((!Yii::$app->user->isGuest)&&(Yii::$app->user->identity->username == 'mapala')): ?>
                 <div class ='col-lg-3'>
                 <div class="panel panel-success">

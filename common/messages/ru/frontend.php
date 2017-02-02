@@ -167,7 +167,7 @@ return [
     'Current rate:' => 'Текущий курс:',
     'author:' => 'автор:',
     'install STEEM posting private key' => 'укажите приватный ключ от аккаунта GOLOS',
-    
+    'Community' => 'Сообщество',
     
     
     
