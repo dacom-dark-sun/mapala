@@ -90,8 +90,8 @@ $("#steem-btn-save_pass").click(function() {
    if (!err){
        if (result[0][0] != null){
        put_key_to_cookie('steemsig', wif);
-       setCookie('steemac', result[0][0], {"path": "/", "expires": 31536000});
-       $('.account_name').text(result[0][0]);
+       setCookie('steemac', username, {"path": "/", "expires": 31536000});
+       $('.account_name').text(username);
        $('#STEEM').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#STEEM').prop('disabled', true);
        $("#steem-btn-save").hide();
@@ -103,7 +103,7 @@ $("#steem-btn-save_pass").click(function() {
        
        $.ajax({
          method: "GET",
-         data: {name:result[0][0]},
+         data: {name:username},
          url:'/ajax/save_name',
          success: function(result) {
              console.log(result);
@@ -155,8 +155,8 @@ $("#golos-btn-save_pass").click(function() {
    if (!err){
        if (result[0][0] != null){
        put_key_to_cookie('golossig', wif);
-       setCookie('golosac', result[0][0], {"path": "/", "expires": 31536000});
-       $('.account_name').text(result[0][0]);
+       setCookie('golosac', username, {"path": "/", "expires": 31536000});
+       $('.account_name').text(username);
        $('#GOLOS').val('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
        $('#GOLOS').prop('disabled', true);
        $("#golos-btn-save").hide();
@@ -168,7 +168,7 @@ $("#golos-btn-save_pass").click(function() {
  
        $.ajax({
          method: "GET",
-         data: {name:result[0][0]},
+         data: {name:username},
          url:'/ajax/save_name',
          success: function(result) {
              console.log(result);
