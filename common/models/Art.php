@@ -574,7 +574,7 @@ class Art extends \yii\db\ActiveRecord
         
         
         
-        public function convert_currency($price){
+        static function convert_currency($price){
           $price_old =  floatval($price);
           $blockchain =  BlockChain::get_blockchain_from_locale();
           $GRAMM_IN_OZ = 31.1034768;
@@ -771,6 +771,15 @@ class Art extends \yii\db\ActiveRecord
                 ->count();
         
          return $art;
+         
+     }
+     
+     static function get_stat_from_prev_interval(){
+         $blockchain = BlockChain::get_blockchain_from_locale();
+         $prev_interval = BitCoin::get_prev_interval();
+         $authors = Art::find()->where('created_at >=' . "'" .   $prev_interval['date_start'] . "'")->andwhere('created_at <=' . "'" .   $prev_interval['date_end'] . "'")->andWhere(['blockchain' => $blockchain])->andWhere(['<>', 'author','mapala'])->asArray()->all();
+    
+         return $authors;
          
      }
         
