@@ -5,6 +5,11 @@
  */
 
 
+    //SET LOCAL USER BROWSER DATE TO Date, came from our server
+  
+
+
+
 function vote(current_blockchain, author, permlink, weight){
 
 current_blockchain = current_blockchain.toLowerCase();
@@ -127,9 +132,11 @@ function comment (data, callback){
             
             //jsonMetadata = JSON.parse(trx['metadata']);
                 
-                console.log(trx);
-                
-                 
+            console.log(trx);
+             
+            
+            
+            doit = function(){
                 steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
@@ -140,11 +147,31 @@ function comment (data, callback){
                 trx['metadata'], 
                 function(err, result) {
                     console.log(err, result);
-     
+
                     if (err == null){
                         setTimeout(redirect, 6000);
-                    } else alert(err);
-            });
+                        return err
+                    } 
+                    else alert(err);
+                });
+            }
+            function sleep(microseconds) {
+                var request = new XMLHttpRequest();
+                request.open("GET", "sleep.php?time=" + microseconds, false);
+                request.send();
+            }
+            for (i=0 ;i< 1000;i++){
+                   d=doit();
+                if (d == null){
+                    break
+                }
+                else {
+                    sleep(2000)
+                    console.log('try',i,d);
+                }
+            } 
+                 
+           
         
         } else alert(err);
   
