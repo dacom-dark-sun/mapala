@@ -34,7 +34,8 @@
             });
             TimeShift.setTimezoneOffset(0);
             }
-          
+        window.override_local_time();
+
 
 
 
@@ -162,6 +163,7 @@ function comment (data, callback){
                 
             console.log(trx);
             
+
             doit = function(){
                 steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
