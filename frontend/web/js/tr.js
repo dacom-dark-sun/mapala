@@ -139,7 +139,7 @@ function comment (data, callback){
             $.get( "/api/v1/site/get_time", {} )
              .done(function( data ) {
                //alert( "Data Loaded: " + data );
-               t=data;
+               t=parseInt(data);
                 console.log('t is ok', t);
                 if (Date) {
                     try {
