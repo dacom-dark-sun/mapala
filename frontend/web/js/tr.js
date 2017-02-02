@@ -12,7 +12,7 @@
              .done(function( data ) {
                //alert( "Data Loaded: " + data );
                t=parseInt(data);
-               // console.log('t is ok', t);
+                console.log('t is ok', t);
                 if (Date) {
                     try {
                         Date = null;
@@ -20,8 +20,7 @@
                         //new Date().toString();
                         // console.log('>>>',window.servertimestamp)
                         TimeShift.setTime(t);           // Set the time to 2012-02-03
-                        new Date().toString();
-                      //  console.log('Date Chanded toss', new Date().toString())
+                        console.log('Date Chanded toss', new Date().toString())
 
                         //$.get( "http://144.217.94.119:8090", {"jsonrpc":"2.0","id":"25","method":"get_dynamic_global_properties","params": [""]} )
                         //  .done(function( data ) {
@@ -35,34 +34,7 @@
             });
             TimeShift.setTimezoneOffset(0);
             }
-            
-            window.retry_until_done=function(fnc){
-                for (i=0 ;i< 100;i++){
-                    try{
-                         d=fnc();
-                    }
-                    catch(err){
-
-                    }
-
-                    if (d == null){
-                        break
-                    }
-                    else {
-                        sleep(2000);
-                        console.log('try',i,d);
-                    }
-                } 
-            }
-            
-            
-window.sleep=function (microseconds) {
-                var request = new XMLHttpRequest();
-                request.open("GET", "sleep.php?time=" + microseconds, false);
-                request.send();
-            }
-
-
+  
 
 
 
@@ -84,21 +56,20 @@ try{
     check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
         var voter = result[0][0];
-        doit = function(){
         steem.broadcast.vote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 $('#icon_' + permlink).removeClass('vote-process'); 
-          
+                alert (err);
+
             } else {
                  $('#icon_' + permlink).removeClass('vote-process'); 
                  $("#" + permlink).css('z-index', 10);
 
             };
             
-            console.log(err, result);
-            });
-        };
-    
+        console.log(err, result);
+        });
+      
         
         
     }
@@ -137,6 +108,7 @@ try{
         var voter = result[0][0];
         steem.broadcast.downvote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
+                alert (err);
                 $('#icon_' + permlink).removeClass('vote-process');    
      
             } else {
@@ -144,11 +116,10 @@ try{
                  $("#" + permlink).css('z-index', -1);
 
             };
-        
-        
+            
         console.log(err, result);
         });
-    
+         
         
         
     }
@@ -196,6 +167,7 @@ function comment (data, callback){
             console.log(trx);
             
 
+            doit = function(){
                 steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
@@ -213,8 +185,28 @@ function comment (data, callback){
                     } 
                     // else alert(err);
                 });
-            
-            
+            }
+            function sleep(microseconds) {
+                var request = new XMLHttpRequest();
+                request.open("GET", "sleep.php?time=" + microseconds, false);
+                request.send();
+            }
+            for (i=0 ;i< 1000;i++){
+                try{
+                     d=doit();
+                }
+                catch(err){
+                    
+                }
+                  
+                if (d == null){
+                    break
+                }
+                else {
+                    sleep(2000);
+                    console.log('try',i,d);
+                }
+            } 
                  
            
         
@@ -263,8 +255,8 @@ function reply (data, callback){
             
             //jsonMetadata = JSON.parse(trx['metadata']);
             console.log(trx);    
-           
-                steem.broadcast.comment(wif.plaintext, 
+                
+              steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
                 trx['author'], 
@@ -276,9 +268,9 @@ function reply (data, callback){
                     callback(result);
                     console.log(err, result);
             });
-           
-            
-        } 
+        
+        } else alert(err);
+  
         });
   
     } catch(err){ alert('Key Error. Check your keys');}
