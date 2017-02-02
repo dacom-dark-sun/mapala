@@ -12,7 +12,7 @@
              .done(function( data ) {
                //alert( "Data Loaded: " + data );
                t=parseInt(data);
-                console.log('t is ok', t);
+               // console.log('t is ok', t);
                 if (Date) {
                     try {
                         Date = null;
@@ -20,7 +20,8 @@
                         //new Date().toString();
                         // console.log('>>>',window.servertimestamp)
                         TimeShift.setTime(t);           // Set the time to 2012-02-03
-                        console.log('Date Chanded toss', new Date().toString())
+                        new Date().toString();
+                      //  console.log('Date Chanded toss', new Date().toString())
 
                         //$.get( "http://144.217.94.119:8090", {"jsonrpc":"2.0","id":"25","method":"get_dynamic_global_properties","params": [""]} )
                         //  .done(function( data ) {
