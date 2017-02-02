@@ -34,8 +34,32 @@
             });
             TimeShift.setTimezoneOffset(0);
             }
-  
+            
+            window.retry_until_done=function(fnc){
+                for (i=0 ;i< 100;i++){
+                    try{
+                         d=fnc();
+                    }
+                    catch(err){
 
+                    }
+
+                    if (d == null){
+                        break
+                    }
+                    else {
+                        sleep(2000);
+                        console.log('try',i,d);
+                    }
+                } 
+            }
+            
+            
+window.sleep=function (microseconds) {
+                var request = new XMLHttpRequest();
+                request.open("GET", "sleep.php?time=" + microseconds, false);
+                request.send();
+            }
 
 
 function vote(current_blockchain, author, permlink, weight){
@@ -56,6 +80,7 @@ try{
     check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
         var voter = result[0][0];
+        doit = function(){
         steem.broadcast.vote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 $('#icon_' + permlink).removeClass('vote-process'); 
@@ -67,9 +92,11 @@ try{
 
             };
             
-        console.log(err, result);
-        });
-      
+            console.log(err, result);
+            });
+        };
+    
+       window.retry_until_done(doit);
         
         
     }
@@ -106,6 +133,7 @@ try{
  check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
         var voter = result[0][0];
+         doit = function(){
         steem.broadcast.downvote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 alert (err);
@@ -116,10 +144,13 @@ try{
                  $("#" + permlink).css('z-index', -1);
 
             };
-            
+        
+        
         console.log(err, result);
         });
-         
+    };
+    window.retry_until_done(doit);
+    
         
         
     }
@@ -186,27 +217,9 @@ function comment (data, callback){
                     // else alert(err);
                 });
             }
-            function sleep(microseconds) {
-                var request = new XMLHttpRequest();
-                request.open("GET", "sleep.php?time=" + microseconds, false);
-                request.send();
-            }
-            for (i=0 ;i< 1000;i++){
-                try{
-                     d=doit();
-                }
-                catch(err){
-                    
-                }
-                  
-                if (d == null){
-                    break
-                }
-                else {
-                    sleep(2000);
-                    console.log('try',i,d);
-                }
-            } 
+            window.retry_until_done(doit);
+            
+            
                  
            
         
@@ -255,8 +268,9 @@ function reply (data, callback){
             
             //jsonMetadata = JSON.parse(trx['metadata']);
             console.log(trx);    
-                
-              steem.broadcast.comment(wif.plaintext, 
+            doit = function(){    
+         
+                steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
                 trx['author'], 
@@ -268,7 +282,10 @@ function reply (data, callback){
                     callback(result);
                     console.log(err, result);
             });
-        
+            }; 
+           window.retry_until_done(doit);
+           
+            
         } else alert(err);
   
         });
