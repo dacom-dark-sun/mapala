@@ -98,8 +98,8 @@ class SiteController extends Controller
 
 
 
-    public function actionGet_tree(){
-        $categories_tree = Art::create_array_categories();
+    public function actionGet_tree($blockchain){
+        $categories_tree = Art::create_array_categories($raw = null, $blockchain);
    
     return json_encode($categories_tree, JSON_UNESCAPED_UNICODE);
     }

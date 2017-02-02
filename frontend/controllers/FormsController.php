@@ -15,6 +15,7 @@ use frontend\models\forms\Blogs;
 use frontend\models\forms\Transport;
 use frontend\controllers\SiteController;
 use common\models\Art;
+use frontend\models\forms\Community;
 use common\models\BlockChain;
 use common\models\Countries;
 use common\models\Cities;
@@ -196,6 +197,55 @@ class FormsController extends SiteController
    
     }
        
+    
+    
+    public function actionCommunity($author = null, $permlink = null)
+    {
+/*  public $title;
+    public $body;
+    public $tags;
+ */
+        //Если пользователь - гость, перенаправляем на контроллер логина.
+        if(Yii::$app->user->isGuest) {
+            $this->redirect(array('user/sign-in/login'));
+        }
+        
+         $model = new Community();
+        
+        /*
+        При нажатии на кнопку submit формы добавления материала, вызывается это же действие, в котором проверяется поступление данных через массив POST. В случае их наличия и успешной валидации, запускается процесс конструирования массива с данными, готовыми к транзакции в блокчейн. 
+        */
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { 
+            if ($permlink != null){
+                $model->permlink = $permlink;
+            } 
+            $bl_model = BlockChain::construct_community($model);
+             return $bl_model;
+        }
+        
+        if (($author != null)&&($permlink != null)){ //EDIT        
+        /*
+        Если в контроллер поступают данные об авторе и прямой ссылке, то запускается процесс "доконструирования" модели данных. Поскольку часть данных записывается в metadata, их необходимо передать файлу view вместе с основной моделью. Процесс не из самых "красивых" и требует переработки. 
+        */
+        
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
+
+              $current_art= Art::get_article_for_edit($author, $permlink);
+              $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              $model = Art::fill_community($model,$meta, $current_art);
+          }
+     
+              return $this->render('community', [ //CLEAR
+                'model' => $model, 
+                'author' => $author,
+                'permlink' => $permlink
+                ]);
+   
+    }
+    
     
     /*
     Действие Places показывает форму пополнения достопримечательностей. 

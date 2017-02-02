@@ -86,11 +86,12 @@ class Art extends \yii\db\ActiveRecord
     
        
     
-    static function create_array_categories($raw = null)
+    static function create_array_categories($raw = null, $blockchain = null)
     {
         $data_full = null;
         $query = new Category();
-        $blockchain =  BlockChain::get_blockchain_from_locale();    
+        if ($blockchain == null)
+            $blockchain =  BlockChain::get_blockchain_from_locale();    
             
             $array_categories = $query->find()->where(['blockchain'=> $blockchain])->asArray()->select('country, country_json, city_json, category_json, sub_category_json')->all();
             foreach ($array_categories as $line){
@@ -703,6 +704,21 @@ class Art extends \yii\db\ActiveRecord
          
      }
      
+        
+     static function fill_community($model, $meta, $current_art){
+         /*
+         public $title;
+         public $country;
+         public $body;
+         public $tags;
+         public $coordinates;        
+         */
+        $model->tags = $current_art->city;
+    return $model;
+         
+         
+     }
+     
      
      static function fill_news($model, $meta, $current_art){
          /*
@@ -711,7 +727,7 @@ class Art extends \yii\db\ActiveRecord
          public $tags;
          */
         
-        $model->tags = $current_art->category;
+        $model->tags = $current_art->city;
     return $model;
          
          
