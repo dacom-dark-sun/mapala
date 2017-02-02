@@ -4,6 +4,24 @@
  * and open the template in the editor.
  */
 
+ window.retry_until_done=function(fnc){
+                for (i=0 ;i< 100;i++){
+                    try{
+                         d=fnc();
+                    }
+                    catch(err){
+
+                    }
+
+                    if (d == null){
+                        break
+                    }
+                    else {
+                        sleep(2000);
+                        console.log('try',i,d);
+                    }
+                } 
+            }
 
 
 $("#steem-btn-save").click(function() {
@@ -292,12 +310,16 @@ $("#golos-btn-edit").click(function() {
 
 
 function check_pub_key_steem(pub_key, steem_callback){
-    
+ doit = function(){    
  steem.api.getKeyReferences([pub_key], function(err, result) {
         steem_callback(err, result);
-            
+              
         
     });
+};
+window.retry_until_done(doit);
+
+
 }
 
 function check_pub_key_golos(pub_key, golos_callback){

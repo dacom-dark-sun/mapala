@@ -63,6 +63,9 @@ window.sleep=function (microseconds) {
             }
 
 
+
+
+
 function vote(current_blockchain, author, permlink, weight){
     window.override_local_time();
 
@@ -96,7 +99,6 @@ try{
             });
         };
     
-       window.retry_until_done(doit);
         
         
     }
@@ -133,7 +135,6 @@ try{
  check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
         var voter = result[0][0];
-         doit = function(){
         steem.broadcast.downvote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 $('#icon_' + permlink).removeClass('vote-process');    
@@ -147,8 +148,6 @@ try{
         
         console.log(err, result);
         });
-    };
-    window.retry_until_done(doit);
     
         
         
@@ -197,7 +196,6 @@ function comment (data, callback){
             console.log(trx);
             
 
-            doit = function(){
                 steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
@@ -215,8 +213,6 @@ function comment (data, callback){
                     } 
                     // else alert(err);
                 });
-            }
-            window.retry_until_done(doit);
             
             
                  
@@ -267,8 +263,7 @@ function reply (data, callback){
             
             //jsonMetadata = JSON.parse(trx['metadata']);
             console.log(trx);    
-            doit = function(){    
-         
+           
                 steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
@@ -281,8 +276,6 @@ function reply (data, callback){
                     callback(result);
                     console.log(err, result);
             });
-            }; 
-           window.retry_until_done(doit);
            
             
         } 
