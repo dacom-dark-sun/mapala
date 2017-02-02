@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'minHeight' => 400,
                         'toolbarFixedTopOffset' => 50,
                         'imageResizable' => true,
-                         'imagePosition' => true,
+                        'imagePosition' => true,
                         'imageUpload' => yii\helpers\Url::to(['/site/image-upload']),
                         'plugins' => [
                             'fullscreen',
