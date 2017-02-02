@@ -88,7 +88,14 @@ class BitCoin extends Model
         return $prev_interval['rate'];
     }
     
-
+    static function get_prev_interval(){
+        $interval = Bitcoin::get_interval(); 
+        $prev_id = $interval['id'] - 1;
+        
+        $prev_interval = Calendar::find()->where('id=' . $prev_id)->asArray()->one();
+        return $prev_interval;
+        
+    }
     
     
     

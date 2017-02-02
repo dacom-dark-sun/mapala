@@ -287,7 +287,38 @@ $current_rate = BitCoin::get_rate();
     } 
     
     
-    public function actionTeam(){
+    public function actionStat(){
+     
+         $arts = Art::get_stat_from_prev_interval();
+         $total_payout_value = 0 ;
+         foreach ($arts as $art){
+             $total_payout_value = $total_payout_value + $art['total_pending_payout_value'];
+         }
+             
+         
+         $data_provider = new ArrayDataProvider([
+            'allModels' => $arts,
+            'sort' => [
+                'attributes' => ['username', 'total_pending_payout_value'],
+            ],
+            'pagination' => [
+                'pageSize' => 1000,
+            ],
+        ]);
+         
+     
+     
+      return $this->render('stat',[
+            'total_payout_value' => $total_payout_value,
+            'data_provider' => $data_provider,
+        ]);  
+     
+        
+        
+    }
+    
+    
+     public function actionTeam(){
      $wd_model = new Withdraw();
         
      if(Yii::$app->user->isGuest) {
