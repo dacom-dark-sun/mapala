@@ -34,12 +34,12 @@
             });
             TimeShift.setTimezoneOffset(0);
             }
-        window.override_local_time();
-
+  
 
 
 
 function vote(current_blockchain, author, permlink, weight){
+    window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
 current_blockchain = current_blockchain + 'sig';
@@ -91,7 +91,8 @@ try{
 
 
 function down_vote(current_blockchain, author, permlink, weight){
-    
+          window.override_local_time();
+
 current_blockchain = current_blockchain.toLowerCase();
 current_blockchain = current_blockchain + 'sig';
 
@@ -138,6 +139,8 @@ try{
 
 
 function comment (data, callback){
+          window.override_local_time();
+
     var trx = new Array();
     data = JSON.parse(data);
     var blockchain = data.blockchain.toLowerCase() + 'sig';
@@ -225,7 +228,8 @@ function redirect(){
 
 
 function reply (data, callback){
-    
+          window.override_local_time();
+
     var trx = new Array();
     data = JSON.parse(data);
     var blockchain = data.blockchain.toLowerCase() + 'sig';
