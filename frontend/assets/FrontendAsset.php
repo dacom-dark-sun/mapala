@@ -27,6 +27,7 @@ class FrontendAsset extends AssetBundle
         'js/key_op.js',
       
          'js/crypto.js',
+         'js/timeshift.js',
          'js/tr.js',
         'js/common.js',
     ];

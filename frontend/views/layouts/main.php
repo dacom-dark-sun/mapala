@@ -4,14 +4,44 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
 /* @var $content string */
 use cybercog\yii\googleanalytics\widgets\GATracking;
-
 echo GATracking::widget([
     'trackingId' => 'UA-89551963-1',
 ]) ;
 
+
 $this->beginContent('@frontend/views/layouts/base.php')
 ?>
-    <div class="container-fluid">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+
+
+<script>
+    var t=<?php echo time(); ?>000;
+
+      TimeShift.setTimezoneOffset(0);      
+    
+    console.log('t',t);
+   if(Date) {
+       try{
+           Date = null;
+           Date = TimeShift.Date;                      // Overwrite Date object
+           //new Date().toString();
+           // console.log('>>>',window.servertimestamp)
+           TimeShift.setTime(t);           // Set the time to 2012-02-03
+           console.log('Date Chanded toss', new Date().toString())
+
+            //$.get( "http://144.217.94.119:8090", {"jsonrpc":"2.0","id":"25","method":"get_dynamic_global_properties","params": [""]} )
+            //  .done(function( data ) {
+            //    alert( "Data Loaded: " + data );
+            // });
+           //Сходим за нормальным временем
+       } catch(exeption) {
+           console.log("Couldn't override Date object.");
+       }
+   }
+</script>
+
+<div class="container-fluid">
         <div class ="container_for_all">
         <?php echo Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
