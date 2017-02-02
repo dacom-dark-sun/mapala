@@ -16,29 +16,7 @@ $this->beginContent('@frontend/views/layouts/base.php')
 
 
 <script>
-    var t=<?php echo time(); ?>000;
-
-      TimeShift.setTimezoneOffset(0);      
-    
-    console.log('t',t);
-   if(Date) {
-       try{
-           Date = null;
-           Date = TimeShift.Date;                      // Overwrite Date object
-           //new Date().toString();
-           // console.log('>>>',window.servertimestamp)
-           TimeShift.setTime(t);           // Set the time to 2012-02-03
-           console.log('Date Chanded toss', new Date().toString())
-
-            //$.get( "http://144.217.94.119:8090", {"jsonrpc":"2.0","id":"25","method":"get_dynamic_global_properties","params": [""]} )
-            //  .done(function( data ) {
-            //    alert( "Data Loaded: " + data );
-            // });
-           //Сходим за нормальным временем
-       } catch(exeption) {
-           console.log("Couldn't override Date object.");
-       }
-   }
+   
 </script>
 
 <div class="container-fluid">

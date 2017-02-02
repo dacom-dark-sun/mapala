@@ -242,12 +242,11 @@ $ico =  array(
             'tokens' => $personal_tokens,
     );
         return json_encode($history, JSON_UNESCAPED_UNICODE);
-     
     
-    
-    
-    
-    
-}
+    }
 
+    
+    static function actionGet_time(){
+        return time()*1000;
+    }
 }
