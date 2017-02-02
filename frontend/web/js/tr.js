@@ -84,8 +84,7 @@ try{
         steem.broadcast.vote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 $('#icon_' + permlink).removeClass('vote-process'); 
-                alert (err);
-
+          
             } else {
                  $('#icon_' + permlink).removeClass('vote-process'); 
                  $("#" + permlink).css('z-index', 10);
@@ -136,7 +135,6 @@ try{
          doit = function(){
         steem.broadcast.downvote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
-                alert (err);
                 $('#icon_' + permlink).removeClass('vote-process');    
      
             } else {
@@ -286,8 +284,7 @@ function reply (data, callback){
            window.retry_until_done(doit);
            
             
-        } else alert(err);
-  
+        } 
         });
   
     } catch(err){ alert('Key Error. Check your keys');}
