@@ -181,7 +181,7 @@ function comment (data, callback){
                         setTimeout(redirect, 6000);
                         return err
                     } 
-                    else alert(err);
+                    // else alert(err);
                 });
             }
             function sleep(microseconds) {
@@ -190,12 +190,18 @@ function comment (data, callback){
                 request.send();
             }
             for (i=0 ;i< 1000;i++){
-                   d=doit();
+                try{
+                     d=doit();
+                }
+                catch(err){
+                    
+                }
+                  
                 if (d == null){
                     break
                 }
                 else {
-                    sleep(2000)
+                    sleep(2000);
                     console.log('try',i,d);
                 }
             } 
