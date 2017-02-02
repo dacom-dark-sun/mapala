@@ -619,3 +619,9 @@ margin-bottom: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.popover-content {
+    min-width: 259px;
+}
+.popover-title {
+    line-height: 20px;
+}

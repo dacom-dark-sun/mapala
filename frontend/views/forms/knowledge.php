@@ -7,7 +7,7 @@
  */
 
 use common\models\Countries;
-use vova07\imperavi\Widget;
+//use vova07\imperavi\Widget;
 use yii\helpers\StringHelper;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
@@ -16,6 +16,8 @@ use yii\helpers\ArrayHelper;
 use common\models\OurCategory;
 use yii\helpers\Html;
 use common\models\BlockChain;
+use common\components\editorwidget\EditorWidget;
+
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 
 $this->title = Yii::t('frontend','Knowledge');
@@ -71,11 +73,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
              
            <?php //---------------- EDITOR------------------------------
-                 echo $form->field($model, 'body')->widget(Widget::className(), [
+                 echo $form->field($model, 'body')->widget(EditorWidget::className(), [
                     'settings' => [
                         'minHeight' => 400,
                         'toolbarFixedTopOffset' => 50,
-                         'imageResizable' => true,
+                        'imageResizable' => true,
                          'imagePosition' => true,
                         'imageUpload' => yii\helpers\Url::to(['/site/image-upload']),
                         'plugins' => [
@@ -193,15 +195,12 @@ $this->params['breadcrumbs'][] = $this->title;
         yii\bootstrap\Modal::end();
 
         ?>
-        
-                
-                     
+
 <script>
        
     $('#add-form').on('beforeSubmit', function () {
           $('.loader_head').css('display', 'inline');
     });
-
      var acc = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
        acc = getCookie(acc);
        if (acc){
@@ -214,6 +213,5 @@ $this->params['breadcrumbs'][] = $this->title;
        $(".account_name").click(function() {
           $('#modalKey').modal('show');
        });
-
      
 </script>

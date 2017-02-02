@@ -1,6 +1,7 @@
 <?php
+
 use common\models\Countries;
-use vova07\imperavi\Widget;
+//use vova07\imperavi\Widget;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
@@ -9,6 +10,8 @@ use common\models\OurCategory;
 use yii\helpers\StringHelper;
 use yii\helpers\Html;
 use yii\web\JsExpression;
+use common\components\editorwidget\EditorWidget;
+
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 
 
@@ -63,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                 <?php //---------------- EDITOR------------------------------
-                 echo $form->field($model, 'body')->widget(Widget::className(), [
+                 echo $form->field($model, 'body')->widget(EditorWidget::className(), [
                     'settings' => [
                         'minHeight' => 400,
                         'toolbarFixedTopOffset' => 50,
