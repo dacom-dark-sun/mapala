@@ -9,8 +9,8 @@ return [
         '/forms/<action>' => 'forms/<action>',
         '/page/<action>' => 'page/<action>',
         '/category/<categories>' => 'site/index',
-        '<author:\w+>/<permlink:[\w-]+>' => 'site/view',
-        '<author:\w+>' => 'site/index',
+        '<author:[\wd-]+>/<permlink:[\wd-]+>' => 'site/view',
+        '<author:[\wd-]+>' => 'site/index',
         '' => 'site/index',
     ]
 ];
