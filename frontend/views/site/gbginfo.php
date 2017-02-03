@@ -8,23 +8,19 @@
 
 ?>
 
-<b>1.</b> Для инвестиции в Золотых вам необходимо зайти в ваш кошелёк на Голосе и выбрать <b> меню </b> --> <b> Передать </b>. <br>
-<img src="/img/transfergbg.png">     <br>
-<b>2.</b> Введите аккаунт <b> mapala.ico</b>, укажите желаемую сумму и в поле Заметка укажите имя аккаунта на Mapala.net, на который вы хотите, чтобы зачислились токены от этого платежа;<br><br>
+<b>1.</b> <?= Yii::t('frontend', 'For investment in SBD you need to go into your purse on Steemit and select <b> Menu </b> -> <b> Transfer </b>.') ?> <br>
+<img src="/img/transfergbg.png"><br>
+<b>2.</b> <?= Yii::t('frontend', 'Enter account <b>mapala.ico</b>, enter the amount and in the note specify the account name on Mapala.net, which you want to enroll tokens from this payment;') ?><br><br>
 <img src="/img/transfergbg2.png"><br><br>
-<b>3.</b> Через несколько минут транзакция появится в вашем личном кабинете;<br>
-<b>4.</b> Весь наш внутренний учёт ведётся в биткоинах, поэтому при зачислении инвестиции GBG будут конвертированы по курсу BTC/GBG.<br>
+<b>3.</b> <?= Yii::t('frontend', 'A few minutes later the transaction will appear in your personal Mapala account;') ?> <br>
+<b>4.</b> <?= Yii::t('frontend','All of our internal accounting is conducted in Bitcoins, so in enrollment investment SBD will be converted on the BTC / SBD rate.') ?><br>
 <br>
-<b> Важно! </b> В данный момент существующие объёмы торгов не позволяют быстро конвертировать GBG в BTC. Поэтому мы продаём GBG в частном порядке с коэффициентом 0,85, и при этом ориентируемся на эталонный курс 1 мг золота.<br>
+<?php if(\common\models\BlockChain::get_blockchain_from_locale() == 'golos'):?>
+<b> <?= Yii::t('frontend', 'Important!')?> </b> В данный момент существующие объёмы торгов не позволяют быстро конвертировать GBG в BTC. Поэтому мы продаём GBG в частном порядке с коэффициентом 0,85, и при этом ориентируемся на эталонный курс 1 мг золота.')<br>
 В случае появления лучших предложений по выкупу у нас GBG или повышения ликвидности GBG на биржах мы пересмотрим данное правило по конвертации.<br>
 <br>
 <b> Точная формула: </b> Курс_золота_за_тройскую_унцию / 1000 / 31,1034768 / курс BTC * 0,85<br>
 <br>
-Для каждого дня недели действуют бонусы:<br>
-Суббота: +6% <br>
-Воскресенье: +5%<br>
-Понедельник: +4%<br>
-Вторник: +3%<br>
-Среда:  +2%<br>
-Четверг: +1%<br>
-Пятница: 0%<br>
+<?php ENDIF; ?>
+
+<?= Yii::t('frontend', 'For each day of the week there are bonuses:</b><br><br>Saturday:  +6% <br>Sunday: +5%<br>Monday: +4%<br>Tuesday: +3%<br>Wednesay:  +2%<br>Thursday: +1%<br>Friday: 0%<br>');?>

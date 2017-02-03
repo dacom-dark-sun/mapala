@@ -170,7 +170,7 @@ class BlockChain extends Model
                          
              $json['tags'][0] = 'mapala';
              $json['tags'][1] =  BlockChain::convert_country_to_lang($model->country);
-             $json['tags'][2] = ($model->city == "" ? Blockchain::tag_to_eng(\Yii::t('frontend', 'Unsorted')) : $model->city);
+             $json['tags'][2] = ($model->city == "" ? Blockchain::tag_to_eng(\Yii::t('frontend', 'Out_of_Town')) : $model->city);
              $json['tags'][3] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Knowledge'));
              $json['tags'][4] = BlockChain::tag_to_eng($model->tags);
              
@@ -308,7 +308,7 @@ class BlockChain extends Model
     public $coordinates;
 */    
              $bl_model['parentAuthor'] = '';
-             $bl_model['parentPermlink'] = 'test'; //
+             $bl_model['parentPermlink'] = 'mapala'; //
              if ($model->permlink == null){
                 $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
              } else {
@@ -319,7 +319,7 @@ class BlockChain extends Model
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
                          
-             $json['tags'][0] = 'test';
+             $json['tags'][0] = 'mapala';
              $json['tags'][1] = Blockchain::tag_to_eng(\Yii::t('frontend', 'News'));
                
              $json['tags'][2] = $model->tags != 'ico' ? BlockChain::tag_to_eng($model->tags) : $model->tags;
@@ -353,7 +353,7 @@ class BlockChain extends Model
    
 */    
              $bl_model['parentAuthor'] = '';
-             $bl_model['parentPermlink'] = 'test'; //
+             $bl_model['parentPermlink'] = 'mapala'; //
              if ($model->permlink == null){
                 $bl_model['permlink'] = BlockChain::create_permlink($model->title); 
              } else {
@@ -364,7 +364,7 @@ class BlockChain extends Model
              $bl_model['title'] = $model->title;
              $bl_model['blockchain'] = BlockChain::get_blockchain_from_locale();
                          
-             $json['tags'][0] = 'test';
+             $json['tags'][0] = 'mapala';
              $json['tags'][1] = Blockchain::tag_to_eng(\Yii::t('frontend', 'Community'));
                
              $json['tags'][2] = BlockChain::tag_to_eng($model->tags);

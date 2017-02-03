@@ -25,7 +25,7 @@ $meta = Art::explode_meta($model);
             
             case 'date_until_leave':
                 echo '<div class="row-meta">';
-                echo Yii::t('frontend', 'Date until leave') . ": ";
+                echo Yii::t('frontend', 'Departure date') . ": ";
                 echo $meta['date_until_leave'];
                 echo '</div>';
             break;
@@ -35,7 +35,7 @@ $meta = Art::explode_meta($model);
                 if ($meta['free'] == 1) {
                    echo Yii::t('frontend', 'Free');
                 } else {
-                   echo Yii::t('frontend', 'Must pay') . ': ' . $meta['cost'];
+                   echo Yii::t('frontend', 'Payment required') . ': ' . $meta['cost'];
          
                 }
                 echo '</div>';

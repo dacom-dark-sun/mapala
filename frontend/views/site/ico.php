@@ -91,7 +91,7 @@ use common\models\BitCoin;
 <div class ='col-xs-6 col-lg-3'>
                 <div class="panel panel-danger">
                     <div class="panel-heading">   
-                <center>        <?= Yii::t('frontend', 'Total information') ?>  </center>
+                <center>        <?= Yii::t('frontend', 'pre-ICO information') ?>  </center>
                     </div>
                     <div class="panel-body">
                  <center> <?= Yii::t('frontend', 'All investments - ') ?>      <?= $total_btc ?> BTC </center>
@@ -114,7 +114,7 @@ use common\models\BitCoin;
     
    <div class = 'col-lg-2'>   
        
-       <button class="btn btn-danger change_category_btn" onclick="bonus_info();"> <?= Yii::t('frontend', 'BONUS TODAY:')?> <?= $bonuse_today; ?> %</button>
+       <button class="btn btn-danger change_category_btn" onclick="bonus_info();"> <?= Yii::t('frontend', 'CURRENT BONUS:')?> <?= $bonuse_today; ?> %</button>
     </div>
      
     
@@ -183,7 +183,7 @@ use common\models\BitCoin;
                          ],
 
                         ['attribute' => 'stake', 
-                         'label' => Yii::t('frontend', 'Week stake, %'),
+                         'label' => Yii::t('frontend', 'Weekly stake, %'),
                          'contentOptions' => ['class' => 'text-center'],
                          'headerOptions' => ['class' => 'text-center']
                          ],
@@ -229,7 +229,7 @@ use common\models\BitCoin;
 <?php
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
-            'header' => '<h2>' . Yii::t('frontend', 'Instruction GBG') . '</h2>',
+            'header' => '<h2>' . Yii::t('frontend', 'Instruction SBD') . '</h2>',
             'id' => 'gbginfo',
             'size' => 'modal-lg',
             'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
@@ -246,7 +246,7 @@ use common\models\BitCoin;
 <?php
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
-            'header' => '<h2>' . Yii::t('frontend', 'Instruction GBG') . '</h2>',
+            'header' => '<h2>' . Yii::t('frontend', 'Instruction BTC') . '</h2>',
             'id' => 'btcinfo',
             'size' => 'modal-lg',
             'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
@@ -261,7 +261,7 @@ use common\models\BitCoin;
 <?php
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
-            'header' => '<h2>' . Yii::t('frontend', 'Bonuses:') . '</h2>',
+            'header' => '<h2>' . Yii::t('frontend', 'CURRENT BONUS:') . '</h2>',
             'id' => 'bonusinfo',
             'size' => 'modal-xs',
             'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],

@@ -15,11 +15,11 @@ use yii\captcha\Captcha;
 
  *  */
 
-$this->title = Yii::t('frontend','Update database');
+$this->title = Yii::t('frontend','Add Post');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
-          <h1>     <?= Yii::t('frontend', 'Выбери тип контента для публикации в BlockChain:') ?> </h1>
+          <h1>     <?= Yii::t('frontend', 'Choose a type of content to publish on the BlockChain:') ?> </h1>
           <br>
     
     <div class="row">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class ='col-lg-3'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                      <center>  <b>  <?= Yii::t('frontend', 'Поделись полезными знаниями и туристическими секретами') ?> </b></center>
+                      <center>  <b>  <?= Yii::t('frontend', 'Share usefull knowledge and traveler secrets') ?> </b></center>
                       <?= Html::a('<img src="/img/alexandria.jpg" style="width: 100%;">', ['/forms/knowledge', 'author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
                        <?= Html::a(Yii::t('frontend','Knowledge'), ['/forms/knowledge', 'author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%; ']) ?>
       
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class ='col-lg-3'>
               <div class="panel panel-success">
                     <div class="panel-heading">   
-                   <center>   <b>  <?= Yii::t('frontend', 'Расскажи о интересных местах, которые стоит посетить') ?> </b></center>
+                   <center>   <b>  <?= Yii::t('frontend', 'Tell about interesting places that are worth visting') ?> </b></center>
                    <?= Html::a('<img src="/img/train.jpg" style="width: 100%;">', ['/forms/places', 'author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
                    <?= Html::a(Yii::t('frontend','Places'), ['/forms/places', 'author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
            
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class ='col-lg-3'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <center>  <b>   <?= Yii::t('frontend', 'Расскажи историю своего приключения') ?> </b> </center>
+                        <center>  <b>   <?= Yii::t('frontend', 'Tell a story of your adventure') ?> </b> </center>
                          <?= Html::a('<img src="/img/tuzemec.jpg" style="width: 100%;"> ', ['/forms/blogs','author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
       
                         
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
              <div class ='col-lg-3'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <center>  <b>   <?= Yii::t('frontend', 'Здесь кипит жизнь сообщества. В этом разделе можно сообщить о проблемах, поделиться идеями или полезными материалами для сообщества.') ?> </b> </center>
+                        <center>  <b>   <?= Yii::t('frontend', 'Here boiling life of the community. In this section, you can report problems, share ideas or useful materials for the community.') ?> </b> </center>
                          <?= Html::a('<img src="/img/community2.png" style="width: 100%;"> ', ['/forms/community','author'=> $author, 'permlink' => $permlink], ['class'=>'btn btn-active', 'style' => 'padding-right:10px; width:100%; ']) ?>
       
                         
@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class ='col-lg-3'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <center>  <b>   <?= Yii::t('frontend', 'Новости') ?> </b> </center>
+                        <center>  <b>   <?= Yii::t('frontend', 'News') ?> </b> </center>
                          <?= Html::a(Yii::t('frontend','Новости'), ['/forms/news'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
            
                     </div>
