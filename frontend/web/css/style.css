@@ -132,6 +132,15 @@ a.desc:after {
 }
 
   .category_panel{
+    position: fixed;
+    overflow: scroll;
+    height: 100%;
+    
+}
+
+#btc_wallet{
+    width: 100%;
+    text-align: center;
 }
 .voters{
    padding-left: 20px !important;

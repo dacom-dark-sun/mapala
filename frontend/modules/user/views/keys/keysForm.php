@@ -14,7 +14,7 @@ KeyAsset::register($this);
 
 $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]); 
 if (Yii::$app->controller->id == 'keys')
-    $this->title = Yii::t('frontend', 'Key STEEM')
+    $this->title = Yii::t('frontend', 'STEEM key')
 ?>
 <div class="form-index">
     <h1><?php if (Yii::$app->controller->id == 'keys')
@@ -37,7 +37,7 @@ if (Yii::$app->controller->id == 'keys')
                  <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
                  <div><input type="text" class="form-control"  id="STEEM_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div class = 'loader' style="display: none" ></div></div>
                 <div class ="keys_save_edit_buttons">
-                    <button type="button" id='steem-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
+                    <button type="button" id='steem-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Get posting key')?></button>
                 <button type="button" id= 'steem-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
                 </div>
             </div>
@@ -56,7 +56,7 @@ if (Yii::$app->controller->id == 'keys')
                  <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
                 <div><input type="text" class="form-control"  id="GOLOS_pass" placeholder="<?php echo Yii::t('frontend', 'Password')?>" ><div  style="display: none"  class = 'loader' ></div></div>
                 <div class ="keys_save_edit_buttons">
-                    <button type="button" id='golos-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
+                    <button type="button" id='golos-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Get posting key')?></button>
                 <button type="button" id= 'golos-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
         <?php  if (Yii::$app->controller->id == 'keys'):?>      <button type="button" class="btn btn-danger" onclick=" $('#modalsignupBlockchain').modal('show')"> <?php echo Yii::t('frontend', 'Получить аккаунт GOLOS')?></button>
             <?php endif; ?>

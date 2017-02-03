@@ -31,16 +31,16 @@ $this->registerMetaTag([
         ],
         'innerContainerOptions' => ['class'=>'container-fluid container-navbar'],
     ]); ?>
-           <?php echo '<span class="logo_text">[ Everyone Can Travel ] </span>' . '<span class="span_amount">' . Yii::t("frontend","Articles") . ": " . Art::get_article_amount() . '</span>';?>
+           <?php echo '<span class="logo_text">[ Everyone Can Travel ] </span>' . '<span class="span_amount">'  . Yii::t("frontend","Articles") . ": " . Art::get_article_amount('steem') . Yii::t("frontend"," STEEM") .  ", " . Art::get_article_amount('golos') .  " " . Yii::t("frontend","GOLOS")  . '</span>';?>
     
     
     <?php echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => Yii::t('frontend', 'Base'),
+            ['label' => Yii::t('frontend', 'Blogging base'),
                 'items'=>[
                      [
-                        'label' => Yii::t('frontend', 'Watch'), 'url' => ['/site/index'],
+                        'label' => Yii::t('frontend', 'Blogs'), 'url' => ['/site/index'],
                         'url' => ['/site/index']
                     ],
                     [
@@ -59,7 +59,7 @@ $this->registerMetaTag([
                 'visible'=>!Yii::$app->user->isGuest,
                 'items'=>[
                      [
-                        'label' => Yii::t('frontend', 'Key STEEM'),
+                        'label' => Yii::t('frontend', 'STEEM key'),
                         'url' => ['/user/keys/index']
                     ],
                     [

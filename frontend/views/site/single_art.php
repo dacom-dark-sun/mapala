@@ -14,7 +14,7 @@ $this->title = $model->title;
 
 ?>
 <div class ="site-index">
-<button type="button" class="btn btn-default previous" onclick = "window.history.back();">Назад</button>
+<button type="button" class="btn btn-default previous" onclick = "window.history.back();"><?= Yii::t('frontend','Back')?></button>
 <?php echo Html::a("Блог Автора",['/site/index/','author'=>$model->author],['class'=>'btn btn-default previous']) ?>
        
 <hr/>
