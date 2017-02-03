@@ -782,6 +782,20 @@ class Art extends \yii\db\ActiveRecord
          return $authors;
          
      }
+     
+     static function get_reg_user(){
+         $prev_interval = BitCoin::get_prev_interval();
+         $users = User::find()->where('created_at >=' . "'" .   $prev_interval['date_start'] . "'")->andwhere('created_at <=' . "'" .   $prev_interval['date_end'] . "'")->asArray()->all();
+         return $users;
+     }
+      
+     static function get_reg_user_q(){
+         $prev_interval = BitCoin::get_prev_interval();
+          $prev_interval['date_start'] = strtotime($prev_interval['date_start']);
+         $prev_interval['date_end'] = strtotime($prev_interval['date_end']);
         
+         $users_q = User::find()->where('created_at >=' . "'" .   $prev_interval['date_start'] . "'")->andwhere('created_at <=' . "'" .   $prev_interval['date_end'] . "'")->count();
+         return $users_q;
+     }
         
 }
