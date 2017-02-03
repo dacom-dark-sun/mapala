@@ -20,7 +20,7 @@ use common\models\Art;
 <div class ='col-xs-3 col-lg-4'>
                 <div class="panel panel-danger">
                     <div class="panel-heading">   
-                        <center>    <?= Yii::t('frontend', 'Personal Bitcoin Address') ?></center>
+                        <center>    <?= Yii::t('frontend', 'Total payments') ?></center>
                     </div>
                     <div class="panel-body">
                   <center>  <?= $total_payout_value ?>    </center>
@@ -31,10 +31,10 @@ use common\models\Art;
                 </div>
     <div class="panel panel-danger">
                     <div class="panel-heading">   
-                        <center>    <?= Yii::t('frontend', 'GBG account') ?></center>
+                        <center>    <?= Yii::t('frontend', 'New registrations per week') ?></center>
                     </div>
                        <div class="panel-body">
-                           <center>  mapala.ico </center>               
+                           <center> <?= $users_per_week ?> </center>               
                        </div>
                     <center> <span class ="link" onclick="gbg_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
                  
