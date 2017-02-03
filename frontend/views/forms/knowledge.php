@@ -22,7 +22,7 @@ $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]
 
 $this->title = Yii::t('frontend','Knowledge');
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend','Update database'), 'url'=> ['/site/add']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend','Add Post'), 'url'=> ['/site/add']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="form-index">
-     <?php if ($author&&$permlink){
-              echo Html::a(Yii::t('frontend', 'Сменить модель данных'), 
+    <?php if ($author&&$permlink){
+              echo Html::a(Yii::t('frontend', 'Change the data model'), 
                   ['/site/add', 'author' => $author, 'permlink' => $permlink], 
                   ['class'=>'btn btn-warning change_category_btn']);
           }
@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
             
             <?php //-------SHOW Categories--------------------------------------------.   
             echo $form->field($model, 'tags')->widget(Select2::classname(),[
-                 'options' => ['placeholder' => 'Select a category ...'],
-                 "data" => ArrayHelper::map(OurCategory::find()
+                     'options' => ['placeholder' => Yii::t('frontend','Select a category ...')],
+                    "data" => ArrayHelper::map(OurCategory::find()
                         ->Where(['model' => StringHelper::basename(get_class($model))])
                         ->all(), BlockChain::get_blockchain_from_locale(), BlockChain::get_blockchain_from_locale()),
                 //---------------------------------------------------------------------
@@ -56,8 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
             
              <?php //Show Countries-------------------------------------------------------------
                 echo $form->field($model, 'country')->widget(Select2::classname(),[
-                     'options' => ['placeholder' => 'Select a state ...'],
-
+                     'options' => ['placeholder' => Yii::t('frontend','Select a state ...')],
+                   
                     "data" => ArrayHelper::map(Countries::find()->all(),'id','name'),
                     'pluginEvents' => [
                      ],//---------------------------------------------------------------------
@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Title') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Постарайся уложиться в 100 символов, кратко и емко рассказав о сути знания') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Please try to fit description into 100 symbols, briefly, but fully describing the Summary') ?></div>
                 </div>
             
             
@@ -118,13 +118,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Category') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 
-                            '- <b>Лайфхак</b> - расскажи секреты жизни в своем городе и стране; <br>'
-                            . '- <b>Погода</b> - расскажи о климате и временах года, к чему путешественнику быть готовым?; <br>'
-                            . '- <b>География</b> - конечно, не все знают где находится твой город и какой пейзжах вокруг. Расскажи об этом, а лучше - покажи;<br>'
-                            . '- <b>Традиции</b> - расскажи о традициях, обрядах и церемониях; <br>'
-                            . '- <b>Язык</b> - расскажи на каких языках говорят в твоем городе, расскажи о нем; <br>'
-                            . '- <b>Видео-презентация</b> - покажи короткую видеопрезентацию города. Позволь путешественникам взглянуть на него твоими глазами;') ?></div>
+                    <div class="panel-body">
+                           <?= Yii::t('frontend', '-<b> Lifehack </b> - tell the secrets of life in your city and country;');?> <br>
+                           <?= Yii::t('frontend', '-<b> Traditions </b> - tell us about the traditions, rites and ceremonies;');?> <br>
+                           <?= Yii::t('frontend', '-<b> Different </b> - tell us about the geography, weather, language, about anything!');?> <br>
+                        </div>
                 </div>
 
                 
@@ -134,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Country') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Страна будет размещена в "голове" дерева тегов') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Country would be placed at the root of the tag tree') ?></div>
                 </div>
                 
             </div>
@@ -143,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'City') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Город будет являться вложенной папкой в дереве тегов') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'City will be a branch in the tag tree') ?></div>
                 </div>
 
                 
@@ -151,11 +149,9 @@ $this->params['breadcrumbs'][] = $this->title;
              <div class ='col-lg-5'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Инструкция к редактору:') ?>
+                        <?= Yii::t('frontend', 'Note to the editor:') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Для установки картинки, вставьте в редактор прямую ссылку на нее.<br>'
-                         . 'Используется базовый синтаксис html, без поддержки MarkDown. <br>'
-                        );?>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Use basic html syntax, MarkDown is not supported');?>
                     </div>
                 </div>
             </div>
@@ -166,7 +162,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Coordinates') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Отметь место на карте, если это уместно, или ничего не отмечай, если нет.') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'It is very difficult to find a special place without exact coordinates. Help other travelers, mark coordinates accurately.') ?></div>
                 </div>
                 
             </div>
