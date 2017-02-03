@@ -295,6 +295,7 @@ $current_rate = BitCoin::get_rate();
          foreach ($arts as $art){
              $total_payout_value = $total_payout_value + $art['total_pending_payout_value'];
          }
+         $total_payout_value = Art::convert_currency($total_payout_value);
              
          
          $data_provider = new ArrayDataProvider([
