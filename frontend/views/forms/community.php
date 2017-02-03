@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Title') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Постарайся уложиться в 100 символов, кратко и емко рассказав о сути знания') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Please try to fit description into 100 symbols, briefly, but fully describing the Summary') ?></div>
                 </div>
             
             
@@ -102,11 +102,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Category') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 
-                            '<b>Введите свою категорию, или выберите подходящую из списка</b><br>'
-                            . '- <b>Предложения</b> - Поделись своими идеями и предложениями с сообществом; <br>'
-                            . '- <b>Отзыв</b> - Сообщи об ошибках на сайте, задай вопросы или напиши отзыв.; <br>'
-                            . '- <b>Руководства</b> - Здесь можете разместить ваши полезные материалы для сообщества: гайды, инструкции и т.д.;<br>') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Enter your own category, or choose from a list:');?><br>
+                        <?= Yii::t('frontend', '- Offers - share your ideas and suggestions from the community;');?><br>
+                        <?= Yii::t('frontend', '- Feedback - Report an error on the website, ask a question or write a review;');?><br>
+                          <?= Yii::t('frontend', '- Manuals - Here you can place your materials useful for the community: guides, manuals, etc ..;');?><br>
+                        </div>
                 </div>
 
                 
@@ -115,11 +115,9 @@ $this->params['breadcrumbs'][] = $this->title;
              <div class ='col-lg-5'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Инструкция к редактору:') ?>
+                        <?= Yii::t('frontend', 'Note to the editor:') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Для установки картинки, вставьте в редактор прямую ссылку на нее.<br>'
-                         . 'Используется базовый синтаксис html, без поддержки MarkDown. <br>'
-                        );?>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Use basic html syntax, MarkDown is not supported' );?>
                     </div>
                 </div>
             </div>
@@ -134,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHead','class'=>'text-center'],
-            'header' => '<h2>' . Yii::t('frontend', 'Ключ Golos') . '</h2>',
+            'header' => '<h2>' . Yii::t('frontend', 'Key STEEM') . '</h2>',
             'id' => 'modalKey',
             'size' => 'modal-lg',
             'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],

@@ -17,7 +17,7 @@ $this->registerJsFile('\js/form_save.js',  ['position' => yii\web\View::POS_END]
 
 $this->title = Yii::t('frontend','Blogs'); 
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend','Пополнить базу'), 'url'=> ['/site/add']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend','Add Post'), 'url'=> ['/site/add']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-index">
     <h1><?php echo Html::encode($this->title) ?></h1>
  <?php if ($author&&$permlink){
-              echo Html::a(Yii::t('frontend', 'Сменить модель данных'), 
+              echo Html::a(Yii::t('frontend', 'Change the data model'), 
                   ['/site/add', 'author' => $author, 'permlink' => $permlink], 
                   ['class'=>'btn btn-warning change_category_btn']);
           }
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Title') ?>
                     </div>
-                           <div class="panel-body"><?= Yii::t('frontend', 'Постарайся уложиться в 100 символов, кратко и емко рассказав Главное') ?></div>
+                           <div class="panel-body"><?= Yii::t('frontend', 'Please try to fit description into 100 symbols, briefly, but fully describing the Summary') ?></div>
                 </div>
             </div>
             
@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Country') ?>
                     </div>
-                <div class="panel-body"><?= Yii::t('frontend', 'Select a country, which will head branch of tree') ?></div>
+                <div class="panel-body"><?= Yii::t('frontend', 'Country would be placed at the root of the tag tree') ?></div>
                    </div>
             </div>
             
@@ -122,9 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Category') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 
-                            '- <b>Приключения</b> - расскажи историю своего приключения; <br>'
-                           ) ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', '- <b>Adventure</b> - tell the story of your adventure;' ) ?></div>
                 </div>
             </div>
             
@@ -133,11 +131,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class ='col-lg-5'>
                 <div class="panel panel-success">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Инструкция к редактору:') ?>
+                        <?= Yii::t('frontend', 'Note to the editor:') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Для установки картинки, вставьте в редактор прямую ссылку на нее.<br>'
-                         . 'Используется базовый синтаксис html, без поддержки MarkDown. <br>'
-                        );?>
+                    <div class="panel-body"><?= Yii::t('frontend', 'Use basic html syntax, MarkDown is not supported');?>
                     </div>
                 </div>
             </div>
@@ -150,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Coordinates') ?>
                     </div>
-                    <div class="panel-body"><?= Yii::t('frontend', 'Очень тяжело найти особенное без без точных координат. Помоги другим путешественникам, укажи координаты точно.') ?></div>
+                    <div class="panel-body"><?= Yii::t('frontend', 'It is very difficult to find a special place without exact coordinates. Help other travelers, mark coordinates accurately.') ?></div>
                 </div>
                 
             </div>

@@ -19,7 +19,7 @@
 return [
     '- <b>Лайфхак</b> - расскажи секреты жизни в своем городе и стране; <br>' => '- <b>Lifehack</b> - give some tips about living in your city and country; <br>',
     '- <b>Приключение</b> - есть история приключений? Поделись!; <br>' => '- <b>Adventure</b> - do you have a story of adventure? Share it!; <br>',
-    '- <b>Природные</b> - все природные чудеса и интересности вносить сюда; <br>' => '- <b>Nature</b> - all wonders and curiocities of nature go into this section; <br>',
+    '- <b>Природа</b> - все природные чудеса и интересности вносить сюда; <br>' => '- <b>Nature</b> - all wonders and curiocities of nature go into this section; <br>',
     '<h3>Инструкция по получению постинг ключа: </h3>' => '<h3>Instruction for getting a posting key: </h3>',
     'Activation email' => 'Activation email',
     'If you live there, leave this as is. It will show to everybody, that this is your home base.' => '',
@@ -184,6 +184,22 @@ return [
     'В данный момент существующие объёмы торгов не позволяют быстро конвертировать GBG в BTC. Поэтому мы продаём GBG в частном порядке с коэффициентом 0,85, и при этом ориентируемся на эталонный курс 1 мг золота.' => '',
     'Instruction SBD' => 'Инструкция GBG',
     'Instruction BTC' => 'Инструкция BTC',
+  '- <b> Nature </b> - all the natural wonders contribute here; <br>- <b>Human</b> - people have created something special and interesting? Write here; <br>' =>'- <b>Природа</b> - все природные чудеса вносить сюда; <br> - <b>Человек</b> - люди создали что-то особенное и интересное? Пиши сюда; <br>',
+'Use basic html syntax, MarkDown is not supported' => 'Используется базовый синтаксис html, MarkDown не поддерживается',   
+    'Note to the editor:' => 'Заметка к редактору:',
+    'It is very difficult to find a special place without exact coordinates. Help other travelers, mark coordinates accurately.' => 'Очень тяжело найти особенное место без точных координат. Помоги другим путешественникам, укажи координаты точно.',
+    'Select a category ...' => 'Выберите категорию ...',
+    'Select a state ...' => 'Выберите страну ...',
+    'Select a location ...' => 'Выберите локацию ...',
+    'Change the data model' => 'Сменить модель данных',
+    '-<b> Lifehack </b> - tell the secrets of life in your city and country;' => '- <b> Лайфхак </b> - расскажи секреты жизни в своем городе и стране;',
+   '-<b> Traditions </b> - tell us about the traditions, rites and ceremonies;' => ' - <b> Традиции </b> - расскажи о традициях, обрядах и церемониях;',
+   '-<b> Different </b> - tell us about the geography, weather, language, about anything!' => '- <b>Разное</b> - расскажи о географии, погоде, языке, о чем угодно!',
+   '- <b>Adventure</b> - tell the story of your adventure;' => '- <b>Приключения</b> - расскажи историю твоего приключения;',
+    'Enter your own category, or choose from a list:' => 'Введите свою собственную категорию, или выберите подходящую из списка',
+    '- Offers - share your ideas and suggestions from the community;' => '- Предложения - поделись своими идеями и предложениями с сообществом;',
+    '- Feedback - Report an error on the website, ask a question or write a review;' => '- Отзыв - Сообщи об ошибках на сайте, задай вопросы или напиши отзыв.;',
+    '- Manuals - Here you can place your materials useful for the community: guides, manuals, etc ..;' => '- Руководства - здесь можете разместить ваши полезные материалы для сообщества: гайды, инструкции и т.д',
     
     
     
