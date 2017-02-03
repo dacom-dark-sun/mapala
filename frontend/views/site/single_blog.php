@@ -22,7 +22,7 @@ $this->title = '@' . $author;
                               <?php // echo Html::Button('Отправить сообщение', ['class' => 'btn btn-success', 'disabled' => 'disabled']) ?>
                     </div>
         </div>
-            <div class="col-xs-12 col-lg-10 col-md-10 col-sm-10 col-lg-pull-2 col-md-pull-2 col-sm-pull-2">
+            <div class="col-xs-12 col-lg-10 col-md-10 col-sm-10">
                <div id="article-index">
 
     <?php echo \yii\widgets\ListView::widget([
