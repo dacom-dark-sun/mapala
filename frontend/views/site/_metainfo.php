@@ -26,7 +26,7 @@ use common\models\BlockChain;
                        data-toggle="popover"
                        data-placement="bottom"
                        data-html="true"
-                       title="<?=Yii::t('frontend', 'Голоса')?><button data-toggle='popover' type='button' class='close'>×</button>"
+                       title="<?=Yii::t('frontend', 'Voters')?><button data-toggle='popover' type='button' class='close'>×</button>"
                        data-content='<?=Art::get_voters($model->voters)?>'><?=$model->votes?>&#9660</label>
             </div>
             <div class="col-xs-4 col-lg-1 Icon chatbox">

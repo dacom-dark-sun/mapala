@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">   
                         <?= Yii::t('frontend', 'Country') ?>
                     </div>
-                <div class="panel-body"><?= Yii::t('frontend', 'Страна будет размещена в "голове" дерева тегов') ?></div>
+                <div class="panel-body"><?= Yii::t('frontend', 'Select a country, which will head branch of tree') ?></div>
                    </div>
             </div>
             

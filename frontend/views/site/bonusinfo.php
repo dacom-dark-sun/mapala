@@ -5,13 +5,5 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+echo Yii::t('frontend', 'For each day of the week there are bonuses:</b><br><br>Saturday:  +6% <br>Sunday: +5%<br>Monday: +4%<br>Tuesday: +3%<br>Wednesay:  +2%<br>Thursday: +1%<br>Friday: 0%<br>')
 ?>
-<b>Для каждого дня недели действуют бонусы:</b><br><br>
-Суббота:  +6% <br>
-Воскресенье: +5%<br>
-Понедельник: +4%<br>
-Вторник: +3%<br>
-Среда:  +2%<br>
-Четверг: +1%<br>
-Пятница: 0%<br>

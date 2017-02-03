@@ -6,4 +6,4 @@
  * and open the template in the editor.
  */
 
-echo "Пока ничего нет";
+echo Yii::t('frontend', 'Nothing yet');
