@@ -226,7 +226,7 @@ $current_rate = BitCoin::get_rate();
             'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'stake', 'currency', 'tokens', 'symbol'],
         ],
         'pagination' => [
-            'pageSize' => 50,
+            'pageSize' => 100,
         ],
     ]);
     

@@ -37,7 +37,7 @@ use yii\helpers\Url;
             if (($image)&&(@fopen($image,'r'))):
                  echo  ("<img src=" . $image . " class= 'article-thumb img-rounded pull-left'>");
             else:
-               echo "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png class= 'article-thumb img-rounded pull-left'>";
+               echo "<img src=/frontend/web/img/logo_small.png class= 'article-thumb img-rounded pull-left'>";
             endif; ?>
             
             <div class="article-text">

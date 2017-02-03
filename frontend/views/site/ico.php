@@ -22,11 +22,12 @@ use common\models\BitCoin;
                         <center>    <?= Yii::t('frontend', 'Personal Bitcoin Address') ?></center>
                     </div>
                     <div class="panel-body">
-                  <center>      <?= $btc_wallet ?></center>
+                        <center> <input type="text" id="btc_wallet" value="<?= $btc_wallet ?>" readonly>   </center>
                     </div>
-                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'min: 0.002 BTC (100 RUB)')?> </span></center>
                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
-                       
+                        <center> 
+                            <span class ="btn btn-success change_category_btn" onclick="copyToClipboard();"> <?= Yii::t('frontend', 'Copy')?> </span>
+                        </center>
                 </div>
     <div class="panel panel-danger">
                     <div class="panel-heading">   
@@ -122,7 +123,7 @@ use common\models\BitCoin;
     <div class="col-lg-12">
    <div class="panel panel-info">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Distribution') . '     (' . $interval['date_start'] . ' - ' . $interval['date_end'] . ')  UTC   '?>  
+                        <?= Yii::t('frontend', 'Distribution of tokens') . '     (' . $interval['date_start'] . ' - ' . $interval['date_end'] . ')  UTC   '?>  
                     </div>
        <div class="panel-body">
            <b>   <?= Yii::t('frontend', 'Tokens for distribution: 810000')?> </b> 
@@ -170,7 +171,7 @@ use common\models\BitCoin;
                         
                             
                         ['attribute' => 'bonuse', 
-                         'label' => Yii::t('frontend', 'Bonuse, %'),
+                         'label' => Yii::t('frontend', 'Bonus (%)'),
                          'contentOptions' => ['class' => 'text-center'],
                          'headerOptions' => ['class' => 'text-center']
                          ],
@@ -183,7 +184,7 @@ use common\models\BitCoin;
                          ],
 
                         ['attribute' => 'stake', 
-                         'label' => Yii::t('frontend', 'Weekly stake, %'),
+                         'label' => Yii::t('frontend', 'Week stake (%)'),
                          'contentOptions' => ['class' => 'text-center'],
                          'headerOptions' => ['class' => 'text-center']
                          ],
@@ -289,6 +290,11 @@ use common\models\BitCoin;
      function bonus_info(){
        $('#bonusinfo').modal('show');
        
+    }
+    
+    function copyToClipboard() {
+       var element = $('#btc_wallet').select(); 
+        document.execCommand("copy");
     }
     
     

@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class ='col-lg-5'>
               <div class="panel panel-danger">
                     <div class="panel-heading">   
-                        <?= Yii::t('frontend', 'Сохраняйте пароль НАДЕЖНО. Мы не можем его восстановить.') ?>
+                        <?= Yii::t('frontend', 'Keep passwords securely. We can not restore it.') ?>
                     </div>
                   
                   

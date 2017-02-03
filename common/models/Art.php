@@ -764,9 +764,8 @@ class Art extends \yii\db\ActiveRecord
      }
      
      
-     static function get_article_amount(){
+     static function get_article_amount($blockchain){
          $query = new Art();
-         $blockchain = BlockChain::get_blockchain_from_locale();
             $art = $query
                 ->find()
                 ->where('blockchain=' . "'" .  $blockchain . "'")

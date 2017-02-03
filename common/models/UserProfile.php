@@ -79,11 +79,11 @@ class UserProfile extends ActiveRecord
     {
         return [
             'user_id' => Yii::t('common', 'User ID'),
-            'firstname' => Yii::t('common', 'Firstname'),
-            'middlename' => Yii::t('common', 'Middlename'),
-            'lastname' => Yii::t('common', 'Lastname'),
+            'firstname' => Yii::t('common', 'First name'),
+            'middlename' => Yii::t('common', 'Middle name (if you have)'),
+            'lastname' => Yii::t('common', 'Last name'),
             'locale' => Yii::t('common', 'Locale'),
-            'picture' => Yii::t('common', 'Picture'),
+            'picture' => Yii::t('common', 'Profile picture'),
             'gender' => Yii::t('common', 'Gender'),
         ];
     }

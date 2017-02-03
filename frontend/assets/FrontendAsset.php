@@ -46,10 +46,11 @@ class FrontendAsset extends AssetBundle
         $blockchain = BlockChain::get_blockchain_from_locale();
         if ($blockchain == 'steem'){
             $this->js[] = "js/steem.min.js"; // dynamic file added
-        }
+            }
 
         if ($blockchain == 'golos'){
            $this->js[] = "js/golos.min.js"; // dynamic file added
+           
         }
 
         
