@@ -16,7 +16,19 @@ use yii\widgets\Pjax;
 
      <div class="body-content">
         <div class="row">
-            <div class="col-lg-2 col-md-2 category_panel">
+            <div class="col-lg-10 col-md-10">
+               <div id="article-index">
+
+                   <?php echo \yii\widgets\ListView::widget([
+                        'dataProvider'=>$dataProvider,
+                      //  'pager' => ['class' => kop\y2sp\ScrollPager::className(), 'item' => '.article-item'],
+                        'itemView'=>'_item',
+
+                        'summary'=>'',
+                    ])?>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-ld-push-10 col-md-push-10 category_panel">
                 <div class ="static">
                     <div class ='scroll'>
                     <div class ="category_buttons">
@@ -33,18 +45,7 @@ use yii\widgets\Pjax;
                                             
             </div>
     
-            <div class="col-lg-10 col-ld-push-2 col-md-push-2 col-md-10">
-               <div id="article-index">
-
-                   <?php echo \yii\widgets\ListView::widget([
-                        'dataProvider'=>$dataProvider,
-                      //  'pager' => ['class' => kop\y2sp\ScrollPager::className(), 'item' => '.article-item'],
-                        'itemView'=>'_item',
-
-                        'summary'=>'',
-                    ])?>
-                </div>
-            </div>
+            
             
     </div>
     </div>
