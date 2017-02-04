@@ -42,6 +42,9 @@ function vote(current_blockchain, author, permlink, weight){
     window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
+var author = current_blockchain + 'ac';
+    author = getCookie(author);
+    
 current_blockchain = current_blockchain + 'sig';
 
 
@@ -55,7 +58,7 @@ try{
 
     check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
-        var voter = result[0][0];
+        var voter = author;
         steem.broadcast.vote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 $('#icon_' + permlink).removeClass('vote-process'); 
@@ -94,8 +97,11 @@ function down_vote(current_blockchain, author, permlink, weight){
           window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
-current_blockchain = current_blockchain + 'sig';
+var author = current_blockchain + 'ac';
+    author = getCookie(author);
 
+current_blockchain = current_blockchain + 'sig';
+    
 var wif = get_wif(current_blockchain);
 
 if (wif.status  ==  'success'){
@@ -105,7 +111,7 @@ try{
 
  check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
-        var voter = result[0][0];
+        var voter = author;
         steem.broadcast.downvote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 alert (err);
@@ -139,12 +145,13 @@ try{
 
 
 function comment (data, callback){
-          window.override_local_time();
+    window.override_local_time();
 
     var trx = new Array();
     data = JSON.parse(data);
     var blockchain = data.blockchain.toLowerCase() + 'sig';
-    
+    var author = data.blockchain.toLoweCase() + 'ac';
+    author = getCookie(author);
     var wif = get_wif(blockchain);
     
     if (wif.status  ==  'success')
@@ -156,7 +163,7 @@ function comment (data, callback){
         if (!err){
             trx['parentAuthor'] = data.parentAuthor;
             trx['parentPermlink'] = data.parentPermlink;
-            trx['author'] = result[0][0];
+            trx['author'] = author;
             trx['permlink'] = data.permlink;
             trx['title'] = data.title;
             trx['body'] = data.body;
@@ -233,6 +240,8 @@ function reply (data, callback){
     var trx = new Array();
     data = JSON.parse(data);
     var blockchain = data.blockchain.toLowerCase() + 'sig';
+    var author = data.blockchain.toLoweCase() + 'ac';
+    author = getCookie(author);
     
     var wif = get_wif(blockchain);
     
@@ -246,7 +255,7 @@ function reply (data, callback){
             
             trx['parentAuthor'] = data.parentAuthor;
             trx['parentPermlink'] = data.parentPermlink;
-            trx['author'] = result[0][0];
+            trx['author'] = author;
             trx['permlink'] = 're-' + trx['author'] + '-' + data.permlink;
             trx['permlink'] = trx['permlink'].replace(".","");
             trx['title'] = data.title;
