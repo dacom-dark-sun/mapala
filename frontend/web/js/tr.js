@@ -42,8 +42,8 @@ function vote(current_blockchain, author, permlink, weight){
     window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
-var author = current_blockchain + 'ac';
-    author = getCookie(author);
+var voter = current_blockchain + 'ac';
+    voter = getCookie(voter);
     
 current_blockchain = current_blockchain + 'sig';
 
@@ -58,7 +58,6 @@ try{
 
     check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
-        var voter = author;
         steem.broadcast.vote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
             if (err) {
                 $('#icon_' + permlink).removeClass('vote-process'); 
