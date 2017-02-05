@@ -27,13 +27,27 @@
             TimeShift.setTimezoneOffset(0);
             };
   
-
+function addScript(current_blockchain) {
+  var s = document.createElement( 'script' );
+  
+  if (current_blockchain =='golos')
+  { 
+      s.setAttribute( 'id', 'golos-script' );
+      s.setAttribute( 'src', 'js/golos.min.js' );
+  } else {
+      s.setAttribute( 'id', 'steem-script' );
+      s.setAttribute( 'src', 'js/steem.min.js' );
+      
+  }
+        document.body.appendChild( s );
+}
 
 
 function vote(current_blockchain, author, permlink, weight){
     window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
+addScript(current_blockchain);
 var voter = current_blockchain + 'ac';
     voter = getCookie(voter);
     
@@ -90,6 +104,7 @@ function down_vote(current_blockchain, author, permlink, weight){
           window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
+addScript(current_blockchain);
 var author = current_blockchain + 'ac';
     author = getCookie(author);
 
@@ -150,6 +165,7 @@ function comment (data, callback){
     var trx = new Array();
     data = JSON.parse(data);
     var blockchain = data.blockchain.toLowerCase() + 'sig';
+    addScript(data.blockchain.toLowerCase());
     var author = data.blockchain.toLowerCase() + 'ac';
     author = getCookie(author);
     var wif = get_wif(blockchain);
@@ -249,6 +265,8 @@ function reply (data, callback){
 
     var trx = new Array();
     data = JSON.parse(data);
+    addScript(data.blockchain.toLowerCase());
+    
     var blockchain = data.blockchain.toLowerCase() + 'sig';
     var author = data.blockchain.toLoweCase() + 'ac';
     author = getCookie(author);
