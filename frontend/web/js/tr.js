@@ -32,11 +32,9 @@ function addScript(current_blockchain) {
   
   if (current_blockchain =='golos')
   { 
-      document.getElementById("golos-script").remove();
       s.setAttribute( 'id', 'golos-script' );
       s.setAttribute( 'src', 'js/golos.min.js' );
   } else {
-      document.getElementById("steem-script").remove();
       s.setAttribute( 'id', 'steem-script' );
       s.setAttribute( 'src', 'js/steem.min.js' );
       
