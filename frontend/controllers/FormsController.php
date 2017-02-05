@@ -71,6 +71,7 @@ class FormsController extends SiteController
         $model = new ImMapala();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+            $model->body = str_replace('<p "="">','',$model->body);
             if ($permlink != null){
                 $model->permlink = $permlink;
             }  
@@ -120,6 +121,7 @@ class FormsController extends SiteController
         $model = new Homestay();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+            $model->body = str_replace('<p "="">','',$model->body);
             if ($permlink != null){
                 $model->permlink = $permlink;
             }  
@@ -167,6 +169,7 @@ class FormsController extends SiteController
         */
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { 
+            $model->body = str_replace('<p "="">','',$model->body);
             if ($permlink != null){
                 $model->permlink = $permlink;
             } 
@@ -217,6 +220,7 @@ class FormsController extends SiteController
         */
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { 
+            $model->body = str_replace('<p "="">','',$model->body);
             if ($permlink != null){
                 $model->permlink = $permlink;
             } 
@@ -263,6 +267,7 @@ class FormsController extends SiteController
         При нажатии на кнопку submit формы добавления материала, вызывается это же действие, в котором проверяется поступление данных через массив POST. В случае их наличия и успешной валидации, запускается процесс конструирования массива с данными, готовыми к транзакции в блокчейн. 
         */
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+            $model->body = str_replace('<p "="">','',$model->body);
             if ($permlink != null){
                 $model->permlink = $permlink;
             } 
@@ -315,6 +320,7 @@ class FormsController extends SiteController
         При нажатии на кнопку submit формы добавления материала, вызывается это же действие, в котором проверяется поступление данных через массив POST. В случае их наличия и успешной валидации, запускается процесс конструирования массива с данными, готовыми к транзакции в блокчейн. 
         */
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+            $model->body = str_replace('<p "="">','',$model->body);
             if ($permlink != null){
                 $model->permlink = $permlink;
             } 
@@ -364,6 +370,7 @@ class FormsController extends SiteController
 
         if (Yii::$app->user->identity->username == 'mapala'){
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+            $model->body = str_replace('<p "="">','',$model->body);
            if ($permlink != null){
                 $model->permlink = $permlink;
             } 
@@ -403,6 +410,7 @@ class FormsController extends SiteController
 
         if (Yii::$app->user->identity->username == 'mapala'){
         if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+           $model->body = str_replace('<p "="">','',$model->body);
            if ($permlink != null){
                 $model->permlink = $permlink;
             } 
