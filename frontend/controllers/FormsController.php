@@ -389,7 +389,47 @@ class FormsController extends SiteController
         ]);
  
     }
+      
+    
+    
+     public function actionTest($author = null, $permlink = null)
+        {
+        //Если пользователь - гость, перенаправляем на контроллер логина.
+        if(Yii::$app->user->isGuest) {
+            $this->redirect(array('user/sign-in/login'));
+        }
         
+        $model = new News();
+
+        if (Yii::$app->user->identity->username == 'mapala'){
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+           if ($permlink != null){
+                $model->permlink = $permlink;
+            } 
+            $bl_model = BlockChain::construct_test($model);
+             return $bl_model;
+        }
+        
+        if (($author != null)&&($permlink != null)){ //EDIT          
+        /* Если в контроллер поступают данные об авторе и прямой ссылке, то запускается процесс "доконструирования" модели данных. Поскольку часть данных записывается в metadata, их необходимо передать файлу view вместе с основной моделью. Процесс не из самых "красивых" и требует переработки. 
+        */
+        //Here $model - is model for edit (immapala), $current_art - it is model current article, 
+        //from which we need to get additional parametrs (meta) and add to main model
+
+              $current_art= Art::get_article_for_edit($author, $permlink);
+              $model->attributes = $current_art->attributes;
+              $meta = Art::explode_meta($current_art);
+              $model = Art::fill_news($model,$meta, $current_art);
+    
+        }
+     }
+        return $this->render('news', [ //CLEAR
+        'model' => $model
+        ]);
+ 
+    }
+    
+    
     
     public function actionEvents()
         {

@@ -21,8 +21,10 @@
                         console.log('try',i,d);
                     }
                 } 
-            }
-
+            };
+            
+            
+            
 
 $("#steem-btn-save").click(function() {
   $('.loader').show();
@@ -96,6 +98,7 @@ $("#steem-btn-save_pass").click(function() {
        deleteCookie('steemsig');
        deleteCookie('steemac');
    }
+   
    var username = $('#username').val().toLowerCase();
    var password =  $('#STEEM_pass').val();
    try{
@@ -310,30 +313,16 @@ $("#golos-btn-edit").click(function() {
 
 
 function check_pub_key_steem(pub_key, steem_callback){
- doit = function(){    
  steem.api.getKeyReferences([pub_key], function(err, result) {
         steem_callback(err, result);
-              
         
     });
-};
-window.retry_until_done(doit);
-
-
 }
 
 function check_pub_key_golos(pub_key, golos_callback){
- 
-doit = function(){    
-    
  steem.api.getKeyReferences([pub_key], function(err, result) {  //CHANGE TO GOLOS
         golos_callback(err, result);
-            
-        
     });
-};
-window.retry_until_done(doit);
-
 }
 
 

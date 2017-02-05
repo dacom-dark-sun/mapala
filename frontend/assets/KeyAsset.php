@@ -18,7 +18,9 @@ class KeyAsset extends AssetBundle
     ];
 
     public $js = [
-        "js/cryptico/cryptico.min.js",
+   //     "js/cryptico/cryptico.min.js",
+         'js/reconnection.js',
+     
         'js/key_op.js',
        // "js/steem.min.js",//ADD GOLOS
          'js/crypto.js',
