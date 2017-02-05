@@ -87,7 +87,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 
            <?php endif; ?>
    
-            
+            <?php if ((!Yii::$app->user->isGuest)&&(Yii::$app->user->identity->username == 'mapala')): ?>
+                <div class ='col-lg-3'>
+                <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <center>  <b>   <?= Yii::t('frontend', 'Test') ?> </b> </center>
+                         <?= Html::a(Yii::t('frontend','Test'), ['/forms/test'], ['class'=>'btn btn-primary', 'style' => 'padding-right:10px; width:100%;']) ?>
+           
+                    </div>
+                </div>
+            </div>
+                
+           <?php endif; ?>
+   
         </div>
     </div>
     

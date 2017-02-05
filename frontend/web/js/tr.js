@@ -17,23 +17,15 @@
                     try {
                         Date = null;
                         Date = TimeShift.Date;                      // Overwrite Date object
-                        //new Date().toString();
-                        // console.log('>>>',window.servertimestamp)
                         TimeShift.setTime(t);           // Set the time to 2012-02-03
                         console.log('Date Chanded toss', new Date().toString())
-
-                        //$.get( "http://144.217.94.119:8090", {"jsonrpc":"2.0","id":"25","method":"get_dynamic_global_properties","params": [""]} )
-                        //  .done(function( data ) {
-                        //    alert( "Data Loaded: " + data );
-                        // });
-                        //Сходим за нормальным временем
                     } catch (exeption) {
                         console.log("Couldn't override Date object.");
                     }
                 }
             });
             TimeShift.setTimezoneOffset(0);
-            }
+            };
   
 
 
@@ -55,7 +47,7 @@ if (wif.status  ==  'success'){
 try{
     $('#icon_' + permlink).addClass('vote-process'); 
     pub_key = convert_to_pub_key_steem(wif.plaintext);
-
+      
     check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
         steem.broadcast.vote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
@@ -76,13 +68,15 @@ try{
         
     }
     else {
-        alert(err);
-        $('#icon_' + permlink).removeClass('vote-process'); 
+           if (err['message'] != 'The WS connection was closed before this operation was made') {  
+                   alert(err);
+          }  
+           console.log(err['message']);
+           $('#icon_' + permlink).removeClass('vote-process'); 
 
     }
   
    });
-  
 } catch(err){ alert('Key Error. Check your keys');}
 } else alert('Key Error. Check your keys');
   
@@ -107,8 +101,9 @@ if (wif.status  ==  'success'){
 try{
     $('#icon_' + permlink).addClass('vote-process'); 
     pub_key = convert_to_pub_key_steem(wif.plaintext);
-
- check_pub_key_steem(pub_key, function steem_callback(err, result){ 
+    
+          
+    check_pub_key_steem(pub_key, function steem_callback(err, result){ 
     if (!err){
         var voter = author;
         steem.broadcast.downvote(wif.plaintext, voter, author, permlink, weight, function(err, result) {
@@ -128,9 +123,15 @@ try{
         
         
     }
-    else {alert(err);
-        $('#icon_' + permlink).removeClass('vote-process');    
+    else {
+        {
+           if (err['message'] != 'The WS connection was closed before this operation was made') {  
+                   alert(err);
+          }  
+           console.log(err['message']);
+        $('#icon_' + permlink).removeClass('vote-process'); 
 
+    }
     }
   
    });
@@ -157,6 +158,7 @@ function comment (data, callback){
     try{
         pub_key = convert_to_pub_key_steem(wif.plaintext);
         
+        
         check_pub_key_steem(pub_key, function steem_callback(err, result){ 
         
         if (!err){
@@ -173,7 +175,6 @@ function comment (data, callback){
             console.log(trx);
             
 
-            doit = function(){
                 steem.broadcast.comment(wif.plaintext, 
                 trx['parentAuthor'], 
                 trx['parentPermlink'], 
@@ -187,38 +188,24 @@ function comment (data, callback){
 
                     if (err == null){
                         setTimeout(redirect, 6000);
-                        return err
                     } 
-                    // else alert(err);
+                     else alert(err);
                 });
+            
+        } else {
+            {
+            if (err['message'] != 'The WS connection was closed before this operation was made') {  
+                   alert(err);
+            }  
+            console.log(err['message']);
+            $('#icon_' + permlink).removeClass('vote-process'); 
+
             }
-            function sleep(microseconds) {
-                var request = new XMLHttpRequest();
-                request.open("GET", "sleep.php?time=" + microseconds, false);
-                request.send();
-            }
-            for (i=0 ;i< 1000;i++){
-                try{
-                     d=doit();
-                }
-                catch(err){
-                    
-                }
-                  
-                if (d == null){
-                    break
-                }
-                else {
-                    sleep(2000);
-                    console.log('try',i,d);
-                }
-            } 
-                 
-           
-        
-        } else alert(err);
+            
+        }
   
-        });
+    });
+        
   
     } catch(err){ alert('Key Error. Check your keys');}
     
@@ -230,8 +217,32 @@ function redirect(){
     document.location.href = '/site/show_single_blog';
 }
     
-    
+    function sleep(microseconds) {
+                var request = new XMLHttpRequest();
+                request.open("GET", "sleep.php?time=" + microseconds, false);
+                request.send();
+            };
+            
+function ReloadScripts(work_continue) {
 
+    var scriptTag = document.getElementsByTagName('script');
+    var src;
+
+    for (var i = 0; i < scriptTag.length; i++) {
+        src = scriptTag[i].src;
+        scriptTag[i].parentNode.removeChild(scriptTag[i]);
+
+        try {
+            var x = document.createElement('script');
+            x.type = 'text/javascript';
+            x.src = src;
+            //console.log(x)
+            document.getElementsByTagName('head')[0].appendChild(x);
+        }
+        catch (e) {console.log(e)}
+    }
+work_continue();
+};
 
 function reply (data, callback){
           window.override_local_time();
@@ -247,7 +258,7 @@ function reply (data, callback){
     if (wif.status  ==  'success')
     try{
         pub_key = convert_to_pub_key_steem(wif.plaintext);
-        
+           
         check_pub_key_steem(pub_key, function steem_callback(err, result){ 
         
         if (!err){
@@ -277,10 +288,17 @@ function reply (data, callback){
                     console.log(err, result);
             });
         
-        } else alert(err);
+        } else {
+            {
+                if (err['message'] != 'The WS connection was closed before this operation was made') {  
+                   alert(err);
+                }  
+                console.log(err['message']);
   
-        });
-  
+            }
+        }
+    });
+   
     } catch(err){ alert('Key Error. Check your keys');}
     
   
