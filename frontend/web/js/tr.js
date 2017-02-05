@@ -32,9 +32,11 @@ function addScript(current_blockchain) {
   
   if (current_blockchain =='golos')
   { 
+      document.getElementById("golos-script").remove();
       s.setAttribute( 'id', 'golos-script' );
       s.setAttribute( 'src', 'js/golos.min.js' );
   } else {
+      document.getElementById("steem-script").remove();
       s.setAttribute( 'id', 'steem-script' );
       s.setAttribute( 'src', 'js/steem.min.js' );
       
@@ -233,32 +235,6 @@ function redirect(){
     document.location.href = '/site/show_single_blog';
 }
     
-    function sleep(microseconds) {
-                var request = new XMLHttpRequest();
-                request.open("GET", "sleep.php?time=" + microseconds, false);
-                request.send();
-            };
-            
-function ReloadScripts(work_continue) {
-
-    var scriptTag = document.getElementsByTagName('script');
-    var src;
-
-    for (var i = 0; i < scriptTag.length; i++) {
-        src = scriptTag[i].src;
-        scriptTag[i].parentNode.removeChild(scriptTag[i]);
-
-        try {
-            var x = document.createElement('script');
-            x.type = 'text/javascript';
-            x.src = src;
-            //console.log(x)
-            document.getElementsByTagName('head')[0].appendChild(x);
-        }
-        catch (e) {console.log(e)}
-    }
-work_continue();
-};
 
 function reply (data, callback){
           window.override_local_time();
