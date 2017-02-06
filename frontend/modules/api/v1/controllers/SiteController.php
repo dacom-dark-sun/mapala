@@ -63,15 +63,16 @@ class SiteController extends Controller
 */
     
     
-    public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null)
+    public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null, $blockchain = null)
     {
+        
         if ($categories != null){ //Отображение по категориям
-            $dataProvider = Art::get_data_by_categories_in_array($categories);
+            $dataProvider = Art::get_data_by_categories_in_array($categories, $blockchain);
              return  $json = strip_tags(json_encode($dataProvider, JSON_UNESCAPED_UNICODE));    
         }
         
         if (($permlink == null)&&($author != null)) { //Отображение персонального блога
-            $dataProvider = Art::get_single_blog_in_array($author);
+            $dataProvider = Art::get_single_blog_in_array($author, $blockchain);
             $personal_blog = array(
                 'author' => $author,
                 'data' => $dataProvider,
@@ -80,7 +81,7 @@ class SiteController extends Controller
             
             
         } elseif (($permlink != null)&&($author != null)) { //Отображение статьи в полный экран
-            $model = Art::get_single_art_in_array($author, $permlink);
+            $model = Art::get_single_art_in_array($author, $permlink, $blockchain);
             if ($model == null){
                 return null;
             } else{ 
@@ -88,7 +89,7 @@ class SiteController extends Controller
             }
             
         }
-        $dataProvider = Art::get_data_by_categories_in_array($categories=null, $state); //Стандартное отображение с порядком вывода, определяемым переменной $state
+        $dataProvider = Art::get_data_by_categories_in_array($categories=null, $state, $blockchain); //Стандартное отображение с порядком вывода, определяемым переменной $state
         
             return  $json = strip_tags(json_encode($dataProvider, JSON_UNESCAPED_UNICODE));    
             
