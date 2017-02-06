@@ -402,9 +402,10 @@ class Art extends \yii\db\ActiveRecord
             
         }
         
-         static function get_data_by_categories_in_array($categories = null, $state = 'new'){
+         static function get_data_by_categories_in_array($categories = null, $state = 'new', $blockchain = null){
              $searchModel = new Art();
-             $blockchain =  BlockChain::get_blockchain_from_locale();    
+             if ($blockchain == null)
+                $blockchain =  BlockChain::get_blockchain_from_locale(); 
              $dataProvider = new \yii\data\ArrayDataProvider();
              if ($categories == null){
                 $dataProvider = $searchModel->find()->where(['blockchain'=> $blockchain])->asArray()->all();
@@ -503,9 +504,10 @@ class Art extends \yii\db\ActiveRecord
 
         }
         
-         static function get_single_blog_in_array($author = null){
+         static function get_single_blog_in_array($author = null, $blockchain = null){
             $searchModel = new Art();
-            $blockchain =  BlockChain::get_blockchain_from_locale();    
+            if ($blockchain == null)
+                $blockchain =  BlockChain::get_blockchain_from_locale(); 
             
             $dataProvider = $searchModel->find()->where(['author' => $author, 'blockchain' => $blockchain])->asArray()->all();
             $data_provider = new ArrayDataProvider([
@@ -546,9 +548,10 @@ class Art extends \yii\db\ActiveRecord
         }
             
              
-        static function get_single_art_in_array($author, $permlink){
-        $blockchain =  BlockChain::get_blockchain_from_locale();
-        
+        static function get_single_art_in_array($author, $permlink, $blockchain){
+         if ($blockchain == null)
+                $blockchain =  BlockChain::get_blockchain_from_locale(); 
+            
         $model = Art::find()->where(['author' => $author])->andWhere(['permlink' => $permlink])->andWhere(['blockchain' => $blockchain])->asArray()->one();
         if (empty($model)){
             if ($blockchain =='golos'){
