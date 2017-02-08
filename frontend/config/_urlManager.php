@@ -4,6 +4,7 @@ return [
     'enablePrettyUrl'=>true,
     'showScriptName'=>false,
     'rules'=> [
+        '/report/<action:index>' => 'report/<action>',
         '/ajax/<action>' => 'ajax/<action>',
         '/site/<action:add|show_single_blog|ico|image-upload>' => 'site/<action>',
         '/forms/<action>' => 'forms/<action>',
@@ -12,5 +13,6 @@ return [
         '<author:[\wd.-]+>/<permlink:[\wd.-]+>' => 'site/view',
         '<author:[\wd.-]+>' => 'site/index',
         '' => 'site/index',
+
     ]
 ];
