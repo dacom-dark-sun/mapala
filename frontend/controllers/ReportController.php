@@ -16,22 +16,19 @@ class ReportController extends \yii\web\Controller
 
         try {
             $actualWeeks = $calendar->getActualWeeks();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
 
-        if (Yii::$app->request->get()) {
-            $currentWeek = Yii::$app->request->get('weekid');
-        } else {
-            $currentWeek = $actualWeeks[0]['id'];
-        }
+            if (Yii::$app->request->get()) {
+                $currentWeek = Yii::$app->request->get('weekid');
+            } else {
+                $currentWeek = $actualWeeks[0]['id'];
+            }
 
-        try {
             $report->setIntervalDates($currentWeek);
+
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-
+        
         $investment = $report->getInvestment();
         $teamTokens = $report->getTeamTokens();
         $bountyTokens = $report->getBountyTokens();

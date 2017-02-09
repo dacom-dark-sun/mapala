@@ -7,7 +7,7 @@ use yii\helpers\Url;
     <div class="pagination">
         <ul class="list-group">
             <?php foreach ($actualWeeks as $weekItem):?>
-                <?if($currentWeek == $weekItem['id']):?>
+                <?php if($currentWeek == $weekItem['id']):?>
                     <li class="list-group-item active">
                         <a href="<?=Url::to(['report/index', 'weekid' => $weekItem['id']])?>">
                             <?=$weekItem['date_start']?> - <?=$weekItem['date_end']?>
