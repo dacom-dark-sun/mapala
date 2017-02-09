@@ -169,7 +169,6 @@ function comment (data, callback){
     var trx = new Array();
     data = JSON.parse(data);
     var blockchain = data.blockchain.toLowerCase() + 'sig';
-    addScript(data.blockchain.toLowerCase());
     var author = data.blockchain.toLowerCase() + 'ac';
     author = getCookie(author);
     var wif = get_wif(blockchain);
@@ -246,7 +245,7 @@ function reply (data, callback){
     addScript(data.blockchain.toLowerCase());
     
     var blockchain = data.blockchain.toLowerCase() + 'sig';
-    var author = data.blockchain.toLoweCase() + 'ac';
+    var author = data.blockchain.toLowerCase() + 'ac';
     author = getCookie(author);
     
     var wif = get_wif(blockchain);
