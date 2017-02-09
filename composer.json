@@ -69,7 +69,8 @@
     "bookin/yii2-awesome-bootstrap-checkbox": "@dev",
     "kartik-v/yii2-money": "*",
     "2amigos/yii2-ckeditor-widget": "^2.0",
-    "borales/yii2-medium-editor": "*"
+    "borales/yii2-medium-editor": "*",
+    "cybercog/yii2-google-analytics": "^0.3.2"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

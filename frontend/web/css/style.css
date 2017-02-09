@@ -634,3 +634,14 @@ margin-bottom: 20px;
 .popover-title {
     line-height: 20px;
 }
+.first-report .table-container {
+    height: 500px !important;
+    overflow-y: scroll;
+}
+.second-report .table-container {
+    height: 500px !important;
+    overflow-y: scroll;
+}
+.list-group-item.active a{
+    color:white;
+}

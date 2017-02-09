@@ -397,7 +397,7 @@
 			 * a boolean indicating if node ellipsis should be shown - this only works with a fixed with on the container
 			 * @name $.jstree.defaults.core.themes.ellipsis
 			 */
-			ellipsis		: true,
+			ellipsis		: false,
 			/**
 			 * a boolean indicating if the tree background is striped
 			 * @name $.jstree.defaults.core.themes.stripes
@@ -407,12 +407,12 @@
 			 * a string (or boolean `false`) specifying the theme variant to use (if the theme supports variants)
 			 * @name $.jstree.defaults.core.themes.variant
 			 */
-			variant			: 'large',
+			variant			: false,
 			/**
 			 * a boolean specifying if a reponsive version of the theme should kick in on smaller screens (if the theme supports it). Defaults to `false`.
 			 * @name $.jstree.defaults.core.themes.responsive
 			 */
-			responsive		: true
+			responsive		: false
 		},
 		/**
 		 * if left as `true` all parents of all selected nodes will be opened once the tree loads (so that all selected nodes are visible to the user)
@@ -4883,7 +4883,7 @@
 		 * @name $.jstree.defaults.checkbox.visible
 		 * @plugin checkbox
 		 */
-		visible				: false,
+		visible				: true,
 		/**
 		 * a boolean indicating if checkboxes should cascade down and have an undetermined state. Defaults to `true`.
 		 * @name $.jstree.defaults.checkbox.three_state
@@ -4915,7 +4915,7 @@
 		 * @name $.jstree.defaults.checkbox.tie_selection
 		 * @plugin checkbox
 		 */
-		tie_selection		: ''
+		tie_selection		: true
 	};
 	$.jstree.plugins.checkbox = function (options, parent) {
 		this.bind = function () {
