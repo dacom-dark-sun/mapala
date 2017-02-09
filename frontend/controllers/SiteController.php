@@ -53,7 +53,7 @@ class SiteController extends Controller
                 'validatorOptions' => [
                 'maxSize' => 4000000
               ],
-            'url' => 'https://mapala.net/storage/web/img/', // Directory URL address, where files are stored.
+            'url' => 'http://mapala.dev/storage/web/img/', // Directory URL address, where files are stored.
             'path' => '@storage/web/img/' // Or absolute path to directory where files are stored.
             ],
         ];
@@ -101,8 +101,26 @@ class SiteController extends Controller
             'data' => $categories_tree,
          ]);
         
-}
+    }
 
+    /**
+     * Отображение статьи в полный экран
+     *
+     * @param string $author Символьный код автора статьи
+     * @param string $permlink Символьный код статьи
+     *
+     * @return mixed
+     */
+    public function actionView($author, $permlink)
+    {
+        $model = Art::get_single_art($author, $permlink);
+        if ($model == null){
+            return $this->render('empty_blog');
+        } else{
+            return $this->render('single_art', ['model'=>$model,
+            ]);
+        }
+    }
 
 
     /*

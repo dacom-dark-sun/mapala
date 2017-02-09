@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Exception;
 
 /**
  * This is the model class for table "calendar".
@@ -41,5 +42,25 @@ class Calendar extends \yii\db\ActiveRecord
             'date_start' => 'Date Start',
             'date_end' => 'Date End',
         ];
+    }
+
+    public function getActualWeeks()
+    {
+        $result = $this->find()
+            ->select(['id', 'date_start', 'date_end'])
+            ->where(['finished' => 1])
+            ->orderBy(['date_end' => SORT_DESC])
+            ->asArray()
+            ->all();
+        if (is_null($result)) {
+            throw new Exception('Нет активных недель');
+        }
+
+        return $result;
+    }
+
+    public function paginationQuery()
+    {
+        return $this->find()->where(['finished' => 1])->count();
     }
 }

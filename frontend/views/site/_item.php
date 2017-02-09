@@ -13,7 +13,7 @@ use yii\helpers\Url;
     <div class="col-xs-12">
         <h2 class="article-title">
           
-            <?php echo Html::a(stripslashes($model->title),['/site/index/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
+            <?php echo Html::a(stripslashes($model->title),['site/view','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'main_page_link']) ?>
         </h2>
                   <div class ="location">
 

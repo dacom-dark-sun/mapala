@@ -48,29 +48,25 @@ $this->beginContent('@frontend/views/layouts/base.php')
 <div class ="version">alfa 1.01 <a href="http://mapala.ru">(0-~)</a></div>
 
 <script>
+    //function for show one category by Event onclick on the Tree
+    function function_a(data){
+        $.ajax({
+            method: "GET",
+            data: {
+                categories:data
+            },
+            url: '/ajax/category',
+            success: function(view) {
+                $('#article-index').html(view);
+                history.pushState('', '',"/category/"+ data);
 
- function function_a(data){  //function for show one category by Event onclick on the Tree
-   $.ajax({
-         method: "GET",
-         data: {categories:data
-         },
-         url: '<?php echo Yii::$app->request->baseUrl . '/ajax/show_by_category' ?>',
-         success: function(view) {
-             $('#article-index').html(view);
-              history.pushState('', '',"?categories="+ data);
-         
-         }
-     });
-}
-
-$(document).ready(function(){
-    $('.jstree')
-        .bind("changed.jstree", function(e, data, x){
-           function_a(JSON.stringify(data.selected));
+            }
         });
-    }); 
+    }
 
-
-
-
+    $( document ).ready(function() {
+        $('.jstree').bind("changed.jstree", function(e, data, x){
+            function_a(JSON.stringify(data.selected));
+        });
+    });
 </script>

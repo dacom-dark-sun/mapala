@@ -4,6 +4,7 @@
 
 /vendor/*
 /parser/*
+!vendor/thiagotalma/
 
 # composer
 
@@ -11,6 +12,7 @@ composer.phar
 ## remove in production!
 
 /storage/web/thumbs
+/storage/web/img
 composer.lock
 
 # IDE
@@ -32,3 +34,6 @@ phpunit.phar
 
 # Vagrant
 /.vagrant
+
+#!/vendor/vova07/
+/storage/web/img/
