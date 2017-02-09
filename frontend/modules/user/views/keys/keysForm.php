@@ -70,7 +70,7 @@ if (Yii::$app->controller->id == 'keys')
             <div class="col-lg-6">
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <?= Yii::t('frontend', 'Важно!') ?>
+                    <?= Yii::t('frontend', 'Important!') ?>
                 </div>
                     <div class="panel-body"><?= Yii::t('frontend', 'For receiving private posting key you can use login and  password from  Steem / Golos accounts. Or you can take it from the Steem / Golos  wallets by yourself and save it on mapala.net. For more details  about  posting key saving see the <span id="instruction">instruction</span><br><br><b>Mapala.net servers dont  get any keys and passwords. All the transactions occur between you and blockchain. Или  All the transactions are between you and blockchain. After that the key becomes encrypted and stored in browser cookies.</b>'
                             ) ?>

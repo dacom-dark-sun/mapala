@@ -49,7 +49,7 @@ $this->registerMetaTag([
                     ],
                 ]],
             ['label' => Yii::t('frontend', 'My blog'), 'url' => ['/site/show_single_blog'], ['visible'=>!Yii::$app->user->isGuest]],
-            ['label' => Yii::t('frontend', 'ICO'), 'url' => ['/site/ico']],
+            ['label' => Yii::t('frontend', 'ICO'), 'url' => ['/site/ico'], 'visible'=>!Blockchain::is_steem()],
            
             
             ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],

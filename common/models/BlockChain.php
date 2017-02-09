@@ -552,6 +552,11 @@ class BlockChain extends Model
         
     }
     
+    static function is_steem(){
+        $x = (Yii::$app->language == "ru-RU") ? '0' : '1';
+        return $x;
+    }
+    
     
        
    static function create_permlink($title){

@@ -208,6 +208,9 @@ return [
     'For receiving private posting key you can use login and  password from  Steem / Golos accounts. Or you can take it from the Steem / Golos  wallets by yourself and save it on mapala.net. For more details  about  posting key saving see the <span id="instruction">instruction</span><br><br><b>Mapala.net servers dont  get any keys and passwords. All the transactions occur between you and blockchain. Или  All the transactions are between you and blockchain. After that the key becomes encrypted and stored in browser cookies.</b>' => 'Вы можете использовать логин и пароль от аккаунта Steem/Golos для получения приватного постинг-ключа, или можете самостоятельно взять его в кошельке аккаунта Steem/Golos и сохранить его на Mapala.Net. Подробнее о сохранении постинг-ключа см. <span id="instruction">инструкцию.</span><br><br>Ключи и пароли ни в каком виде НЕ передается на сервер MapalaNet. Все операции происходят между вашим устройством и блокчейном, после чего ключ шифруется и сохраняется в cookies браузера.',
     'How to get a posting key.' => 'Как получить постинг-ключ',
     'You have to copy and save in appropriate posting field your private key from GOLOS platform to publish posts, vote and receive awards. You can find private posting key on<a href=http://golos.io>golos.io</a> in “permissions” tab. Please note that private key begin witha a number 5.' => 'Для публикации постов, голосования, и получения вознаграждений, вам необходимо скопировать и сохранить в соответствующем поле приватный постинг ключ социально-медийной платформы GOLOS. Найти приватный постинг ключ можно на <a href=http://golos.io>golos.io</a> во вкладке "Разрешения". Обратите внимание, что приватный ключ начинается с цифры "5"',
+    'Back' => 'Назад',
+    'Author blog'=>'Блог автора',
+    
     
     
     
