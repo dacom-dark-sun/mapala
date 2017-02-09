@@ -68,7 +68,7 @@ class SiteController extends Controller
         
         if ($categories != null){ //Отображение по категориям
             $dataProvider = Art::get_data_by_categories_in_array($categories, $blockchain);
-             return  $json = strip_tags(json_encode($dataProvider, JSON_UNESCAPED_UNICODE));    
+             return  $json = json_encode($dataProvider, JSON_UNESCAPED_UNICODE);    
         }
         
         if (($permlink == null)&&($author != null)) { //Отображение персонального блога
@@ -77,7 +77,7 @@ class SiteController extends Controller
                 'author' => $author,
                 'data' => $dataProvider,
             );
-             return  $json = strip_tags(json_encode($personal_blog, JSON_UNESCAPED_UNICODE));    
+             return  $json = json_encode($personal_blog, JSON_UNESCAPED_UNICODE);    
             
             
         } elseif (($permlink != null)&&($author != null)) { //Отображение статьи в полный экран
@@ -85,13 +85,13 @@ class SiteController extends Controller
             if ($model == null){
                 return null;
             } else{ 
-                return $json = strip_tags(json_encode($model, JSON_UNESCAPED_UNICODE));    
+                return $json = json_encode($model, JSON_UNESCAPED_UNICODE);    
             }
             
         }
         $dataProvider = Art::get_data_by_categories_in_array($categories=null, $state, $blockchain); //Стандартное отображение с порядком вывода, определяемым переменной $state
         
-            return  $json = strip_tags(json_encode($dataProvider, JSON_UNESCAPED_UNICODE));    
+            return  $json = json_encode($dataProvider, JSON_UNESCAPED_UNICODE);    
             
         
 }
