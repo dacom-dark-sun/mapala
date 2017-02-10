@@ -25,8 +25,6 @@ use common\models\Art;
                     <div class="panel-body">
                   <center>  <?= $total_payout_value ?>    </center>
                     </div>
-                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'min: 0.002 BTC (100 RUB)')?> </span></center>
-                   <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
                        
                 </div>
     <div class="panel panel-danger">
@@ -36,77 +34,15 @@ use common\models\Art;
                        <div class="panel-body">
                            <center> <?= $users_per_week ?> </center>               
                        </div>
-                    <center> <span class ="link" onclick="gbg_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
                  
                 </div>
     
     
             </div>
 
-        <div class ='col-xs-6 col-lg-2'>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">   
-                <center>        <?= Yii::t('frontend', 'Weekly income') ?>  </center>
-                    </div>
-                    <div class="panel-body">
-                 <center> BTC </center>
-                    </div>
-                 <div class="panel-body">
-                        <center>  GBG </center>
-                    </div>
-                    <hr>
-                <center> <?= Yii::t('frontend', 'Current rate:') ?></center>
-                
-                    <center> BTC/MPL </center>
-                    
-               
-                </div>
-   </div>
+        
+        
 
-<div class ='col-xs-3 col-lg-3'>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">   
-                    <center>    <?= Yii::t('frontend', 'Personal information') ?></center>
-                    </div>
-                    <div class="panel-body">
-                   <center>   BTC</center>
-                    </div>
-                    <div class="panel-body">
-                   <center>   GBG</center>
-                    </div>
-                    <hr>
-                 <div class="panel-body">
-                 <center>  <?= Yii::t('frontend', 'Tokens') ?></center>
-                    </div>
-               
-                 <center>    <?=  Html::a(Yii::t('frontend', 'History'), 
-                              ['/site/personal_history'], 
-                              ['class'=>'btn btn-success change_category_btn']);
-                      ?></center>
-
-                </div>
-            </div>
-        
-        
-        
-<div class ='col-xs-6 col-lg-3'>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">   
-                <center>        <?= Yii::t('frontend', 'Total information') ?>  </center>
-                    </div>
-                    <div class="panel-body">
-                 <center> <?= Yii::t('frontend', 'All investments - ') ?>      BTC </center>
-                    </div>
-                 <div class="panel-body">
-                        <center>  <?= Yii::t('frontend', 'All distributed tokens - ') ?>        </center>
-                    </div>
-                     <center>    <?=  Html::a(Yii::t('frontend', 'History'), 
-                              ['/site/investors'], 
-                              ['class'=>'btn btn-success change_category_btn']);
-                      ?></center>
-               
-                </div>
-   </div>
         
         
         
@@ -115,7 +51,6 @@ use common\models\Art;
     
    <div class = 'col-lg-2'>   
        
-       <button class="btn btn-danger change_category_btn" onclick="bonus_info();"> <?= Yii::t('frontend', 'BONUS TODAY:')?>  %</button>
     </div>
      
     
@@ -125,7 +60,6 @@ use common\models\Art;
                     <div class="panel-heading">   
                     </div>
        <div class="panel-body">
-           <b>   <?= Yii::t('frontend', 'Tokens for distribution: 810000')?> </b> 
            
             <?= GridView::widget([
                     'dataProvider' => $data_provider,
