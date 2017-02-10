@@ -291,7 +291,7 @@ class BitCoin extends Model
        $all_btc = BitCoin::get_all_btc();
        $all_tokens = BitCoin::get_all_tokens();
        
-       $rate = $all_btc/$all_tokens/2;
+       $rate = $all_btc/$all_tokens;
        $rate = number_format($rate, 10);
       return $rate;  
     }
@@ -307,7 +307,7 @@ class BitCoin extends Model
        
         $model->status = 'pending';
         $model->created_at = date("Y-m-d H:i:s");
-        $model->rate = BitCoin::get_rate();
+        $model->rate = BitCoin::get_current_rate();
         $model->tokens = $model->btc / $model->rate;
          
         if ($model->tokens <= $user->team_tokens) {
