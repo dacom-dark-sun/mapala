@@ -173,7 +173,7 @@ function comment (data, callback){
     author = getCookie(author);
     var wif = get_wif(blockchain);
     
-    if (wif.status  ==  'success')
+    if (wif.status  ==  'success'){
     try{
         pub_key = convert_to_pub_key_steem(wif.plaintext);
         
@@ -228,7 +228,9 @@ function comment (data, callback){
   
     } catch(err){ alert('Key Error. Check your keys');}
     
-  
+} else {
+    alert('Key Error (decryption problem). Refresh your keys');
+}
     
 }
     
