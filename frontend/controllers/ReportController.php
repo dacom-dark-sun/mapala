@@ -2,58 +2,66 @@
 
 namespace frontend\controllers;
 
+use common\models\FullReport;
 use Yii;
-use common\models\Report;
+use common\models\WeekReport;
 use common\models\Calendar;
-use yii\base\Exception;
 
 class ReportController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $report = new Report();
         $calendar = new Calendar();
+        $weekReport = new WeekReport($calendar);
+        $fullReport = new FullReport($calendar);
 
-        try {
-            $actualWeeks = $calendar->getActualWeeks();
-
-            if (Yii::$app->request->get()) {
-                $currentWeek = Yii::$app->request->get('weekid');
-            } else {
-                $currentWeek = $actualWeeks[0]['id'];
-            }
-
-            $report->setIntervalDates($currentWeek);
-
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        if (Yii::$app->request->get()) {
+            $currentWeek = Yii::$app->request->get('weekid');
+        } else {
+            $currentWeek = null;
         }
+
+        //week report
+        $weekReport->setIntervalDates($currentWeek);
         
-        $investment = $report->getInvestment();
-        $teamTokens = $report->getTeamTokens();
-        $bountyTokens = $report->getBountyTokens();
+        $weekInvestment = $weekReport->getInvestment();
+        $weekTeamTokens = $weekReport->getTeamTokens();
+        $weekBountyTokens = $weekReport->getBountyTokens();
 
-        $firstReport = $report->getFirstReport($investment, $teamTokens, $bountyTokens);
-        $totalTokens = $report->getTotalTokens();
-        $totalTeam = $report->getTotalTeam();
-        $totalBounty = $report->getTotalBounty();
+        $weekTable = $weekReport->getReport($weekInvestment, $weekTeamTokens, $weekBountyTokens);
+        $totalWeekTokens = $weekReport->getTotal('ico', 'tokens');
+        $totalWeekBounty = $weekReport->getTotal('bounty', 'tokens');
+        $totalWeekTeam = $weekReport->getTotal('team', 'tokens');
 
-        $secondReport = $report->getSecondReport($investment, $teamTokens, $bountyTokens);
-        $totalSecondReport = $report->getTotalSecondReport($secondReport);
-        $totalZeroteam = $report->getTotalZeroteam();
+        //full report
+        $fullReport->setIntervalDates($currentWeek);
+
+        $fullInvestment = $fullReport->getInvestment();
+        $fullTeamTokens = $fullReport->getTeamTokens();
+        $fullBountyTokens = $fullReport->getBountyTokens();
+
+        $fullTable = $fullReport->getReport($fullInvestment, $fullTeamTokens, $fullBountyTokens);
+        $totalFullTokens = $fullReport->getTotal('ico', 'tokens');
+        $totalFullBounty = $fullReport->getTotal('bounty', 'tokens');
+        $totalFullTeam = $fullReport->getTotal('team', 'tokens');
+        $totalFullReport = $fullReport->getTotalReport($fullTable);
+        $totalFullZeroteam = $fullReport->getTotalZeroteam();
+
+        //echo "<pre>".print_r($fullTable, true)."</pre>";
 
         return $this->render('index', [
-            'firstReport' => $firstReport,
-            'totalTokens' => $totalTokens,
-            'totalTeam' => $totalTeam,
-            'totalBounty' => $totalBounty,
-            'secondReport' => $secondReport,
-            'totalZeroteam' => $totalZeroteam,
-            'totalSecondReport' => $totalSecondReport,
-            'actualWeeks' => $actualWeeks,
-            'currentWeek' => $currentWeek,
-            'firstKey' => 0,
-            'secondKey' => 0,
+            'weekTable' => $weekTable,
+            'totalWeekTokens' => $totalWeekTokens,
+            'totalWeekTeam' => $totalWeekTeam,
+            'totalWeekBounty' => $totalWeekBounty,
+            'fullTable' => $fullTable,
+            'totalFullZeroteam' => $totalFullZeroteam,
+            'totalFullReport' => $totalFullReport,
+            'totalFullTokens' => $totalFullTokens,
+            'totalFullBounty' => $totalFullBounty,
+            'totalFullTeam' => $totalFullTeam,
+            'actualWeeks' => array_reverse($weekReport->actualWeeks),
+            'currentWeek' => $weekReport->currentWeekId,
         ]);
     }
 

@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use rmrevin\yii\module\Comments\interfaces\CommentatorInterface;
 use common\models\BlockChain;
+use common\models\Ico;
 /**
  * User model
  *
@@ -308,6 +309,20 @@ class User extends ActiveRecord
         return false; 
         //['/profile', 'id' => $this->id]; // or false, if user does not have a public page
     }
-    
-    
+
+    /**
+     * Возвразает всех пользователей, что присутствуют в таблице ico
+     *
+     * @return array|ActiveRecord[]
+     */
+    public function getActivePayUsers()
+    {
+        $subQuery = Ico::find()->select(['name'])->distinct();
+
+        return $this->find()
+            ->select(['id', 'username'])
+            //->where(['in', 'username', $subQuery])
+            ->asArray()
+            ->all();
+    }
 }
