@@ -24,13 +24,24 @@ class ArrayProcessing
 
 
         foreach ($arr as $key => $item) {
-            $username = strtolower($item['username']);
-            print_r($users[$username]);
+            $username = $item['username'];
+
+            if(!isset($users[$username])) {
+                $username = ucfirst($username);
+            }
+
             $result[$key]['raiting'] = $key;
             $result[$key]['username'] = $username;
             $result[$key]['calendar_id'] = $item['calendar_id'];
-            //$result[$key]['user_id'] = $users[$username]['id'];
+
+            if(isset($users[$username])) {
+                $result[$key]['user_id'] = $users[$username]['id'];
+            } else {
+                $result[$key]['user_id'] = null;
+            }
         }
+
+
 
         return $result;
     }

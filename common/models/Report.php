@@ -33,7 +33,7 @@ abstract class Report
 
     abstract public function setIntervalDates($calendarId = null);
 
-    abstract public function getReport($investment, $teamTokens, $bountyTokens);
+    //abstract public function getReport($investment, $teamTokens, $bountyTokens);
 
     /**
      * Возвращает уникальные ключи из массивов

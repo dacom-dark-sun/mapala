@@ -7,6 +7,7 @@ use common\models\ConsoleReport;
 use common\models\Calendar;
 use common\models\User;
 use common\models\ArrayProcessing;
+use common\models\Raiting;
 
 class MakeraitingController extends Controller
 {
@@ -17,7 +18,6 @@ class MakeraitingController extends Controller
         $report = new ConsoleReport($calendar);
         $user = new User();
         $processing = new ArrayProcessing();
-
 
         $report->setIntervalDates();
 
@@ -31,12 +31,19 @@ class MakeraitingController extends Controller
         $table = $report->getReport($investment, $teamTokens, $bountyTokens);
         $table = $processing->PreparationRaitingArr($table, $activePayUsers);
 
+        //Удаляем старые записи
+        Raiting::deleteAll();
 
+        //Добавляем новые
+        foreach ($table as $tableItem) {
+            $raitingRow = new Raiting();
+            $raitingRow->calend_id = $tableItem['calendar_id'];
+            $raitingRow->user_id = $tableItem['user_id'];
+            $raitingRow->raiting = $tableItem['raiting'];
+            $raitingRow->username = $tableItem['username'];
+            $raitingRow->save();
+        }
 
-
-        //print_r($table);
-        //print_r($activePayUsers);
-
-        echo 'makeraiting/make' . PHP_EOL;
+        echo 'Данные в таблице raiting обновлнеы' . PHP_EOL;
     }
 }

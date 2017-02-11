@@ -81,7 +81,7 @@ use yii\helpers\Url;
                 <?php foreach ($fullTable as $key => $item):?>
                     <tr>
                         <td><?=$key + 1?></td>
-                        <td></td>
+                        <td><span class="<?= $item['raiting']['color']?>"><?= $item['raiting']['number']?></span></td>
                         <td><?=$item['username']?></td>
                         <td><?=round($item['tokens'], 3)?></td>
                         <td><?=round($item['team_tokens'], 3)?></td>

@@ -636,3 +636,9 @@ margin-bottom: 20px;
 .list-group-item.active a{
     color:white;
 }
+.red {
+    color:red;
+}
+.green {
+    color:green;
+}

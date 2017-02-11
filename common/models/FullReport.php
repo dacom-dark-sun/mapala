@@ -18,12 +18,25 @@ class FullReport extends Report
         }
     }
 
+    /**
+     * Callback функция для сортировки массива
+     *
+     * @param $a
+     * @param $b
+     * @return bool
+     */
     protected function sortArr($a, $b)
     {
         if ($a['sum'] === $b['sum']) return 0;
         return $a['sum'] < $b['sum'] ? 1 : -1;
     }
 
+    /**
+     * Проверяет условие, если zeroteam, то значение таблицы team.tokens записывается в zeroteam
+     *
+     * @param array $arr
+     * @return array
+     */
     protected function combineTeamKeys($arr)
     {
         $combineArr = [];
@@ -50,6 +63,45 @@ class FullReport extends Report
         return $combineArr;
     }
 
+    /**
+     * Высчитывает рейтинг
+     *
+     * @param int $currentraiting Текущий рейтинг
+     * @param string $username Имя пользователя
+     * @param int $previousWeekRaiting Рейтинг за прошлую неделю
+     * @return array
+     */
+    protected function calculateRaiting($currentraiting, $username, $previousWeekRaiting)
+    {
+        $result = [];
+
+        if(!isset($previousWeekRaiting[$username]['raiting'])) {
+            $number = 'new';
+            $color = 'default';
+        } else {
+            $number = $currentraiting - $previousWeekRaiting[$username]['raiting'];
+            if($number > 0) {
+                $number = "+" . $number;
+                $color = 'green';
+            } elseif($number == 0) {
+                $number = '-';
+                $color = 'green';
+            } else {
+                $color = 'red';
+            }
+        }
+        $result['number'] = $number;
+        $result['color'] = $color;
+
+        return $result;
+    }
+
+    /**
+     * Устанавливает даты начала и конца недели в свойсвто $intervalDates
+     *
+     * @param integer $calendarId ID недели из таблицы calendar
+     * @throws Exception Выбрасывается исключение если неделя не найдена
+     */
     public function setIntervalDates($calendarId = null)
     {
         $firstWeek = current($this->actualWeeks);
@@ -59,8 +111,9 @@ class FullReport extends Report
         $this->date_end = $lastWeek->date_end;
     }
 
-    public function getReport($investment, $teamTokens, $bountyTokens)
+    public function getReport($investment, $teamTokens, $bountyTokens, $previousWeekRaitng)
     {
+
         $args = func_get_args();
         $allKeys = $this->getAllUniqueKeys($args);
         $result = [];
@@ -76,6 +129,8 @@ class FullReport extends Report
                 $result[$key]['team_tokens'] +
                 $result[$key]['zeroteam'] +
                 $result[$key]['bounty_tokens'];
+
+            $result[$key]['raiting'] = $this->calculateRaiting($key, $itemKey, $previousWeekRaitng);
         }
 
         uasort($result, array($this, 'sortArr'));
@@ -83,6 +138,12 @@ class FullReport extends Report
         return array_values($result);
     }
 
+    /**
+     * Складывает значения всех полей sum
+     *
+     * @param array $arr
+     * @return int
+     */
     public function getTotalReport($arr)
     {
         $totalResult = 0;

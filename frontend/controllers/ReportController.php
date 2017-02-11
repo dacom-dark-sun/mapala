@@ -6,12 +6,16 @@ use common\models\FullReport;
 use Yii;
 use common\models\WeekReport;
 use common\models\Calendar;
+use common\models\Raiting;
+use common\models\ArrayProcessing;
 
 class ReportController extends \yii\web\Controller
 {
     public function actionIndex()
     {
         $calendar = new Calendar();
+        $raiting = new Raiting();
+        $arrayProcessing = new ArrayProcessing();
         $weekReport = new WeekReport($calendar);
         $fullReport = new FullReport($calendar);
 
@@ -40,7 +44,9 @@ class ReportController extends \yii\web\Controller
         $fullTeamTokens = $fullReport->getTeamTokens();
         $fullBountyTokens = $fullReport->getBountyTokens();
 
-        $fullTable = $fullReport->getReport($fullInvestment, $fullTeamTokens, $fullBountyTokens);
+        $previousWeekRaitng = $arrayProcessing->setNameAsKey($raiting->getRaitingRows(), 'username');
+
+        $fullTable = $fullReport->getReport($fullInvestment, $fullTeamTokens, $fullBountyTokens, $previousWeekRaitng);
         $totalFullTokens = $fullReport->getTotal('ico', 'tokens');
         $totalFullBounty = $fullReport->getTotal('bounty', 'tokens');
         $totalFullTeam = $fullReport->getTotal('team', 'tokens');
