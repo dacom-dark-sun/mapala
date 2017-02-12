@@ -49,8 +49,7 @@ class Calendar extends \yii\db\ActiveRecord
         $result = $this->find()
             ->select(['id', 'date_start', 'date_end'])
             ->where(['finished' => 1])
-            ->orderBy(['date_end' => SORT_DESC])
-            ->asArray()
+            ->orderBy(['id' => SORT_ASC])
             ->all();
         if (is_null($result)) {
             throw new Exception('Нет активных недель');
@@ -62,5 +61,18 @@ class Calendar extends \yii\db\ActiveRecord
     public function paginationQuery()
     {
         return $this->find()->where(['finished' => 1])->count();
+    }
+
+    public function getPreviousWeek()
+    {
+        $subQuery = $this->find()->where(['finished' => 1])->max('id');
+
+        return $this->find()
+            ->select(['id', 'date_start', 'date_end'])
+            ->where(['finished' => 1])
+            ->andWhere(['<', 'id', $subQuery])
+            ->orderBy(['id' => SORT_DESC])
+            ->limit(1)
+            ->one();
     }
 }

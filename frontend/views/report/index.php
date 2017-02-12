@@ -39,9 +39,9 @@ use yii\helpers\Url;
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($firstReport as $item):?>
+                <?php foreach ($weekTable as $key=>$item):?>
                     <tr>
-                        <td><?=++$firstKey?></td>
+                        <td><?=$key + 1?></td>
                         <td><?=$item['username']?></td>
                         <td><?=round($item['tokens'], 3)?></td>
                         <td><?=round($item['team_tokens'], 3)?></td>
@@ -51,9 +51,9 @@ use yii\helpers\Url;
                     <tr>
                         <td></td>
                         <td><b>Итого за неделю</b></td>
-                        <td><?=$totalTokens?></td>
-                        <td><?=$totalTeam?></td>
-                        <td><?=$totalBounty?></td>
+                        <td><?=$totalWeekTokens?></td>
+                        <td><?=$totalWeekTeam?></td>
+                        <td><?=$totalWeekBounty?></td>
                     </tr>
                 </tbody>
             </table>
@@ -78,10 +78,10 @@ use yii\helpers\Url;
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($secondReport as $item):?>
+                <?php foreach ($fullTable as $key => $item):?>
                     <tr>
-                        <td><?=++$secondKey?></td>
-                        <td></td>
+                        <td><?=$key + 1?></td>
+                        <td><span class="<?= $item['raiting']['color']?>"><?= $item['raiting']['number']?></span></td>
                         <td><?=$item['username']?></td>
                         <td><?=round($item['tokens'], 3)?></td>
                         <td><?=round($item['team_tokens'], 3)?></td>
@@ -94,11 +94,11 @@ use yii\helpers\Url;
                     <td></td>
                     <td></td>
                     <td><b>Итого</b></td>
-                    <td><?=$totalTokens?></td>
-                    <td><?=$totalTeam?></td>
-                    <td><?=$totalBounty?></td>
-                    <td><?=$totalZeroteam?></td>
-                    <td><?=$totalSecondReport?></td>
+                    <td><?=$totalFullTokens?></td>
+                    <td><?=$totalFullTeam?></td>
+                    <td><?=$totalFullBounty?></td>
+                    <td><?=$totalFullZeroteam?></td>
+                    <td><?=$totalFullReport?></td>
                 </tr>
                 </tbody>
             </table>
