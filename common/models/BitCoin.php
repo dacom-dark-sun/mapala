@@ -307,7 +307,7 @@ class BitCoin extends Model
        
         $model->status = 'pending';
         $model->created_at = date("Y-m-d H:i:s");
-        $model->rate = BitCoin::get_current_rate();
+        $model->rate = BitCoin::get_rate();
         $model->tokens = $model->btc / $model->rate;
          
         if ($model->tokens <= $user->team_tokens) {
