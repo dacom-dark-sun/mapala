@@ -34,7 +34,7 @@ $this->title = $model->title;
     ]); 
     $this->registerMetaTag([
         'property' => 'og:url',
-        'content' => BaseUrl::base(),
+        'content' => 'https://mapala.net' . Yii::$app->request->url,
     ]); 
     $this->registerMetaTag([
         'property' => 'og:image',
@@ -97,18 +97,24 @@ $this->title = $model->title;
          <hr>
          <?= $this->render('/site/_addmetainfo',['model'=>$model]) ?>
 
-         <div class="fb-share-button" data-href=" <?= BaseUrl::base(); ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><?= Yii::t('frontend','Share')?></a></div>
-         
          
      </div>
 
         <div class="col-xs-12 col-lg-12 col-md-12 col-lg-push-1 col-md-push-1 article-metainfo">
 
             <?= $this->render('/site/_metainfo',['model'=>$model]) ?>
+         
+            
             <?php 
             $model_name = Art::get_current_model($model);?>
       
         </div>
+       <div class ="col-xs-12 col-lg-12 col-md-12 edit-button text-center">
+       
+        <div class="fb-share-button" data-href=" <?= 'https://mapala.net' . Yii::$app->request->url ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><?= Yii::t('frontend','Share')?></a></div>
+       </div>
+       
+        
        <div class ="col-xs-12 col-lg-12 col-md-12 edit-button text-center">
               <?php echo Html::a(Yii::t('frontend', 'Edit'),['forms/' . $model_name . '/','author'=>$model->author,'permlink'=>$model->permlink],['class'=>'btn btn-warning edit_link']) ?>
        </div>

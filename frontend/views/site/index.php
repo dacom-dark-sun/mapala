@@ -9,7 +9,26 @@ use yii\widgets\Pjax;
 
 ?>
 <?php $this->title = Yii::t('frontend','MAPALA'); ?>
+<?php 
 
+    $this->registerMetaTag([
+        'property' => 'og:title',
+        'content' => Yii::t('common','Mapala.net invite you to join the worldwide community')
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:description',
+        'content' => Yii::t('common','Mapala.net sweeping the planet and inviting you to join. The project will be released soon. Hurry up!')
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:url',
+        'content' => 'https://mapala.net',
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:image',
+        'content' => 'https://mapala.net/frontend/web/img/logo_small.png',
+    ]); 
+
+?> 
    
 
 <div class="site-index">

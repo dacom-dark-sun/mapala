@@ -75,8 +75,8 @@ return [
     'User ID' => 'ID пользователя',
     'Username' => 'Имя пользователя',
     'Value' => 'Значение',
-    'Mapala.net sweeping the planet and inviting you to join. The project  will be released soon. Hurry up!'=>'Mapala.net шагает по планете и приглашает вас присоединиться. Проект будет в ближайшее время. Поторопись!',
-    'Mappala.net invite you to join the worldwide community' => 'Mapala.net приглашает тебя присоединиться к глобальному сообществу',
+    'Mapala.net sweeping the planet and inviting you to join. The project will be released soon. Hurry up!'=>'Mapala.net шагает по планете и приглашает вас присоединиться. Проект будет в ближайшее время. Поторопись!',
+    'Mapala.net invite you to join the worldwide community' => 'Mapala.net приглашает тебя присоединиться к глобальному сообществу',
     'Keep passwords securely. We can not restore it.' =>'Сохраняйте пароль НАДЕЖНО. Мы не можем его восстановить.',
   
     
