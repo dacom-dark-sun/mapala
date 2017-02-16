@@ -44,6 +44,51 @@ $this->title = $model->title;
         'property' => 'og:type',
         'content' => 'website'
     ]);
+    
+
+$this->title = $model->title;
+    $this->registerMetaTag([
+        'itemprop' => 'og:title',
+        'content' => $model->title,
+    ]); 
+    $this->registerMetaTag([
+        'itemprop' => 'og:description',
+        'content' => Art::get_first_line($model),
+    ]); 
+    $this->registerMetaTag([
+        'itemprop' => 'og:url',
+        'content' => 'https://mapala.net' . Yii::$app->request->url,
+    ]); 
+    $this->registerMetaTag([
+        'itemprop' => 'og:image',
+        'content' => $image,
+    ]);
+    $this->registerMetaTag([
+        'itemprop' => 'og:type',
+        'content' => 'website'
+    ]);
+    
+    $this->registerMetaTag([
+        'itemprop' => 'og:title',
+        'content' => $model->title,
+    ]); 
+    $this->registerMetaTag([
+        'itemprop' => 'og:description',
+        'content' => Art::get_first_line($model),
+    ]); 
+    $this->registerMetaTag([
+        'itemprop' => 'og:url',
+        'content' => 'https://mapala.net' . Yii::$app->request->url,
+    ]); 
+    $this->registerMetaTag([
+        'itemprop' => 'og:image',
+        'content' => $image,
+    ]);
+    $this->registerMetaTag([
+        'itemprop' => 'og:type',
+        'content' => 'website'
+    ]);
+
 
 ?>
 <div id="fb-root"></div>
