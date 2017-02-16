@@ -5,14 +5,50 @@ use dosamigos\editable\EditableAddressAsset;
 use dosamigos\editable\Editable;
 use common\models\Art;
 use common\models\BlockChain;
+use kartik\social\FacebookPlugin;
+use yii\helpers\BaseUrl;
+
 /**
  * @var $this yii\web\View
  * @var $model common\models\Article
  */
 use yii\helpers\Html;
+
+
+
 $this->title = $model->title;
+    $this->registerMetaTag([
+        'property' => 'og:title',
+        'content' => Yii::t('common','Mappala.net invite you to join the worldwide community')
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:description',
+        'content' => Yii::t('common','Mapala.net sweeping the planet and inviting you to join. The project will be released soon. Hurry up!')
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:url',
+        'content' => Yii::t('common','http://mapala.net')
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:image',
+        'content' => Yii::t('common','http://mapala.dev/frontend/web/img/logo_small.png')
+    ]);
+    $this->registerMetaTag([
+        'property' => 'og:type',
+        'content' => 'website'
+    ]);
 
 ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.8&appId=1794193514175666";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
 <div class ="site-index">
 <button type="button" class="btn btn-default previous" onclick = "window.history.back();"><?= Yii::t('frontend','Back')?></button>
 <?php echo Html::a(Yii::t('frontend','Author blog'),['/site/index/','author'=>$model->author],['class'=>'btn btn-default previous']) ?>
@@ -54,6 +90,9 @@ $this->title = $model->title;
          <hr>
          <?= $this->render('/site/_addmetainfo',['model'=>$model]) ?>
 
+         <div class="fb-share-button" data-href=" <?= BaseUrl::base(); ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><?= Yii::t('frontend','Share')?></a></div>
+         
+         
      </div>
 
         <div class="col-xs-12 col-lg-12 col-md-12 col-lg-push-1 col-md-push-1 article-metainfo">

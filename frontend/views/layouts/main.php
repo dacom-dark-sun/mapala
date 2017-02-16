@@ -4,27 +4,13 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
 use common\models\BlockChain;
 /* @var $content string */
+
+
 use cybercog\yii\googleanalytics\widgets\GATracking;
 echo GATracking::widget([
     'trackingId' => 'UA-89551963-1',
-]) ;
-
-    $this->registerMetaTag([
-        'name' => 'og_title',
-        'content' => Yii::t('common','Mappala.net invite you to join the worldwide community')
-    ]); 
-    $this->registerMetaTag([
-        'name' => 'og_description',
-        'content' => Yii::t('common','Mapala.net sweeping the planet and inviting you to join. The project will be released soon. Hurry up!')
-    ]); 
-    $this->registerMetaTag([
-        'name' => 'og_url',
-        'content' => Yii::t('common','https://mapala.net')
-    ]); 
-    $this->registerMetaTag([
-        'name' => 'og_image',
-        'content' => Yii::t('common','http://mapala.dev/frontend/web/img/logo_small.png')
-    ]); 
+]);
+        
 $this->beginContent('@frontend/views/layouts/base.php')
 ?>
 
