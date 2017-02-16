@@ -13,25 +13,32 @@ use yii\helpers\BaseUrl;
  * @var $model common\models\Article
  */
 use yii\helpers\Html;
-
+ 
+            
+    $image = $model::get_images($model);
+    if (($image)&&(@fopen($image,'r'))):
+         $image = $image;
+    else:
+       $image = "https://mapala.net/frontend/web/img/logo_small.png";
+    endif; 
 
 
 $this->title = $model->title;
     $this->registerMetaTag([
         'property' => 'og:title',
-        'content' => Yii::t('common','Mappala.net invite you to join the worldwide community')
+        'content' => $model->title,
     ]); 
     $this->registerMetaTag([
         'property' => 'og:description',
-        'content' => Yii::t('common','Mapala.net sweeping the planet and inviting you to join. The project will be released soon. Hurry up!')
+        'content' => Art::get_first_line($model),
     ]); 
     $this->registerMetaTag([
         'property' => 'og:url',
-        'content' => Yii::t('common','http://mapala.net')
+        'content' => BaseUrl::base(),
     ]); 
     $this->registerMetaTag([
         'property' => 'og:image',
-        'content' => Yii::t('common','http://mapala.dev/frontend/web/img/logo_small.png')
+        'content' => $image,
     ]);
     $this->registerMetaTag([
         'property' => 'og:type',
