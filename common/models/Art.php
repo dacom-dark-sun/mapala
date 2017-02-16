@@ -193,6 +193,24 @@ class Art extends \yii\db\ActiveRecord
         
         
         //This function for get first image to preview from Thumbs folder
+        
+         static function get_image_for_vk($model){
+           $meta = $model->meta;
+           $meta = json_decode(stripslashes($meta), true);
+           $image = $model->validate_json($meta, 'image');
+           $author = $model->author;
+           $permlink = $model-> permlink;
+           
+            if ($image[0]){
+                return $image[0];
+                
+            } else {
+                return false;
+            }
+          
+        }
+        
+        
          static function get_images($model){
            $meta = $model->meta;
            $meta = json_decode(stripslashes($meta), true);

@@ -15,7 +15,7 @@ use yii\helpers\BaseUrl;
 use yii\helpers\Html;
  
             
-    $image = $model::get_images($model);
+    $image = $model::get_image_for_vk($model);
     if (($image)&&(@fopen($image,'r'))):
          $image = $image;
     else:
