@@ -22,7 +22,7 @@ class KeyAsset extends AssetBundle
          'js/reconnection.js',
      
         'js/key_op.js',
-       // "js/steem.min.js",//ADD GOLOS
+       //d "js/steem.min.js",//ADD GOLOS
          'js/crypto.js',
       //   'js/tr.js',
     ];
