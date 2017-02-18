@@ -51,7 +51,7 @@ function vote(current_blockchain, author, permlink, weight){
     window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
-addScript(current_blockchain);
+//addScript(current_blockchain);
 var voter = current_blockchain + 'ac';
     voter = getCookie(voter);
     
@@ -108,7 +108,7 @@ function down_vote(current_blockchain, author, permlink, weight){
           window.override_local_time();
 
 current_blockchain = current_blockchain.toLowerCase();
-addScript(current_blockchain);
+//addScript(current_blockchain);
 var author = current_blockchain + 'ac';
     author = getCookie(author);
 
@@ -244,7 +244,7 @@ function reply (data, callback){
 
     var trx = new Array();
     data = JSON.parse(data);
-    addScript(data.blockchain.toLowerCase());
+   // addScript(data.blockchain.toLowerCase());
     
     var blockchain = data.blockchain.toLowerCase() + 'sig';
     var author = data.blockchain.toLowerCase() + 'ac';
