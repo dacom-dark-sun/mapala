@@ -26,7 +26,7 @@ class SignupBlockchain extends Model
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'string', 'min' => 6, 'max' => 255],
+            ['username', 'string', 'min' => 3, 'max' => 255],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
