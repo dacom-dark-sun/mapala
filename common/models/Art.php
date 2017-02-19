@@ -322,20 +322,20 @@ class Art extends \yii\db\ActiveRecord
         
         
         static function get_body($model){
-            $body = \kartik\markdown\Markdown::convert($model->body);
+           // $body = \kartik\markdown\Markdown::convert($model->body);
              
-            $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
-            $body = $model->body;
-            $matches = Art::parse_links_and_urls($body);
-            foreach($matches[0] as $id => $m){
-                if (in_array($matches[5][$id], $format_img)){
-                    $body = str_replace($m,'<img src=' . $m . '>', $body);
-                } else {
-                    $body = str_replace($m,'[' . $m . ']('. $m . ')', $body);
-                  }
+           // $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
+            return $body = $model->body;
+          //  $matches = Art::parse_links_and_urls($body);
+          //  foreach($matches[0] as $id => $m){
+          //      if (in_array($matches[5][$id], $format_img)){
+           //         $body = str_replace($m,'<img src=' . $m . '>', $body);
+           //     } else {
+            //        $body = str_replace($m,'[' . $m . ']('. $m . ')', $body);
+            //      }
                 
-           }
-           return $body;
+        //   }
+          // return $body;
         }
         
         
