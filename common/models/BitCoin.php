@@ -105,6 +105,7 @@ class BitCoin extends Model
         $prev_id = $interval['id'] - 1;
         
         $prev_interval = Calendar::find()->where('id=' . $prev_id)->asArray()->one();
+       
         if ($prev_interval['finished'] == 0){
              $players = BitCoin::get_data($prev_interval);
              $total_investments = 0;
@@ -120,9 +121,13 @@ class BitCoin extends Model
                 $total_btc_per_week = BitCoin::get_weekly_btc($players);
                 $total_gbg_per_week = Bitcoin::get_weekly_gbg($players);
                 
+                $total_invest_by_user = BitCoin::get_all_investors();
+                $total_amount_btc = BitCoin::get_total_amount($total_invest_by_user);
+
+                $total_tokens = Bitcoin::get_all_tokens();
                 
                 
-                $rate = $total_investments / 810000;
+                $rate = $total_amount_btc / $total_tokens;
                 Yii::$app->db->createCommand()
                  ->update('calendar', [
                  'finished' => 1, 
@@ -143,7 +148,7 @@ class BitCoin extends Model
     static function get_interval(){
        
          $interval = Calendar::find()->where('date_start <= CURDATE()')->andWhere('date_end >= CURDATE()')->asArray()->one(); 
-        
+         
          return $interval;
     }
     
@@ -207,6 +212,7 @@ class BitCoin extends Model
                 return $total_weekly_gbg;
         
     }
+    
     
     static function get_bonuse_today(){
     
