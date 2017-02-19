@@ -30,7 +30,7 @@ $this->title = $model->title;
     ]); 
     $this->registerMetaTag([
         'property' => 'og:description',
-        'content' => Art::get_first_line($model),
+        'content' => Art::get_short_first_line($model),
     ]); 
     $this->registerMetaTag([
         'property' => 'og:url',
@@ -53,7 +53,7 @@ $this->title = $model->title;
     ]); 
     $this->registerMetaTag([
         'itemprop' => 'og:description',
-        'content' => Art::get_first_line($model),
+        'content' => Art::get_short_first_line($model),
     ]); 
     $this->registerMetaTag([
         'itemprop' => 'og:url',
@@ -68,26 +68,6 @@ $this->title = $model->title;
         'content' => 'website'
     ]);
     
-    $this->registerMetaTag([
-        'itemprop' => 'og:title',
-        'content' => $model->title,
-    ]); 
-    $this->registerMetaTag([
-        'itemprop' => 'og:description',
-        'content' => Art::get_first_line($model),
-    ]); 
-    $this->registerMetaTag([
-        'itemprop' => 'og:url',
-        'content' => 'https://mapala.net' . Yii::$app->request->url,
-    ]); 
-    $this->registerMetaTag([
-        'itemprop' => 'og:image',
-        'content' => $image,
-    ]);
-    $this->registerMetaTag([
-        'itemprop' => 'og:type',
-        'content' => 'website'
-    ]);
 
 
 ?>
@@ -159,7 +139,7 @@ $this->title = $model->title;
         </div>
        <div class ="col-xs-12 col-lg-12 col-md-12 edit-button text-center">
        
-        <div class="fb-share-button" style="display: inline" data-href=" <?='https://mapala.net' . Yii::$app->request->url ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><?= Yii::t('frontend','Share')?></a></div>
+        <div class="fb-share-button" style="display: inline" type="button_count" data-href=" <?='https://mapala.net' . Yii::$app->request->url ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><?= Yii::t('frontend','Share')?></a></div>
         <div id="vk_share_button" style="display: inline"></div>
        </div>
        

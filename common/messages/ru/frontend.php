@@ -165,7 +165,7 @@ return [
     'Bonuses:' => 'Бонусы:',
     'Current rate:' => 'Текущий курс:',
     'author:' => 'автор:',
-    'please enter GOLOS private posting key' => 'пожалуйста, укажите приватный ключ от аккаунта GOLOS',
+    'please enter Steem private posting key' => 'пожалуйста, укажите приватный ключ от аккаунта GOLOS',
     'Community' => 'Сообщество',
     'Here you can write a feedback, report about the problems, propose useful information for community' => 'Здесь кипит жизнь сообщества. В этом разделе можно сообщить о проблемах, поделиться идеями или полезными материалами для сообщества',
     
@@ -210,7 +210,8 @@ return [
     'You have to copy and save in appropriate posting field your private key from GOLOS platform to publish posts, vote and receive awards. You can find private posting key on<a href=http://golos.io>golos.io</a> in “permissions” tab. Please note that private key begin witha a number 5.' => 'Для публикации постов, голосования, и получения вознаграждений, вам необходимо скопировать и сохранить в соответствующем поле приватный постинг ключ социально-медийной платформы GOLOS. Найти приватный постинг ключ можно на <a href=http://golos.io>golos.io</a> во вкладке "Разрешения". Обратите внимание, что приватный ключ начинается с цифры "5"',
     'Back' => 'Назад',
     'Author blog'=>'Блог автора',
-    
+    'Trail' => 'Trail',
+    'Authors get paid when people like you upvote their post. If you enjoyed what you read here, earn $4.50 of STEEM Power when you Sign Up and vote for it.' => 'В сети MapalaNet авторы получают вознаграждение, когда пользователи голосуют за их посты.. Проголосовавшие читатели также вознаграждаются. Если вам понравился данный пост Вы можете вознаградить автора. Для этого зарегистрируйтесь и проголосуйте за пост.',
     
     
     

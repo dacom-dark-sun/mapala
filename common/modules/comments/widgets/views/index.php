@@ -30,10 +30,10 @@ use yii\helpers\Html;
                 'encryptedEntity' => $encryptedEntity,
                 'formId' => $formId
             ]); ?>
-        <?php else: ?>
-        <?php echo Yii::t('frontend',' <div class="description_comments"> В сети MapalaNet авторы получают вознаграждение, когда пользователи голосуют за их посты..
-Проголосовавшие читатели также вознаграждаются. Если вам понравился данный пост Вы можете вознаградить автора
-Для этого зарегистрируйтесь и проголосуйте за пост. </div>')?>
+         <?php else: ?>
+        <div class="description_comments"> 
+        <?php echo Yii::t('frontend','Authors get paid when people like you upvote their post. If you enjoyed what you read here, earn $4.50 of STEEM Power when you Sign Up and vote for it.')?>
+        </div>
         <?php endif; ?>
         
         

@@ -301,22 +301,40 @@ class Art extends \yii\db\ActiveRecord
               return $first_line;
         }
         
+           static function get_short_first_line($model){
+//                $links = $model::get_links($model);
+          //      $body = \kartik\markdown\Markdown::convert($model->body);
+            $body = $model->body; 
+                $first_line = StringHelper::truncate($body, 150, '...', null, true);
+                $matches = Art::parse_links_and_urls($first_line);
+               
+                foreach($matches[0] AS $m){
+                    $first_line = str_replace($m,'',$first_line);
+                
+               }
+                $first_line = str_replace("\\n\\n", ". ", $first_line);
+                $first_line = strip_tags($first_line);
+            //    $first_line= preg_replace('/[^a-zа-яё\s.,]+/iu', '', $first_line);
+        
+              return $first_line;
+        }
+        
         
         
         static function get_body($model){
-          //  $body = \kartik\markdown\Markdown::convert($model->body);
+            $body = \kartik\markdown\Markdown::convert($model->body);
              
-         //   $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
+            $format_img = ['jpg','png','gif','jpeg','swf','bmp','tiff','tipp'];
             $body = $model->body;
-         //   $matches = Art::parse_links_and_urls($body);
-         //   foreach($matches[0] as $id => $m){
-         //       if (in_array($matches[5][$id], $format_img)){
-         //           $body = str_replace($m,'<img src=' . $m . '>', $body);
-         //       }// else {
-                 //   $body = str_replace($m,'[' . $m . ']('. $m . ')', $body);
-                 // }
+            $matches = Art::parse_links_and_urls($body);
+            foreach($matches[0] as $id => $m){
+                if (in_array($matches[5][$id], $format_img)){
+                    $body = str_replace($m,'<img src=' . $m . '>', $body);
+                } else {
+                    $body = str_replace($m,'[' . $m . ']('. $m . ')', $body);
+                  }
                 
-        //   }
+           }
            return $body;
         }
         

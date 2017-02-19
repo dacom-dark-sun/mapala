@@ -202,7 +202,7 @@ $this->params['breadcrumbs'][] = $this->title;
        if (acc){
           $('.account_name').text(acc);
        } else {
-         $('<a id="key_modal_ask"><?php echo Yii::t('frontend', 'install STEEM posting private key') ?></a>').appendTo('.account_name');
+         $('<a id="key_modal_ask"><?php echo Yii::t('frontend', 'please enter Steem private posting key') ?></a>').appendTo('.account_name');
          $(":submit").attr("disabled", true);
        } 
        

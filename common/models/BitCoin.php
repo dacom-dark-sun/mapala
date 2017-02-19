@@ -310,7 +310,7 @@ class BitCoin extends Model
         $model->rate = BitCoin::get_rate();
         $model->tokens = $model->btc / $model->rate;
          
-        if ($model->tokens <= $user->team_tokens) {
+       // if ($model->tokens <= $user->team_tokens) { --munus
             Yii::$app->db->createCommand()
              ->update('user', [
                  'team_tokens' => $user->team_tokens - $model->tokens, 
@@ -319,7 +319,7 @@ class BitCoin extends Model
             
            $model->save();
   
-        }
+       // }
     }
        
     static function get_personal_team_tokens(){
