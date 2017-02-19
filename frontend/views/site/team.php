@@ -47,7 +47,7 @@ use common\models\BitCoin;
                 </div>
     </div>
     
-    
+     
     
     <div class="col-lg-12">
    <div class="panel panel-info">
@@ -182,6 +182,89 @@ use common\models\BitCoin;
            
     
     </div>
+    
+    
+    <div class ='col-xs-12 col-lg-12'>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">   
+                    <center>    <?= Yii::t('frontend', 'Rate information') ?></center>
+                    </div>
+                    <div class="panel-body">
+                              <b>   <?= Yii::t('frontend', 'Team Tokens')?> </b> 
+
+                            <?= GridView::widget([
+                                    'dataProvider' => $calendar_provider,
+                                    'summary'=>'',
+                                    'tableOptions' => [
+                                        'class' => 'table table-striped table-bordered'
+                                    ],
+                                        'columns' => [
+                                        /**
+                                         * Столбец нумерации. Отображает порядковый номер строки
+                                         */
+                                        [
+                                            'class' => \yii\grid\SerialColumn::class,
+                                        ],
+                                        /**
+                                         * Перечисленные ниже поля модели отображаются как колонки с данными без изменения
+                                         */
+                                        ['attribute' => 'date_start', 
+                                         'label' => Yii::t('frontend', 'Дата начала'),
+                                         'contentOptions' => ['class' => 'text-center'],
+                                         'headerOptions' => ['class' => 'text-center']
+                                         ],
+                                        ['attribute' => 'date_end', 
+                                         'label' => Yii::t('frontend', 'Дата завершения'),
+                                          'format'=>'datetime',
+                                         'contentOptions' => ['class' => 'text-center'],
+                                         'headerOptions' => ['class' => 'text-center']
+                                            ],
+
+
+                                        ['attribute' => 'finished', 
+                                         'label' => Yii::t('frontend', 'Finished?'),
+                                         'contentOptions' => ['class' => 'text-center'],
+                                         'headerOptions' => ['class' => 'text-center']
+                                         ],
+                                            
+                                         ['attribute' => 'btc_per_week', 
+                                         'label' => Yii::t('frontend', 'BTC в неделю'),
+                                         'contentOptions' => ['class' => 'text-center'],
+                                         'headerOptions' => ['class' => 'text-center']
+                                         ],
+                                         ['attribute' => 'gbg_per_week', 
+                                         'label' => Yii::t('frontend', 'GBG в неделю'),
+                                         'contentOptions' => ['class' => 'text-center'],
+                                         'headerOptions' => ['class' => 'text-center']
+                                         ],
+                                             ['attribute' => 'week_investments', 
+                                         'label' => Yii::t('frontend', 'Инвестиции за неделю, BTC'),
+                                         'contentOptions' => ['class' => 'text-center'],
+                                         'headerOptions' => ['class' => 'text-center']
+                                         ],
+                                            
+                                            
+                                        ['attribute' => 'rate', 
+                                         'label' => Yii::t('frontend', 'Rate'),
+                                         'contentOptions' => ['class' => 'text-center'],
+                                         'headerOptions' => ['class' => 'text-center']
+                                         ],
+
+
+
+
+
+                                        /**
+                                         * Произвольная колонка с определенной логикой отображения и фильтром в виде выпадающего списка
+                                         */],
+                                ]);?>
+
+                        
+                        
+                    </div>
+                </div>
+    </div>
+    
     
 </div>
 
