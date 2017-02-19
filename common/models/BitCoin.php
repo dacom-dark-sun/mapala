@@ -391,6 +391,10 @@ class BitCoin extends Model
        return User::find()->where(['username' => $user])->asArray()->one();
     }
     
+    static function get_calendar(){
+      $calendar =  Calendar::find()->asArray()->all();
+        return $calendar;
+    }
     
     
     

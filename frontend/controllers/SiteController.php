@@ -359,6 +359,15 @@ $current_rate = BitCoin::get_rate();
             ],
         ]);
          
+         $calendar = Bitcoin::get_calendar();
+         $calendar_provider = new ArrayDataProvider([
+            'allModels' => $calendar,
+            'pagination' => [
+                'pageSize' => 50,
+            ],
+        ]);
+         
+         
          
          
          
@@ -370,6 +379,7 @@ $current_rate = BitCoin::get_rate();
             'current_rate' => $current_rate,
             'data_provider' => $data_provider,
             'wd_provider' => $wd_provider,
+            'calendar_provider' => $calendar_provider,
         ]);  
      
         
