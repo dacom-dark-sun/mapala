@@ -9,7 +9,7 @@ use common\models\BlockChain;
 use yii\helpers\Html;
 use yii\helpers\Markdown;
 use yii\data\ArrayDataProvider;
-
+use common\models\Validated_arts;
 /**
  * This is the model class for table "art".
  *
@@ -834,6 +834,12 @@ class Art extends \yii\db\ActiveRecord
         
          $users_q = User::find()->where('created_at >=' . "'" .   $prev_interval['date_start'] . "'")->andwhere('created_at <=' . "'" .   $prev_interval['date_end'] . "'")->count();
          return $users_q;
+     }
+     
+     static function get_validated_arts(){
+         
+       $val_arts =  Validated_arts::find()->asArray()->all(); 
+       return $val_arts[0];
      }
         
 }
