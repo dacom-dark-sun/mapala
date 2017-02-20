@@ -20,7 +20,7 @@ use common\models\BitCoin;
 use yii\data\ArrayDataProvider;
 use Coinbase\Wallet\Enum\Param;
 use common\models\Withdraw;
-
+use common\models\Trail;
 
 
 
@@ -34,42 +34,66 @@ class TrailController extends Controller
     
     
     
-    public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null)
+    public function actionIndex()
     {
-         return $this->render('trail',[
+       $user_mapala = Yii::$app->user->identity->username;
+       $used = Trail::find()->where(['user_mapala' => $user_mapala])->asArray()->one();
+       if ($used)         
+           $flag = $used['active'];
+       else {
+           $flag = 0;
+       }
+           return $this->render('trail',[
+               'flag' => $flag
             ]); 
      
         
     }
     
+    
     public function actionUse_trail(){
        $post = Yii::$app->request->post();
+       $user_mapala = Yii::$app->user->identity->username;
        $key = $post['key'];
        $user = $post['user'];
-       
+       $blockchain = Blockchain::get_blockchain_from_locale();
        Yii::$app->db->createCommand()
              ->insert('trail', [
                  'key' => $key,
+                 'user_mapala' => $user_mapala,
                  'user' => $user,
+                 'blockchain' => $blockchain,
+                 'weight' => 100,
+                 
                 ])
              ->execute();
+       $used = Trail::find()->where(['user_mapala' => $user_mapala])->asArray()->one();
+       if ($used)         
+           $flag = $used['active'];
+       else {
+           $flag = 0;
+       }
        
-       return true;
+      $this->redirect(array('trail/index'));
     }
+    
+    
     
     public function actionCancel_trail(){
        $post = Yii::$app->request->post();
        $key = $post['key'];
        $user = $post['user'];
+       $user_mapala = Yii::$app->user->identity->username;
        
        Yii::$app->db->createCommand()
              ->delete('trail', [
-                 'key' => $key,
-                 'user' => $user,
-                ])
+                 
+                ],['user_mapala' => $user_mapala])
              ->execute();
        
-       return true;
-    }
+       
+         $this->redirect(array('trail/index'));
+
+}
 
 }    

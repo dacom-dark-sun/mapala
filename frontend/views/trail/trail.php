@@ -23,11 +23,11 @@ if (Yii::$app->controller->id == 'keys')
         <div class='col-lg-12'>
         <div class="col-lg-6">
     
-            <div class="form-group" id="steem_pass_form">
-                <label for="usr"><?php echo Yii::t('frontend', 'Use your posting key for auto-curating')?>:</label>
+            <div class="form-group" id="trail_form">
+                <label for="use"><?php echo Yii::t('frontend', 'Use your posting key for auto-curating')?>:</label>
                 <div class ="keys_save_edit_buttons">
                     <button type="button" id='use_trail' class="btn btn-success"><?php echo Yii::t('frontend', 'Use')?></button>
-                <button type="button" id= 'cancel_use_trail' style='display:none' class="btn btn-danger"><?php echo Yii::t('frontend', 'Cancel auto-curating')?></button>
+                    <button type="button" id= 'cancel_use_trail' class="btn btn-danger"><?php echo Yii::t('frontend', 'Cancel auto-curating')?></button>
                     <div class ="loader_head"  style="display: none;">
                        <div id = 'steem_load' class = 'loader' ></div>
                        </div>
@@ -98,6 +98,17 @@ if (Yii::$app->controller->id == 'keys')
        });
  
 $(document).ready(function(){
+  var flag = <?= \common\models\Art::is_curator() ?>;
+  if (flag == 1){
+      $('#use_trail').hide();
+      $('#cancel_use_trail').show();
+      
+  } else {
+      $('#use_trail').show();
+      $('#cancel_use_trail').hide();
+      
+  }
+    
   var acc = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
   acc = getCookie(acc);
   if (acc){
@@ -125,6 +136,19 @@ $(document).ready(function(){
    }
    
 });
+
+$("#cancel_use_trail").click(function() {
+  var current_blockchain = '<?= BlockChain::get_blockchain_from_locale()?>' + 'sig';
+  var username = '<?= BlockChain::get_blockchain_from_locale()?>' + 'ac';
+  var user = getCookie(username);
+    var wif = get_wif(current_blockchain);
+  
+  if (wif.status  ==  'success'){
+        result = cancel_use_trail(wif.plaintext, user);
+    }    
+    
+});
+
 
 
 $("#use_trail").click(function() {
@@ -171,6 +195,26 @@ $("#instruction").click(function() {
 function send_key(key, user){
      $.ajax({
               url: '/trail/use_trail/',
+       
+            type: "post",
+     
+            data   : {key: key, user:user},
+            success: function (comment_data) 
+            {
+                console.log(comment_data);
+            },
+            error  : function (xhr, ajaxOptions, thrownError) 
+            {
+               console.log('internal server error');
+            }
+            });
+            
+}
+
+
+function cancel_use_trail(key, user){
+     $.ajax({
+              url: '/trail/cancel_trail/',
        
             type: "post",
      

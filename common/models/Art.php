@@ -841,5 +841,16 @@ class Art extends \yii\db\ActiveRecord
        $val_arts =  Validated_arts::find()->asArray()->all(); 
        return $val_arts[0];
      }
+     
+     static function is_curator(){
+        $user_mapala = Yii::$app->user->identity->username;
+      
+        $is_curator = Trail::find()->where(['user_mapala'=> $user_mapala])->andwhere(['active' => 1])->one();
+        if ($is_curator){
+            return 1;
+        } else {
+            return 0;
+        }
+     }
         
 }
