@@ -21,7 +21,7 @@ $this->registerMetaTag([
 ]); ?>
 
 <div class="wrap">
-
+<?php $val_arts = Art::get_validated_arts(); ?>
     <?php
     NavBar::begin([
         'brandLabel' => "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png>" . Yii::$app->name ,
@@ -31,7 +31,7 @@ $this->registerMetaTag([
         ],
         'innerContainerOptions' => ['class'=>'container-fluid container-navbar'],
     ]); ?>
-           <?php echo '<span class="logo_text">[ Everyone Can Travel ] </span>' . '<span class="span_amount">'  . Yii::t("frontend","Articles") . ": " . Art::get_article_amount('steem') . Yii::t("frontend"," STEEM") .  ", " . Art::get_article_amount('golos') .  " " . Yii::t("frontend","GOLOS")  . '</span>';?>
+           <?php echo '<span class="logo_text">[ Everyone Can Travel ] </span>' . '<span class="span_amount">'  . Yii::t("frontend","Articles") . ": " . $val_arts['steem'] . Yii::t("frontend"," STEEM") .  ", " . $val_arts['golos'] .  " " . Yii::t("frontend","GOLOS")  . '</span>';?>
     
     
     <?php echo Nav::widget([
