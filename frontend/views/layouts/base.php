@@ -62,6 +62,12 @@ $this->registerMetaTag([
                         'label' => Yii::t('frontend', 'STEEM key'),
                         'url' => ['/user/keys/index']
                     ],
+                          [
+                        'label' => Yii::t('frontend', 'Trail'),
+                        'url' => ['/trail/index'],
+                        'visible'=>Blockchain::is_steem(),
+                    ],
+                
                     [
                         'label' => Yii::t('frontend', 'Settings'),
                         'url' => ['/user/default/index']
