@@ -20,7 +20,7 @@ use common\models\BitCoin;
 use yii\data\ArrayDataProvider;
 use Coinbase\Wallet\Enum\Param;
 use common\models\Withdraw;
-
+use common\models\Pages;
 
 
 
@@ -316,6 +316,20 @@ $current_rate = BitCoin::get_rate();
             'data_provider' => $data_provider,
         ]);  
      
+        
+        
+    }
+    
+    public function actionFaq(){
+       $blockchain = BlockChain::get_blockchain_from_locale();
+       $page = Pages::find()->where(['title' => 'FAQ'])->andWhere(['blockchain' => $blockchain])->asArray()->one();
+       $page['body'] = \kartik\markdown\Markdown::convert($page['body']);
+       
+       return $this->render('faq',[
+          'body' => $page['body'],
+        ]);  
+     
+        
         
         
     }
