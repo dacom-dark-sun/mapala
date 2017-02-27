@@ -51,6 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'tokenSeparators' => [',', ' '],
                     'maximumInputLength' => 25
                 ],
+                'pluginEvents' => [
+                    "select2:open" => 'function() { $(".select2-results__options").css("max-height","2000px") }',
+                ],
                  "data" => ArrayHelper::map(OurCategory::find()
                         ->Where(['model' => StringHelper::basename(get_class($model))])
                         ->all(), BlockChain::get_blockchain_from_locale(), BlockChain::get_blockchain_from_locale()),
