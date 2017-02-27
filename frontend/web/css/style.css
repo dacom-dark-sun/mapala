@@ -651,3 +651,8 @@ margin-bottom: 20px;
 .green {
     color:green;
 }
+.icofaq{
+    display: inline;
+    margin-top: 10px;
+    position: absolute;
+}

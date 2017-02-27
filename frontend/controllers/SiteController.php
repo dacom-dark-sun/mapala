@@ -21,7 +21,7 @@ use yii\data\ArrayDataProvider;
 use Coinbase\Wallet\Enum\Param;
 use common\models\Withdraw;
 use common\models\Pages;
-
+use common\models\UsersRaw;
 
 
 use Coinbase\Wallet\Client;
@@ -328,12 +328,46 @@ $current_rate = BitCoin::get_rate();
        return $this->render('faq',[
           'body' => $page['body'],
         ]);  
-     
-        
-        
         
     }
     
+    
+    public function actionIcofaq(){
+       $blockchain = BlockChain::get_blockchain_from_locale();
+       $page = Pages::find()->where(['title' => 'FAQ about ICO'])->andWhere(['blockchain' => $blockchain])->asArray()->one();
+       $page['body'] = \kartik\markdown\Markdown::convert($page['body']);
+       
+       return $this->render('icofaq',[
+          'body' => $page['body'],
+        ]);  
+        
+    }
+    
+    public function actionBm(){
+        $users_raw = UsersRaw::find()->asArray()->all();
+        $bm = array();
+        
+        foreach ($users_raw as $user){
+          if (substr($user['username'], 0, 2) == 'bm'){
+            $bm[]=json_decode($user['json_metadata'], true);
+               
+          }
+        }
+           $data_provider = new ArrayDataProvider([
+                    'allModels' => $bm,
+                    'sort' => [
+                        'attributes' => ['age', 'facebook', 'vk', 'email', 'phone'],
+                    ],
+                    'pagination' => [
+                        'pageSize' => 500,
+                    ],
+                ]);
+        
+       return $this->render('bm',[
+          'data_provider' => $data_provider,
+        ]);  
+     
+    }
     
      public function actionTeam(){
      $wd_model = new Withdraw();

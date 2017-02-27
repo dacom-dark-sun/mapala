@@ -114,8 +114,11 @@ use common\models\BitCoin;
     </div>
     
    <div class = 'col-lg-2'>   
-       
+  
        <button class="btn btn-danger change_category_btn" onclick="bonus_info();"> <?= Yii::t('frontend', 'CURRENT BONUS:')?> <?= $bonuse_today; ?> %</button>
+  <?php echo Html::a(Yii::t('frontend','FAQ about ICO'),['/site/icofaq/'],['class'=>'btn btn-success icofaq']) ?>
+  
+         
     </div>
      
     
