@@ -19,7 +19,7 @@ use common\models\Calendar;
 use common\models\BitCoin;
 use yii\data\ArrayDataProvider;
 use Coinbase\Wallet\Enum\Param;
-
+use common\models\Comment;
 
 
 use Coinbase\Wallet\Client;
@@ -146,6 +146,12 @@ class SiteController extends Controller
       return $this->renderAjax('comments', [
          'model' => $model
      ]);
+     }
+     
+     public function actionGet_comment($parent_permlink){
+         $comments = Comment::find()->where(['parent_permlink' => $parent_permlink])->asArray()->all();
+         
+         return $json = json_encode($comments, JSON_UNESCAPED_UNICODE);
      }
      
      
