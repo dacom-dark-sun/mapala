@@ -40,11 +40,11 @@ $("#steem-btn-save").click(function() {
    try{
    var pub_key = convert_to_pub_key_steem(wif);
    
-   check_pub_key_steem(pub_key, function steem_callback(err, result){
+   //check_pub_key_steem(pub_key, function steem_callback(err, result){
    
    //check key here
-   if (!err){
-       if (result[0][0] != null){
+//   if (!err){
+  //     if (result[0][0] != null){
        put_key_to_cookie('steemsig', wif);
        setCookie('steemac', result[0][0], {"path": "/", "expires": 31536000});
        $('.account_name').text(result[0][0]);
@@ -68,20 +68,20 @@ $("#steem-btn-save").click(function() {
      });
         
         
-       } else {
-           alert('Sorry, this key not linked to any account');
-             $('#STEEM').val('');
-         }
-   }
-   else {
-       $('.loader').hide();
-       alert ('Wrong private posting key. Try again.');
-   }
+//       } else {
+//           alert('Sorry, this key not linked to any account');
+//             $('#STEEM').val('');
+//         }
+  // }
+ //  else {
+ //      $('.loader').hide();
+ //      alert ('Wrong private posting key. Try again.');
+ //  }
   
     
   $('.loader').hide();
   
-   });
+   //});
 } catch(err) {$('.loader').hide();
     alert('This is NOT private key');
     }
@@ -105,11 +105,11 @@ $("#steem-btn-save_pass").click(function() {
    var wif = steem.auth.toWif(username, password, 'posting');
    var pub_key = convert_to_pub_key_steem(wif);
    
-   check_pub_key_steem(pub_key, function steem_callback(err, result){
+  // check_pub_key_steem(pub_key, function steem_callback(err, result){
    
    //check key here
-   if (!err){
-       if (result[0][0] != null){
+  // if (!err){
+   //    if (result[0][0] != null){
        put_key_to_cookie('steemsig', wif);
        setCookie('steemac', username, {"path": "/", "expires": 31536000});
        $('.account_name').text(username);
@@ -133,19 +133,19 @@ $("#steem-btn-save_pass").click(function() {
        
    
    
-       } else {
-           alert('Sorry, this key not linked to any account');
-             $('#STEEM').val('');
-         }
-   }
-   else {
-       $('.loader').hide();
-       alert ('Wrong private posting key. Try again.');
-   }
+  //     } else {
+  //         alert('Sorry, this key not linked to any account');
+  //           $('#STEEM').val('');
+  //       }
+  // }
+  // else {
+  //     $('.loader').hide();
+  //     alert ('Wrong private posting key. Try again.');
+  // }
    $('.loader').hide();
    
   
-   });
+   //});
 } catch(err) {$('.loader').hide();
     alert('This is NOT private key');
     }
