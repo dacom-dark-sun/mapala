@@ -290,6 +290,9 @@ $current_rate = BitCoin::get_rate();
     public function actionStat(){
         $users_per_week= Art::get_reg_user_q();
         
+        $total_payments = Art::get_total_payments();
+        $total_payments = Art::convert_currency($total_payments);
+        
          $arts = Art::get_stat_from_prev_interval();
          $total_payout_value = 0 ;
          foreach ($arts as $art){
@@ -314,6 +317,7 @@ $current_rate = BitCoin::get_rate();
           'users_per_week' => $users_per_week,
             'total_payout_value' => $total_payout_value,
             'data_provider' => $data_provider,
+            'total_payments' => $total_payments,
         ]);  
      
         

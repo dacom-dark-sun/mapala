@@ -790,7 +790,15 @@ class Art extends \yii\db\ActiveRecord
          
      }
      
-     
+     static function get_total_payments(){
+         $blockchain = BlockChain::get_blockchain_from_locale();
+         $arts = Art::find()->where(['blockchain' => $blockchain])->asArray()->all();
+         $total_payments = 0;
+         foreach ($arts as $art){
+             $total_payments += $art['total_pending_payout_value'];
+         }
+         return $total_payments;
+     }
      
         
      static function get_current_model($model){

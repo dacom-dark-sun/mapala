@@ -25,7 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <h1><?php echo Html::encode($this->title) ?></h1>
-
+ <?php if ($author&&$permlink){
+              echo Html::a(Yii::t('frontend', 'Change the data model'), 
+                  ['/site/add', 'author' => $author, 'permlink' => $permlink], 
+                  ['class'=>'btn btn-warning change_category_btn']);
+          }
+          ?>
+   
 
 <div class="form-index">
     <div class="row">

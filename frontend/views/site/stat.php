@@ -20,7 +20,7 @@ use common\models\Art;
 <div class ='col-xs-3 col-lg-4'>
                 <div class="panel panel-danger">
                     <div class="panel-heading">   
-                        <center>    <?= Yii::t('frontend', 'Total payments') ?></center>
+                        <center>    <?= Yii::t('frontend', 'Total payments in this week') ?></center>
                     </div>
                     <div class="panel-body">
                   <center>  <?= $total_payout_value ?>    </center>
@@ -36,7 +36,15 @@ use common\models\Art;
                        </div>
                  
                 </div>
-    
+     <div class="panel panel-danger">
+                    <div class="panel-heading">   
+                        <center>    <?= Yii::t('frontend', 'TOTAL PAYMENTS SINCE START') ?></center>
+                    </div>
+                       <div class="panel-body">
+                           <center> <?= $total_payments ?> </center>               
+                       </div>
+                 
+                </div>
     
             </div>
 
