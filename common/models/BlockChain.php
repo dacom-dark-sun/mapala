@@ -636,18 +636,18 @@ class BlockChain extends Model
         $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
         $posting_key = json_decode(shell_exec($cmd), true);
         
-        $param = '{"id":"1","method":"get_private_key_from_password","params":["' . $username . '", "posting", "' . $pass . '"]}';
-        $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
-        $owner_key = json_decode(shell_exec($cmd), true);
+      //  $param = '{"id":"1","method":"get_private_key_from_password","params":["' . $username . '", "posting", "' . $pass . '"]}';
+      //  $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
+      //  $owner_key = json_decode(shell_exec($cmd), true);
         
-       // $owner_key = "GLS6EYLMr8zgujLjHdVoKqb8svHxisTCbbF3WE2smojyDRq5TgaUq";
+        $owner_key = "GLS6EYLMr8zgujLjHdVoKqb8svHxisTCbbF3WE2smojyDRq5TgaUq";
      
         $param = '{"id":"1","method":"get_private_key_from_password","params":["' . $username . '", "memo", "' . $pass . '"]}';
         $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
         $memo_key = json_decode(shell_exec($cmd), true);
         
         $param = '{"id":"1","method":"create_account_with_keys","params":["' . $creator . '","' . $username . '", '
-                . '"{\"app\":\"mapala\"}", "' . $owner_key["result"][0] . '",  "' . $active_key["result"][0] . '",  "' . $posting_key["result"][0] . '",  "' . $memo_key["result"][0] . '", "true"]}';
+                . '"{\"app\":\"mapala\"}", "' . $owner_key . '",  "' . $active_key["result"][0] . '",  "' . $posting_key["result"][0] . '",  "' . $memo_key["result"][0] . '", "true"]}';
         $cmd = "curl -s --data" . " " . "'" . $param . "'" . " " . env('GOLOS_NODE');
         $result = json_decode(shell_exec($cmd), true);
         $result = $posting_key["result"][1];
