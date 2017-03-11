@@ -23,6 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+    
+            <div class ='col-lg-12 col-xs-12'>
+                 <div class="panel panel-success">
+                    <div class="panel-heading">   
+                        <div class ="register_count"><?= Yii::t('frontend','Registered: ') ?><b><?php echo frontend\modules\user\models\SignupForm::get_registration_count() . " " .  Yii::t('frontend', 'members')?> </b></div>
+                    </div>
+                </div>
+            </div>
+            
      <?php echo $form->field($model, 'email') ?>                      
      <?php echo $form->field($model, 'username') ?>
                 <?php echo $form->field($model, 'password')->passwordInput() ?>

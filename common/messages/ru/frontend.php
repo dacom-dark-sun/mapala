@@ -214,7 +214,8 @@ return [
     'Authors get paid when people like you upvote their post. If you enjoyed what you read here, earn $4.50 of STEEM Power when you Sign Up and vote for it.' => 'В сети MapalaNet авторы получают вознаграждение, когда пользователи голосуют за их посты.. Проголосовавшие читатели также вознаграждаются. Если вам понравился данный пост Вы можете вознаградить автора. Для этого зарегистрируйтесь и проголосуйте за пост.',
     '<center><i>Опубликовано с сайта свободных путешественников <a target=_blank href=https://mapala.net/>MapalaNet</a></i></center>' => '<center><i>Опубликовано с сайта свободных путешественников <a target=_blank href=https://mapala.net/>MapalaNet</a></i></center>',
     'FAQ about ICO' => 'Вопросы и ответы о ICO',
-    
+    'Registered: ' => 'Зарегистрировано: ',
+    'members' => 'участников',
     
     
     

@@ -128,4 +128,14 @@ class SignupForm extends Model
             return false;
         }
     }
+    
+    static function get_registration_count(){
+        
+        $query = new User();
+            $count = $query
+                ->find()
+               ->asArray()
+                ->count();
+        return $count;
+    }
 }
