@@ -49,6 +49,7 @@ class SignupForm extends Model
             
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'email'],
+             ['email', 'required'],
             ['email', 'unique',
                 'targetClass'=> '\common\models\User',
                 'message' => Yii::t('frontend', 'This email address has already been taken.')
