@@ -113,6 +113,8 @@ class User extends ActiveRecord
     {
         return [
             [['username', 'email'], 'unique'],
+            ['email', 'filter', 'filter' => 'trim'],
+            ['email', 'email'],
             ['status', 'default', 'value' => self::STATUS_NOT_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::statuses())],
             [['username'], 'filter', 'filter' => '\yii\helpers\Html::encode']

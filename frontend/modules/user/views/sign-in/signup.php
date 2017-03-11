@@ -23,7 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-                <?php echo $form->field($model, 'username') ?>
+     <?php echo $form->field($model, 'email') ?>                      
+     <?php echo $form->field($model, 'username') ?>
                 <?php echo $form->field($model, 'password')->passwordInput() ?>
                <?php echo $form->field($model, 'verifyCode')->widget(Captcha::className(), [
                     'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
