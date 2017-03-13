@@ -435,7 +435,7 @@ class FormsController extends SiteController
         }
      }
         return $this->render('news', [ //CLEAR
-        'model' => $model
+        'model' => $model,
         'author' => $author,
         'permlink' => $permlink
       
