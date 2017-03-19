@@ -224,6 +224,7 @@ $current_rate = BitCoin::get_rate();
         'allModels' => $players,
         'sort' => [
             'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'stake', 'currency', 'tokens', 'symbol'],
+            'defaultOrder' => ['created_at'=>SORT_ASC]
         ],
         'pagination' => [
             'pageSize' => 100,
