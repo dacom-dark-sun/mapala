@@ -348,6 +348,19 @@ $current_rate = BitCoin::get_rate();
         
     }
     
+    public function actionWelcome(){
+       $blockchain = BlockChain::get_blockchain_from_locale();
+       $page = Pages::find()->where(['title' => 'Welcome'])->andWhere(['blockchain' => $blockchain])->asArray()->one();
+       $page['body'] = \kartik\markdown\Markdown::convert($page['body']);
+       
+       return $this->render('icofaq',[
+          'body' => $page['body'],
+        ]);  
+        
+    }
+   
+    
+    
     public function actionBm(){
         $users_raw = UsersRaw::find()->asArray()->all();
         $bm = array();
