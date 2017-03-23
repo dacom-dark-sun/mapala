@@ -252,6 +252,24 @@ $ico =  array(
     
     }
 
+    static function actionCreate_user($user){
+
+            Yii::$app->db->createCommand()
+             ->insert('user', [
+                 'username' => $user,
+                 'email' => '',
+                 'status'=> 2,
+                 'auth_key' => "YRJN4Iwbv8sSbK1MK7on_8g3UlonKJt",
+                 'access_token' => '',
+                 'password_hash'=> '$2y$13$JWQgFbwjJs6.m8BoiiwI0.L1lMh8izsNp1lOnooe07lQ3Oe/RYlCO',
+                ])
+             ->execute();
+        
+        BitCoin::create_address($user);
+        return true;
+    }
+    
+    
     
     static function actionGet_time(){
         return time()*1000;
