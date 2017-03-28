@@ -216,7 +216,8 @@ return [
     'FAQ about ICO' => 'Вопросы и ответы о ICO',
     'Registered: ' => 'Зарегистрировано: ',
     'members' => 'участников',
-    
+    'This is an experimental version of travel community, that pays money to authors for their articles. We have developed an up to date version that will be p2p tourism portal, based on 3 blockchains. More information on: ' => 'Это экспериментальная версия туристического сообщества, которое платит деньги авторам за их статьи. Сейчас мы разрабатываем новую версию, которая будет туристическим p2p порталом, основанным на трех блокчейнах. Больше информации здесь: ',
+    'Warning' => 'Внимание',
     
     
     
