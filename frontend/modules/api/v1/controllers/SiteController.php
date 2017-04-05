@@ -57,6 +57,29 @@ class SiteController extends Controller
         ];
     }
     
+    public function behaviors()
+{
+    return [
+        'corsFilter' => [
+            'class' => \yii\filters\Cors::className(),
+            'cors' => [
+                // restrict access to
+                'Origin' => ['http://beta.mapala.net', 'https://beta.mapala.net'],
+                'Access-Control-Request-Method' => ['POST', 'PUT'],
+                // Allow only POST and PUT methods
+                'Access-Control-Request-Headers' => ['X-Wsse'],
+                // Allow only headers 'X-Wsse'
+                'Access-Control-Allow-Credentials' => true,
+                // Allow OPTIONS caching
+                'Access-Control-Max-Age' => 3600,
+                // Allow the X-Pagination-Current-Page header to be exposed to the browser.
+                'Access-Control-Expose-Headers' => ['X-Pagination-Current-Page'],
+            ],
+
+        ],
+    ];
+}
+    
     
 /*
 Начальная страница проекта возвращается действием Index контроллера Site. В качестве параметров передаются переменные: $state = 'new'/'trending'/'discuss, что меняет порядок отображения контента в ленте. Если в параметрах указаны автор и прямая ссылка - контроллер возвращает статью. Если только автор - блог автора. Если массив категорий - возвращаются данные по одной или нескольким категориям. 
