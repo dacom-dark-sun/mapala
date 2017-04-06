@@ -235,7 +235,7 @@ $ico =  array(
             'players' => $players,
             
         );
-        return  $json = json_encode($ico, JSON_UNESCAPED_UNICODE);    
+        return  $json = "jsonCallback(". json_encode($ico, JSON_UNESCAPED_UNICODE) . ")";    
         
     }
     
