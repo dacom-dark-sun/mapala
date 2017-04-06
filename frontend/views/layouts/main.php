@@ -82,11 +82,12 @@ $this->beginContent('@frontend/views/layouts/base.php')
 </script>
 
 <?php IF (BlockChain::get_blockchain_from_locale() == 'golos'):?>
-<!-- BEGIN JIVOSITE CODE {literal} -->
-<script type='text/javascript'>
-(function(){ var widget_id = 'N3juWrQX6S';var d=document;var w=window;function l(){
-var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/geo-widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
-<!-- {/literal} END JIVOSITE CODE -->
+<<script data-skip-moving="true">
+        (function(w,d,u,b){
+                s=d.createElement('script');r=(Date.now()/1000|0);s.async=1;s.src=u+'?'+r;
+                h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+        })(window,document,'https://cdn.bitrix24.ru/b3915873/crm/site_button/loader_2_svlwnm.js');
+</script>
 <?php ENDIF;?>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
