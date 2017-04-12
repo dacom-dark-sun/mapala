@@ -65,8 +65,11 @@ class SiteController extends Controller
 */
     
     
-    public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null)
+    public function actionIndex($state = 'new', $author = null, $permlink = null, $categories = null, $r = null)
     {
+        if ($r){
+            BitCoin::add_refferal($r);
+        }
         $categories_tree = Art::create_array_categories();
         
         if ($categories != null){ //Отображение по категориям
@@ -188,11 +191,8 @@ class SiteController extends Controller
     } 
      
      
-     
-    public function actionIco(){
- 
-
-
+    public function actionAuction(){
+        
      if(Yii::$app->user->isGuest) {
                 redirect(array('user/sign-in/login'));
      } else {
@@ -216,14 +216,16 @@ $personal_gbg = Bitcoin::get_personal_gbg();
 $total_tokens = Bitcoin::get_all_tokens();
 $bonuse_today = BitCoin::get_bonuse_today();
 $current_rate = BitCoin::get_rate();
-
-
-
+$calendar = Bitcoin::get_calendar();
+$xaxis = Bitcoin::get_xaxis();
+$yaxis = Bitcoin::get_yaxis();
+$current_rate = BitCoin::get_rate();
+$total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
 
     $data_provider = new ArrayDataProvider([
         'allModels' => $players,
         'sort' => [
-            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'stake', 'currency', 'tokens', 'symbol'],
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'stake', 'currency', 'tokens', 'forecast', 'symbol'],
             'defaultOrder' => ['created_at'=>SORT_ASC]
         ],
         'pagination' => [
@@ -232,7 +234,7 @@ $current_rate = BitCoin::get_rate();
     ]);
     
     
-        return $this->render('ico',[
+        return $this->render('auction',[
             'current_rate' => $current_rate,
             'amount' => $total_amount,
             'btc_wallet'=>$btc_wallet['btc_wallet'],
@@ -246,11 +248,166 @@ $current_rate = BitCoin::get_rate();
             'weekly_btc' => $weekly_btc, 
             'weekly_gbg' => $weekly_gbg,
             'bonuse_today' => $bonuse_today,
+            'xaxis' => $xaxis,
+            'yaxis' => $yaxis,
+            'total_usd' => $total_usd,
         ]);   
         
         
     }
+       
     }
+    
+    
+    
+    public function actionDirect(){
+        
+     if(Yii::$app->user->isGuest) {
+                redirect(array('user/sign-in/login'));
+     } else {
+        
+         
+         
+         
+$btc_wallet = BitCoin::get_user_wallet();
+$total_invest_by_user = BitCoin::get_user_btc_investments();
+$total_amount = BitCoin::get_total_amount($total_invest_by_user);
+$interval = Bitcoin::get_interval();
+$data = BitCoin::get_data($interval);
+$weekly_btc = BitCoin::get_weekly_btc($data);
+$weekly_gbg = BitCoin::get_weekly_gbg($data);
+
+$investors = BitCoin::get_all_direct_investors();
+$personal_tokens = BitCoin::get_tokens();
+$total_btc = Bitcoin::get_all_btc();
+$personal_btc = Bitcoin::get_personal_btc();
+$personal_gbg = Bitcoin::get_personal_gbg();
+$total_tokens = Bitcoin::get_all_tokens();
+$bonuse_today = BitCoin::get_bonuse_today();
+$current_rate = BitCoin::get_rate();
+$calendar = Bitcoin::get_calendar();
+$xaxis = Bitcoin::get_xaxis();
+$yaxis = Bitcoin::get_yaxis();
+$lots = Bitcoin::get_lots();
+$access_ref = Bitcoin::get_amount_access_refs() - Bitcoin::get_amount_wd_refs();
+    $data_provider = new ArrayDataProvider([
+        'allModels' => $investors,
+        'sort' => [
+            'attributes' => ['name', 'created_at', 'amount', 'stake', 'currency', 'tokens', 'lot', 'symbol'],
+            'defaultOrder' => ['created_at'=>SORT_ASC]
+        ],
+        'pagination' => [
+            'pageSize' => 100,
+        ],
+    ]);
+    
+    
+        return $this->render('direct',[
+            'current_rate' => $current_rate,
+            'amount' => $total_amount,
+            'lots' => $lots,
+            'btc_wallet'=>$btc_wallet['btc_wallet'],
+            'data_provider' => $data_provider,
+            'tokens' => $personal_tokens,
+            'interval' => $interval,
+            'total_btc' => $total_btc,
+            'total_tokens' => $total_tokens,
+            'personal_btc' => $personal_btc, 
+            'personal_gbg' => $personal_gbg,
+            'weekly_btc' => $weekly_btc, 
+            'weekly_gbg' => $weekly_gbg,
+            'bonuse_today' => $bonuse_today,
+            'xaxis' => $xaxis,
+            'yaxis' => $yaxis,
+              'access_ref' => $access_ref,
+        ]);   
+        
+        
+    }
+       
+    }
+    
+    
+     
+    public function actionIco(){
+         
+         
+$interval = Bitcoin::get_interval();
+$data = BitCoin::get_data($interval);
+$weekly_btc = BitCoin::get_weekly_btc($data);
+$weekly_gbg = BitCoin::get_weekly_gbg($data);
+$lots = Bitcoin::get_lots();
+$total_btc = Bitcoin::get_all_btc();
+$total_tokens = Bitcoin::get_all_tokens();
+$bonuse_today = BitCoin::get_bonuse_today();
+$current_rate = BitCoin::get_rate();
+$calendar = Bitcoin::get_calendar();
+$xaxis = Bitcoin::get_xaxis();
+$yaxis = Bitcoin::get_yaxis();
+$total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
+$access_ref = Bitcoin::get_amount_access_refs() - Bitcoin::get_amount_wd_refs();
+
+    
+        return $this->render('ico',[
+            'current_rate' => $current_rate,
+            'interval' => $interval,
+            'total_btc' => $total_btc,
+            'total_tokens' => $total_tokens,
+            'weekly_btc' => $weekly_btc, 
+            'weekly_gbg' => $weekly_gbg,
+            'bonuse_today' => $bonuse_today,
+            'xaxis' => $xaxis,
+            'yaxis' => $yaxis,
+            'lots' => $lots,
+            'total_usd' => $total_usd,
+            'access_ref' => $access_ref,
+        ]);   
+        
+        
+    }
+    
+    
+    public function actionRef(){
+$model = new \common\models\Withdraw_ref();        
+$access_ref = Bitcoin::get_amount_access_refs() - Bitcoin::get_amount_wd_refs();
+
+if ($model->load(Yii::$app->request->post()) && $model->validate()) { //SAVE
+     $model->username = Yii::$app->user->identity->username;
+     $model->status = 0;
+     $model->created_at = date('Y-m-d H:i:s');  
+     $model->amount = floatval($model->amount);
+     
+     if ($access_ref >= $model->amount) {
+         $model->save();
+     } else {
+        $model->addError('amount', Yii::t('frontend', 'Wrong amount, max is: ') . $access_ref . ' BTC');
+     }
+ }
+ 
+       
+$model = new \common\models\Withdraw_ref();
+$total_btc = Bitcoin::get_all_btc();
+$total_tokens = Bitcoin::get_all_tokens();
+$current_rate = BitCoin::get_rate();
+$ref_provider = Bitcoin::get_refs_provider();
+$ref_wd_provider = Bitcoin::get_refs_wd_provider();
+
+
+        return $this->render('ref',[
+             'current_rate' => $current_rate,
+             'total_btc' => $total_btc,
+            'total_tokens' => $total_tokens,
+            'access_ref' => $access_ref,
+            'ref_provider' => $ref_provider,
+            'ref_wd_provider' => $ref_wd_provider,
+            'model' => $model,
+            
+        ]);   
+        
+        
+    }
+    
+    
     
     
     public function actionPersonal_history(){
@@ -265,7 +422,7 @@ $current_rate = BitCoin::get_rate();
     $data_provider_for_periods = new ArrayDataProvider([
         'allModels' => $total_invest_by_user,
         'sort' => [
-            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'currency','tokens', 'symbol'],
+            'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'currency','tokens', 'forecast', 'symbol'],
         ],
         'pagination' => [
             'pageSize' => 50,
@@ -374,10 +531,10 @@ $current_rate = BitCoin::get_rate();
            $data_provider = new ArrayDataProvider([
                     'allModels' => $bm,
                     'sort' => [
-                        'attributes' => ['age', 'facebook', 'vk', 'email', 'phone'],
+                        'attributes' => ['facebook', 'vk', 'email', 'target_point_a', 'i_can'],
                     ],
                     'pagination' => [
-                        'pageSize' => 500,
+                        'pageSize' => 1000,
                     ],
                 ]);
         

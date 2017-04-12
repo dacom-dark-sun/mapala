@@ -651,8 +651,36 @@ margin-bottom: 20px;
 .green {
     color:green;
 }
-.icofaq{
-    display: inline;
+
+.icofaq_auction{
+     display: inline;
     margin-top: 10px;
     position: absolute;
+}
+.width_100{
+    width: 100%;
+}
+.icofaq{
+   
+}
+.line_rate{
+    margin-right: 150px;
+}
+
+@-webkit-keyframes marquee {
+    0% {
+		left: 0;
+	}
+	100% {
+		left: -100%;
+	}
+}
+
+@keyframes marquee {
+	0% {
+		left: 0;
+	}
+	100% {
+		left: -100%;
+	}
 }

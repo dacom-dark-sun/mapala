@@ -10,6 +10,7 @@ use common\models\User;
 use common\models\Gbg;
 use common\models\Ico;
 use common\models\Team;
+use common\models\Lots;
 use common\models\Withdraw;
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +20,24 @@ use common\models\Withdraw;
 
 class BitCoin extends Model
 {
+    static function add_refferal($r){
+
+            Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name' => 'ref',
+                'value' => $r
+            ]));
+          
+    }
+    
+    static function add_ref_to_database($user){
+       $ref = Yii::$app->request->cookies['ref'];
+        Yii::$app->db->createCommand()
+             ->update('user', [
+                 'ref' => $ref, 
+                ],['username' => $user])
+             ->execute();
+        
+    }
     
     
     
@@ -47,10 +66,12 @@ class BitCoin extends Model
         
     }
     
+   
+    
     static function get_data($interval){
        
    
-    $players = ICO::find()->where('created_at >=' . "'" .   $interval['date_start'] . "'")->andwhere('created_at <=' . "'" .   $interval['date_end'] . "'")->asArray()->all();
+    $players = ICO::find()->where('created_at >=' . "'" .   $interval['date_start'] . "'")->andwhere('created_at <=' . "'" .   $interval['date_end'] . "'")->andWhere(['direct'=>0])->asArray()->all();
     $total_amount = 0;
         
     foreach ($players as $player){
@@ -64,12 +85,13 @@ class BitCoin extends Model
     foreach ($players as &$player){
         if ($player['bonuse'] != 0){
             $player['tokens'] = round(810000 / $total_amount * $player['amount'] * ($player['bonuse']/100 +1), 3);
+            
         } else {
             $player['tokens'] = round(810000 / $total_amount * $player['amount'], 3);
     
         }
         $player['stake'] = round($player['tokens']/810000 * 100,2);
-       
+        $player['forecast'] = 2.98 * $player['tokens'];
         
     }
     unset($player);
@@ -125,25 +147,61 @@ class BitCoin extends Model
                 $total_amount_btc = BitCoin::get_total_amount($total_invest_by_user);
 
                 $total_tokens = Bitcoin::get_all_tokens();
-                
-                
                 $rate = $total_amount_btc / $total_tokens;
+                $weekly_rate = Bitcoin::get_weekly_rate($total_investments);
+                
                 Yii::$app->db->createCommand()
                  ->update('calendar', [
                  'finished' => 1, 
                  'rate' => $rate,
+                 'weekly_rate' => $weekly_rate,
                  'week_investments' => $total_investments,
                  'btc_per_week' => $total_btc_per_week,
                  'gbg_per_week' => $total_gbg_per_week, 
                 ],['id' => $interval['id'] - 1 
                 ]) ->execute();
           
-            echo $prev_interval['date_start'] . '-' . $prev_interval['date_end'] . '  SUCCESS DISTRIBUTED' . " \n";
+             $weekly_rate = Bitcoin::create_weekly_rate();   
+             $max_rate = Bitcoin::get_max_rate();
+             
+                   
+            echo $prev_interval['date_start'] . '-' . $prev_interval['date_end'] . '  SUCCESS DISTRIBUTED' . 'WEEKLY_RATE: ' . $weekly_rate . ' MAX_RATE: ' . $max_rate . " \n";
             
         }
         
     }
     
+    static function get_weekly_rate($total_investments){
+       
+       $rate = $total_investments/810000;
+       $rate = number_format($rate, 10);
+      return $rate;  
+    }
+    
+    
+    static function create_weekly_rate(){
+        $calendar = Bitcoin::get_calendar();
+       foreach ($calendar as $row){
+          $weekly_rate = BitCoin::get_weekly_rate($row['week_investments']);
+          
+            Yii::$app->db->createCommand()
+                 ->update('calendar', [
+                 'weekly_rate' => $weekly_rate, 
+                ],['id' => $row['id'], 
+                ]) ->execute();
+           
+           
+       }
+       
+        
+    }
+    
+    static function get_max_rate(){
+        $max = Calendar::find()->max('weekly_rate');
+    //    var_dump($max);
+        return $max;
+        
+    }
     
     static function get_interval(){
        
@@ -209,6 +267,21 @@ class BitCoin extends Model
                 };
             }
         }
+                return $total_weekly_gbg;
+        
+    }
+    
+     static function get_weekly_btc_gbg($data){
+        $total_weekly_gbg = 0;
+        foreach ($data as $d){
+            if ($d['symbol'] == 'GBG'){
+                $gbg = Gbg::find ()->where(['hash' => $d['hash']])->asArray()->one();
+                if ($gbg){
+                $total_weekly_gbg = $total_weekly_gbg + $gbg['amount'];
+                };
+            }
+        }
+        
                 return $total_weekly_gbg;
         
     }
@@ -293,14 +366,7 @@ class BitCoin extends Model
         
     }
     
-    static function get_current_rate(){
-       $all_btc = BitCoin::get_all_btc();
-       $all_tokens = BitCoin::get_all_tokens();
-       
-       $rate = $all_btc/$all_tokens;
-       $rate = number_format($rate, 10);
-      return $rate;  
-    }
+    
 
     static function get_all_wd(){
       $wd =  Withdraw::find()->asArray()->all();
@@ -392,9 +458,189 @@ class BitCoin extends Model
     }
     
     static function get_calendar(){
-      $calendar =  Calendar::find()->asArray()->all();
+      $calendar =  Calendar::find()->where(['not', ['rate' => null]])->asArray()->all();
         return $calendar;
     }
+    
+    
+    static function get_xaxis(){
+     $calendar =  Calendar::find()->asArray()->all();
+     foreach ($calendar as $c){
+         $xaxis[] = $c['date_end'];
+     }
+        return $xaxis;
+    }
+    
+    
+    static function get_yaxis(){
+     $calendar =  Calendar::find()->asArray()->all();
+     foreach ($calendar as $c){
+         if ($c['rate'] == null) break;
+         $yaxis[] = $c['rate'] * 1000000;
+     }
+        return $yaxis;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    //ARRAY DATA PROVIDER FOR DISPLAY LOTS
+    static function get_lots(){
+       $lots = Lots::find()->asArray()->all();
+       
+       foreach ($lots as &$l){
+            $l['total_amount_in_usd'] = Bitcoin::btc_to_usd($l['total_amount']);
+            $l['discount'] = round ($l['discount'], 1);
+            $direct_sales = ICO::find()->where(['direct' => 1])->andWhere(['lot' => $l['id']])->asArray()->all();
+            $l['solded'] = 0;
+            foreach ($direct_sales as $ds){
+                if ($l['id'] == $ds['lot']){
+                  $l['solded'] += $ds['amount'];
+                }
+            }
+            $l['solded'] = round($l['solded'] / $l['total_amount'] * 100, 2);
+       }
+
+        $lots_array = new ArrayDataProvider([
+                'allModels' => $lots,
+                'sort' => [
+                    'attributes' => ['id', 'total_amount', 'total_amount_in_usd', 'finished', 'discount', 'solded'],
+                ],
+                'pagination' => [
+                    'pageSize' => 50,
+                ],
+            ]);
+        return $lots_array;
+      
+        
+    }
+        
+    
+    static function get_amount_access_refs(){
+        $user = Yii::$app->user->identity->username;
+        $ref_money = Ref::find()->where(['referer' => $user])->asArray()->All();
+        $r_money = 0;
+        foreach ($ref_money as $rf){
+            $r_money += $rf['amount_to_ref'];
+        }
+        return $r_money;
+    }
+    
+    
+    static function get_amount_wd_refs(){
+        $user = Yii::$app->user->identity->username;
+        $ref_money = Withdraw_ref::find()->where(['username' => $user])->asArray()->All();
+        $wd_ref_money = 0;
+        foreach ($ref_money as $rf){
+            $wd_ref_money += $rf['amount'];
+        }
+        return $wd_ref_money;
+        
+        
+    }
+    
+     static function get_refs_provider(){
+       $refs = Ref::find()->asArray()->all();
+       
+        $refs_array = new ArrayDataProvider([
+                'allModels' => $refs,
+                'sort' => [
+                    'attributes' => ['referer', 'created_at', 'amount_to_ref'],
+                ],
+                'pagination' => [
+                    'pageSize' => 50,
+                ],
+            ]);
+        return $refs_array;
+      
+        
+    }
+    
+    static function get_refs_wd_provider(){
+        $user = Yii::$app->user->identity->username;
+       $refs = Withdraw_ref::find()->asArray()->where(['username' => $user])->all();
+       
+        $refs_array = new ArrayDataProvider([
+                'allModels' => $refs,
+                'sort' => [
+                    'attributes' => ['amount', 'created_at', 'status'],
+                ],
+                'pagination' => [
+                    'pageSize' => 50,
+                ],
+            ]);
+        return $refs_array;
+      
+        
+    }
+       
+    
+    static function get_all_direct_investors(){
+       return ICO::find()->where(['direct' => 1])-> asArray()->all();
+    }
+    
+    
+    
+    /*
+     * CONVERTER GBG to BTC and USD
+     */
+    
+    static function btc_to_usd($btc){
+        $btc_usd_rate = Bitcoin::get_btc_rate();
+        $usd = $btc * $btc_usd_rate;
+        return $usd;
+    }
+    
+    
+    static function gbg_to_usd($gbg = 0){
+        $gbg_usd_rate = Bitcoin::get_xao_rate();
+        $btc_usd_rate = Bitcoin::get_btc_rate();
+        $gbg_btc_rate = $gbg_usd_rate / $btc_usd_rate;
+        $gbg_in_btc = $gbg_btc_rate * $gbg;
+        $gbg_in_usd = Bitcoin::btc_to_usd($gbg_in_btc);
+        return $gbg_in_usd;
+    }
+    
+    
+    static function get_xao_rate(){
+        
+        $cmd = "curl -s 'http://data-asg.goldprice.org/GetData/USD-XAU/1'";
+        $out = shell_exec($cmd);  
+        $out = json_decode($out, true);
+        
+        $result = $out[0]; 
+        $result = substr($result, 8);
+        $XAUOZ = floatval($result);
+        $GRAMM_IN_OZ=31.1034768;
+        $XAUMG = $XAUOZ / $GRAMM_IN_OZ / 1000;
+        
+        
+        
+        return $XAUMG;
+        
+        
+    }
+    
+    
+    static function get_btc_rate(){
+        
+        $jsnsrc = "https://blockchain.info/ticker";
+        $json = file_get_contents($jsnsrc);
+        $json = json_decode($json);
+        $btc_rate = $json->USD->last;
+        
+        return $btc_rate;
+
+    }
+   
+    /*
+     * CONVERTER FINISHED
+     */
+    
     
     
     

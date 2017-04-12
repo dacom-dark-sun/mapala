@@ -6,7 +6,7 @@ return [
     'rules'=> [
         '/report/<action:index>' => 'report/<action>',
         '/ajax/<action>' => 'ajax/<action>',
-        '/site/<action:add|show_single_blog|welcome|ico|stat|join|team|investors|set-locale|captcha|personal_history|comments|bm|icofaq|image-upload|trail|faq>' => 'site/<action>',
+        '/site/<action:add|show_single_blog|welcome|ref|create_user|auction|direct|ico|stat|join|team|investors|set-locale|captcha|personal_history|comments|bm|icofaq|image-upload|trail|faq>' => 'site/<action>',
         '/trail/<action:index>' => 'trail/<action>',
         '/forms/<action>' => 'forms/<action>',
         '/page/<action>' => 'page/<action>',
