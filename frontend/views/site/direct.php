@@ -55,7 +55,7 @@ use miloschuman\highcharts\Highcharts;
                         <center>    <?= Yii::t('frontend', 'Personal Bitcoin Address') ?></center>
                     </div>
                     <div class="panel-body">
-                        <center> <input type="text" id="btc_wallet" value="<?= $btc_wallet ?>" readonly>   </center>
+                        <center> <input type="text" id="btc_wallet" value="Ожидайте выдачи" readonly>   </center>
                     </div>
                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
                         <center> 
