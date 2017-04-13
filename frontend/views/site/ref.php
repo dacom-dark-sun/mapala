@@ -144,8 +144,24 @@ use yii\helpers\Html;
 
        
         </div>
-        
-    
+        <div class="col-lg-4">
+            <div class="panel panel-success">
+         <center><?= Yii::t('frontend', 'Available refferal bonuse: ') . $access_ref . " BTC" ?></center>
+                 <br>
+                 <div>
+                 <center>   <?php echo Html::a(Yii::t('frontend','Withdraw'),['/site/ref'],['class'=>'btn btn-success']) ?></center>
+                 </div>
+                 <br>
+                          <center> 
+                           <?= Yii::t('frontend', 'Referal link: ')?>   </center>
+                 <center>
+                     <input type="text" id="link" style="width: 100%; text-align: center" value="http://mapala.net/site/index?r=<?= Yii::$app->user->identity->username; ?>" readonly>
+                            </center>
+                 <center>
+                            <span class ="btn btn-success change_category_btn" onclick="copyToClipboard_link();"> <?= Yii::t('frontend', 'Copy')?> </span>
+                 </center>
+            </div>            
+        </div>
         
         
     </div>
