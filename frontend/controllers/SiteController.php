@@ -345,7 +345,6 @@ $calendar = Bitcoin::get_calendar();
 $xaxis = Bitcoin::get_xaxis();
 $yaxis = Bitcoin::get_yaxis();
 $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
-$access_ref = Bitcoin::get_amount_access_refs() - Bitcoin::get_amount_wd_refs();
 
     
         return $this->render('ico',[
@@ -360,7 +359,6 @@ $access_ref = Bitcoin::get_amount_access_refs() - Bitcoin::get_amount_wd_refs();
             'yaxis' => $yaxis,
             'lots' => $lots,
             'total_usd' => $total_usd,
-            'access_ref' => $access_ref,
         ]);   
         
         
