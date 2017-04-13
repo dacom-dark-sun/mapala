@@ -146,11 +146,6 @@ use yii\helpers\Html;
         </div>
         <div class="col-lg-4">
             <div class="panel panel-success">
-         <center><?= Yii::t('frontend', 'Available refferal bonuse: ') . $access_ref . " BTC" ?></center>
-                 <br>
-                 <div>
-                 <center>   <?php echo Html::a(Yii::t('frontend','Withdraw'),['/site/ref'],['class'=>'btn btn-success']) ?></center>
-                 </div>
                  <br>
                           <center> 
                            <?= Yii::t('frontend', 'Referal link: ')?>   </center>
