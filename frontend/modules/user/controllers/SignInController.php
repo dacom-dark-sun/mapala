@@ -137,6 +137,8 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->getUser()->login($user);
                 }
                 BitCoin::create_address($user->username);
+                Bitcoin::create_direct_address($user->username);
+                Bitcoin::add_ref_to_database($user->username);
                 return $this->goHome();
             }
         }

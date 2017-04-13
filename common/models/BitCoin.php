@@ -39,7 +39,30 @@ class BitCoin extends Model
         
     }
     
-    
+     static function create_direct_address($user){
+        $apiKey = env('APIKEY');
+        $apiSecret = env('APISECRET');
+        $configuration = Configuration::apiKey($apiKey, $apiSecret);
+        $client = Client::create($configuration);
+        $account = $client->getAccount(env('BTC_ACCOUNT_DIRECT'));
+       
+        $address = new Address([
+            'name' => $user,
+        ]);
+        $client->createAccountAddress($account, $address);
+        $address = $client->decodeLastResponse();
+        
+        
+        Yii::$app->db->createCommand()
+             ->update('user', [
+                 'btc_wallet' => $address['data']['address'], 
+                ],['username' => $user])
+             ->execute();
+        
+        return true;
+        
+        
+    }
     
     static function create_address($user){
         $apiKey = env('APIKEY');
