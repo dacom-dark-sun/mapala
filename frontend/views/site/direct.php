@@ -55,9 +55,9 @@ use miloschuman\highcharts\Highcharts;
                         <center>    <?= Yii::t('frontend', 'Personal Bitcoin Address') ?></center>
                     </div>
                     <div class="panel-body">
-                        <center> <input type="text" id="btc_wallet" value="Ожидайте выдачи" readonly>   </center>
+                        <center> <input type="text" id="btc_wallet" value="<?= $btc_wallet ?>" readonly>   </center>
                     </div>
-                    <center>ВНИМАНИЕ! Минимальная сумма для прямой покупки - 2 BTC. При покупке токенов на меньшую сумму, деньги автоматически перенаправятся в аукцион </center><br>
+                    <center>ВНИМАНИЕ! Минимальная сумма для прямой покупки - 2 BTC. При покупке токенов на меньшую сумму, деньги автоматически перенаправятся в аукцион. </center><br>
                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
                         <center> 
                             <span class ="btn btn-success change_category_btn" onclick="copyToClipboard();"> <?= Yii::t('frontend', 'Copy')?> </span>

@@ -475,6 +475,9 @@ class BitCoin extends Model
         return $btc;
     }
     
+   
+    
+    
     static function get_user_wallet($user = null){
        if (!$user) $user = Yii::$app->user->identity->username;
        return User::find()->where(['username' => $user])->asArray()->one();
