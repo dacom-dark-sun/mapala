@@ -55,7 +55,7 @@ class BitCoin extends Model
         
         Yii::$app->db->createCommand()
              ->update('user', [
-                 'btc_wallet' => $address['data']['address'], 
+                 'btc_wallet_direct' => $address['data']['address'], 
                 ],['username' => $user])
              ->execute();
         
