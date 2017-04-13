@@ -150,7 +150,7 @@ use yii\helpers\Html;
                           <center> 
                            <?= Yii::t('frontend', 'Referal link: ')?>   </center>
                  <center>
-                     <input type="text" id="link" style="width: 100%; text-align: center" value="http://mapala.net/site/index?r=<?= Yii::$app->user->identity->username; ?>" readonly>
+                     <input type="text" id="link" style="width: 100%; text-align: center" value="http://mapala.net/?r=<?= Yii::$app->user->identity->username; ?>" readonly>
                             </center>
                  <center>
                             <span class ="btn btn-success change_category_btn" onclick="copyToClipboard_link();"> <?= Yii::t('frontend', 'Copy')?> </span>
