@@ -82,7 +82,7 @@ $this->beginContent('@frontend/views/layouts/base.php')
 </script>
 
 <?php IF (BlockChain::get_blockchain_from_locale() == 'golos'):?>
-<<script data-skip-moving="true">
+<script data-skip-moving="true">
         (function(w,d,u,b){
                 s=d.createElement('script');r=(Date.now()/1000|0);s.async=1;s.src=u+'?'+r;
                 h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
@@ -117,5 +117,5 @@ $this->beginContent('@frontend/views/layouts/base.php')
         } else { f(); }
     })(document, window, "yandex_metrika_callbacks");
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/42784284" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/42784284" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
 <!-- /Yandex.Metrika counter -->
