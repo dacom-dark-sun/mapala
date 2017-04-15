@@ -84,8 +84,9 @@ use miloschuman\highcharts\Highcharts;
                     <center> <?= Yii::t('frontend', 'Tokens: ')?></center>
                         
                  <center> <?= round($tokens,2) ?> <?= Yii::t('frontend', 'Mpl') ?></center>
-                
-                 <br>
+                <br>
+                   <center> <?= Yii::t('frontend', 'Bounty: ') ?> <center>
+                    <?= Bitcoin::get_bounty() ?> Mpl
 
                 </div>
             </div>

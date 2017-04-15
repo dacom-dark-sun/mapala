@@ -249,6 +249,7 @@ return [
     'Lot' => 'Лот',
     'FAQ about ICO' => 'FAQ о ICO',
     'Tokens: ' => 'Токены:',
+    'Bounty: ' => 'Баунти: ',
     
     
     
