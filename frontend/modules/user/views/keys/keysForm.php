@@ -24,14 +24,7 @@ if (Yii::$app->controller->id == 'keys')
         <div class="col-lg-6">
     <?php if (BlockChain::get_blockchain_from_locale() == 'steem'): ?>
             
-            <div class="form-group">
-                <label for="usr"><?php echo Yii::t('frontend', 'Steem private posting key')?>:</label>
-                <div><input type="text" class="form-control"  id="STEEM" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div  class = 'loader' style="display: none" ></div></div>
-                <div class ="keys_save_edit_buttons">
-                    <button type="button" id='steem-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
-                <button type="button" id= 'steem-btn-edit' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
-                </div>
-            </div>
+            
             <div class="form-group" id="steem_pass_form">
                 <label for="usr"><?php echo Yii::t('frontend', 'Get posting key from password')?>:</label>
                  <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
@@ -40,17 +33,18 @@ if (Yii::$app->controller->id == 'keys')
                     <button type="button" id='steem-btn-save_pass' class="btn btn-success"><?php echo Yii::t('frontend', 'Get posting key')?></button>
                 <button type="button" id= 'steem-btn-edit_pass' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
                 </div>
+                 <div class="form-group">
+                <label for="usr"><?php //echo Yii::t('frontend', 'Steem private posting key')?>:</label>
+                <div><input type="text" class="form-control" disabled  id="STEEM" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div  class = 'loader' style="display: none" ></div></div>
+                <div class ="keys_save_edit_buttons">
+                    <button type="button" id='steem-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
+                <button type="button" id= 'steem-btn-edit' style='display:none' class="btn btn-warning"><? //php echo Yii::t('frontend', 'Edit')?></button>
+                </div>
+            </div> 
             </div>
     <?php else: ?>            
     
-            <div class="form-group">
-                <label for="pwd"><?php echo Yii::t('frontend', 'Steem private posting key')?>:</label>
-                <div><input type="text" class="form-control"  id="GOLOS" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div  style="display: none"  class = 'loader' ></div></div>
-                    <div class ="keys_save_edit_buttons">
-                    <button type="button" id= 'golos-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
-                    <button type="button" id= 'golos-btn-edit' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
-                </div>
-            </div>
+           
                <div class="form-group" id="golos_pass_form">
                 <label for="usr"><?php echo Yii::t('frontend', 'Get posting key from password')?>:</label>
                  <div><input type="text" class="form-control"  id="username" placeholder="<?php echo Yii::t('frontend', 'Username')?>"  ></div>
@@ -62,6 +56,14 @@ if (Yii::$app->controller->id == 'keys')
             <?php endif; ?>
                 </div>
             </div>
+             <div class="form-group">
+                <label for="pwd"><?php echo Yii::t('frontend', 'Steem private posting key')?>:</label>
+                <div><input type="text" class="form-control" disabled id="GOLOS" placeholder="<?php echo Yii::t('frontend', 'Posting Key, begins with 5..')?>" ><div  style="display: none"  class = 'loader' ></div></div>
+                    <div class ="keys_save_edit_buttons">
+                    <button type="button" id= 'golos-btn-save' class="btn btn-success"><?php echo Yii::t('frontend', 'Save')?></button>
+                    <button type="button" id= 'golos-btn-edit' style='display:none' class="btn btn-warning"><?php echo Yii::t('frontend', 'Edit')?></button>
+                </div>
+            </div> 
     <?php endif; ?>
             <div class ="account_name"></div>
         </div>
