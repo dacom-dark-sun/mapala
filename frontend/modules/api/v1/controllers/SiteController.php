@@ -203,7 +203,7 @@ class SiteController extends Controller
      
      
      
-    public function actionIco(){
+    public function actionIco($callback){
              
          
 $interval = Bitcoin::get_interval();
@@ -235,7 +235,7 @@ $ico =  array(
             'total_usd' => $total_usd,
        );
 
-        return  $json = "jsonCallback(". json_encode($ico, JSON_UNESCAPED_UNICODE) . ")";    
+        return  $json = $callback . "(". json_encode($ico, JSON_UNESCAPED_UNICODE) . ")";    
         
     }
     
@@ -244,7 +244,7 @@ $ico =  array(
     
      
      
-    public function actionAuction($user){
+    public function actionAuction($callback, $user){
         
          
 $btc_wallet = BitCoin::get_user_wallet($user);
@@ -299,7 +299,7 @@ $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekl
             'yaxis' => $yaxis,
             'total_usd' => $total_usd,
     );
-        return  $json = "jsonCallback(". json_encode($ico, JSON_UNESCAPED_UNICODE) . ")";    
+        return  $json = $callback . "(". json_encode($ico, JSON_UNESCAPED_UNICODE) . ")";    
         
         
         
@@ -362,7 +362,7 @@ $access_ref = Bitcoin::get_amount_access_refs($user) - Bitcoin::get_amount_wd_re
             'yaxis' => $yaxis,
               'access_ref' => $access_ref,
     );
-        return  $json = "jsonCallback(". json_encode($ico, JSON_UNESCAPED_UNICODE) . ")";    
+        return  $json = $callback . "(". json_encode($ico, JSON_UNESCAPED_UNICODE) . ")";    
         
        
     }
