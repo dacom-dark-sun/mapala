@@ -53,7 +53,7 @@ class SiteController extends Controller
                 'validatorOptions' => [
                 'maxSize' => 4000000
               ],
-            'url' => 'http://mapala.net/storage/web/img/', // Directory URL address, where files are stored.
+            'url' => 'https://mapala.net/storage/web/img/', // Directory URL address, where files are stored.
             'path' => '@storage/web/img/' // Or absolute path to directory where files are stored.
             ],
         ];
@@ -540,6 +540,10 @@ $ref_wd_provider = Bitcoin::get_refs_wd_provider();
           'data_provider' => $data_provider,
         ]);  
      
+    }
+    
+    public function actionJoin(){
+        return $this->render('join');
     }
     
      public function actionTeam(){

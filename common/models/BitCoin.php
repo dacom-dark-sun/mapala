@@ -556,8 +556,9 @@ class BitCoin extends Model
     }
         
     
-    static function get_amount_access_refs(){
-        $user = Yii::$app->user->identity->username;
+    static function get_amount_access_refs($user = null){
+       if (!$user) $user = Yii::$app->user->identity->username;
+       
         $ref_money = Ref::find()->where(['referer' => $user])->asArray()->All();
         $r_money = 0;
         foreach ($ref_money as $rf){
@@ -567,8 +568,8 @@ class BitCoin extends Model
     }
     
     
-    static function get_amount_wd_refs(){
-        $user = Yii::$app->user->identity->username;
+    static function get_amount_wd_refs($user = null){
+       if (!$user) $user = Yii::$app->user->identity->username;
         $ref_money = Withdraw_ref::find()->where(['username' => $user])->asArray()->All();
         $wd_ref_money = 0;
         foreach ($ref_money as $rf){
