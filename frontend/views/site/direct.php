@@ -97,6 +97,11 @@ use miloschuman\highcharts\Highcharts;
         
         
     </div>
+    
+    <div class ="col-lg-12"> 
+        <?php echo Html::a(Yii::t('frontend','<-- ICO'),['/site/ico/'],['class'=>'btn btn-success']) ?>
+    
+    </div>
     <center><h2> <?= Yii::t('frontend','Direct purchase')?></h2></center>
      
    <div class="col-lg-12">

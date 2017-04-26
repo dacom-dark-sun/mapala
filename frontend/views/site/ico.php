@@ -16,7 +16,7 @@ use miloschuman\highcharts\Highcharts;
 <div class="row">
     <div class="col-lg-12">
          <?= $this->render('_line',['current_rate'=>$current_rate, 'total_btc' => $total_btc, 'total_tokens' => $total_tokens]) ?>
-         <?= $this->render('_rate',['xaxis'=>$xaxis, 'yaxis' => $yaxis]) ?>
+         <?= $this->render('_rate',['xaxis'=>$xaxis, 'yaxis' => $yaxis, 'fast_yaxis' => $fast_yaxis]) ?>
    
         
        
@@ -43,7 +43,28 @@ use miloschuman\highcharts\Highcharts;
     </div>
         
         <div class ='col-lg-2' style="text-align: center;"> 
+            <?php IF (!Yii::$app->user->isGuest):?>
             
+            
+            <div class ='col-xs-12 col-lg-12'>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">   
+                    <center>    <?= Yii::t('frontend', 'Personal information') ?></center>
+                    </div>
+                    <div class="panel-body">
+                   <center>  <?= Bitcoin::get_personal_btc(); ?> BTC</center>
+                    </div>
+                    <div class="panel-body">
+                   <center>  <?= Bitcoin::get_personal_gbg(); ?> GBG</center>
+                    </div>
+                    <hr>
+                 <div class="panel-body">
+                 <center> <?= BitCoin::get_tokens() ?> Tokens</center>
+                    </div>
+                </div>
+            </div>
+           
+            <?php ENDIF ; ?>
               <center><?=  Html::a(Yii::t('frontend', 'FAQ'), 
                               ['/site/icofaq/'], 
                               ['class'=>'btn btn-success change_category_btn width_100']);?></center>

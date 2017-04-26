@@ -15,6 +15,8 @@ use miloschuman\highcharts\Highcharts;
       ],
       'series' => [
          ['name' => Yii::t('frontend', 'Middle Rate'), 'data' => $yaxis],
+     //    ['name' => Yii::t('frontend', 'Weekly Rate'), 'data' => $fast_yaxis],
+         
       ]
    ]
 ]);

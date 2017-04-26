@@ -54,8 +54,10 @@ use miloschuman\highcharts\Highcharts;
                        
                         <center><?= Yii::t('frontend','Total: ') . '$' . $total_usd ?>
                    </div>
-                      <button class="btn btn-danger change_category_btn" onclick="bonus_info();"> <?= Yii::t('frontend', 'CURRENT BONUS:')?> <?= $bonuse_today; ?> %</button>
-                     </div>
+                    <div class ="col-lg-12">
+                        <button class="btn btn-danger change_category_btn" style="white-space: normal;" onclick="bonus_info();"> <?= Yii::t('frontend', 'CURRENT BONUS:')?> <?= $bonuse_today; ?> %</button>
+                    </div>
+                    </div>
                   </div>
                   
                     
@@ -120,6 +122,12 @@ use miloschuman\highcharts\Highcharts;
         
         
     </div>
+    
+    <div class ="col-lg-12"> 
+        <?php echo Html::a(Yii::t('frontend','<-- ICO'),['/site/ico/'],['class'=>'btn btn-success']) ?>
+    
+    </div>
+    
     <center><h2> <?= Yii::t('frontend','Auction')?></h2></center>
    
      

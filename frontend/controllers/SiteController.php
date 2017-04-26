@@ -344,6 +344,8 @@ $current_rate = BitCoin::get_rate();
 $calendar = Bitcoin::get_calendar();
 $xaxis = Bitcoin::get_xaxis();
 $yaxis = Bitcoin::get_yaxis();
+$fast_yaxis = Bitcoin::get_fast_yaxis();
+
 $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
 
     
@@ -357,6 +359,7 @@ $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekl
             'bonuse_today' => $bonuse_today,
             'xaxis' => $xaxis,
             'yaxis' => $yaxis,
+            'fast_yaxis' => $fast_yaxis,
             'lots' => $lots,
             'total_usd' => $total_usd,
         ]);   

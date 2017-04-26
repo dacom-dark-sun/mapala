@@ -508,6 +508,17 @@ class BitCoin extends Model
     }
     
     
+     static function get_fast_yaxis(){
+     $calendar =  Calendar::find()->asArray()->all();
+     foreach ($calendar as $c){
+         if ($c['week_investments'] == null) break;
+         $yaxis[] = $c['weekly_rate'] * 1000000;
+     }
+        return $yaxis;
+    }
+    
+    
+    
     static function get_bounty(){
         $user = Yii::$app->user->identity->username;
         $bounty = Bounty::find()->where(['name' => $user])->asArray()->all();
