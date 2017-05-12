@@ -235,13 +235,24 @@ class BitCoin extends Model
     
     
     
-    static function get_tokens($user = null){
+    /*static function get_tokens($user = null){
         if ($user == null)
            $user = Yii::$app->user->identity->username;
       
          $tokens =  User::find()->where(['username' => $user])->asArray()->one();
     
          return $tokens['tokens'];
+    }*/
+    
+    static function get_personal_tokens ($user = null){
+        if ($user == null)
+             $user = Yii::$app->user->identity->username;
+        $tokens = Ico::find()->where(['name' => $user])->asArray()->all();
+        $personal_tokens = 0;
+        foreach ($tokens as $t){
+            $personal_tokens = $personal_tokens + $t['tokens'];
+        }
+        return $personal_tokens;
     }
     
    

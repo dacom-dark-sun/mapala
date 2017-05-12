@@ -111,7 +111,7 @@ use miloschuman\highcharts\Highcharts;
                  <center> <?= round($tokens,2) ?> <?= Yii::t('frontend', 'Mpl') ?></center>
                  <br>
                    <center> <?= Yii::t('frontend', 'Bounty: ') ?> <center>
-                    <?= Bitcoin::get_bounty() ?> Mpl
+                    <?= Bitcoin::get_bounty() ?> Tokens
                  </div>
        
             </div>

@@ -50,18 +50,23 @@ use miloschuman\highcharts\Highcharts;
                 <div class="panel panel-danger">
                     <div class="panel-heading">   
                     <center>    <?= Yii::t('frontend', 'Personal information') ?></center>
-                    </div>
+                     </div>
                     <div class="panel-body">
+                           <center> <?= Yii::t('frontend', 'Investments: ') ?> <center>
                    <center>  <?= Bitcoin::get_personal_btc(); ?> BTC</center>
-                    </div>
-                    <div class="panel-body">
                    <center>  <?= Bitcoin::get_personal_gbg(); ?> GBG</center>
-                    </div>
                     <hr>
-                 <div class="panel-body">
-                 <center> <?= BitCoin::get_tokens() ?> Tokens</center>
+                      <center> <?= Yii::t('frontend', 'Tokens: ') ?> <center>
+                  
+                 <center> <?= BitCoin::get_personal_tokens() ?> Mpl</center>
+                 <br>
+              
+                  <center> <?= Yii::t('frontend', 'Bounty: ') ?> <center>
+                    <?= Bitcoin::get_bounty() ?> Mpl
+                 </div>
+                   
+                   
                     </div>
-                </div>
             </div>
            
             <?php ENDIF ; ?>

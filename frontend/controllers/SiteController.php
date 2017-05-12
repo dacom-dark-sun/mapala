@@ -209,7 +209,7 @@ $weekly_btc = BitCoin::get_weekly_btc($data);
 $weekly_gbg = BitCoin::get_weekly_gbg($data);
 
 $players = BitCoin::get_data($interval);
-$personal_tokens = BitCoin::get_tokens();
+$personal_tokens = BitCoin::get_personal_tokens();
 $total_btc = Bitcoin::get_all_btc();
 $personal_btc = Bitcoin::get_personal_btc();
 $personal_gbg = Bitcoin::get_personal_gbg();
@@ -278,7 +278,7 @@ $weekly_btc = BitCoin::get_weekly_btc($data);
 $weekly_gbg = BitCoin::get_weekly_gbg($data);
 
 $investors = BitCoin::get_all_direct_investors();
-$personal_tokens = BitCoin::get_tokens();
+$personal_tokens = BitCoin::get_personal_tokens();
 $total_btc = Bitcoin::get_all_btc();
 $personal_btc = Bitcoin::get_personal_btc();
 $personal_gbg = Bitcoin::get_personal_gbg();
@@ -345,7 +345,6 @@ $calendar = Bitcoin::get_calendar();
 $xaxis = Bitcoin::get_xaxis();
 $yaxis = Bitcoin::get_yaxis();
 $fast_yaxis = Bitcoin::get_fast_yaxis();
-
 $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
 
     
