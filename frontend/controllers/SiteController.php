@@ -327,6 +327,23 @@ $access_ref = Bitcoin::get_amount_access_refs() - Bitcoin::get_amount_wd_refs();
        
     }
     
+    public function actionIcosumm(){
+        $investors= BitCoin::get_icosumm();
+        $data_provider = new ArrayDataProvider([
+        'allModels' => $investors,
+        'sort' => [
+            'attributes' => ['name', 'created_at', 'amount', 'stake', 'currency', 'tokens', 'lot', 'symbol'],
+            'defaultOrder' => ['created_at'=>SORT_ASC]
+        ],
+        'pagination' => [
+            'pageSize' => 100,
+        ],
+    ]);
+        return $this->render('icosumm',[
+            'data_provider' => $data_provider,
+        ]);
+        
+    }
     
      
     public function actionIco(){

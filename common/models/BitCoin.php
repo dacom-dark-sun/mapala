@@ -64,6 +64,8 @@ class BitCoin extends Model
         
     }
     
+    
+    
     static function create_address($user){
         $apiKey = env('APIKEY');
         $apiSecret = env('APISECRET');
@@ -695,7 +697,39 @@ class BitCoin extends Model
         return $btc_rate;
 
     }
-   
+    
+    
+    static function get_icosumm(){
+        $invs = Ico::find()->asArray()->all();
+        
+        $inv_summ = Array();
+
+        foreach ($invs as $inv){
+            if (in_array($inv['name'], $inv_summ)){
+                
+            } else {
+                $unique_investors[$inv['name']] = $inv['name'];
+            }
+        }
+        
+        foreach ($unique_investors as &$ui){
+             $invs = Ico::find()->where(['name' => $ui]) -> asArray()->all();
+             $tokens = 0;
+             foreach ($invs as $inv){
+                 $tokens = $tokens + $inv['tokens'];
+             } 
+             $ui = $tokens;
+       
+           
+            }
+          var_dump($unique_investors);
+        
+        
+        
+        
+        return $inv_summ;
+    
+    }
     /*
      * CONVERTER FINISHED
      */
