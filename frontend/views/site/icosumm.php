@@ -2,6 +2,9 @@
 use yii\grid\GridView;
 use common\models\BitCoin;
 ?>
+
+Total BTC : <?= $total_btc ?> <br>
+Total Tokens : <?= round($total_tokens) ?> <br>
 <?= GridView::widget([
                     'dataProvider' => $data_provider,
                     'summary'=>'',

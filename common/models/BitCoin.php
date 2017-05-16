@@ -711,23 +711,24 @@ class BitCoin extends Model
                 $unique_investors[$inv['name']] = $inv['name'];
             }
         }
-        
+        $array = Array();
+          
         foreach ($unique_investors as &$ui){
              $invs = Ico::find()->where(['name' => $ui]) -> asArray()->all();
              $tokens = 0;
+             $amount = 0;
              foreach ($invs as $inv){
                  $tokens = $tokens + $inv['tokens'];
+                 $amount = $amount + $inv['amount'];
              } 
-             $ui = $tokens;
-       
+             
+            
+             $array[] = ['name' => $ui, 'amount' => $amount,'tokens' => $tokens]; 
            
             }
-          var_dump($unique_investors);
+          
         
-        
-        
-        
-        return $inv_summ;
+        return $array;
     
     }
     /*

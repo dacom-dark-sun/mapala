@@ -256,7 +256,7 @@ $weekly_btc = BitCoin::get_weekly_btc($data);
 $weekly_gbg = BitCoin::get_weekly_gbg($data);
 
 $players = BitCoin::get_data($interval);
-$personal_tokens = BitCoin::get_tokens($user);
+$personal_tokens = BitCoin::get_personal_tokens($user);
 $total_btc = Bitcoin::get_all_btc();
 $personal_btc = Bitcoin::get_personal_btc($user);
 $personal_gbg = Bitcoin::get_personal_gbg($user);
@@ -320,7 +320,7 @@ $weekly_btc = BitCoin::get_weekly_btc($data);
 $weekly_gbg = BitCoin::get_weekly_gbg($data);
 
 $investors = BitCoin::get_all_direct_investors();
-$personal_tokens = BitCoin::get_tokens($user);
+$personal_tokens = BitCoin::get_personal_tokens($user);
 $total_btc = Bitcoin::get_all_btc();
 $personal_btc = Bitcoin::get_personal_btc($user);
 $personal_gbg = Bitcoin::get_personal_gbg($user);
@@ -376,7 +376,7 @@ $access_ref = Bitcoin::get_amount_access_refs($user) - Bitcoin::get_amount_wd_re
         $total_btc = Bitcoin::get_all_btc();
         $personal_btc = Bitcoin::get_personal_btc($user);
         $personal_gbg = Bitcoin::get_personal_gbg($user);
-        $personal_tokens = BitCoin::get_tokens($user);
+        $personal_tokens = BitCoin::get_personal_tokens($user);
         $total_invest_by_user = BitCoin::get_user_btc_investments($user);
         $total_tokens = Bitcoin::get_all_tokens();
 
