@@ -591,8 +591,11 @@ $ref_wd_provider = Bitcoin::get_refs_wd_provider();
          $data_provider = new ArrayDataProvider([
             'allModels' => $team,
             'sort' => [
-                'attributes' => ['name', 'created_at', 'tokens', 'description'],
+                'attributes' => ['name', 'created_at', 'tokens', 'description', 'comment'],
+                     'defaultOrder' => ['created_at'=>SORT_ASC]
+       
             ],
+          
             'pagination' => [
                 'pageSize' => 50,
             ],

@@ -51,62 +51,7 @@ use common\models\BitCoin;
     
     <div class="col-lg-12">
    <div class="panel panel-info">
-       <div class="panel-body">
-                      <b>   <?= Yii::t('frontend', 'Team Tokens')?> </b> 
-
-            <?= GridView::widget([
-                    'dataProvider' => $data_provider,
-                    'summary'=>'',
-                    'tableOptions' => [
-                        'class' => 'table table-striped table-bordered'
-                    ],
-                        'columns' => [
-                        /**
-                         * Столбец нумерации. Отображает порядковый номер строки
-                         */
-                        [
-                            'class' => \yii\grid\SerialColumn::class,
-                        ],
-                        /**
-                         * Перечисленные ниже поля модели отображаются как колонки с данными без изменения
-                         */
-                        ['attribute' => 'name', 
-                         'label' => Yii::t('frontend', 'Username'),
-                         'contentOptions' => ['class' => 'text-center'],
-                         'headerOptions' => ['class' => 'text-center']
-                         ],
-                        ['attribute' => 'created_at', 
-                         'label' => Yii::t('frontend', 'Date, Time'),
-                          'format'=>'datetime',
-                         'contentOptions' => ['class' => 'text-center'],
-                         'headerOptions' => ['class' => 'text-center']
-                            ],
-
-                      
-                        ['attribute' => 'tokens', 
-                         'label' => Yii::t('frontend', 'Tokens'),
-                         'contentOptions' => ['class' => 'text-center'],
-                         'headerOptions' => ['class' => 'text-center']
-                         ],
-                    
-
-
-                        /**
-                         * Произвольная колонка с определенной логикой отображения и фильтром в виде выпадающего списка
-                         */],
-                ]);?>
-
-           
-           
-           
-       </div>
-       </div>
-        
-           
-    
-    </div>
-    
-    <div class="col-lg-12">
+       <div class="col-lg-12">
    <div class="panel panel-info">
        <div class="panel-body">
            <b>   <?= Yii::t('frontend', 'Withdraws')?> </b> 
@@ -165,6 +110,11 @@ use common\models\BitCoin;
                          'contentOptions' => ['class' => 'text-center'],
                          'headerOptions' => ['class' => 'text-center']
                          ],
+                              ['attribute' => 'comment', 
+                         'label' => Yii::t('frontend', 'Comment'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center']
+                         ],
                     
 
 
@@ -182,6 +132,62 @@ use common\models\BitCoin;
            
     
     </div>
+    
+       <div class="panel-body">
+                      <b>   <?= Yii::t('frontend', 'Team Tokens')?> </b> 
+
+            <?= GridView::widget([
+                    'dataProvider' => $data_provider,
+                    'summary'=>'',
+                    'tableOptions' => [
+                        'class' => 'table table-striped table-bordered'
+                    ],
+                        'columns' => [
+                        /**
+                         * Столбец нумерации. Отображает порядковый номер строки
+                         */
+                        [
+                            'class' => \yii\grid\SerialColumn::class,
+                        ],
+                        /**
+                         * Перечисленные ниже поля модели отображаются как колонки с данными без изменения
+                         */
+                        ['attribute' => 'name', 
+                         'label' => Yii::t('frontend', 'Username'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center']
+                         ],
+                        ['attribute' => 'created_at', 
+                         'label' => Yii::t('frontend', 'Date, Time'),
+                          'format'=>'datetime',
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center']
+                            ],
+
+                      
+                        ['attribute' => 'tokens', 
+                         'label' => Yii::t('frontend', 'Tokens'),
+                         'contentOptions' => ['class' => 'text-center'],
+                         'headerOptions' => ['class' => 'text-center']
+                         ],
+                    
+
+
+                        /**
+                         * Произвольная колонка с определенной логикой отображения и фильтром в виде выпадающего списка
+                         */],
+                ]);?>
+
+           
+           
+           
+       </div>
+       </div>
+        
+           
+    
+    </div>
+    
     
     
     <div class ='col-xs-12 col-lg-12'>

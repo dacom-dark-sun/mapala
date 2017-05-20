@@ -14,8 +14,11 @@ use yii\helpers\Html;
   <?php echo $form->field($model, 'btc',['inputOptions' => [
 'autocomplete' => 'off']]) ?>
   <?php echo $form->field($model, 'btc_address') ?>
-  
+
+  <?php echo $form->field($model, 'comment')->textarea(['rows' => 2, 'cols' => 5]);
+?>
   <?php echo Html::submitButton(Yii::t('frontend', 'Withdraw'), ['class' => 'btn btn-primary', 'name' => 'add-button']) ?>
+
          <input id ="tokens" readonly> tokens           
          
   <?php ActiveForm::end(); ?>

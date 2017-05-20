@@ -29,7 +29,7 @@ class Withdraw extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'btc_address', 'created_at', 'status'], 'string'],
+            [['name', 'btc_address', 'created_at', 'status', 'comment'], 'string'],
             [['rate', 'tokens', 'btc'], 'number'],
         ];
     }
