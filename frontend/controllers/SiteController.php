@@ -329,8 +329,12 @@ $access_ref = Bitcoin::get_amount_access_refs() - Bitcoin::get_amount_wd_refs();
     
     public function actionIcosumm(){
         $investors= BitCoin::get_icosumm();
+        $team= BitCoin::get_team();
+        
         $total_btc = Bitcoin::get_all_btc();
-$total_tokens = Bitcoin::get_all_tokens();
+        $total_tokens = Bitcoin::get_all_tokens();
+        $total_team_tokens = Bitcoin::get_all_tokens(); //to do team tokens
+        
         
         $data_provider = new ArrayDataProvider([
         'allModels' => $investors,
@@ -342,11 +346,21 @@ $total_tokens = Bitcoin::get_all_tokens();
             'pageSize' => 100,
         ],
     ]);
-        
+        $data_provider2 = new ArrayDataProvider([
+        'allModels' => $team,
+        'sort' => [
+            'attributes' => ['name', 'created_at', 'amount', 'stake', 'currency', 'tokens', 'lot', 'symbol'],
+            'defaultOrder' => ['created_at'=>SORT_ASC]
+        ],
+        'pagination' => [
+            'pageSize' => 100,
+        ],
+    ]); 
         
         
         return $this->render('icosumm',[
             'data_provider' => $data_provider,
+             'data_provider2' => $data_provider2,
              'total_btc' => $total_btc,
             'total_tokens' => $total_tokens,
         ]);

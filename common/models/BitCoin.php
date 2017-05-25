@@ -109,13 +109,13 @@ class BitCoin extends Model
     
     foreach ($players as &$player){
         if ($player['bonuse'] != 0){
-            $player['tokens'] = round(810000 / $total_amount * $player['amount'] * ($player['bonuse']/100 +1), 3);
+            $player['tokens'] = round(810000 / $total_amount * $player['amount'] * ($player['bonuse']/100 +1), 4);
             
         } else {
-            $player['tokens'] = round(810000 / $total_amount * $player['amount'], 3);
+            $player['tokens'] = round(810000 / $total_amount * $player['amount'], 4);
     
         }
-        $player['stake'] = round($player['tokens']/810000 * 100,2);
+        $player['stake'] = round($player['tokens']/810000 * 100,4);
         $player['forecast'] = 2.98 * $player['tokens'];
         
     }
@@ -724,6 +724,39 @@ class BitCoin extends Model
              
             
              $array[] = ['name' => $ui, 'amount' => $amount,'tokens' => $tokens]; 
+           
+            }
+          
+        
+        return $array;
+    
+    }
+     static function get_team(){
+        $invs = team::find()->asArray()->all();
+        
+        $inv_summ = Array();
+
+        foreach ($invs as $inv){
+            if (in_array($inv['name'], $inv_summ)){
+                
+            } else {
+                $unique_investors[$inv['name']] = $inv['name'];
+            }
+        }
+        $array = Array();
+          
+        foreach ($unique_investors as &$ui){
+             $invs = Team::find()->where(['name' => $ui]) -> asArray()->all();
+             $tokens = 0;
+             $amount = 0;
+             $description = '';
+             foreach ($invs as $inv){
+                 $tokens = $tokens + $inv['tokens'];
+                 $description = ' ' . $description . $inv['description'] . ';';
+             } 
+             
+            
+             $array[] = ['name' => $ui, 'amount' => $amount,'tokens' => $tokens, 'description' => $description]; 
            
             }
           
