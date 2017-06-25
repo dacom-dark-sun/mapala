@@ -179,7 +179,7 @@ return [
     'For investment in SBD you need to go into your purse on Steemit and select <b> Menu </b> -> <b> Transfer </b>.' => 'Для инвестиции в Золотых вам необходимо зайти в ваш кошелёк на Голосе и выбрать <b> меню </b> --> <b> Передать </b>.',
     'Enter account <b>mapala.ico</b>, enter the amount and in the note specify the account name on Mapala.net, which you want to enroll tokens from this payment;' => 'Введите аккаунт <b>mapala.ico</b>, укажите желаемую сумму и в поле Заметка укажите имя аккаунта на Mapala.net, на который вы хотите, чтобы зачислились токены от этого платежа;',
 'A few minutes later the transaction will appear in your personal Mapala account;' => 'Через несколько минут транзакция появится в вашем личном кабинете Mapala;',
-'All of our internal accounting is conducted in Bitcoins, so in enrollment investment SBD will be converted on the BTC / SBD rate.' => 'Весь наш внутренний учёт ведётся в биткоинах, поэтому при зачислении инвестиции GBG будут конвертированы по курсу BTC/GBG.',
+'All of our internal accounting is conducted in Bitcoins, so in enrollment investment SBD will be converted on the BTC / SBD rate.' => 'Весь наш внутренний учёт ведётся в биткоинах, поэтому при зачислении инвестиции GBG будут конвертированы по курсу 1 мг Золота/BTC.',
     'Important!' => 'Важно!',
     'В данный момент существующие объёмы торгов не позволяют быстро конвертировать GBG в BTC. Поэтому мы продаём GBG в частном порядке с коэффициентом 0,85, и при этом ориентируемся на эталонный курс 1 мг золота.' => '',
     'Instruction SBD' => 'Инструкция GBG',
