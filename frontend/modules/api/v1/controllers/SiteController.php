@@ -410,9 +410,9 @@ $access_ref = Bitcoin::get_amount_access_refs($user) - Bitcoin::get_amount_wd_re
                  'username' => $user,
                  'email' => '',
                  'status'=> 2,
-                 'auth_key' => "",
+                 'auth_key' => "YRJN4Iwbv8sSbK1MK7on_8g3UlonKJt",
                  'access_token' => '',
-                 'password_hash'=> '',
+                 'password_hash'=> '$2y$13$JWQgFbwjJs6.m8BoiiwI0.L1lMh8izsNp1lOnooe07lQ3Oe/RYlCO',
                 ])
              ->execute();
         
