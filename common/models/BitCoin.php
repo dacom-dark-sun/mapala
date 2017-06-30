@@ -689,12 +689,17 @@ class BitCoin extends Model
     
     static function get_btc_rate(){
         
-        $jsnsrc = "https://blockchain.info/ticker";
+      //  $jsnsrc = "https://blockchain.info/ticker";
+     //   $json = file_get_contents($jsnsrc);
+     //   $json = json_decode($json);
+     //   $btc_rate = $json->USD->last;
+        $jsnsrc = "https://bittrex.com/api/v1.1/public/getmarketsummary?market=usdt-btc";
         $json = file_get_contents($jsnsrc);
-        $json = json_decode($json);
-        $btc_rate = $json->USD->last;
+        $json = json_decode($json, true);
+       
+        return $json['result'][0]['Last'];
         
-        return $btc_rate;
+       // return $btc_rate;
 
     }
     
