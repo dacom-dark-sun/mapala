@@ -73,7 +73,8 @@ use miloschuman\highcharts\Highcharts;
                         <center> <input type="text" id="btc_wallet" value="<?= $btc_wallet ?>" readonly>   </center>
                     </div>
                    <center> <span class ="link" onclick="btc_info();"> <?= Yii::t('frontend', 'INSTRUCTION')?> </span></center>
-                        <center> 
+                   <center><?= Yii::t('frontend', 'Minimum amount: 0.001 BTC')?></center>
+                   <center> 
                             <span class ="btn btn-success change_category_btn" onclick="copyToClipboard();"> <?= Yii::t('frontend', 'Copy')?> </span>
                         </center>
                 </div>

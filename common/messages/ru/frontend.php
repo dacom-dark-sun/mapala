@@ -251,7 +251,7 @@ return [
     'Tokens: ' => 'Токены:',
     'Bounty: ' => 'Баунти: ',
     'Investments: ' => 'Инвестиции: ',
-    
+    'Minimum amount: 0.001 BTC' => 'Минимальная сумма: 0.001 BTC',
     
     
     
