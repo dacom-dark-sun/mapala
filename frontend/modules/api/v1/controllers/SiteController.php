@@ -243,7 +243,29 @@ $ico =  array(
     
     
     
-     
+    public function actionPersonal_info($user){
+        
+$personal_tokens = BitCoin::get_personal_tokens($user);
+$personal_bounty = Bitcoin::get_bounty($user);
+$personal_btc = Bitcoin::get_personal_btc($user);
+$personal_gbg = Bitcoin::get_personal_gbg($user);
+$total_personal_usd = round(Bitcoin::btc_to_usd($personal_btc) + BitCoin::gbg_to_usd($personal_gbg),4);
+ 
+$ico = array(
+        
+            'personal_btc' => $personal_btc, 
+            'personal_gbg' => $personal_gbg,
+            'personal_tokens' => $personal_tokens,
+            'personal_bounty' => $personal_bounty,
+            'total_personal_usd' => $total_personal_usd,
+    );
+        return  $json = json_encode($ico, JSON_UNESCAPED_UNICODE);    
+        
+        
+        
+
+        
+    }
      
     public function actionAuction($user){
         
@@ -271,9 +293,6 @@ $yaxis = Bitcoin::get_yaxis();
 $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
 
 $personal_tokens = BitCoin::get_personal_tokens($user);
-$personal_bounty = Bitcoin::get_bounty($user);
-$personal_btc = Bitcoin::get_personal_btc($user);
-$personal_gbg = Bitcoin::get_personal_gbg($user);
 
 $data_provider = new ArrayDataProvider([
         'allModels' => $players,
@@ -296,16 +315,13 @@ $data_provider = new ArrayDataProvider([
             'interval' => $interval,
             'total_btc' => $total_btc,
             'total_tokens' => $total_tokens,
-            'personal_btc' => $personal_btc, 
-            'personal_gbg' => $personal_gbg,
             'weekly_btc' => $weekly_btc, 
             'weekly_gbg' => $weekly_gbg,
             'bonuse_today' => $bonuse_today,
             'xaxis' => $xaxis,
             'yaxis' => $yaxis,
             'total_usd' => $total_usd,
-            'personal_tokens' => $personal_tokens,
-            'personal_bounty' => $personal_bounty,
+            
     );
         return  $json = json_encode($ico, JSON_UNESCAPED_UNICODE);    
         
