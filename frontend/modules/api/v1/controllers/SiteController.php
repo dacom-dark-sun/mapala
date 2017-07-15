@@ -201,7 +201,8 @@ class SiteController extends Controller
         return json_encode($investors);
     } 
      
-     
+    
+    
      
     public function actionIco(){
              
@@ -220,7 +221,6 @@ $xaxis = Bitcoin::get_xaxis();
 $yaxis = Bitcoin::get_yaxis();
 $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
 
-    
 $ico =  array( 
             'current_rate' => $current_rate,
             'interval' => $interval,
@@ -233,6 +233,7 @@ $ico =  array(
             'yaxis' => $yaxis,
             'lots' => $lots,
             'total_usd' => $total_usd,
+        
        );
 
         return  $json = json_encode($ico, JSON_UNESCAPED_UNICODE);    
@@ -247,29 +248,34 @@ $ico =  array(
     public function actionAuction($user){
         
          
-$btc_wallet = BitCoin::get_user_wallet($user);
 $total_invest_by_user = BitCoin::get_user_btc_investments($user);
 $total_amount = BitCoin::get_total_amount($total_invest_by_user);
+
+$btc_wallet = BitCoin::get_user_wallet($user);
+
 $interval = Bitcoin::get_interval();
 $data = BitCoin::get_data($interval);
 $weekly_btc = BitCoin::get_weekly_btc($data);
 $weekly_gbg = BitCoin::get_weekly_gbg($data);
 
 $players = BitCoin::get_data($interval);
-$personal_tokens = BitCoin::get_personal_tokens($user);
+
 $total_btc = Bitcoin::get_all_btc();
-$personal_btc = Bitcoin::get_personal_btc($user);
-$personal_gbg = Bitcoin::get_personal_gbg($user);
 $total_tokens = Bitcoin::get_all_tokens();
 $bonuse_today = BitCoin::get_bonuse_today();
 $current_rate = BitCoin::get_rate();
-$calendar = Bitcoin::get_calendar();
+
 $xaxis = Bitcoin::get_xaxis();
 $yaxis = Bitcoin::get_yaxis();
-$current_rate = BitCoin::get_rate();
+
 $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekly_gbg),4);
 
-    $data_provider = new ArrayDataProvider([
+$personal_tokens = BitCoin::get_personal_tokens($user);
+$personal_bounty = Bitcoin::get_bounty($user);
+$personal_btc = Bitcoin::get_personal_btc($user);
+$personal_gbg = Bitcoin::get_personal_gbg($user);
+
+$data_provider = new ArrayDataProvider([
         'allModels' => $players,
         'sort' => [
             'attributes' => ['name', 'created_at', 'amount', 'bonuse', 'stake', 'currency', 'tokens', 'forecast', 'symbol'],
@@ -298,6 +304,8 @@ $total_usd = round(Bitcoin::btc_to_usd($weekly_btc) + BitCoin::gbg_to_usd($weekl
             'xaxis' => $xaxis,
             'yaxis' => $yaxis,
             'total_usd' => $total_usd,
+            'personal_tokens' => $personal_tokens,
+            'personal_bounty' => $personal_bounty,
     );
         return  $json = json_encode($ico, JSON_UNESCAPED_UNICODE);    
         

@@ -532,8 +532,8 @@ class BitCoin extends Model
     
     
     
-    static function get_bounty(){
-        $user = Yii::$app->user->identity->username;
+    static function get_bounty($user = null){
+        if (!$user) $user = Yii::$app->user->identity->username;
         $bounty = Bounty::find()->where(['name' => $user])->asArray()->all();
         $money =0;
         foreach ($bounty as $b){
