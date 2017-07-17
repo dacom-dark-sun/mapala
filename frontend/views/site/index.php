@@ -12,31 +12,6 @@ use yii\widgets\Pjax;
                               <?= Html::a(Yii::t('frontend', 'Trending'), ['/site/index/','state'=>'trending'], ['class'=>'btn btn-success each_category_button']) ?>
                               <?= Html::a(Yii::t('frontend', 'Discuss'), ['/site/index/','state'=>'discuss'], ['class'=>'btn btn-success each_category_button']) ?>
        
- */
-?>
-<?php $this->title = Yii::t('frontend','MAPALA'); ?>
-<?php 
-
-    $this->registerMetaTag([
-        'property' => 'og:title',
-        'content' => Yii::t('common','Mapala.net invite you to join the worldwide community')
-    ]); 
-    $this->registerMetaTag([
-        'property' => 'og:description',
-        'content' => Yii::t('common','Mapala.net sweeping the planet and inviting you to join. The project will be released soon. Hurry up!')
-    ]); 
-    $this->registerMetaTag([
-        'property' => 'og:url',
-        'content' => 'https://mapala.net',
-    ]); 
-    $this->registerMetaTag([
-        'property' => 'og:image',
-        'content' => 'https://mapala.net/frontend/web/img/logo_small.png',
-    ]); 
-
-?> 
-   
-
 <div class="site-index">
 
      <div class="body-content">
@@ -85,3 +60,55 @@ use yii\widgets\Pjax;
     
     
 </div>
+
+ */
+?>
+<?php $this->title = Yii::t('frontend','MAPALA'); ?>
+<?php 
+
+    $this->registerMetaTag([
+        'property' => 'og:title',
+        'content' => Yii::t('common','Mapala.net invite you to join the worldwide community')
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:description',
+        'content' => Yii::t('common','Mapala.net sweeping the planet and inviting you to join. The project will be released soon. Hurry up!')
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:url',
+        'content' => 'https://mapala.net',
+    ]); 
+    $this->registerMetaTag([
+        'property' => 'og:image',
+        'content' => 'https://mapala.net/frontend/web/img/logo_small.png',
+    ]); 
+
+?> 
+
+<div class="col-lg-12 col-md-12" style = "text-align:center">
+    <img src='/frontend/web/img/mapalabeta.gif' style = "height: 250px;">
+    <h1 style = "color: white"> <?= Yii::t('frontend', 'blockchains synchronization ...')?> </h1>
+    <br>
+    <h2 style ="color:white" > <?= Yii::t('frontend', 'Last chance to be first')?></h2>
+    <div style="width: 200px; margin-left: auto; margin-right: auto;">
+     <center><?=  Html::a(Yii::t('frontend', 'pre-ICO'), 
+                              ['/site/ico/'], 
+                              ['style' => 'font-size:20px; margin-top:20px','class'=>'btn btn-success change_category_btn width_100']);?></center>
+          
+            <center><?=  Html::a(Yii::t('frontend', 'Blog Mapala-Team'), 
+                              ['/mapala'], 
+                              ['class'=>'btn btn-success change_category_btn width_100']);?></center>
+              <center><?=  Html::a(Yii::t('frontend', 'History investments'), 
+                              ['/site/investors'], 
+                              ['class'=>'btn btn-success change_category_btn width_100']);?></center>
+            
+            
+  
+    </div>
+    
+</div>
+
+<script>
+$(".wrap").addClass("wrap-blue");
+</script>
+

@@ -55,7 +55,6 @@ $this->beginContent('@frontend/views/layouts/base.php')
     </div>
 <?php $this->endContent() ?>
 
-<div class ="version">alfa 1.02 <a href="http://mapala.ru">(0-~)</a></div>
 
 <script>
     //function for show one category by Event onclick on the Tree

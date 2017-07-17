@@ -19,20 +19,19 @@ $this->registerMetaTag([
 'name' => 'p:domain_verify',
 'content' => '2a77368c453493113d92d6d451b0bcd1'
 ]); ?>
-
-<div class="wrap">
+ 
+<div class="wrap" >
 <?php $val_arts = Art::get_validated_arts(); ?>
     <?php
     NavBar::begin([
-        'brandLabel' => "<img src=https://s13.postimg.org/ror54hqyv/logo_small.png>" . Yii::$app->name ,
+        'brandLabel' => "<img src=/frontend/web/img/logo_small3.png>" . Yii::$app->name ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
         'innerContainerOptions' => ['class'=>'container-fluid container-navbar'],
     ]); ?>
-           <?php echo '<span class="logo_text">[ Everyone Can Travel ] </span>' . '<span class="span_amount">'  . Yii::t("frontend","Articles") . ": " . $val_arts['steem'] . Yii::t("frontend"," STEEM") .  ", " . $val_arts['golos'] .  " " . Yii::t("frontend","GOLOS")  . '</span>';?>
-    
+        
     
     <?php echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -42,6 +41,10 @@ $this->registerMetaTag([
                      [
                         'label' => Yii::t('frontend', 'Blogs'), 'url' => ['/site/index'],
                         'url' => ['/site/index']
+                    ],
+                    [
+                        'label' => Yii::t('frontend', 'Mapala Team'), 'url' => ['site/mapala'],
+                        'url' => ['/mapala']
                     ],
                     [
                         'label' => Yii::t('frontend', 'Add Post'),

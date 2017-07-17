@@ -252,7 +252,9 @@ return [
     'Bounty: ' => 'Баунти: ',
     'Investments: ' => 'Инвестиции: ',
     'Minimum amount: 0.001 BTC' => 'Минимальная сумма: 0.001 BTC',
-    
+    'Mapala Team' => 'Команда Mapala',
+    'blockchains synchronization ...' => 'блокчейн-синхронизация ...',
+    'Last chance to be first' => 'Последний шанс быть первым!'
     
     
 ];
