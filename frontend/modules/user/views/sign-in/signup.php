@@ -40,7 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
                    'captchaAction' => '/site/captcha',
                 ]) ?>
                 <div class="form-group">
-                    <?php echo Html::submitButton(Yii::t('frontend', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?php echo Html::submitButton(Yii::t('frontend', 'Signup'), ['disabled' => 'disabled','class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <p> Регистрация приостановлена в связи с переходом на BETA-версию. Приносим извинения за предоставленные неудобства </p>
                 </div>
                
             <?php ActiveForm::end(); ?>
