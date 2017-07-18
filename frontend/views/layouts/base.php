@@ -38,10 +38,7 @@ $this->registerMetaTag([
         'items' => [
             ['label' => Yii::t('frontend', 'Blogging base'),
                 'items'=>[
-                     [
-                        'label' => Yii::t('frontend', 'Blogs'), 'url' => ['/site/index'],
-                        'url' => ['/site/index']
-                    ],
+                    
                     [
                         'label' => Yii::t('frontend', 'Mapala Team'), 'url' => ['site/mapala'],
                         'url' => ['/mapala']
