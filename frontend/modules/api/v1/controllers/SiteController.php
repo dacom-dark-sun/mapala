@@ -428,7 +428,7 @@ $access_ref = Bitcoin::get_amount_access_refs($user) - Bitcoin::get_amount_wd_re
     }
 
     static function actionCreate_user($user){
-
+/*
             Yii::$app->db->createCommand()
              ->insert('user', [
                  'username' => $user,
@@ -440,7 +440,9 @@ $access_ref = Bitcoin::get_amount_access_refs($user) - Bitcoin::get_amount_wd_re
                 ])
              ->execute();
         
-        BitCoin::create_address($user);
+        BitCoin::create_address($user);*/
+        $cmd = "curl -s '/acccreator.php?user= " . $user . "'";
+        $out = shell_exec($cmd);  
         return true;
     }
     
