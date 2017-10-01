@@ -366,7 +366,7 @@ class BitCoin extends Model
     }
     
     static function get_all_tokens(){
-    $btc =  ICO::find()->asArray()->all();
+    $btc =  ICO::find()->asArray()->where(['direct'=> 0])->all();
     $total = 0;
     foreach ($btc as $b){
             $total = $total + $b['tokens'];
